@@ -1,0 +1,60 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    tools:context="com.designstring.thedailystore.activity.SelectLocationActivityAtCust">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="5dp"
+            android:id="@+id/order_details_lay"
+            android:paddingBottom="5dp">
+        <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="60dp"-->
+        <!--android:text="Choose the location"-->
+        <!--android:id="@+id/location_text_view"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:gravity="center_vertical|center_horizontal"-->
+        <!--android:textSize="20dp"-->
+        <!--android:background="#ffffff"-->
+
+<!--/>-->
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0.5dp"-->
+
+        <!--android:layout_below="@+id/location_text_view"-->
+        <!--android:id="@+id/view" />-->
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/search_for_product"
+        android:layout_below="@+id/view"
+        android:layout_alignParentRight="true"
+        android:textSize="12sp"
+        android:background="@color/search_back_color"
+        android:hint="Search for location"
+        android:textColorHint="@color/secondary_text_color"
+        android:drawableLeft="@drawable/ic_action_search"/>
+
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/area_listView"
+        android:layout_below="@+id/search_for_product"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:dividerHeight="5dp"
+        android:divider="#F7F7F7"/>
+    </RelativeLayout>
+
+</RelativeLayout>

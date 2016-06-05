@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    >
+
+    <!-- Delivery Details View-->
+    <View
+        android:layout_width="375dp"
+        android:layout_height="0.5dp"
+        android:background="@color/view_color"
+        android:layout_marginTop="7dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/view"
+        android:layout_below="@+id/orderDeliveryDetails"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Delivery Details"
+        android:textSize="20sp"
+        android:textColor="@color/heading_color"
+        android:id="@+id/orderDeliveryDetails"
+        android:layout_marginTop="13dp"
+        android:layout_alignParentTop="true"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_marginLeft="10dp" />
+
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:id="@+id/orderMapSymbol"
+
+        android:layout_above="@+id/orderDetailName"
+        android:layout_alignRight="@+id/view"
+        android:visibility="gone"
+        android:layout_marginBottom="3dp" />
+
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/orderDetailName"
+        android:inputType="textPersonName"
+        android:textSize="15sp"
+        android:hint="Enter Name Here"
+        android:layout_below="@+id/view"
+        android:layout_marginTop="17dp"
+        android:textColorHint="@color/third_text_color"
+        android:textColor="@color/secondary_text_color"
+        android:background="#ffffff"
+        android:layout_alignRight="@+id/view"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentLeft="true" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/view_color"
+        android:layout_below="@+id/orderDetailName"
+        android:layout_marginLeft="10dp"
+        android:layout_alignRight="@+id/orderMapSymbol"
+        android:layout_marginTop="7dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:textSize="15sp"
+        android:hint="Enter Phone No"
+        android:textColorHint="@color/third_text_color"
+        android:ems="10"
+        android:layout_marginTop="18dp"
+        android:textColor="@color/secondary_text_color"
+        android:background="#ffffff"
+        android:id="@+id/orderDetailPhone"
+        android:layout_below="@+id/orderDetailName"
+        android:layout_marginLeft="10dp"
+        android:layout_alignRight="@+id/orderDetailName"
+        android:layout_alignParentLeft="true" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/view_color"
+        android:layout_below="@+id/orderDetailPhone"
+        android:layout_marginLeft="10dp"
+        android:layout_alignRight="@+id/orderMapSymbol"
+        android:layout_marginTop="7dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/orderDetailAddress_house_no"
+        android:textSize="15sp"
+        android:inputType="textPostalAddress"
+        android:hint="Enter House/Flat No"
+        android:textColorHint="@color/third_text_color"
+        android:background="#ffffff"
+        android:layout_below="@+id/orderDetailPhone"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/secondary_text_color"
+        android:layout_alignRight="@+id/orderDetailPhone"
+        android:layout_marginTop="18dp"
+        android:layout_alignParentLeft="true" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/view_color"
+        android:layout_below="@+id/orderDetailAddress_house_no"
+        android:layout_marginLeft="10dp"
+        android:layout_alignRight="@+id/orderMapSymbol"
+        android:layout_marginTop="7dp"
+         />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/orderDetailAddress_areaname"
+        android:textSize="15sp"
+        android:inputType="textPostalAddress"
+        android:hint="Enter AreaName Here"
+        android:textColorHint="@color/third_text_color"
+        android:background="#ffffff"
+        android:layout_below="@+id/orderDetailAddress_house_no"
+        android:layout_marginLeft="10dp"
+        android:layout_alignRight="@+id/orderDetailAddress_house_no"
+        android:layout_marginTop="18dp"
+        android:textColor="@color/secondary_text_color"
+        android:layout_alignParentLeft="true" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/view_color"
+        android:layout_below="@+id/orderDetailAddress_areaname"
+        android:layout_marginLeft="10dp"
+        android:layout_alignRight="@+id/orderMapSymbol"
+        android:layout_marginTop="7dp"
+       />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/orderDetailAddress_landmark"
+        android:textSize="15sp"
+        android:inputType="textPostalAddress"
+        android:hint="Enter Locality/Landmark Here"
+        android:textColorHint="@color/third_text_color"
+        android:background="#ffffff"
+        android:layout_below="@+id/orderDetailAddress_areaname"
+        android:layout_marginLeft="10dp"
+        android:layout_alignRight="@+id/orderDetailAddress_areaname"
+        android:layout_marginTop="18dp"
+        android:textColor="@color/secondary_text_color"
+        android:layout_alignParentLeft="true" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/view_color"
+        android:layout_below="@+id/orderDetailAddress_landmark"
+        android:layout_marginLeft="10dp"
+
+        android:layout_alignRight="@+id/orderMapSymbol"
+        android:layout_marginTop="7dp"
+        />
+
+
+
+
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/orderDetailEmail"
+        android:inputType="textEmailAddress"
+        android:textSize="15sp"
+        android:hint="Enter City"
+        android:textColor="@color/secondary_text_color"
+        android:textColorHint="@color/third_text_color"
+        android:background="#ffffff"
+        android:layout_below="@+id/orderDetailAddress_landmark"
+        android:layout_marginLeft="10dp"
+        android:layout_alignRight="@+id/orderDetailAddress_landmark"
+        android:layout_marginTop="18dp"
+        android:layout_alignParentLeft="true" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/view_color"
+        android:layout_below="@+id/orderDetailEmail"
+        android:layout_marginLeft="10dp"
+        android:layout_alignRight="@+id/orderMapSymbol"
+        android:layout_marginTop="7dp"
+        android:id="@+id/view4" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/orderAddAddressList"
+
+        android:layout_below="@+id/view4"
+        android:layout_marginTop="6dp"
+        android:visibility="gone"/>
+
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Select Delivery Time"
+        android:textColor="@color/title_text_color"
+
+        android:textSize="15sp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/orderDeliveryTime"
+        android:layout_below="@+id/view4"
+        android:layout_marginLeft="10dp" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/view_color"
+        android:layout_above="@+id/orderEntercode"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/view5"
+        />
+
+
+
+    <View
+        android:layout_width="200dp"
+        android:layout_height="0.5dp"
+        android:background="@color/view_color"
+        android:layout_alignBottom="@+id/orderDetailCouponcode"
+        android:layout_alignLeft="@+id/orderEntercode"
+        android:layout_alignRight="@+id/textView"
+        android:id="@+id/view7" />
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:id="@+id/orderEntercode"
+        android:inputType="text"
+        android:textSize="10sp"
+        android:textColorHint="@color/title_text_color"
+        android:background="#ffffff"
+        android:hint="Enter your Code Here"
+        android:layout_above="@+id/view3"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/orderDetailCouponcode"
+        android:visibility="gone"
+        android:layout_marginLeft="18dp"/>
+
+    <View
+        android:layout_width="200dp"
+        android:layout_height="0.5dp"
+        android:background="@color/view_color"
+        android:layout_alignBottom="@+id/orderDetailCouponcode"
+        android:layout_alignLeft="@+id/orderEntercode"
+        android:layout_alignRight="@+id/textView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Coupon Code"
+        android:textColor="@color/title_text_color"
+        android:id="@+id/orderDetailCouponcode"
+        android:layout_alignBottom="@+id/orderEntercode"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="7dp"
+        android:textSize="13sp"
+        android:visibility="gone"
+        />
+
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/view_color"
+        android:layout_above="@+id/view2"
+        android:layout_alignParentLeft="true"
+        android:visibility="gone"
+        android:layout_marginBottom="25dp"
+        android:id="@+id/view3" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Delivery"
+        android:id="@+id/orderDetailDelivery"
+        android:textSize="13sp"
+        android:layout_alignTop="@+id/view3"
+        android:textColor="@color/title_text_color"
+        android:layout_marginLeft="10dp"
+        android:visibility="gone"
+        android:layout_marginTop="4dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Rs.50"
+        android:textColor="@color/title_text_color"
+        android:id="@+id/orderDetailDeliveryRupees"
+        android:layout_alignTop="@+id/orderDetailDelivery"
+        android:layout_alignRight="@+id/view4"
+        android:textSize="12sp"
+        android:visibility="gone"
+        android:layout_marginTop="1dp" />
+
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/view_color"
+        android:id="@+id/view2"
+        android:layout_above="@+id/textView"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Approx Total"
+        android:textSize="14sp"
+        android:id="@+id/orderDetailTotal"
+        android:layout_alignBottom="@+id/textView"
+        android:layout_marginLeft="10dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Rs.381"
+        android:gravity="center_horizontal"
+        android:textSize="13sp"
+        android:id="@+id/textView"
+        android:textColor="@color/dialy_green"
+        android:layout_above="@+id/placeOrderButton"
+        android:layout_alignRight="@+id/orderDetailEmail"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="3dp" />
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Place Order"
+        android:textColor="#ffffff"
+        android:id="@+id/placeOrderButton"
+        android:background="@color/colorAccent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:clickable="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Time"
+        android:id="@+id/timme_date"
+        android:layout_marginTop="14dp"
+        android:textSize="14sp"
+        android:textColor="@color/title_text_color"
+        android:gravity="center_vertical"
+        android:drawableLeft="@drawable/ic_action_alarm"
+        android:layout_below="@+id/orderDeliveryTime"
+        android:layout_alignLeft="@+id/orderDeliveryTime"
+        android:layout_alignStart="@+id/orderDeliveryTime" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select time"
+        android:drawableLeft="@drawable/ic_action_alarm"
+        android:textSize="14sp"
+        android:textColor="@color/title_text_color"
+        android:id="@+id/select_time_text"
+        android:gravity="center_vertical"
+        android:layout_marginTop="14dp"
+        android:visibility="invisible"
+        android:layout_below="@+id/timme_date"
+        android:layout_alignLeft="@+id/timme_date"
+        android:layout_alignStart="@+id/timme_date" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get Current Location"
+        android:id="@+id/locationButton"
+        android:layout_below="@+id/orderMapSymbol"
+        android:layout_alignRight="@+id/view7"
+        android:layout_alignEnd="@+id/view7" />
+
+
+</RelativeLayout>

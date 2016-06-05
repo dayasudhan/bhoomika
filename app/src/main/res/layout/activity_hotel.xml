@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.naktec.bakasura.activity.HotelActivity">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text=" Location Name comes here"
+            android:id="@+id/location_text_view_vendor_list"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:gravity="center_vertical|center_horizontal"
+            android:textSize="20dp"
+            android:background="#ffffff"
+            android:textColor="@color/heading_color"
+            android:paddingLeft="20dp"
+
+            android:layout_toLeftOf="@+id/viewleft" />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="60dp"
+            android:background="@color/view_color"
+            android:layout_toLeftOf="@+id/filter_relative"
+            android:id="@+id/viewleft" />
+        <RelativeLayout
+            android:layout_width="60dp"
+            android:layout_height="59dp"
+            android:id="@+id/filter_relative"
+            android:layout_alignParentRight="true"
+            android:background="#ffffff">
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="59dp"
+                android:id="@+id/filter_btn_vendor_list"
+                android:src="@drawable/ic_funnel"
+                android:padding="15dp"
+
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="1dp"/>
+        </RelativeLayout>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/search_for_vendor_vendor_list"
+            android:layout_below="@+id/location_text_view_vendor_list"
+            android:layout_alignParentRight="true"
+            android:textColorHint="@color/title_text_color"
+            android:background="@color/search_back_color"
+            android:textSize="12sp"
+            android:hint="Find a vendor"
+            android:padding="10dp"
+            />
+        <!--  <View
+              android:layout_width="match_parent"
+              android:layout_height="0.5dp"
+              android:background="@color/text_view_grey"
+              android:id="@+id/view_search_for_vendor"
+              android:layout_alignLeft="@+id/search_for_vendor_vendor_list"
+              android:layout_below="@+id/search_for_vendor_vendor_list"
+              android:layout_alignRight="@+id/search_for_vendor_vendor_list" />-->
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listView_vendor"
+            android:layout_below="@+id/search_for_vendor_vendor_list"
+            android:layout_centerHorizontal="true"
+
+            android:layout_marginTop="5dp"
+            android:divider="#F7F7F7"
+            android:dividerHeight="5dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="There are no vendors for this location"
+            android:id="@+id/textView_no_vendors"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:visibility="invisible"
+            android:textColor="@color/title_text_color"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" />
+
+    </RelativeLayout>
+
+
+

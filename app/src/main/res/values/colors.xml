@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="text_view_grey">#8A8A8A</color>
+    <color name="primary">#3F51B5</color>
+    <color name="primary_dark">#303F9F</color>
+    <color name="primary_light">#C5CAE9</color>
+    <color name="accent">#03A9F4</color>
+
+    <color name="black">#000000 </color>
+    <color name="Amber">#FFA000 </color>
+    <color name="text_purple">#7B1FA2 </color>
+    <color name="alpha_60">#99FFFFFF</color>
+    <color name="tab_indi_colo">#F44336 </color>
+    <color name="transculent">#00000000</color>
+    <color name="amber_tool_bar_color">#FFC107 </color>
+    <color name="red">#FF0000</color>
+    <color name="green">#00FF00</color>
+    <color name="view_color">#dadada</color>
+    <color name="background_color">#ffffff</color>
+    <color name="search_back_color">#ffffff</color>
+    <!--<color name="title_text_color">#05000000</color>-->
+    <!--<color name="secondary_text_color">#a0a0a0</color>-->
+    <!--<color name="third_text_color">#c2c2c2</color>-->
+    <color name="title_text_color">#144eed</color>
+    <color name="secondary_text_color">#4089ed</color>
+    <color name="third_text_color">#6ec4ed</color>
+    <color name="dialy_green">#07c2b1</color>
+    <color name="my_green">#00E804</color>
+    <color name="img_background">#baeaed</color>
+    <color name="heading_color">#ff6f13</color>
+    <color name="myblue1">#144eed</color>
+    <color name="myblue2">#4089ed</color>
+    <color name="myblue3">#6ec4ed</color>
+</resources>

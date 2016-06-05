@@ -1,0 +1,66 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    tools:context="com.designstring.thedailystore.activity.ProductDetailListActivity">
+
+
+
+
+    <!--<View-->
+        <!--android:layout_width="0.5dp"-->
+        <!--android:layout_height="60dp"-->
+        <!--android:background="@color/view_color"-->
+        <!--android:id="@+id/viewleft1"-->
+        <!--android:layout_toLeftOf="@+id/viewleft" />-->
+    <!--<EditText-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:id="@+id/search_for_product_brand_detail"-->
+        <!--android:textSize="12sp"-->
+        <!--android:background="#e6e6e6"-->
+        <!--android:paddingLeft="5dp"-->
+        <!--android:textColorHint="#c2c2c2"-->
+        <!--android:hint="Search for products and brands"-->
+        <!--android:drawableLeft="@drawable/ic_action_search"-->
+
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+
+         <!--/>-->
+
+    <!--<View-->
+        <!--android:layout_width="0.5dp"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:background="@color/view_color"-->
+        <!--android:layout_toLeftOf="@+id/viewleft" />-->
+
+
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/listView_product_detail"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:divider="#F7F7F7"
+        android:clickable="true"
+        android:drawSelectorOnTop="false"
+        android:dividerHeight="5dp"
+/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="There are no products in this category"
+        android:id="@+id/textView_no_product"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:visibility="invisible"
+        android:textColor="@color/title_text_color"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
+</RelativeLayout>
