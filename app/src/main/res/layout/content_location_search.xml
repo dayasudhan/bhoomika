@@ -31,17 +31,17 @@
         <!--android:layout_below="@+id/location_text_view"-->
         <!--android:id="@+id/view" />-->
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/search_for_product"
-        android:layout_below="@+id/view"
-        android:layout_alignParentRight="true"
-        android:textSize="12sp"
-        android:background="@color/search_back_color"
-        android:hint="Search for location"
-        android:textColorHint="@color/secondary_text_color"
-        android:drawableLeft="@drawable/ic_action_search"/>
+    <!--<EditText-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/search_for_product"-->
+        <!--android:layout_below="@+id/view"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:textSize="12sp"-->
+        <!--android:background="@color/search_back_color"-->
+        <!--android:hint="Search for location"-->
+        <!--android:textColorHint="@color/secondary_text_color"-->
+        <!--android:drawableLeft="@drawable/ic_action_search"/>-->
 
 
     <ListView
