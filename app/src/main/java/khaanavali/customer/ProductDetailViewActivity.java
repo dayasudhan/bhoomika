@@ -2,7 +2,9 @@ package khaanavali.customer;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ListView;
@@ -61,6 +63,29 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
 
 
 
+    }
+
+    private void setToolBar(String areaClicked) {
+        Toolbar tb = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(tb);
+
+        ActionBar ab = getSupportActionBar();
+        ab.setHomeAsUpIndicator(R.drawable.ic_action_back);
+        ab.setDisplayHomeAsUpEnabled(true);
+        ab.setTitle(areaClicked);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(android.view.MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // API 5+ solution
+                onBackPressed();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
     @Override
     public void buttonClicked(int postion,int value) {

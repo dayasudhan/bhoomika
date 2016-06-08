@@ -4,11 +4,28 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     >
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
 
+        <include
+            android:id="@+id/toolbar2"
+            layout="@layout/toolbar" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="5dp"
+            android:id="@+id/order_details_lay"
+            >
     <!-- Delivery Details View-->
     <View
         android:layout_width="375dp"
-        android:layout_height="0.5dp"
+        android:layout_height="0.0dp"
         android:background="@color/view_color"
         android:layout_marginTop="7dp"
         android:layout_marginLeft="10dp"
@@ -21,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Delivery Details"
+        android:text=""
         android:textSize="20sp"
         android:textColor="@color/heading_color"
         android:id="@+id/orderDeliveryDetails"
@@ -55,7 +72,9 @@
         android:background="#ffffff"
         android:layout_alignRight="@+id/view"
         android:layout_marginLeft="10dp"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:clickable="true"
+        android:enabled="true" />
 
     <View
         android:layout_width="match_parent"
@@ -408,10 +427,15 @@
         android:text="Get Current Location"
         android:textColor="#ffffff"
         android:id="@+id/locationButton"
-        android:background="@color/primary_dark"
+        android:background="@color/button_material_light"
         android:layout_below="@+id/orderMapSymbol"
         android:layout_alignRight="@+id/view7"
-        android:layout_alignEnd="@+id/view7" />
-
+        android:layout_alignEnd="@+id/view7"
+        android:enabled="false"
+        android:focusable="true"
+        android:clickable="true"
+        android:longClickable="false" />
+        </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>

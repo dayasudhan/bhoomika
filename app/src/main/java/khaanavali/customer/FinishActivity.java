@@ -2,7 +2,9 @@ package khaanavali.customer;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -57,6 +59,29 @@ public class FinishActivity extends AppCompatActivity {
             CustomerAddress =   CustomerAddress.concat(order.getCustomer().getAddress().getCity());
 
         txtViewAddress.setText(CustomerAddress);
+        setToolBar();
+    }
+    private void setToolBar() {
+        Toolbar tb = (Toolbar) findViewById(R.id.toolbar2);
+        setSupportActionBar(tb);
+
+        ActionBar ab = getSupportActionBar();
+        ab.setHomeAsUpIndicator(R.drawable.ic_action_back);
+        ab.setDisplayHomeAsUpEnabled(true);
+        ab.setTitle("Order Summary");
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(android.view.MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // API 5+ solution
+                onBackPressed();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
     public void onBackPressed() {
 

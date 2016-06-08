@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.net.ParseException;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -63,13 +65,13 @@ public class HotelActivity extends AppCompatActivity {
         hotellist =  new ArrayList<HotelDetail>();
         Intent intent = getIntent();
         String areaClicked = new String(intent.getStringExtra("area"));
-        TextView areaname= (TextView) findViewById(R.id.location_text_view_vendor_list);
-        areaname.setText(areaClicked);
+       // TextView areaname= (TextView) findViewById(R.id.location_text_view_vendor_list);
+       // areaname.setText(areaClicked);
         getHotelList(areaClicked);
 
         listView = (ListView) findViewById(R.id.listView_vendor);
 
-        //setToolBar(areaClicked);
+        setToolBar(areaClicked);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -89,21 +91,32 @@ public class HotelActivity extends AppCompatActivity {
 //            }
 //        });
     }
-//    private void setToolBar(String areaClicked) {
-//        Toolbar tb = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(tb);
-//
-//        ActionBar ab = getSupportActionBar();
-//        ab.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
-//        ab.setDisplayHomeAsUpEnabled(true);
-//        ab.setTitle(areaClicked);
-//    }
+    private void setToolBar(String areaClicked) {
+        Toolbar tb = (Toolbar) findViewById(R.id.toolbar2);
+        setSupportActionBar(tb);
+
+        ActionBar ab = getSupportActionBar();
+        ab.setHomeAsUpIndicator(R.drawable.ic_action_back);
+        ab.setDisplayHomeAsUpEnabled(true);
+        ab.setTitle(areaClicked);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(android.view.MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // API 5+ solution
+                onBackPressed();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
     //http://oota.herokuapp.com/v1/admin/coverageArea
     public void getHotelList(String areaClicked)
     {
         hotellist.clear();
-      //  String order_url = "http://oota.herokuapp.com/v1/vendor/city?city=Bangalore";
-        //String order_url = "http://oota.herokuapp.com/v1/vendor/area?areaName=";
         String order_url = Constants.GET_HOTEL_BY_DELIVERY_AREAS;
         order_url = order_url + areaClicked;
         new JSONAsyncTask().execute(order_url);

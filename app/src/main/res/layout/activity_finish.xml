@@ -1,11 +1,27 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:background="@color/background_color"
-    android:paddingTop="5dp"
+
 
 
     tools:context="com.designstring.thedailystore.activity.AfterPlacingOrederActivity">
 
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar2"
+        layout="@layout/toolbar" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="5dp"
+            android:id="@+id/order_details_lay2"
+            >
 
     <TextView
         android:layout_width="match_parent"
@@ -306,12 +322,13 @@
         android:textSize="16sp"
 
         android:textColor="@color/heading_color"
-        android:text="Your food will reach you with in time."
+        android:text="Your food will reach you with in time. Kindly note down your Order Id for further tracking your order status."
         android:id="@+id/thanks"
 
         android:layout_below="@+id/relativeLayout"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="90dp" />
-
+</RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>

@@ -4,39 +4,6 @@
     android:background="@color/background_color"
     tools:context="com.designstring.thedailystore.activity.ProductDetailListActivity">
 
-
-
-
-    <!--<View-->
-        <!--android:layout_width="0.5dp"-->
-        <!--android:layout_height="60dp"-->
-        <!--android:background="@color/view_color"-->
-        <!--android:id="@+id/viewleft1"-->
-        <!--android:layout_toLeftOf="@+id/viewleft" />-->
-    <!--<EditText-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="50dp"-->
-        <!--android:id="@+id/search_for_product_brand_detail"-->
-        <!--android:textSize="12sp"-->
-        <!--android:background="#e6e6e6"-->
-        <!--android:paddingLeft="5dp"-->
-        <!--android:textColorHint="#c2c2c2"-->
-        <!--android:hint="Search for products and brands"-->
-        <!--android:drawableLeft="@drawable/ic_action_search"-->
-
-        <!--android:layout_alignParentLeft="true"-->
-        <!--android:layout_alignParentStart="true"-->
-
-         <!--/>-->
-
-    <!--<View-->
-        <!--android:layout_width="0.5dp"-->
-        <!--android:layout_height="50dp"-->
-        <!--android:background="@color/view_color"-->
-        <!--android:layout_toLeftOf="@+id/viewleft" />-->
-
-
-
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

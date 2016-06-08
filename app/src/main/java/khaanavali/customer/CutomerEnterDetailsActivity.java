@@ -8,8 +8,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -91,6 +93,7 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
                     alertMessage();
                 }
 
+
             }
         });
 
@@ -130,7 +133,29 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
 
             }
         });
+        setToolBar("Delivery Details");
+    }
+    private void setToolBar(String title) {
+        Toolbar tb = (Toolbar) findViewById(R.id.toolbar2);
+        setSupportActionBar(tb);
 
+        ActionBar ab = getSupportActionBar();
+        ab.setHomeAsUpIndicator(R.drawable.ic_action_back);
+        ab.setDisplayHomeAsUpEnabled(true);
+        ab.setTitle(title);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(android.view.MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // API 5+ solution
+                onBackPressed();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
     public void alertMessage()
     {
