@@ -54,7 +54,7 @@ public class HotelActivity extends AppCompatActivity {
     private static final String TAG_DELIVERY_TIME = "deliverTime";
     private static final String TAG_RATING = "rating";
     private ArrayList<HotelDetail> hotellist;
-
+    ListView listView ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,10 +65,9 @@ public class HotelActivity extends AppCompatActivity {
         TextView areaname= (TextView) findViewById(R.id.location_text_view_vendor_list);
         areaname.setText(areaClicked);
         getHotelList(areaClicked);
-        HotelListAdapter dataAdapter = new HotelListAdapter(HotelActivity.this,
-                R.layout.hotel_list_item,hotellist);
-        ListView listView = (ListView) findViewById(R.id.listView_vendor);
-        listView.setAdapter(dataAdapter);
+
+        listView = (ListView) findViewById(R.id.listView_vendor);
+
         //setToolBar(areaClicked);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -107,6 +106,12 @@ public class HotelActivity extends AppCompatActivity {
         String order_url = "http://oota.herokuapp.com/v1/vendor/delieveryareas?areaName=";
         order_url = order_url + areaClicked;
         new JSONAsyncTask().execute(order_url);
+    }
+    public void initHotelList()
+    {
+        HotelListAdapter dataAdapter = new HotelListAdapter(HotelActivity.this,
+                R.layout.hotel_list_item,hotellist);
+        listView.setAdapter(dataAdapter);
     }
     public  class JSONAsyncTask extends AsyncTask<String, Void, Boolean> {
 
@@ -293,8 +298,13 @@ public class HotelActivity extends AppCompatActivity {
         }
         protected void onPostExecute(Boolean result) {
             dialog.cancel();
+
             if (result == false)
                 Toast.makeText(getApplicationContext(), "Unable to fetch data from server", Toast.LENGTH_LONG).show();
+            else
+            {
+                initHotelList();
+            }
 
         }
     }

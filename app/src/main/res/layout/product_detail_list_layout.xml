@@ -9,6 +9,7 @@
         android:id="@+id/product_detail_image_view"
         android:layout_marginLeft="10dp"
         android:background="@color/img_background"
+        android:src="@drawable/knvl1"
         android:layout_centerVertical="true"
 
         />

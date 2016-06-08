@@ -305,7 +305,7 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
 
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/heading_color"
         android:text="Your food will reach you with in time."
         android:id="@+id/thanks"
 

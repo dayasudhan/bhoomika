@@ -43,18 +43,18 @@
     <!--android:layout_alignParentRight="true"-->
     <!--android:layout_marginBottom="1dp"/>-->
 </RelativeLayout>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/search_for_vendor_vendor_list"
-            android:layout_below="@+id/location_text_view_vendor_list"
-            android:layout_alignParentRight="true"
-            android:textColorHint="@color/title_text_color"
-            android:background="@color/search_back_color"
-            android:textSize="12sp"
-            android:hint="Find a vendor"
-            android:padding="10dp"
-            />
+        <!--<EditText-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/search_for_vendor_vendor_list"-->
+            <!--android:layout_below="@+id/location_text_view_vendor_list"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:textColorHint="@color/title_text_color"-->
+            <!--android:background="@color/search_back_color"-->
+            <!--android:textSize="12sp"-->
+            <!--android:hint="Find a vendor"-->
+            <!--android:padding="10dp"-->
+            <!--/>-->
         <!--  <View
               android:layout_width="match_parent"
               android:layout_height="0.5dp"
@@ -68,9 +68,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/listView_vendor"
-            android:layout_below="@+id/search_for_vendor_vendor_list"
+            android:layout_below="@+id/location_text_view_vendor_list"
             android:layout_centerHorizontal="true"
-
+            android:layout_alignParentRight="true"
             android:layout_marginTop="5dp"
             android:divider="#F7F7F7"
             android:dividerHeight="5dp"

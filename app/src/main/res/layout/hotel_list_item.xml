@@ -13,7 +13,7 @@
         android:layout_marginTop="10dp"
         android:background="@color/img_background"
         android:layout_alignParentTop="true"
-
+        android:src="@drawable/logo"
         android:layout_alignParentLeft="true" />
 
 
@@ -62,7 +62,7 @@
             android:layout_weight=".50"
             android:textSize="12dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/my_green"
+            android:textColor="@color/third_text_color"
             android:text="Rating " />
         <!--<RatingBar-->
             <!--style = "?android:attr/ratingBarStyleSmall"-->
@@ -90,7 +90,7 @@
             android:layout_weight=".50"
             android:layout_height="wrap_content"
             android:textSize="12dp"
-            android:textColor="@color/my_green"
+            android:textColor="@color/third_text_color"
             android:text="60 minutes" />
 
     </LinearLayout>

@@ -51,7 +51,7 @@
         android:layout_below="@+id/view"
         android:layout_marginTop="17dp"
         android:textColorHint="@color/third_text_color"
-        android:textColor="@color/secondary_text_color"
+        android:textColor="@color/title_text_color"
         android:background="#ffffff"
         android:layout_alignRight="@+id/view"
         android:layout_marginLeft="10dp"
@@ -75,7 +75,7 @@
         android:textColorHint="@color/third_text_color"
         android:ems="10"
         android:layout_marginTop="18dp"
-        android:textColor="@color/secondary_text_color"
+        android:textColor="@color/title_text_color"
         android:background="#ffffff"
         android:id="@+id/orderDetailPhone"
         android:layout_below="@+id/orderDetailName"
@@ -103,7 +103,7 @@
         android:background="#ffffff"
         android:layout_below="@+id/orderDetailPhone"
         android:layout_marginLeft="10dp"
-        android:textColor="@color/secondary_text_color"
+        android:textColor="@color/title_text_color"
         android:layout_alignRight="@+id/orderDetailPhone"
         android:layout_marginTop="18dp"
         android:layout_alignParentLeft="true" />
@@ -131,7 +131,7 @@
         android:layout_marginLeft="10dp"
         android:layout_alignRight="@+id/orderDetailAddress_house_no"
         android:layout_marginTop="18dp"
-        android:textColor="@color/secondary_text_color"
+        android:textColor="@color/title_text_color"
         android:layout_alignParentLeft="true" />
 
     <View
@@ -157,7 +157,7 @@
         android:layout_marginLeft="10dp"
         android:layout_alignRight="@+id/orderDetailAddress_areaname"
         android:layout_marginTop="18dp"
-        android:textColor="@color/secondary_text_color"
+        android:textColor="@color/title_text_color"
         android:layout_alignParentLeft="true" />
 
     <View
@@ -182,7 +182,7 @@
         android:inputType="textEmailAddress"
         android:textSize="15sp"
         android:hint="Enter City"
-        android:textColor="@color/secondary_text_color"
+        android:textColor="@color/title_text_color"
         android:textColorHint="@color/third_text_color"
         android:background="#ffffff"
         android:layout_below="@+id/orderDetailAddress_landmark"
@@ -352,7 +352,7 @@
         android:gravity="center_horizontal"
         android:textSize="13sp"
         android:id="@+id/textView"
-        android:textColor="@color/dialy_green"
+        
         android:layout_above="@+id/placeOrderButton"
         android:layout_alignRight="@+id/orderDetailEmail"
         android:layout_marginBottom="4dp"
@@ -365,7 +365,7 @@
         android:text="Place Order"
         android:textColor="#ffffff"
         android:id="@+id/placeOrderButton"
-        android:background="@color/colorAccent"
+        android:background="@color/parrotgreen6"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
@@ -406,7 +406,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Get Current Location"
+        android:textColor="#ffffff"
         android:id="@+id/locationButton"
+        android:background="@color/primary_dark"
         android:layout_below="@+id/orderMapSymbol"
         android:layout_alignRight="@+id/view7"
         android:layout_alignEnd="@+id/view7" />
