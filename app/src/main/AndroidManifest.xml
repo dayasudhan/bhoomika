@@ -13,13 +13,13 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"
                 android:label="@string/title_activity_location_search"
-                android:theme="@style/AppTheme.ActionBar" />
+                android:theme="@style/AppTheme2" />
 
             </intent-filter>
         </activity>
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
