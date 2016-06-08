@@ -22,8 +22,7 @@ public class LocationAdapter extends BaseAdapter{
     private ArrayList<String> mCityCoverage;
     // PreferenceManager mpref;
 
-    public LocationAdapter(Activity context, int layoutResourceID,
-                           String[] cityList ,ArrayList<String> cityCoverage) {
+    public LocationAdapter(Activity context, int layoutResourceID,ArrayList<String> cityCoverage) {
        con = context;
         layoutResID = layoutResourceID;
         mCityCoverage = cityCoverage;

@@ -10,14 +10,14 @@ import android.widget.ListView;
 import khaanavali.customer.adapter.LocationAdapter;
 
 public class CategoriesActivity extends AppCompatActivity {
-    String[] area={"South Indian","North Indian","Punjabi","Chinees"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories);
 
         LocationAdapter dataAdapter = new LocationAdapter(CategoriesActivity.this,
-                R.layout.area_list,area,null);
+                R.layout.area_list,null);
         ListView listView = (ListView) findViewById(R.id.sub_product_listView);
         listView.setAdapter(dataAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

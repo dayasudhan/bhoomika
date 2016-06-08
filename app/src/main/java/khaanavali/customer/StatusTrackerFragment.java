@@ -53,6 +53,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import khaanavali.customer.model.Tracker;
+import khaanavali.customer.utils.Constants;
 
 public class StatusTrackerFragment extends Fragment {
 
@@ -91,7 +92,7 @@ public class StatusTrackerFragment extends Fragment {
     }
     public void getStatus(String orderId)
     {
-       String order_url = "http://oota.herokuapp.com/v1/vendor/order_by_id/";
+       String order_url = Constants.GET_STATUS_URL;
        order_url= order_url.concat(orderId);
        new JSONAsyncTask().execute(order_url);
     }

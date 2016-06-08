@@ -22,6 +22,7 @@ import com.google.gson.Gson;
 import khaanavali.customer.adapter.HotelListAdapter;
 import khaanavali.customer.model.HotelDetail;
 import khaanavali.customer.model.MenuItem;
+import khaanavali.customer.utils.Constants;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -103,7 +104,7 @@ public class HotelActivity extends AppCompatActivity {
         hotellist.clear();
       //  String order_url = "http://oota.herokuapp.com/v1/vendor/city?city=Bangalore";
         //String order_url = "http://oota.herokuapp.com/v1/vendor/area?areaName=";
-        String order_url = "http://oota.herokuapp.com/v1/vendor/delieveryareas?areaName=";
+        String order_url = Constants.GET_HOTEL_BY_DELIVERY_AREAS;
         order_url = order_url + areaClicked;
         new JSONAsyncTask().execute(order_url);
     }

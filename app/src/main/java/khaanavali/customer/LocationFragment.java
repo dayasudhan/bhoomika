@@ -43,6 +43,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import khaanavali.customer.adapter.LocationAdapter;
+import khaanavali.customer.utils.Constants;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -52,7 +54,7 @@ import org.apache.http.util.EntityUtils;
 public class LocationFragment extends Fragment {
 
     private static final String TAG_SUBAREAS = "subAreas";
-    String[] areaCoverage={"kormangla","Vijaynagar","Hsr Layout","Btm Layout"};
+
     private ArrayList<String> mCityCoverage;
     ListView listView;
     @Nullable
@@ -72,7 +74,7 @@ public class LocationFragment extends Fragment {
     public void onReceiveCity()
     {
         LocationAdapter dataAdapter = new LocationAdapter(getActivity(),
-                R.layout.area_list,areaCoverage,mCityCoverage);
+                R.layout.area_list,mCityCoverage);
 
         listView.setAdapter(dataAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -88,8 +90,8 @@ public class LocationFragment extends Fragment {
     public void getCityCoverage()
     {
         mCityCoverage.clear();
-        String order_url = "http://oota.herokuapp.com/v1/admin/coverageArea";
-        new JSONAsyncTask().execute(order_url);
+        //String order_url = "http://oota.herokuapp.com/v1/admin/coverageArea";
+        new JSONAsyncTask().execute(Constants.GET_COVERAGE_AREAS);
     }
 
     public  class JSONAsyncTask extends AsyncTask<String, Void, Boolean> {
