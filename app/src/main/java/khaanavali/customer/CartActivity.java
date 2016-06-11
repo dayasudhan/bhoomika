@@ -57,8 +57,8 @@ public class CartActivity extends AppCompatActivity implements PlusMinusButtonLi
         listView.setAdapter(dataAdapter);
         Button btn= (Button) findViewById(R.id.orderDetailButton_next);
 
-        TextView vendor_name = (TextView) findViewById(R.id.vendor_add_cart_name);
-        vendor_name.setText(order.getHotel().getName());
+        //TextView vendor_name = (TextView) findViewById(R.id.vendor_add_cart_name);
+        //vendor_name.setText(order.getHotel().getName());
 
         deliveryCharge.setText(String.valueOf(order.getHotel().getDeliveryCharges()));
         orderTotalCharge.setText(String.valueOf(order.getTotalCost()));

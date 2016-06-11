@@ -136,7 +136,31 @@
         android:layout_alignRight="@+id/orderMapSymbol"
         android:layout_marginTop="7dp"
          />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/orderDetailAddress_address"
+                android:textSize="15sp"
+                android:inputType="textPostalAddress"
+                android:hint="Enter Address"
+                android:textColorHint="@color/third_text_color"
+                android:background="#ffffff"
+                android:layout_below="@+id/orderDetailAddress_house_no"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/title_text_color"
+                android:layout_alignRight="@+id/orderDetailPhone"
+                android:layout_marginTop="18dp"
+                android:layout_alignParentLeft="true" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/view_color"
+                android:layout_below="@+id/orderDetailAddress_address"
+                android:layout_marginLeft="10dp"
+                android:layout_alignRight="@+id/orderMapSymbol"
+                android:layout_marginTop="7dp"
+                />
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -146,7 +170,7 @@
         android:hint="Enter AreaName Here"
         android:textColorHint="@color/third_text_color"
         android:background="#ffffff"
-        android:layout_below="@+id/orderDetailAddress_house_no"
+        android:layout_below="@+id/orderDetailAddress_address"
         android:layout_marginLeft="10dp"
         android:layout_alignRight="@+id/orderDetailAddress_house_no"
         android:layout_marginTop="18dp"
@@ -427,11 +451,11 @@
         android:text="Get Current Location"
         android:textColor="#ffffff"
         android:id="@+id/locationButton"
-        android:background="@color/button_material_light"
+        android:background="@color/button_material_dark"
         android:layout_below="@+id/orderMapSymbol"
         android:layout_alignRight="@+id/view7"
         android:layout_alignEnd="@+id/view7"
-        android:enabled="false"
+        android:enabled="true"
         android:focusable="true"
         android:clickable="true"
         android:longClickable="false" />

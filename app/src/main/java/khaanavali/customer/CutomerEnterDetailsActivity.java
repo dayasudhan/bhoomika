@@ -42,7 +42,7 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
     Order order;
     String responseOrder;
     Button btnShowLocation;
-    EditText editName,editPhone,editEmail,editHouseNo,editAreaName,editLandmark;
+    EditText editName,editPhone,editEmail,editHouseNo,editAreaName,editLandmark,editAddress;
     // GPSTracker class
     GPSTracker gps;
     @Override
@@ -61,6 +61,7 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
         editHouseNo=(EditText)findViewById(R.id.orderDetailAddress_house_no);
         editAreaName=(EditText)findViewById(R.id.orderDetailAddress_areaname);
         editLandmark=(EditText)findViewById(R.id.orderDetailAddress_landmark);
+        editAddress=(EditText)findViewById(R.id.orderDetailAddress_address);
         TextView orderTotalCharge = (TextView) findViewById(R.id.textView);
         orderTotalCharge.setText(String.valueOf(order.getTotalCost()));
 //        if(true) {
@@ -85,6 +86,9 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
                 }
                 else if(editAreaName.getText().length() == 0){
                     Toast.makeText(getApplicationContext(), "Enter areaname ", Toast.LENGTH_LONG).show();
+                }
+                else if(editAddress.getText().length() == 0){
+                    Toast.makeText(getApplicationContext(), "Enter Address ", Toast.LENGTH_LONG).show();
                 }
                 else if(editLandmark.getText().length() == 0){
                     Toast.makeText(getApplicationContext(), "Enter Landmark/locality ", Toast.LENGTH_LONG).show();
@@ -113,9 +117,9 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
 //                    double longitude2 = 80.2273703;//12.9671603,77.5352851
                     //only for debugging
 //                    if(latitude == 0 && longitude == 0) {
-//                        latitude = 12.9708084;//13.0714072,77.5654451
 //                        longitude = 77.530879;
-//                    }
+//                    }                       latitude = 12.9708084;//13.0714072,77.5654451
+
                     order.getCustomer().getAddress().setLatitude(Double.toString(latitude));
                     order.getCustomer().getAddress().setLongitude(Double.toString(longitude));
                     LocationAddress locationAddress = new LocationAddress();
@@ -172,6 +176,7 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
                         order.getCustomer().getAddress().setAreaName(editAreaName.getText().toString());
                         order.getCustomer().getAddress().setLandMark(editLandmark.getText().toString());
                         order.getCustomer().getAddress().setAddressLine1(editHouseNo.getText().toString());
+                        order.getCustomer().getAddress().setAddressLine2(editAddress.getText().toString());
                         order.getCustomer().getAddress().setCity(editEmail.getText().toString());
                         Gson gson = new Gson();
                         String strOrder = gson.toJson(order);
@@ -201,7 +206,7 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
                     {
                             editEmail.setText(LocationAddress.address.getLocality());
                             editAreaName.setText(LocationAddress.address.getAddressLine(1));
-                            editHouseNo.setText(LocationAddress.address.getAddressLine(0));
+                        editAddress.setText(LocationAddress.address.getAddressLine(0));
 
                     }
                     break;
