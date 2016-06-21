@@ -49,12 +49,12 @@ public class MainActivity extends AppCompatActivity {
         setToolBar();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//
+//        getMenuInflater().inflate(R.menu.main_menu, menu);
+//        return true;
+//    }
 
     private void setToolBar() {
         Toolbar tb = (Toolbar) findViewById(R.id.toolbar);
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        Snackbar.make(layout, "Button " + btnName, Snackbar.LENGTH_SHORT).show();
+      //  Snackbar.make(layout, "Button " + btnName, Snackbar.LENGTH_SHORT).show();
         return true;
     }
 }

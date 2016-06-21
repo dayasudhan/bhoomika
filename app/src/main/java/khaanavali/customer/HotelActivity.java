@@ -118,7 +118,8 @@ public class HotelActivity extends AppCompatActivity {
     {
         hotellist.clear();
         String order_url = Constants.GET_HOTEL_BY_DELIVERY_AREAS;
-        order_url = order_url + areaClicked;
+        String area = areaClicked.replace(" ", "%20");
+        order_url = order_url + area;
         new JSONAsyncTask().execute(order_url);
     }
     public void initHotelList()

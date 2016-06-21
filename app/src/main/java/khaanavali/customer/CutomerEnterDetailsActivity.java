@@ -226,11 +226,9 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
     }
     public void postOrder(String order)
     {
-        //192.168.1.105
-      //  String order_url = "http://192.168.1.105:3000/v1/vendor/order";
-      // String order_url = "http://oota.herokuapp.com/v1/vendor/order";
 
-        new PostJSONAsyncTask().execute(Constants.ORDER_URL,order);
+            new PostJSONAsyncTask().execute(Constants.ORDER_URL, order);
+
     }
     public  class PostJSONAsyncTask extends AsyncTask<String, Void, Boolean> {
         ProgressDialog dialog;
