@@ -21,17 +21,18 @@ package khaanavali.customer;
  */
 
 
+import android.app.ActivityManager;
+import android.app.NotificationManager;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.RelativeLayout;
 
@@ -47,8 +48,25 @@ public class MainActivity extends AppCompatActivity {
         layout = (RelativeLayout) findViewById(R.id.layout);
         setNavigationDrawer();
         setToolBar();
+        if (!checkNotificationListenerServiceRunning()) {
+            startService(new Intent(this, NotificationListener.class));
+            // stopService(new Intent(this,NotificationListener.class));
+        }
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        // int notificationId = getIntent().getExtras().getInt("notificationID");
+        notificationManager.cancelAll();
     }
 
+    public boolean checkNotificationListenerServiceRunning() {
+        ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if ("khaanavali.customer.NotificationListener"
+                    .equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //
@@ -61,8 +79,10 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(tb);
 
         ActionBar ab = getSupportActionBar();
-        ab.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
-        ab.setDisplayHomeAsUpEnabled(true);
+        if (ab != null) {
+            ab.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
+            ab.setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     private void setNavigationDrawer() {
@@ -111,15 +131,12 @@ public class MainActivity extends AppCompatActivity {
         String btnName = null;
 
         switch(itemId) {
-            case R.id.menu_settings:
-                btnName = "Settings";
-                break;
-            case R.id.menu_refresh:
-                btnName = "Referesh";
-                break;
-            case R.id.menu_help:
-                btnName = "Help";
-                break;
+//            case R.id.menu_refresh:
+//                btnName = "Referesh";
+//                break;
+//            case R.id.menu_help:
+//                btnName = "Help";
+//                break;
             // Android home
             case android.R.id.home: {
                 dLayout.openDrawer(GravityCompat.START);

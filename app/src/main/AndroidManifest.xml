@@ -48,6 +48,8 @@
         <activity android:name=".FinishActivity"
             >
         </activity>
+         <!-- adding our service -->
+         <service android:name=".NotificationListener" />
     </application>
 
 </manifest>
