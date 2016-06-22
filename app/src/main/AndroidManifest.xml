@@ -30,14 +30,14 @@
         </activity>
         <activity
             android:name=".HotelActivity"
-            android:label="@string/title_activity_location_search"></activity>
-        <activity android:name=".CategoriesActivity"></activity>
+            android:label="@string/title_activity_location_search" />
+        <activity android:name=".CategoriesActivity" />
         <activity
             android:name=".ProductDetailViewActivity"
-            android:theme="@style/AppTheme2"></activity>
-        <activity android:name=".CartActivity"></activity>
-        <activity android:name=".CutomerEnterDetailsActivity"></activity>
-        <activity android:name=".FinishActivity"></activity>
+            android:theme="@style/AppTheme2" />
+        <activity android:name=".CartActivity" />
+        <activity android:name=".CutomerEnterDetailsActivity" />
+        <activity android:name=".FinishActivity" />
         <!-- adding our service -->
         <service android:name=".NotificationListener" />
     </application>

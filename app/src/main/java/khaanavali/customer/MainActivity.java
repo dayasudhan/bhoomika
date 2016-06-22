@@ -108,7 +108,10 @@ public class MainActivity extends AppCompatActivity {
                 {
                     frag = new StatusTrackerFragment();
                 }
-
+                else if(itemId == R.id.invite)
+                {
+                    frag = new ShareAppFragment();
+                }
                 if (frag != null) {
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 

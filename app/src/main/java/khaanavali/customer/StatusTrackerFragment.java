@@ -70,6 +70,8 @@ public class StatusTrackerFragment extends Fragment {
         txtViewTracker = (TextView) v.findViewById(R.id.statusText);
         btnStatus = (Button)v.findViewById(R.id.status_button);
         trackerDetails = new ArrayList<Tracker>();
+        ((MainActivity) getActivity())
+                .setActionBarTitle("Status Tracker");
         btnStatus.setOnClickListener(new View.OnClickListener() {
 
             @Override
