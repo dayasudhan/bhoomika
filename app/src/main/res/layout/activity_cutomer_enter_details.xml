@@ -455,7 +455,8 @@
         android:text="Get Current Location"
         android:textColor="#ffffff"
         android:id="@+id/locationButton"
-        android:background="@color/button_material_dark"
+        android:drawableLeft="@drawable/ic_action_location_found"
+        android:background="@drawable/buttonshape"
         android:layout_below="@+id/orderMapSymbol"
         android:layout_alignRight="@+id/view7"
         android:layout_alignEnd="@+id/view7"
@@ -463,6 +464,21 @@
         android:focusable="true"
         android:clickable="true"
         android:longClickable="false" />
+            <!--<Button-->
+                <!--android:id="@+id/angry_btn"-->
+
+                <!--android:text="Button"-->
+                <!--android:textColor="#FFFFFF"-->
+                <!--android:textSize="30sp"-->
+
+                <!--android:layout_width="270dp"-->
+                <!--android:layout_height="60dp"-->
+                <!--android:background="@drawable/buttonshape"-->
+                <!--android:shadowColor="#A8A8A8"-->
+                <!--android:shadowDx="0"-->
+                <!--android:shadowDy="0"-->
+                <!--android:shadowRadius="5"-->
+                <!--/>-->
         </RelativeLayout>
     </LinearLayout>
 

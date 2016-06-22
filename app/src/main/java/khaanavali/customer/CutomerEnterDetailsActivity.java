@@ -3,6 +3,7 @@ package khaanavali.customer;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.net.ParseException;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -116,9 +117,10 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
                     //                    double latitude2 = 12.9096282;//13.0714072,77.5654451
 //                    double longitude2 = 80.2273703;//12.9671603,77.5352851
                     //only for debugging
-//                    if(latitude == 0 && longitude == 0) {
-//                        longitude = 77.530879;
-//                    }                       latitude = 12.9708084;//13.0714072,77.5654451
+                    boolean isDebuggable = 0 != (getApplicationInfo().flags &= ApplicationInfo.FLAG_DEBUGGABLE);
+                    if(latitude == 0 && longitude == 0 && isDebuggable) {
+                        longitude = 77.530879;
+                    }                       latitude = 12.9708084;//13.0714072,77.5654451
 
                     order.getCustomer().getAddress().setLatitude(Double.toString(latitude));
                     order.getCustomer().getAddress().setLongitude(Double.toString(longitude));
