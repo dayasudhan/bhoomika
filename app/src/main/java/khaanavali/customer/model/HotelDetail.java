@@ -9,38 +9,65 @@ public class HotelDetail {
 
 
     Integer phone;
-    int deliveryRange;
-    String id;
-    ArrayList<String> deliveryAreas;
+    int deliverRange;
+    String _id;
+    ArrayList<String> deliverAreas;
     Address address;
-    ArrayList<MenuItem> menuItem;
+    ArrayList<MenuItem> menu;
     Hotel hotel;
     String speciality;
     int rating;
-    int delivery_time;
+    int deliveryTime;
+    int deliverCharge;
+    int minimumOrder;
 
+    public OrderAcceptTimings getOrderAcceptTimings() {
+        return orderAcceptTimings;
+    }
+
+    public void setOrderAcceptTimings(OrderAcceptTimings orderAcceptTimings) {
+        this.orderAcceptTimings = orderAcceptTimings;
+    }
+
+    public int getMinimumOrder() {
+        return minimumOrder;
+    }
+
+    public void setMinimumOrder(int minimumOrder) {
+        this.minimumOrder = minimumOrder;
+    }
+
+    public int getDeliverCharge() {
+        return deliverCharge;
+    }
+
+    public void setDeliverCharge(int deliverCharge) {
+        this.deliverCharge = deliverCharge;
+    }
+
+    OrderAcceptTimings orderAcceptTimings;
     public HotelDetail()
     {
         hotel = new Hotel();
 
-        id = new String();
+        _id = new String();
 
         address = new Address();
-        menuItem = new ArrayList<MenuItem>();
+        menu = new ArrayList<MenuItem>();
         speciality = new String();
-        deliveryAreas = new ArrayList<String>();
-        deliveryRange = 3;
+        deliverAreas = new ArrayList<String>();
+   //     deliverRange = 3;
         phone = new Integer(0);
         rating = 5;
-        delivery_time = 60;
+      //  deliveryTime = 60;
     }
 
-    public int getDelivery_time() {
-        return delivery_time;
+    public int getDeliveryTime() {
+        return deliveryTime;
     }
 
-    public void setDelivery_time(int delivery_time) {
-        this.delivery_time = delivery_time;
+    public void setDeliveryTime(int deliveryTime) {
+        this.deliveryTime = deliveryTime;
     }
 
     public int getRating() {
@@ -50,12 +77,12 @@ public class HotelDetail {
     public void setRating(int rating) {
         this.rating = rating;
     }
-    public ArrayList<MenuItem> getMenuItem() {
-        return menuItem;
+    public ArrayList<MenuItem> getMenu() {
+        return menu;
     }
 
-    public void setMenuItem(ArrayList<MenuItem> menuItem) {
-        this.menuItem = menuItem;
+    public void setMenu(ArrayList<MenuItem> menu) {
+        this.menu = menu;
     }
     public Integer getPhone() {
         return phone;
@@ -64,23 +91,23 @@ public class HotelDetail {
     public void setPhone(Integer phone) {
         this.phone = phone;
     }
-    public ArrayList<String> getDeliveryAreas() {
-        return deliveryAreas;
+    public ArrayList<String> getDeliverAreas() {
+        return deliverAreas;
     }
 
-    public void setDeliveryAreas(ArrayList<String> deliveryAreas) {
-        this.deliveryAreas = deliveryAreas;
+    public void setDeliverAreas(ArrayList<String> deliverAreas) {
+        this.deliverAreas = deliverAreas;
     }
 
 
 
 
-    public String getId() {
-        return id;
+    public String get_id() {
+        return _id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void set_id(String _id) {
+        this._id = _id;
     }
 
     public String getSpeciality() {
@@ -107,12 +134,12 @@ public class HotelDetail {
         this.address = address;
     }
 
-    public int getDeliveryRange() {
-        return deliveryRange;
+    public int getDeliverRange() {
+        return deliverRange;
     }
 
-    public void setDeliveryRange(int deliveryRange) {
-        this.deliveryRange = deliveryRange;
+    public void setDeliverRange(int deliverRange) {
+        this.deliverRange = deliverRange;
     }
 
 }

@@ -10,7 +10,7 @@ public class Hotel {
         email = new String();
         id = new String();
         phone = new Integer(0);
-        deliveryCharges = 0;
+        //deliveryCharges = 0;
     }
     public String getName() {
         return name;
@@ -48,13 +48,13 @@ public class Hotel {
     }
 
     String id;
-    public int getDeliveryCharges() {
-        return deliveryCharges;
-    }
-
-    public void setDeliveryCharges(int deliveryCharges) {
-        this.deliveryCharges = deliveryCharges;
-    }
-
-    int deliveryCharges;
+//    public int getDeliveryCharges() {
+//        return deliveryCharges;
+//    }
+//
+//    public void setDeliveryCharges(int deliveryCharges) {
+//        this.deliveryCharges = deliveryCharges;
+//    }
+//
+//    int deliveryCharges;
 }

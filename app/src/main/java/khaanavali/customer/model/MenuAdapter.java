@@ -64,7 +64,7 @@ public class MenuAdapter {
         name = item.getName();
         id = item.getId();
         price = item.getPrice();
-        available = item.isAvailable();
+       // available = item.isAvailable();
         no_of_order = 0;
     }
     public  MenuAdapter(Menu item)

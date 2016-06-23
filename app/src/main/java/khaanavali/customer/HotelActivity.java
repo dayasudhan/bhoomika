@@ -24,6 +24,7 @@ import com.google.gson.Gson;
 import khaanavali.customer.adapter.HotelListAdapter;
 import khaanavali.customer.model.HotelDetail;
 import khaanavali.customer.model.MenuItem;
+import khaanavali.customer.model.OrderAcceptTimings;
 import khaanavali.customer.utils.Constants;
 
 import org.apache.http.HttpEntity;
@@ -54,8 +55,11 @@ public class HotelActivity extends AppCompatActivity {
     private static final String TAG_DELIVERY_RANGE = "deliverRange";
     private static final String TAG_DELIVERY_CHARGE = "deliverCharge";
     private static final String TAG_AVAILIBILITY = "availability";
-    private static final String TAG_DELIVERY_TIME = "deliverTime";
+    private static final String TAG_DELIVERY_TIME = "deliveryTime";
+    private static final String TAG_ORDER_ACCEPT_TIMINGS = "orderAcceptTimings";
     private static final String TAG_RATING = "rating";
+    private static final String TAG_MINIMUM_ORDER = "minimumOrder";
+
     private ArrayList<HotelDetail> hotellist;
     ListView listView ;
     @Override
@@ -163,21 +167,19 @@ public class HotelActivity extends AppCompatActivity {
 
                 if (status == 200) {
                     HttpEntity entity = response.getEntity();
-
                     String data = EntityUtils.toString(entity);
                     JSONArray jarray = new JSONArray(data);
-
                     for (int i = 0; i < jarray.length(); i++) {
                         JSONObject object = jarray.getJSONObject(i);
                         HotelDetail hotelDetail = new HotelDetail();
                         if (object.has(TAG_MENU)) {
                             JSONArray menuArray = object.getJSONArray(TAG_MENU);
-                            hotelDetail.getMenuItem().clear();
+                            hotelDetail.getMenu().clear();
                             for (int j = 0; j < menuArray.length(); j++) {
                                 JSONObject menu_object = menuArray.getJSONObject(j);
                                 MenuItem menuItem = new MenuItem();
-                                if(menu_object.has(TAG_ID))
-                                    menuItem.setId(menu_object.getString(TAG_ID));
+//                                if(menu_object.has(TAG_ID))
+//                                    menuItem.set_id(menu_object.getString(TAG_ID));
                                 if(menu_object.has(TAG_NAME))
                                     menuItem.setName(menu_object.getString(TAG_NAME));
                                 String dd =menu_object.getString(TAG_PRICE);
@@ -192,18 +194,18 @@ public class HotelActivity extends AppCompatActivity {
 
                                     try {
                                         if(menu_object.getInt(TAG_AVAILIBILITY) == 1)
-                                            menuItem.setAvailable(true);
+                                            menuItem.setAvailable(1);
                                         else
-                                            menuItem.setAvailable(false);
+                                            menuItem.setAvailable(0);
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
                                 }
-                                hotelDetail.getMenuItem().add(menuItem);
+                                hotelDetail.getMenu().add(menuItem);
                             }
                         }
                         if(object.has(TAG_ID))
-                            hotelDetail.setId(object.getString(TAG_ID));
+                            hotelDetail.set_id(object.getString(TAG_ID));
 
                         if(object.has(TAG_SPECIALITY))
                             hotelDetail.setSpeciality(object.getString(TAG_SPECIALITY));
@@ -256,16 +258,16 @@ public class HotelActivity extends AppCompatActivity {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            hotelDetail.setDeliveryRange(range);
+                            hotelDetail.setDeliverRange(range);
                         }
                         if(object.has(TAG_DELIVERY_AREAS))
                         {
                             JSONArray delieveryArray = object.getJSONArray(TAG_DELIVERY_AREAS);
-                            hotelDetail.getDeliveryAreas().clear();
+                            hotelDetail.getDeliverAreas().clear();
                             for (int j = 0; j < delieveryArray.length(); j++) {
                                 JSONObject da_object = delieveryArray.getJSONObject(j);
                                 if (da_object.has(TAG_NAME))
-                                    hotelDetail.getDeliveryAreas().add(da_object.getString(TAG_NAME));
+                                    hotelDetail.getDeliverAreas().add(da_object.getString(TAG_NAME));
                             }
                         }
                         if(object.has(TAG_DELIVERY_CHARGE))
@@ -276,7 +278,7 @@ public class HotelActivity extends AppCompatActivity {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            hotelDetail.getHotel().setDeliveryCharges(charge);
+                            hotelDetail.setDeliverCharge(charge);
                         }
                         if(object.has(TAG_RATING))
                         {
@@ -288,6 +290,17 @@ public class HotelActivity extends AppCompatActivity {
                             }
                             hotelDetail.setRating(rating);
                         }
+                        if(object.has(TAG_MINIMUM_ORDER))
+                        {
+                            int rating=0 ;
+                            try {
+                                rating = object.getInt(TAG_MINIMUM_ORDER);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            hotelDetail.setMinimumOrder(rating);
+                        }
+
                         if(object.has(TAG_DELIVERY_TIME))
                         {
                             int delieveryTime=0 ;
@@ -296,17 +309,26 @@ public class HotelActivity extends AppCompatActivity {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            hotelDetail.setDelivery_time(delieveryTime);
+                            hotelDetail.setDeliveryTime(delieveryTime);
+                        }
+                        if(object.has(TAG_ORDER_ACCEPT_TIMINGS))
+                        {
+                            JSONObject ordAcctime = object.getJSONObject(TAG_ORDER_ACCEPT_TIMINGS);
+                            Gson gson = new Gson();
+                            OrderAcceptTimings ordacctimeobj =  gson.fromJson(ordAcctime.toString(),OrderAcceptTimings.class);
+                            hotelDetail.setOrderAcceptTimings(ordacctimeobj);
+
                         }
                         hotellist.add(hotelDetail);
-                    }
+                   }
                     return true;
                 }
             } catch (ParseException e1) {
                 e1.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
-            } catch (JSONException e) {
+
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             return false;

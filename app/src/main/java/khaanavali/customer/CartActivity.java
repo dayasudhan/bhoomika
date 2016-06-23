@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import khaanavali.customer.adapter.PlusMinusButtonListener;
 import khaanavali.customer.adapter.ProductAdapter;
+import khaanavali.customer.model.HotelDetail;
 import khaanavali.customer.model.MenuAdapter;
 import khaanavali.customer.model.Order;
 
@@ -22,8 +23,8 @@ import java.util.ArrayList;
 public class CartActivity extends AppCompatActivity implements PlusMinusButtonListener {
 
 
-    String[] hotel={"Dosa","Idli"};
     Order order;
+    HotelDetail hotelDetail;
     ArrayList<MenuAdapter> mMenulist;
     ProductAdapter dataAdapter;
     TextView orderTotalCharge;
@@ -35,6 +36,8 @@ public class CartActivity extends AppCompatActivity implements PlusMinusButtonLi
         Intent intent = getIntent();
         Gson gson = new Gson();
         order = gson.fromJson(intent.getStringExtra("order"), Order.class);
+        hotelDetail = gson.fromJson(intent.getStringExtra("HotelDetail"), HotelDetail.class);
+
         int totalCost = 0;
         mMenulist = new ArrayList<MenuAdapter>();
         for(int i = 0; i< order.getMenuItems().size();i++)
@@ -43,7 +46,7 @@ public class CartActivity extends AppCompatActivity implements PlusMinusButtonLi
             mMenulist.add(menuAdapter);
             totalCost +=  menuAdapter.getNo_of_order() * menuAdapter.getPrice();
         }
-        order.setBill_value(totalCost);
+        order.setBill_value(totalCost,hotelDetail.getDeliverCharge());
 
 
         dataAdapter = new ProductAdapter(CartActivity.this,
@@ -60,7 +63,7 @@ public class CartActivity extends AppCompatActivity implements PlusMinusButtonLi
         //TextView vendor_name = (TextView) findViewById(R.id.vendor_add_cart_name);
         //vendor_name.setText(order.getHotel().getName());
 
-        deliveryCharge.setText(String.valueOf(order.getHotel().getDeliveryCharges()));
+        deliveryCharge.setText(String.valueOf(hotelDetail.getDeliverCharge()));
         orderTotalCharge.setText(String.valueOf(order.getTotalCost()));
 
         btn.setOnClickListener(new View.OnClickListener() {
@@ -83,6 +86,8 @@ public class CartActivity extends AppCompatActivity implements PlusMinusButtonLi
 
                     String strOrder = gson.toJson(order);
                     i.putExtra("order", strOrder);
+                    String strHotelDetail = gson.toJson(hotelDetail);
+                    i.putExtra("HotelDetail",strHotelDetail);
                     startActivity(i);
                 }
             }
@@ -121,7 +126,7 @@ public class CartActivity extends AppCompatActivity implements PlusMinusButtonLi
                 total += menulist.get(i).getNo_of_order() * menulist.get(i).getPrice();
             }
         }
-        order.setBill_value(total);
+        order.setBill_value(total,hotelDetail.getDeliverCharge());
         orderTotalCharge.setText(String.valueOf(order.getBill_value()));
     }
 }

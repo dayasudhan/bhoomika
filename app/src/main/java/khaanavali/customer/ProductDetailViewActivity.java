@@ -40,9 +40,9 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
         hotelDetail = gson.fromJson(intent.getStringExtra("hotel"), HotelDetail.class);
         order.setHotel(hotelDetail.getHotel());
         mMenulist = new ArrayList<MenuAdapter>();
-        for(int i = 0; i< hotelDetail.getMenuItem().size();i++)
+        for(int i = 0; i< hotelDetail.getMenu().size(); i++)
         {
-            MenuAdapter menuAdapter = new MenuAdapter( hotelDetail.getMenuItem().get(i));
+            MenuAdapter menuAdapter = new MenuAdapter( hotelDetail.getMenu().get(i));
             mMenulist.add(menuAdapter);
         }
         mDataAdapter = new ProductAdapter(ProductDetailViewActivity.this,
@@ -137,6 +137,8 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
                     }
                     String strOrder = gson.toJson(order);
                     i.putExtra("order", strOrder);
+                    String strHotelDetail = gson.toJson(hotelDetail);
+                    i.putExtra("HotelDetail",strHotelDetail);
                     startActivity(i);
                 }
             }

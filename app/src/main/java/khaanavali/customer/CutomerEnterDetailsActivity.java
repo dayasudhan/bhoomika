@@ -20,6 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+
+import khaanavali.customer.model.HotelDetail;
 import khaanavali.customer.model.Order;
 import khaanavali.customer.utils.Constants;
 import khaanavali.customer.utils.GPSTracker;
@@ -36,7 +38,9 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class CutomerEnterDetailsActivity extends AppCompatActivity {
 
@@ -46,6 +50,7 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
     EditText editName,editPhone,editEmail,editHouseNo,editAreaName,editLandmark,editAddress;
     // GPSTracker class
     GPSTracker gps;
+    HotelDetail hotelDetail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +58,7 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Gson gson = new Gson();
         order = gson.fromJson(intent.getStringExtra("order"), Order.class);
+        hotelDetail = gson.fromJson(intent.getStringExtra("HotelDetail"), HotelDetail.class);
         responseOrder = new String();
         Button btn= (Button) findViewById(R.id.placeOrderButton);
         btnShowLocation= (Button) findViewById(R.id.locationButton);
@@ -63,7 +69,7 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
         editAreaName=(EditText)findViewById(R.id.orderDetailAddress_areaname);
         editLandmark=(EditText)findViewById(R.id.orderDetailAddress_landmark);
         editAddress=(EditText)findViewById(R.id.orderDetailAddress_address);
-        TextView orderTotalCharge = (TextView) findViewById(R.id.textView);
+        final TextView orderTotalCharge = (TextView) findViewById(R.id.textView);
         orderTotalCharge.setText(String.valueOf(order.getTotalCost()));
 //        if(true) {
 //            editName.setText("name");
@@ -93,6 +99,15 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
                 }
                 else if(editLandmark.getText().length() == 0){
                     Toast.makeText(getApplicationContext(), "Enter Landmark/locality ", Toast.LENGTH_LONG).show();
+                }
+                else if(hotelDetail.getMinimumOrder() > order.getTotalCost())
+                {
+                    String text  = "Minimum Order for this Hotel is Rs." +  Integer.toString(hotelDetail.getMinimumOrder()) + " Kindly add more items";
+                    Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
+                }
+                else if(!checkTimeAllowedForOrder())
+                {
+                    Toast.makeText(getApplicationContext(), "This time no delivery for this Hotel Kindly Check Timings of Hotel for Order timings", Toast.LENGTH_LONG).show();
                 }
                 else {
                     alertMessage();
@@ -195,6 +210,38 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
         builder.setMessage("Are you sure about this order?" ) .setPositiveButton("Yes", dialogClickListener)
                 .setNegativeButton("No", dialogClickListener).show();
     }
+    public boolean checkTimeAllowedForOrder()
+    {
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+            Date orderTime  = dateFormat.parse( dateFormat.format(new Date()));
+            if (hotelDetail.getOrderAcceptTimings().getMorning().getAvailable().equals("Yes")) {
+                Date starttime = dateFormat.parse(hotelDetail.getOrderAcceptTimings().getMorning().getStartTime());
+                Date endtime = dateFormat.parse(hotelDetail.getOrderAcceptTimings().getMorning().getEndTime());
+                if ((orderTime.after(starttime) && orderTime.before(endtime))) {
+                    return true;
+                }
+            }
+            if (hotelDetail.getOrderAcceptTimings().getLunch().getAvailable().equals("Yes")) {
+                Date starttime = dateFormat.parse(hotelDetail.getOrderAcceptTimings().getLunch().getStartTime());
+                Date endtime = dateFormat.parse(hotelDetail.getOrderAcceptTimings().getLunch().getEndTime());
+                if ((orderTime.after(starttime) && orderTime.before(endtime))) {
+                    return true;
+                }
+            }
+            if (hotelDetail.getOrderAcceptTimings().getDinner().getAvailable().equals("Yes")) {
+                Date starttime = dateFormat.parse(hotelDetail.getOrderAcceptTimings().getDinner().getStartTime());
+                Date endtime = dateFormat.parse(hotelDetail.getOrderAcceptTimings().getDinner().getEndTime());
+                if ((orderTime.after(starttime) && orderTime.before(endtime))) {
+                    return true;
+                }
+            }
+        }
+        catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
     private class GeocoderHandler extends Handler {
         @Override
         public void handleMessage(Message message) {
@@ -286,6 +333,7 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
             if (result == true){
                 Intent i = new Intent(CutomerEnterDetailsActivity.this, FinishActivity.class);
                 i.putExtra("order", responseOrder);
+
                 startActivity(i);
                 finish();
         }

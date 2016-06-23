@@ -31,15 +31,15 @@ public class MenuItem {
     int price;
     String name;
     String id;
-    boolean available;
+    int availability;
     int  no_of_order;
 
-    public boolean isAvailable() {
-        return available;
+    public int isAvailable() {
+        return availability;
     }
 
-    public void setAvailable(boolean available) {
-        this.available = available;
+    public void setAvailable(int available) {
+        this.availability = available;
     }
     public int getNo_of_order() {
         return no_of_order;
@@ -51,7 +51,7 @@ public class MenuItem {
     {
         name = new String();
         id = new String();
-        available = true;
+       // available = ;
         no_of_order = 0;
 
     }

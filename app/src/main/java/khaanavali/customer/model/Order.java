@@ -40,9 +40,9 @@ public class Order {
         return bill_value;
     }
 
-    public void setBill_value(int bill_value) {
+    public void setBill_value(int bill_value , int deliveryCharge) {
         this.bill_value = bill_value;
-        this.totalCost = bill_value + hotel.getDeliveryCharges();
+        this.totalCost = bill_value + deliveryCharge;
     }
     public int getDeliveryCharge() {
         return deliveryCharge;

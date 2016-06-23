@@ -134,20 +134,11 @@ public class MainActivity extends AppCompatActivity {
         String btnName = null;
 
         switch(itemId) {
-//            case R.id.menu_refresh:
-//                btnName = "Referesh";
-//                break;
-//            case R.id.menu_help:
-//                btnName = "Help";
-//                break;
-            // Android home
             case android.R.id.home: {
                 dLayout.openDrawer(GravityCompat.START);
                 return true;
             }
         }
-
-      //  Snackbar.make(layout, "Button " + btnName, Snackbar.LENGTH_SHORT).show();
         return true;
     }
 }

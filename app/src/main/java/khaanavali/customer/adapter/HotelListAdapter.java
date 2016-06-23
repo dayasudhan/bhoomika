@@ -77,7 +77,7 @@ public class HotelListAdapter extends BaseAdapter{
 
         //   itemHolder.city.setTypeface(cr);
         itemHolder.hotelName.setText(mhotelList.get(position).getHotel().getName());
-        itemHolder.hotelDeliveryTime.setText(String.valueOf(mhotelList.get(position).getDelivery_time()).concat(" mins"));
+        itemHolder.hotelDeliveryTime.setText(String.valueOf(mhotelList.get(position).getDeliveryTime()).concat(" mins"));
         itemHolder.hotelRating.setText(String.valueOf(mhotelList.get(position).getRating()).concat("/5*"));
         itemHolder.hotelSpeciality.setText(mhotelList.get(position).getSpeciality());
         return view;
