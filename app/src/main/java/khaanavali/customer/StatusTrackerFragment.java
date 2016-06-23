@@ -76,10 +76,10 @@ public class StatusTrackerFragment extends Fragment {
 
             @Override
             public void onClick(View arg0) {
-                if(!ed.getText().equals("") )
+
+                if(ed.getText().length() > 0 )
                 {
                     getStatus(ed.getText().toString());
-
                 }
                 else
                 {
@@ -113,8 +113,8 @@ public void updateStatus()
             }
             Calendar cal = Calendar.getInstance();
             cal.setTime(getDate);
-            cal.add(Calendar.HOUR, 5);
-            cal.add(Calendar.MINUTE, 30);
+//            cal.add(Calendar.HOUR, 5);
+//            cal.add(Calendar.MINUTE, 30);
             String newTime = requiredFormat.format(cal.getTime());
             trackerItemStr += trackerDetails.get(j).getStatus() + " (" + newTime + ")" + '\n';
         }

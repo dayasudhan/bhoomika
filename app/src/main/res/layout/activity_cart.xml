@@ -97,7 +97,7 @@
         android:text="NEXT"
         android:textColor="#ffffff"
         android:id="@+id/orderDetailButton_next"
-        android:background="@color/parrotgreen6"
+        android:background="@drawable/buttonselector"
         android:layout_marginTop="5dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"

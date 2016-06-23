@@ -3,10 +3,11 @@
     android:layout_width="wrap_content"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:gravity="center"
     android:layout_gravity="center"
     android:clickable="true"
-    style="@android:style/Widget.ActionButton">
+    style="@android:style/Widget.ActionButton"
+    android:gravity="center">
+
 
     <ImageView
         android:id="@+id/hotlist_bell"
@@ -16,7 +17,8 @@
         android:gravity="center"
         android:layout_margin="0dp"
         android:contentDescription="bell"
-        />
+        android:layout_alignParentRight="false"
+        android:layout_toRightOf="@+id/textView3" />
 
     <TextView
         android:id="@+id/count_indicator"
@@ -35,4 +37,15 @@
         android:paddingRight="4dp"
         android:paddingLeft="4dp"
         android:background="@drawable/rounded_circle"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Checkout"
+        android:gravity="center"
+        android:layout_marginTop="6dp"
+        android:id="@+id/textView3"
+ />
+
 </RelativeLayout>

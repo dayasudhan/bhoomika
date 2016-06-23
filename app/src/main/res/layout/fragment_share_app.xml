@@ -24,7 +24,7 @@
             android:text="tell a friend"
             android:id="@+id/invite_button"
             android:textColor="#ffffff"
-            android:background="@color/parrotgreen6"
+            android:background="@drawable/buttonselector"
             android:clickable="true"
 
             android:layout_alignParentBottom="true"
