@@ -29,6 +29,7 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
     ArrayList<MenuAdapter> mMenulist;
     ProductAdapter mDataAdapter;
     TextView counttxt;
+    TextView vendorName,speciality,phone,deliveryTime,minimumOrder,deliverycharge,orderTimings;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +51,19 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
         mDataAdapter.setListener(this);
         ListView listView = (ListView) findViewById(R.id.listView_product_detail);
         listView.setAdapter(mDataAdapter);
+        vendorName  = (TextView)findViewById(R.id.vendor_name_info);
+        vendorName.setText(hotelDetail.getHotel().getName());
 
+        vendorName  = (TextView)findViewById(R.id.vendor_name_info);
+        vendorName.setText(hotelDetail.getHotel().getName());
+        speciality  = (TextView)findViewById(R.id.vendor_speciality_info);
+        speciality.setText(hotelDetail.getSpeciality());
+        deliverycharge  = (TextView)findViewById(R.id.delievercharge);
+        deliverycharge.setText("Deliver Charge: ₹"+Integer.toString(hotelDetail.getDeliverCharge()));
+        deliveryTime  = (TextView)findViewById(R.id.vendor_delivery_time_info);
+        deliveryTime.setText("Deliver Time: " + Integer.toString(hotelDetail.getDeliveryTime()) + " mins");
+        minimumOrder  = (TextView)findViewById(R.id.vendor_rating_info);
+        minimumOrder.setText("Minumu Order: ₹"+Integer.toString(hotelDetail.getMinimumOrder()));
 
         /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -62,11 +75,11 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
         });*/
 
 
-
+        setToolBar(hotelDetail.getHotel().getName());
     }
 
     private void setToolBar(String areaClicked) {
-        Toolbar tb = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar tb = (Toolbar) findViewById(R.id.toolbar2);
         setSupportActionBar(tb);
 
         ActionBar ab = getSupportActionBar();
@@ -100,6 +113,7 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
         //  menu_hotlist = menu.findItem(R.id.menu_hotlist).getActionView();
         // counttxt= (TextView) menu_hotlist.findViewById(R.id.hotlist_hot);
         RelativeLayout badgeLayout = (RelativeLayout) menu.findItem(R.id.menu_hotlist).getActionView();
+        //badgeLayout.set
         counttxt = (TextView) badgeLayout.findViewById(R.id.count_indicator);
         //counttxt.setVisibility(View.INVISIBLE);
         // updateHotCount(0);
