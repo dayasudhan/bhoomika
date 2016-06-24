@@ -26,6 +26,7 @@ public class ProductAdapter extends BaseAdapter {
     int pos;
     private Integer count;
     public int totalCount ;
+    public int totalCost;
     PlusMinusButtonListener mListener;
     public ArrayList<MenuAdapter> getmMenulist() {
         return mMenulist;
@@ -45,6 +46,7 @@ public class ProductAdapter extends BaseAdapter {
         layoutResID = layoutResourceID;
         mMenulist =menuList;
         totalCount = 0;
+        totalCost = 0;
         // this.cr=cr;
 
     }
@@ -104,6 +106,7 @@ public class ProductAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 totalCount =  totalCount + 1;
+
                 v.getTag();
                 int posi = (Integer) v.getTag();
                 View parentRow = (View) v.getParent();
@@ -123,6 +126,7 @@ public class ProductAdapter extends BaseAdapter {
                 TextView btn = (TextView) parentRow.findViewById(R.id.add_btn);
                 btn.setTextColor(Color.parseColor("#07c2b1"));
                 mMenulist.get(posi).setNo_of_order(val);
+                totalCost = totalCost +mMenulist.get(posi).getPrice();
                 mListener.buttonClicked(pos,val);
                 /*String productname = textName.getText().toString();
                 int productID=  productList.get(posforadd).getVendorProduct().getId();
@@ -180,7 +184,9 @@ public class ProductAdapter extends BaseAdapter {
                     addbtn.setTextColor(Color.parseColor("#8A8A8A"));
                     String productname = textName.getText().toString();
                     mMenulist.get(posi).setNo_of_order(val);
+                    totalCost = totalCost  -mMenulist.get(posi).getPrice();
                     mListener.buttonClicked(pos,val);
+
                    /* int productID=  productList.get(posforsub).getVendorProduct().getId();
                         for(int j=0;j<=mProductModel.getSuccess().size();j++){
                             if(productID==mProductModel.getSuccess().get(j).getVendorProduct().getId()){

@@ -216,7 +216,8 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
             SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
             Date orderTime  = dateFormat.parse( dateFormat.format(new Date()));
             if (hotelDetail.getOrderAcceptTimings().getMorning().getAvailable().equals("Yes")) {
-                Date starttime = dateFormat.parse(hotelDetail.getOrderAcceptTimings().getMorning().getStartTime());
+                Date starttime = dateFormat.parse(hotelDetail.getOrderAcceptTimings().getMorning().getStartTime()   );
+                starttime.setMinutes( starttime.getMinutes() -  hotelDetail.getDeliveryTime());
                 Date endtime = dateFormat.parse(hotelDetail.getOrderAcceptTimings().getMorning().getEndTime());
                 if ((orderTime.after(starttime) && orderTime.before(endtime))) {
                     return true;
@@ -224,6 +225,7 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
             }
             if (hotelDetail.getOrderAcceptTimings().getLunch().getAvailable().equals("Yes")) {
                 Date starttime = dateFormat.parse(hotelDetail.getOrderAcceptTimings().getLunch().getStartTime());
+                starttime.setMinutes( starttime.getMinutes() -  hotelDetail.getDeliveryTime());
                 Date endtime = dateFormat.parse(hotelDetail.getOrderAcceptTimings().getLunch().getEndTime());
                 if ((orderTime.after(starttime) && orderTime.before(endtime))) {
                     return true;
@@ -231,6 +233,7 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
             }
             if (hotelDetail.getOrderAcceptTimings().getDinner().getAvailable().equals("Yes")) {
                 Date starttime = dateFormat.parse(hotelDetail.getOrderAcceptTimings().getDinner().getStartTime());
+                starttime.setMinutes( starttime.getMinutes() -  hotelDetail.getDeliveryTime());
                 Date endtime = dateFormat.parse(hotelDetail.getOrderAcceptTimings().getDinner().getEndTime());
                 if ((orderTime.after(starttime) && orderTime.before(endtime))) {
                     return true;

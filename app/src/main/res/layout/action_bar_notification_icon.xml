@@ -18,7 +18,7 @@
         android:layout_margin="0dp"
         android:contentDescription="bell"
         android:layout_alignParentRight="false"
-        android:layout_toRightOf="@+id/textView3" />
+        android:layout_toRightOf="@+id/checkoutprice" />
 
     <TextView
         android:id="@+id/count_indicator"
@@ -42,10 +42,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Checkout"
+        android:text=""
         android:gravity="center"
-        android:layout_marginTop="6dp"
-        android:id="@+id/textView3"
+        android:layout_marginTop="8dp"
+        android:id="@+id/checkoutprice"
  />
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
+        <!--android:text="Rs 134"-->
+        <!--android:id="@+id/textView4"-->
+        <!--android:layout_alignEnd="@+id/hotlist_bell"-->
+        <!--android:layout_below="@+id/textView3" />-->
 
 </RelativeLayout>

@@ -69,18 +69,13 @@ public class CartActivity extends AppCompatActivity implements PlusMinusButtonLi
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                ArrayList<MenuAdapter> menulist = dataAdapter.getmMenulist();
-//                int total =0;
-//                for(int i = 0; i< menulist.size();i++)
-//                {
-//                    if(menulist.get(i).getNo_of_order() > 1) {
-//                        total += menulist.get(i).getNo_of_order() * menulist.get(i).getPrice();
-//                    }
-//                }
-//                order.setBill_value(total);
-                if (order.getTotalCost() <= 0) {
-                    Toast.makeText(getApplicationContext(), "Cart Empty -please select Some Items", Toast.LENGTH_LONG).show();
-                } else {
+
+                if(order.getTotalCost() < hotelDetail.getMinimumOrder())
+                {
+                    String text  = "Minimum Order for this Hotel is Rs." +  Integer.toString(hotelDetail.getMinimumOrder()) + " Kindly add more items";
+                    Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
+                }
+                else {
                     Intent i = new Intent(CartActivity.this, CutomerEnterDetailsActivity.class);
                     Gson gson = new Gson();
 
@@ -94,6 +89,7 @@ public class CartActivity extends AppCompatActivity implements PlusMinusButtonLi
         });
         setToolBar(order.getHotel().getName());
     }
+
     private void setToolBar(String title) {
         Toolbar tb = (Toolbar) findViewById(R.id.toolbar2);
         setSupportActionBar(tb);

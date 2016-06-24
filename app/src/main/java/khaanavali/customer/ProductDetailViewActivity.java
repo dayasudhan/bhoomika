@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import khaanavali.customer.model.MenuAdapter;
 import khaanavali.customer.model.Order;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ProductDetailViewActivity extends AppCompatActivity implements PlusMinusButtonListener {
 
@@ -28,7 +30,7 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
     Order order;
     ArrayList<MenuAdapter> mMenulist;
     ProductAdapter mDataAdapter;
-    TextView counttxt;
+    TextView counttxt,priceTxt;
     TextView vendorName,speciality,phone,deliveryTime,minimumOrder,deliverycharge,orderTimings;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +66,30 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
         deliveryTime.setText("Deliver Time: " + Integer.toString(hotelDetail.getDeliveryTime()) + " mins");
         minimumOrder  = (TextView)findViewById(R.id.vendor_rating_info);
         minimumOrder.setText("Minumu Order: ₹"+Integer.toString(hotelDetail.getMinimumOrder()));
+        phone    = (TextView)findViewById(R.id.phone);
+        phone.setText("Phone :"+Integer.toString(hotelDetail.getPhone()));
+        orderTimings = (TextView)findViewById(R.id.ordertimings);
+        orderTimings.setText("Morning: 09.30 - 12.00" + "\n" + "Lunch   :  09.30 - 12.00 " +"\n" + "Dinner :  09.30 - 12.00");
 
+        String strorderTimings = new String();
+        if (hotelDetail.getOrderAcceptTimings().getMorning().getAvailable().equals("Yes")) {
+            strorderTimings = "Morning: " + hotelDetail.getOrderAcceptTimings().getMorning().getStartTime() + "-" + hotelDetail.getOrderAcceptTimings().getMorning().getEndTime();
+        }
+        if (hotelDetail.getOrderAcceptTimings().getLunch().getAvailable().equals("Yes")) {
+            strorderTimings = strorderTimings + "\n"  + "Lunch   : " + hotelDetail.getOrderAcceptTimings().getLunch().getStartTime() + "-" + hotelDetail.getOrderAcceptTimings().getLunch().getEndTime();
+        }
+        if (hotelDetail.getOrderAcceptTimings().getDinner().getAvailable().equals("Yes")) {
+            strorderTimings = strorderTimings + "\n"  + "Dinner  : " + hotelDetail.getOrderAcceptTimings().getDinner().getStartTime() + "-" + hotelDetail.getOrderAcceptTimings().getDinner().getEndTime();
+        }
+        orderTimings.setText(strorderTimings);
+        Button nextButton = (Button) findViewById(R.id.button);
+        nextButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                moveNext();
+            }
+        });
         /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -88,6 +113,34 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
         ab.setTitle(areaClicked);
     }
 
+    public void moveNext()
+    {
+        if(mDataAdapter.totalCount <= 0)
+        {
+            Toast.makeText(getApplicationContext(), "Cart Empty -please select Some Items", Toast.LENGTH_LONG).show();
+        }
+        else if(mDataAdapter.totalCost < hotelDetail.getMinimumOrder())
+        {
+            String text  = "Minimum Order for this Hotel is Rs." +  Integer.toString(hotelDetail.getMinimumOrder()) + " Kindly add more items";
+            Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
+        }
+        else {
+            Intent i = new Intent(ProductDetailViewActivity.this, CartActivity.class);
+            Gson gson = new Gson();
+            order.getMenuItems().clear();
+            for (int j = 0; j < mDataAdapter.getmMenulist().size(); j++) {
+                if (mDataAdapter.getmMenulist().get(j).getMenuOrder().getNo_of_order() > 0) {
+                    Menu menu = mDataAdapter.getmMenulist().get(j).getMenuOrder();
+                    order.getMenuItems().add(menu);
+                }
+            }
+            String strOrder = gson.toJson(order);
+            i.putExtra("order", strOrder);
+            String strHotelDetail = gson.toJson(hotelDetail);
+            i.putExtra("HotelDetail",strHotelDetail);
+            startActivity(i);
+        }
+    }
     @Override
     public boolean onOptionsItemSelected(android.view.MenuItem item) {
         switch (item.getItemId()) {
@@ -102,8 +155,9 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
     }
     @Override
     public void buttonClicked(int postion,int value) {
-        int count = mDataAdapter.totalCount;
-        counttxt.setText(String.valueOf(count));
+
+        counttxt.setText(String.valueOf(mDataAdapter.totalCount));
+        priceTxt.setText("₹ " + String.valueOf(mDataAdapter.totalCost));
     }
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
@@ -115,46 +169,14 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
         RelativeLayout badgeLayout = (RelativeLayout) menu.findItem(R.id.menu_hotlist).getActionView();
         //badgeLayout.set
         counttxt = (TextView) badgeLayout.findViewById(R.id.count_indicator);
+        priceTxt = (TextView) badgeLayout.findViewById(R.id.checkoutprice);
         //counttxt.setVisibility(View.INVISIBLE);
         // updateHotCount(0);
         counttxt.setText("0");
         badgeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               /* if (mpref.getMainOrder().isEmpty()) {
-                    counttxt.setVisibility(View.INVISIBLE);
-                    Toast.makeText(getApplicationContext(), "There are no items in the cart", Toast.LENGTH_LONG).show();
-                    dialog2 = ProgressDialog.show(ProductDetailListActivity.this,
-                            "", "Loading..  Please wait", true);
-                    reLoadProducts();
-                } else {
-                    if (!counttxt.getText().toString().isEmpty()) {
-                        Integer noItems = new Integer(counttxt.getText().toString());
-
-                        Intent gotoSetCart = new Intent(ProductDetailListActivity.this, CartDetailActivity.class);
-                        startActivity(gotoSetCart);
-                    }
-                }*/
-                if(mDataAdapter.totalCount <= 0)
-                {
-                    Toast.makeText(getApplicationContext(), "Cart Empty -please select Some Items", Toast.LENGTH_LONG).show();
-                }
-                else {
-                    Intent i = new Intent(ProductDetailViewActivity.this, CartActivity.class);
-                    Gson gson = new Gson();
-                    order.getMenuItems().clear();
-                    for (int j = 0; j < mDataAdapter.getmMenulist().size(); j++) {
-                        if (mDataAdapter.getmMenulist().get(j).getMenuOrder().getNo_of_order() > 0) {
-                            Menu menu = mDataAdapter.getmMenulist().get(j).getMenuOrder();
-                            order.getMenuItems().add(menu);
-                        }
-                    }
-                    String strOrder = gson.toJson(order);
-                    i.putExtra("order", strOrder);
-                    String strHotelDetail = gson.toJson(hotelDetail);
-                    i.putExtra("HotelDetail",strHotelDetail);
-                    startActivity(i);
-                }
+                moveNext();
             }
         });
         /*new MyMenuItemStuffListener(menu_hotlist, "Show hot message") {
