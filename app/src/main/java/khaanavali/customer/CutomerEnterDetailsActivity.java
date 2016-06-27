@@ -26,6 +26,7 @@ import khaanavali.customer.model.Order;
 import khaanavali.customer.utils.Constants;
 import khaanavali.customer.utils.GPSTracker;
 import khaanavali.customer.utils.LocationAddress;
+import khaanavali.customer.utils.SessionManager;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -47,10 +48,11 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
     Order order;
     String responseOrder;
     Button btnShowLocation;
-    EditText editName,editPhone,editEmail,editHouseNo,editAreaName,editLandmark,editAddress;
+    EditText editName,editPhone,editCity,editHouseNo,editAreaName,editLandmark,editAddress;
     // GPSTracker class
     GPSTracker gps;
     HotelDetail hotelDetail;
+    SessionManager session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,25 +62,31 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
         order = gson.fromJson(intent.getStringExtra("order"), Order.class);
         hotelDetail = gson.fromJson(intent.getStringExtra("HotelDetail"), HotelDetail.class);
         responseOrder = new String();
+        session = new SessionManager(getApplicationContext());
         Button btn= (Button) findViewById(R.id.placeOrderButton);
         btnShowLocation= (Button) findViewById(R.id.locationButton);
         editName=(EditText)findViewById(R.id.orderDetailName);
         editPhone=(EditText)findViewById(R.id.orderDetailPhone);
-        editEmail=(EditText)findViewById(R.id.orderDetailEmail);
+        editCity=(EditText)findViewById(R.id.orderDetailEmail);
         editHouseNo=(EditText)findViewById(R.id.orderDetailAddress_house_no);
         editAreaName=(EditText)findViewById(R.id.orderDetailAddress_areaname);
         editLandmark=(EditText)findViewById(R.id.orderDetailAddress_landmark);
         editAddress=(EditText)findViewById(R.id.orderDetailAddress_address);
         final TextView orderTotalCharge = (TextView) findViewById(R.id.textView);
         orderTotalCharge.setText(String.valueOf(order.getTotalCost()));
-//        if(true) {
-//            editName.setText("name");
-//            editPhone.setText("9566229075");
-//            editEmail.setText("hjgjhgj");
-//            editAreaName.setText("areaname");
-//            editLandmark.setText("landmark");
-//            editHouseNo.setText("houseno");
-//        }
+        if(session.isLoggedIn()) {
+
+           // session.setAddress(CustomerAddress);
+
+            editName.setText(session.getName());
+            editPhone.setText(session.getKeyPhone());
+
+            editAreaName.setText(session.getAddress().getAreaName());
+            editLandmark.setText(session.getAddress().getLandMark());
+            editHouseNo.setText(session.getAddress().getAddressLine1());
+            editAddress.setText(session.getAddress().getAddressLine2());
+            editCity.setText(session.getAddress().getCity());
+      }
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,10 +113,10 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
                     String text  = "Minimum Order for this Hotel is Rs." +  Integer.toString(hotelDetail.getMinimumOrder()) + " Kindly add more items";
                     Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
                 }
-                else if(!checkTimeAllowedForOrder())
-                {
-                    Toast.makeText(getApplicationContext(), "This time no delivery for this Hotel Kindly Check Timings of Hotel for Order timings", Toast.LENGTH_LONG).show();
-                }
+//                else if(!checkTimeAllowedForOrder())
+//                {
+//                    Toast.makeText(getApplicationContext(), "This time no delivery for this Hotel Kindly Check Timings of Hotel for Order timings", Toast.LENGTH_LONG).show();
+//                }
                 else {
                     alertMessage();
                 }
@@ -143,12 +151,8 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
                         locationAddress.getAddressFromLocation(latitude, longitude,
                                 getApplicationContext(), new GeocoderHandler());
 
-                    // \n is for new line
-//                    Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
                 }else{
-                    // can't get location
-                    // GPS or Network is not enabled
-                    // Ask user to enable GPS/network in settings
+
                     gps.showSettingsAlert();
                 }
 
@@ -189,12 +193,12 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
                     {
                         order.getCustomer().setPhone(editPhone.getText().toString());
                         order.getCustomer().setName(editName.getText().toString());
-                        order.getCustomer().setEmail(editEmail.getText().toString());
+                        order.getCustomer().setEmail(editCity.getText().toString());
                         order.getCustomer().getAddress().setAreaName(editAreaName.getText().toString());
                         order.getCustomer().getAddress().setLandMark(editLandmark.getText().toString());
                         order.getCustomer().getAddress().setAddressLine1(editHouseNo.getText().toString());
                         order.getCustomer().getAddress().setAddressLine2(editAddress.getText().toString());
-                        order.getCustomer().getAddress().setCity(editEmail.getText().toString());
+                        order.getCustomer().getAddress().setCity(editCity.getText().toString());
                         Gson gson = new Gson();
                         String strOrder = gson.toJson(order);
                         postOrder(strOrder);
@@ -207,7 +211,7 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
             }
         };
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Are you sure about this order?" ) .setPositiveButton("Yes", dialogClickListener)
+        builder.setMessage("Are you sure about this order(Address, Phone)?" ) .setPositiveButton("Yes", dialogClickListener)
                 .setNegativeButton("No", dialogClickListener).show();
     }
     public boolean checkTimeAllowedForOrder()
@@ -256,7 +260,7 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
                     locationAddress = bundle.getString("address");
                     if(LocationAddress.address != null)
                     {
-                            editEmail.setText(LocationAddress.address.getLocality());
+                        editCity.setText(LocationAddress.address.getLocality());
                             editAreaName.setText(LocationAddress.address.getAddressLine(1));
                         editAddress.setText(LocationAddress.address.getAddressLine(0));
 

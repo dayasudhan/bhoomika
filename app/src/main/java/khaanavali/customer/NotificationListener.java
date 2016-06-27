@@ -18,6 +18,7 @@ import com.firebase.client.ValueEventListener;
 import java.util.Calendar;
 
 import khaanavali.customer.utils.Constants;
+import khaanavali.customer.utils.SessionManager;
 
 
 /**
@@ -26,6 +27,7 @@ import khaanavali.customer.utils.Constants;
 //Class extending service as it is a service that will run in background
 public class NotificationListener extends Service {
 
+    SessionManager session;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -44,7 +46,7 @@ public class NotificationListener extends Service {
         Firebase.setAndroidContext(getApplicationContext());
         //Creating a firebase object
         Firebase firebase = new Firebase(Constants.FIREBASE_APP + '/' + "customer");
-
+        session = new SessionManager(getApplicationContext());
         //Adding a valueevent listener to firebase
         //this will help us to  track the value changes on firebase
         firebase.addValueEventListener(new ValueEventListener() {
@@ -74,6 +76,10 @@ public class NotificationListener extends Service {
                     String msg = snapshot.child("info").getValue().toString();
                     showNotification(Calendar.getInstance().getTimeInMillis(), msg, 3);
                 }
+                else if (snapshot.child(session.getCurrentOrderId()).exists()) {
+                    String msg = snapshot.child(session.getCurrentOrderId()).getValue().toString();
+                    showNotification(Calendar.getInstance().getTimeInMillis(), msg, 1);
+                }
             }
 
             @Override
@@ -92,7 +98,12 @@ public class NotificationListener extends Service {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
         builder.setSmallIcon(R.mipmap.ic_launcher);
         Intent intent;
-        if (intent_type == 1 || intent_type == 3)
+//        if (intent_type == 1 )
+//        {
+//            intent = new Intent(getApplicationContext(), StatusTrackerFragment.class);
+//        }
+//        else
+        if(intent_type == 3 || intent_type == 1)
             intent = new Intent(getApplicationContext(), MainActivity.class);
         else
             intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=khaanavali.customer"));

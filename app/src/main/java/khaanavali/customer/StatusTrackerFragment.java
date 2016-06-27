@@ -54,6 +54,7 @@ import java.util.Date;
 
 import khaanavali.customer.model.Tracker;
 import khaanavali.customer.utils.Constants;
+import khaanavali.customer.utils.SessionManager;
 
 public class StatusTrackerFragment extends Fragment {
 
@@ -62,12 +63,16 @@ public class StatusTrackerFragment extends Fragment {
     EditText ed;
     private static final String TAG_TRACKER = "tracker";
     ArrayList<Tracker> trackerDetails;
+    SessionManager session;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.status_layout, container, false);
          ed = (EditText)v.findViewById(R.id.editText);
         txtViewTracker = (TextView) v.findViewById(R.id.statusText);
+
+        session = new SessionManager(getActivity().getApplicationContext());
+        ed.setText(session.getCurrentOrderId());
         btnStatus = (Button)v.findViewById(R.id.status_button);
         trackerDetails = new ArrayList<Tracker>();
         ((MainActivity) getActivity())

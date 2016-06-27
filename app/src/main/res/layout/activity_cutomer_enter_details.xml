@@ -258,23 +258,7 @@
         android:visibility="gone"/>
 
 
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Select Delivery Time"
-        android:textColor="@color/title_text_color"
-
-        android:textSize="15sp"
-        android:layout_marginTop="20dp"
-        android:id="@+id/orderDeliveryTime"
-        android:layout_below="@+id/view4"
-        android:layout_marginLeft="10dp" />
-
-
-    <View
+            <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:background="@color/view_color"
@@ -418,22 +402,8 @@
         android:layout_alignParentRight="true"
         android:clickable="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Select Time"
-        android:id="@+id/timme_date"
-        android:layout_marginTop="14dp"
-        android:textSize="14sp"
-        android:textColor="@color/title_text_color"
-        android:gravity="center_vertical"
-        android:drawableLeft="@drawable/ic_action_alarm"
-        android:layout_below="@+id/orderDeliveryTime"
-        android:layout_alignLeft="@+id/orderDeliveryTime"
-        android:layout_alignStart="@+id/orderDeliveryTime" />
 
-
-    <TextView
+            <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Select time"
@@ -444,9 +414,7 @@
         android:gravity="center_vertical"
         android:layout_marginTop="14dp"
         android:visibility="invisible"
-        android:layout_below="@+id/timme_date"
-        android:layout_alignLeft="@+id/timme_date"
-        android:layout_alignStart="@+id/timme_date" />
+        android:layout_below="@+id/view4" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
