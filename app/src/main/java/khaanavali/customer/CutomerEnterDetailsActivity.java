@@ -75,17 +75,20 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
         final TextView orderTotalCharge = (TextView) findViewById(R.id.textView);
         orderTotalCharge.setText(String.valueOf(order.getTotalCost()));
         if(session.isLoggedIn()) {
+            try {
+                editName.setText(session.getName());
+                editPhone.setText(session.getKeyPhone());
 
-           // session.setAddress(CustomerAddress);
+                editAreaName.setText(session.getAddress().getAreaName());
+                editLandmark.setText(session.getAddress().getLandMark());
+                editHouseNo.setText(session.getAddress().getAddressLine1());
+                editAddress.setText(session.getAddress().getAddressLine2());
+                editCity.setText(session.getAddress().getCity());
+            }
+            catch(Exception e)
+            {
 
-            editName.setText(session.getName());
-            editPhone.setText(session.getKeyPhone());
-
-            editAreaName.setText(session.getAddress().getAreaName());
-            editLandmark.setText(session.getAddress().getLandMark());
-            editHouseNo.setText(session.getAddress().getAddressLine1());
-            editAddress.setText(session.getAddress().getAddressLine2());
-            editCity.setText(session.getAddress().getCity());
+            }
       }
         btn.setOnClickListener(new View.OnClickListener() {
             @Override

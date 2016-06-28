@@ -76,7 +76,7 @@ public class NotificationListener extends Service {
                     String msg = snapshot.child("info").getValue().toString();
                     showNotification(Calendar.getInstance().getTimeInMillis(), msg, 3);
                 }
-                else if (snapshot.child(session.getCurrentOrderId()).exists()) {
+                else if (session.getCurrentOrderId() != null && snapshot.child(session.getCurrentOrderId()).exists()) {
                     String msg = snapshot.child(session.getCurrentOrderId()).getValue().toString();
                     showNotification(Calendar.getInstance().getTimeInMillis(), msg, 1);
                 }

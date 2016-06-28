@@ -103,12 +103,12 @@ public class MainActivity extends AppCompatActivity {
                     frag = new LocationFragment();
                 } else if (itemId == R.id.about_knvl) {
                     frag = new AboutKhaanavali();
-                }
-                else if(itemId == R.id.status)
-                {
-                    frag = new StatusTrackerFragment();
-                }
-                else if(itemId == R.id.invite)
+            }
+            else if(itemId == R.id.status)
+            {
+                frag = new StatusTrackerFragment();
+            }
+            else if(itemId == R.id.invite)
                 {
                     frag = new ShareAppFragment();
                 }
