@@ -420,7 +420,7 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Get Current Location"
+        android:text="Current Location"
         android:textColor="#ffffff"
         android:id="@+id/locationButton"
         android:drawableLeft="@drawable/ic_action_location_found"
