@@ -1,14 +1,18 @@
 package khaanavali.customer;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.net.ParseException;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -132,6 +136,55 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View arg0) {
+                if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                        != PackageManager.PERMISSION_GRANTED
+                        && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
+                        != PackageManager.PERMISSION_GRANTED) {
+
+                    // Should we show an explanation?
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(CutomerEnterDetailsActivity.this,
+                            Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+                        new AlertDialog.Builder(CutomerEnterDetailsActivity.this)
+                                .setTitle("Permission Required")
+                                .setMessage("This permission was denied earlier by you. This permission is required to get current location.So, in order to use this feature please allow this permission by clicking ok.")
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                        ActivityCompat.requestPermissions(CutomerEnterDetailsActivity.this,
+                                                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                                                1);
+
+                                    }
+                                })
+                                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                })
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .show();
+
+                    } else {
+
+                        ActivityCompat.requestPermissions(CutomerEnterDetailsActivity.this,
+                                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                                1);
+                        ActivityCompat.requestPermissions(CutomerEnterDetailsActivity.this,
+                                new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                                1);
+
+                    }
+                    return;
+                }
+//                else {
+//                    // permission has been granted, continue as usual
+//                    Location myLocation =
+//                            LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+//                }
+
+
+
                 // create class object
                 gps = new GPSTracker(CutomerEnterDetailsActivity.this);
 
@@ -172,7 +225,25 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setTitle(title);
     }
-
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+//        switch (requestCode) {
+//            case 1:
+//                if (grantResults.length > 0
+//                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                    Toast.makeText(this, "Permission granted", Toast.LENGTH_LONG).show();
+//                } else {
+//                    String permission = permissions[0];
+//                    boolean showRationale = ActivityCompat.shouldShowRequestPermissionRationale(this, permission);
+//                    if (!showRationale) {
+//                        Toast.makeText(this, "Permission Denied with never show options", Toast.LENGTH_LONG).show();
+//                    } else {
+//                        Toast.makeText(this, "Permission Denied", Toast.LENGTH_LONG).show();
+//                    }
+//                    break;
+//                }
+//        }
+//    }
     @Override
     public boolean onOptionsItemSelected(android.view.MenuItem item) {
         switch (item.getItemId()) {
