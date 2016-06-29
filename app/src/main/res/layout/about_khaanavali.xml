@@ -34,14 +34,14 @@
         android:text="   khaanavali@gmail.com"
         android:layout_marginBottom="40dip"/>
 
-    <TextView
-        android:id="@+id/lblknvlPhone"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:textColor="@color/parrotgreen6"
-        android:text="   +919566229075"
-        android:layout_marginBottom="40dip"/>
+    <!--<TextView-->
+        <!--android:id="@+id/lblknvlPhone"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:singleLine="true"-->
+        <!--android:textColor="@color/parrotgreen6"-->
+        <!--android:text="   +919566229075"-->
+        <!--android:layout_marginBottom="40dip"/>-->
 
     <TextView
         android:id="@+id/lblknvlwebsite"

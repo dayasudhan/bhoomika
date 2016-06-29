@@ -116,10 +116,10 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
                     String text  = "Minimum Order for this Hotel is Rs." +  Integer.toString(hotelDetail.getMinimumOrder()) + " Kindly add more items";
                     Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
                 }
-//                else if(!checkTimeAllowedForOrder())
-//                {
-//                    Toast.makeText(getApplicationContext(), "This time no delivery for this Hotel Kindly Check Timings of Hotel for Order timings", Toast.LENGTH_LONG).show();
-//                }
+                else if(!checkTimeAllowedForOrder())
+                {
+                    Toast.makeText(getApplicationContext(), "This time no delivery for this Hotel Kindly Check Timings of Hotel for Order timings", Toast.LENGTH_LONG).show();
+                }
                 else {
                     alertMessage();
                 }
@@ -143,10 +143,10 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
                     //                    double latitude2 = 12.9096282;//13.0714072,77.5654451
 //                    double longitude2 = 80.2273703;//12.9671603,77.5352851
                     //only for debugging
-                    boolean isDebuggable = 0 != (getApplicationInfo().flags &= ApplicationInfo.FLAG_DEBUGGABLE);
-                    if(latitude == 0 && longitude == 0 && isDebuggable) {
-                        longitude = 77.530879;
-                    }                       latitude = 12.9708084;//13.0714072,77.5654451
+//                    boolean isDebuggable = 0 != (getApplicationInfo().flags &= ApplicationInfo.FLAG_DEBUGGABLE);
+//                    if(latitude == 0 && longitude == 0 && isDebuggable) {
+//                        longitude = 77.530879;
+//                    }                       latitude = 12.9708084;//13.0714072,77.5654451
 
                     order.getCustomer().getAddress().setLatitude(Double.toString(latitude));
                     order.getCustomer().getAddress().setLongitude(Double.toString(longitude));

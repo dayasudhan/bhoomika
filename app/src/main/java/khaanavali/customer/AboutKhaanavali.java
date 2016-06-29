@@ -17,9 +17,6 @@ import khaanavali.customer.R;
  * Created by dganeshappa on 6/4/2016.
  */
 
-/**
- * Created by gagan on 11/6/2015.
- */
 public class AboutKhaanavali extends Fragment {
 
     View rootview;
@@ -35,15 +32,15 @@ public class AboutKhaanavali extends Fragment {
 
 
         TextView lblEmail = (TextView) rootview.findViewById(R.id.lblknvlEmail);
-        TextView lblphone = (TextView) rootview.findViewById(R.id.lblknvlPhone);
+       // TextView lblphone = (TextView) rootview.findViewById(R.id.lblknvlPhone);
         TextView lblwebsite = (TextView) rootview.findViewById(R.id.lblknvlwebsite);
         ((MainActivity) getActivity())
                 .setActionBarTitle("About Khaanavali");
 
         // get user data from session// displaying user data
 
-        lblEmail.setText(Html.fromHtml("Email: <b>" + "dayasudhankg@gmail.com" + "</b>"));
-        lblphone.setText(Html.fromHtml("Phone: <b>" + "9566229075" + "</b>"));
+        lblEmail.setText(Html.fromHtml("Email: <b>" + "khaanavali@gmail.com" + "</b>"));
+        //lblphone.setText(Html.fromHtml("Phone: <b>" + "9566229075" + "</b>"));
         lblwebsite.setText(Html.fromHtml("Website: <b>" + "http://khaanavali.com" + "</b>"));
 
 

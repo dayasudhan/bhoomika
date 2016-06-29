@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navView = (NavigationView) findViewById(R.id.navigation);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.addToBackStack(null);
+    //    transaction.addToBackStack(null);
         transaction.replace(R.id.frame, new LocationFragment());
 
         transaction.commit();
@@ -119,9 +119,9 @@ public class MainActivity extends AppCompatActivity {
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
                 transaction.replace(R.id.frame, frag);
-                if(itemId != R.id.location) {
-                    transaction.addToBackStack(null);
-                }
+//                if(itemId != R.id.location) {
+//                    transaction.addToBackStack(null);
+//                }
                 transaction.commit();
 
                 dLayout.closeDrawers();
@@ -152,7 +152,8 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (dLayout.isDrawerOpen(GravityCompat.START)) {
             dLayout.closeDrawer(GravityCompat.START);
-        } else {
+        }
+        else {
             super.onBackPressed();
         }
     }
