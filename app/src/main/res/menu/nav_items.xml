@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item android:id="@+id/home"
+        <item android:id="@+id/location"
               android:title="Home"
               android:icon="@drawable/ic_action_fab" />
 
         <item android:id="@+id/status"
-            android:title="Status"
+            android:title="Order Status"
             android:icon="@drawable/ic_action_star" />
 
         <item android:id="@+id/invite"

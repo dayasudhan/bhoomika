@@ -89,7 +89,9 @@ public class MainActivity extends AppCompatActivity {
         dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navView = (NavigationView) findViewById(R.id.navigation);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.addToBackStack(null);
         transaction.replace(R.id.frame, new LocationFragment());
+
         transaction.commit();
 
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -99,9 +101,10 @@ public class MainActivity extends AppCompatActivity {
                 Fragment frag = null;
                 int itemId = menuItem.getItemId();
 
-                if (itemId == R.id.home) {
-                    frag = new LocationFragment();
-                } else if (itemId == R.id.about_knvl) {
+            if (itemId == R.id.location) {
+                frag = new LocationFragment();
+            }
+            else if (itemId == R.id.about_knvl) {
                     frag = new AboutKhaanavali();
             }
             else if(itemId == R.id.status)
@@ -109,17 +112,21 @@ public class MainActivity extends AppCompatActivity {
                 frag = new StatusTrackerFragment();
             }
             else if(itemId == R.id.invite)
-                {
-                    frag = new ShareAppFragment();
-                }
-                if (frag != null) {
-                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            {
+                frag = new ShareAppFragment();
+            }
+            if (frag != null) {
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-                    transaction.replace(R.id.frame, frag);
-                    transaction.commit();
-                    dLayout.closeDrawers();
-                    return true;
+                transaction.replace(R.id.frame, frag);
+                if(itemId != R.id.location) {
+                    transaction.addToBackStack(null);
                 }
+                transaction.commit();
+
+                dLayout.closeDrawers();
+                return true;
+            }
 
                 return false;
             }
@@ -140,5 +147,13 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return true;
+    }
+    @Override
+    public void onBackPressed() {
+        if (dLayout.isDrawerOpen(GravityCompat.START)) {
+            dLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 }
