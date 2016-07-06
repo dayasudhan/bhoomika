@@ -28,10 +28,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -41,6 +43,8 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 
 import khaanavali.customer.adapter.LocationAdapter;
 import khaanavali.customer.utils.Constants;
@@ -56,7 +60,10 @@ public class LocationFragment extends Fragment {
     private static final String TAG_SUBAREAS = "subAreas";
 
     private ArrayList<String> mCityCoverage;
+  //  ArrayAdapter<String> myAdapter;
     ListView listView;
+    SearchView search;
+    LocationAdapter dataAdapter;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -67,13 +74,29 @@ public class LocationFragment extends Fragment {
         listView = (ListView) v.findViewById(R.id.area_listView);
         getCityCoverage();
 
+        search = (SearchView)v.findViewById(R.id.searchView1);
+        search.setQueryHint("Search Location");
+ 
+        search.setIconified(false);
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                dataAdapter.filter(query);
+                return false;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String query) {
+                dataAdapter.filter(query);
+                return false;
+            }
+        });
         return v;
     }
     public void onReceiveCity()
     {
-        LocationAdapter dataAdapter = new LocationAdapter(getActivity(),
+        dataAdapter = new LocationAdapter(getActivity(),
                 R.layout.area_list,mCityCoverage);
 
         listView.setAdapter(dataAdapter);

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import khaanavali.customer.R;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 
 public class LocationAdapter extends BaseAdapter{
@@ -20,12 +21,14 @@ public class LocationAdapter extends BaseAdapter{
     int layoutResID;
     int pos;
     private ArrayList<String> mCityCoverage;
+    private ArrayList<String> mCityCoverage2;
     // PreferenceManager mpref;
 
     public LocationAdapter(Activity context, int layoutResourceID,ArrayList<String> cityCoverage) {
        con = context;
         layoutResID = layoutResourceID;
         mCityCoverage = cityCoverage;
+        mCityCoverage2 = (ArrayList<String>) mCityCoverage.clone();
     }
 
     @Override
@@ -77,5 +80,24 @@ public class LocationAdapter extends BaseAdapter{
     }*/
     private static class CityItemHolder {
         TextView city;
+    }
+    // Filter Class
+    public void filter(String charText) {
+        charText = charText.toLowerCase(Locale.getDefault());
+        mCityCoverage.clear();
+        if (charText.length() == 0) {
+            mCityCoverage.addAll(mCityCoverage2);
+        }
+        else
+        {
+            for (String city : mCityCoverage2)
+            {
+                if (city.toLowerCase(Locale.getDefault()).startsWith(charText))
+                {
+                    mCityCoverage.add(city);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 }
