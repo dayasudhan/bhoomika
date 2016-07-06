@@ -6,10 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import khaanavali.customer.R;
 import khaanavali.customer.model.HotelDetail;
+import khaanavali.customer.utils.Constants;
+import khaanavali.customer.utils.ImageLoader;
 
 import java.util.ArrayList;
 
@@ -21,6 +24,7 @@ public class HotelListAdapter extends BaseAdapter{
     private String[] city;
     private ArrayList<HotelDetail> mhotelList;
     int pos;
+    public ImageLoader imageLoader;
 
     // PreferenceManager mpref;
 
@@ -31,7 +35,7 @@ public class HotelListAdapter extends BaseAdapter{
         mhotelList = hotelList;
         layoutResID = layoutResourceID;
         // this.cr=cr;
-
+        imageLoader = new ImageLoader(context.getApplicationContext());
     }
 
     @Override
@@ -67,6 +71,7 @@ public class HotelListAdapter extends BaseAdapter{
             itemHolder.hotelDeliveryTime= (TextView) view.findViewById(R.id.vendor_delivery_time);
             itemHolder.hotelRating= (TextView) view.findViewById(R.id.vendor_rating);
             itemHolder.hotelSpeciality= (TextView) view.findViewById(R.id.vendor_speciality);
+            itemHolder.hotellogo = (ImageView)view.findViewById(R.id.vendor_image_view);
 //            ratingbar1=(RatingBar)view.findViewById(R.id.ratingBar1);
 //            ratingbar1.setNumStars(5);
 //            ratingbar1.setRating(3);
@@ -80,6 +85,9 @@ public class HotelListAdapter extends BaseAdapter{
         itemHolder.hotelDeliveryTime.setText(String.valueOf(mhotelList.get(position).getDeliveryTime()).concat(" mins"));
         itemHolder.hotelRating.setText(String.valueOf(mhotelList.get(position).getRating()).concat("/5*"));
         itemHolder.hotelSpeciality.setText(mhotelList.get(position).getSpeciality());
+
+        String image_url = Constants.MAIN_URL + '/' + mhotelList.get(position).getHotel().getLogo();
+        imageLoader.DisplayImage(image_url,  itemHolder.hotellogo);
         return view;
 
     }
@@ -92,7 +100,7 @@ public class HotelListAdapter extends BaseAdapter{
         TextView hotelRating;
         TextView hotelDeliveryTime;
         TextView hotelDeliveryCharge;
-
+        ImageView hotellogo;
 
     }
 }

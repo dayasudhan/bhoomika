@@ -43,6 +43,7 @@ import java.util.ArrayList;
 public class HotelActivity extends AppCompatActivity {
     private static final String TAG_ID = "_id";
     private static final String TAG_ID2 = "id";
+    private static final String TAG_LOGO = "logo";
     private static final String TAG_NAME = "name";
     private static final String TAG_PRICE = "price";
     private static final String TAG_EMAIL = "email";
@@ -117,7 +118,7 @@ public class HotelActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-    //http://oota.herokuapp.com/v1/admin/coverageArea
+
     public void getHotelList(String areaClicked)
     {
         hotellist.clear();
@@ -220,7 +221,10 @@ public class HotelActivity extends AppCompatActivity {
                                 hotelDetail.getHotel().setEmail(hotelObj.getString(TAG_EMAIL));
                             }
                             if (hotelObj.has(TAG_ID2)) {
-                                hotelDetail.getHotel().setId(hotelObj.getString(TAG_ID2));
+                                    hotelDetail.getHotel().setId(hotelObj.getString(TAG_ID2));
+                            }
+                            if (hotelObj.has(TAG_LOGO)) {
+                                hotelDetail.getHotel().setLogo(hotelObj.getString(TAG_LOGO));
                             }
                         }
                         if (object.has(TAG_PHONE)) {

@@ -10,6 +10,7 @@ public class Hotel {
         email = new String();
         id = new String();
         phone = new Integer(0);
+        logo =  new String();
         //deliveryCharges = 0;
     }
     public String getName() {
@@ -48,6 +49,16 @@ public class Hotel {
     }
 
     String id;
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
+    String logo;
 //    public int getDeliveryCharges() {
 //        return deliveryCharges;
 //    }
