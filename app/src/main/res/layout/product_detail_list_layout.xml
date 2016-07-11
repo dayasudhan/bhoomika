@@ -20,7 +20,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Vendor Name 1"
+        android:text="item name"
         android:textColor="@color/title_text_color"
         android:id="@+id/product_detail_name"
         android:textSize="16sp"
