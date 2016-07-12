@@ -138,9 +138,38 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
             i.putExtra("order", strOrder);
             String strHotelDetail = gson.toJson(hotelDetail);
             i.putExtra("HotelDetail",strHotelDetail);
-            startActivity(i);
+            startActivityForResult(i, 1);
         }
     }
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        if (requestCode == 1) {
+            Gson gson = new Gson();
+            order = gson.fromJson(intent.getStringExtra("order"), Order.class);
+                for (int j = 0; j < mDataAdapter.getmMenulist().size(); j++) {
+                    boolean hasSelected = false;
+
+                    for (int i = 0; i < order.getMenuItems().size(); i++) {
+                        MenuAdapter menuAdapter = new MenuAdapter(order.getMenuItems().get(i));
+                        if (mDataAdapter.getmMenulist().get(j).getName().equals(menuAdapter.getName())) {
+                            mDataAdapter.getmMenulist().get(j).setNo_of_order(menuAdapter.getNo_of_order());
+                            hasSelected = true;
+                        }
+                    }
+                    if(hasSelected == false && mDataAdapter.getmMenulist().get(j).getNo_of_order()>0) {
+                        mDataAdapter.getmMenulist().get(j).setNo_of_order(0);
+                    }
+                }
+            }
+            mDataAdapter.notifyDataSetInvalidated();
+    }
+
     @Override
     public boolean onOptionsItemSelected(android.view.MenuItem item) {
         switch (item.getItemId()) {

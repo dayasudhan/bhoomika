@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import khaanavali.customer.adapter.PlusMinusButtonListener;
 import khaanavali.customer.adapter.ProductAdapter;
 import khaanavali.customer.model.HotelDetail;
+import khaanavali.customer.model.Menu;
 import khaanavali.customer.model.MenuAdapter;
 import khaanavali.customer.model.Order;
 
@@ -78,7 +79,13 @@ public class CartActivity extends AppCompatActivity implements PlusMinusButtonLi
                 else {
                     Intent i = new Intent(CartActivity.this, CutomerEnterDetailsActivity.class);
                     Gson gson = new Gson();
-
+                    order.getMenuItems().clear();
+                    for (int j = 0; j < dataAdapter.getmMenulist().size(); j++) {
+                        if (dataAdapter.getmMenulist().get(j).getMenuOrder().getNo_of_order() > 0) {
+                            Menu menu = dataAdapter.getmMenulist().get(j).getMenuOrder();
+                            order.getMenuItems().add(menu);
+                        }
+                    }
                     String strOrder = gson.toJson(order);
                     i.putExtra("order", strOrder);
                     String strHotelDetail = gson.toJson(hotelDetail);
@@ -104,13 +111,30 @@ public class CartActivity extends AppCompatActivity implements PlusMinusButtonLi
     public boolean onOptionsItemSelected(android.view.MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                // API 5+ solution
                 onBackPressed();
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        Intent intent = new Intent();
+        Gson gson = new Gson();
+        order.getMenuItems().clear();
+        for (int j = 0; j < dataAdapter.getmMenulist().size(); j++) {
+            if (dataAdapter.getmMenulist().get(j).getMenuOrder().getNo_of_order() > 0) {
+                Menu menu = dataAdapter.getmMenulist().get(j).getMenuOrder();
+                order.getMenuItems().add(menu);
+            }
+        }
+        String strOrder = gson.toJson(order);
+        intent.putExtra("order", strOrder);
+        setResult(RESULT_OK, intent);
+        finish();
     }
     @Override
     public void buttonClicked(int position, int value) {
@@ -122,6 +146,7 @@ public class CartActivity extends AppCompatActivity implements PlusMinusButtonLi
                 total += menulist.get(i).getNo_of_order() * menulist.get(i).getPrice();
             }
         }
+
         order.setBill_value(total,hotelDetail.getDeliverCharge());
         orderTotalCharge.setText(String.valueOf(order.getBill_value()));
     }

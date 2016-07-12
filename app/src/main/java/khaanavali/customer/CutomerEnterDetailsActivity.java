@@ -82,7 +82,6 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
             try {
                 editName.setText(session.getName());
                 editPhone.setText(session.getKeyPhone());
-
                 editAreaName.setText(session.getAddress().getAreaName());
                 editLandmark.setText(session.getAddress().getLandMark());
                 editHouseNo.setText(session.getAddress().getAddressLine1());
