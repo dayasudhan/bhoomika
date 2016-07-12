@@ -28,7 +28,7 @@ public class CartActivity extends AppCompatActivity implements PlusMinusButtonLi
     HotelDetail hotelDetail;
     ArrayList<MenuAdapter> mMenulist;
     ProductAdapter dataAdapter;
-    TextView orderTotalCharge;
+    TextView orderTotalCharge,billvalue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +67,8 @@ public class CartActivity extends AppCompatActivity implements PlusMinusButtonLi
         deliveryCharge.setText(String.valueOf(hotelDetail.getDeliverCharge()));
         orderTotalCharge.setText(String.valueOf(order.getTotalCost()));
 
+        billvalue = (TextView) findViewById(R.id.orderbilltotaltextrupees);
+        billvalue.setText(String.valueOf(totalCost));
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -148,6 +150,7 @@ public class CartActivity extends AppCompatActivity implements PlusMinusButtonLi
         }
 
         order.setBill_value(total,hotelDetail.getDeliverCharge());
-        orderTotalCharge.setText(String.valueOf(order.getBill_value()));
+        orderTotalCharge.setText(String.valueOf(order.getTotalCost()));
+        billvalue.setText(String.valueOf(order.getBill_value()));
     }
 }

@@ -22,7 +22,38 @@
             android:layout_marginTop="5dp"
             android:id="@+id/order_details_lay"
             >
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/view_color"
+                android:layout_above="@+id/view3"
+                android:layout_alignParentLeft="true"
+                android:layout_marginBottom="25dp"
 
+                android:id="@+id/view4" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Bill total"
+                android:id="@+id/orderbilltotaltext"
+                android:textSize="13sp"
+                android:layout_alignTop="@+id/view4"
+
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="4dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Rs.50"
+                android:layout_marginRight="10dp"
+                android:id="@+id/orderbilltotaltextrupees"
+                android:textSize="12sp"
+                android:layout_alignTop="@+id/orderbilltotaltext"
+                android:layout_alignParentRight="true" />
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
@@ -37,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Delivery"
+        android:text="Delivery charges"
         android:id="@+id/orderDetailDelivery"
         android:textSize="13sp"
         android:layout_alignTop="@+id/view3"
@@ -71,12 +102,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Approx Total"
+        android:text="Grand Total"
         android:textSize="14sp"
         android:id="@+id/orderDetailTotal"
         android:layout_alignBottom="@+id/order_total_charge"
         android:layout_marginLeft="10dp"
-        />
+        android:singleLine="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -121,7 +152,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Order Summary"
+        android:text="Review Order"
         android:id="@+id/vendor_add_cart_name"
         android:textColor="@color/heading_color"
         android:textSize="20dp"
@@ -164,7 +195,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listView_cart"
-        android:layout_above="@+id/view3"
+        android:layout_above="@+id/view4"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
