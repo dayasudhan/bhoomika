@@ -92,7 +92,7 @@ public class LocationAdapter extends BaseAdapter{
         {
             for (String city : mCityCoverage2)
             {
-                if (city.toLowerCase(Locale.getDefault()).startsWith(charText))
+                if (city.toLowerCase(Locale.getDefault()).contains(charText))
                 {
                     mCityCoverage.add(city);
                 }

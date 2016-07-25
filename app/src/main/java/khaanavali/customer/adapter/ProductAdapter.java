@@ -16,9 +16,6 @@ import khaanavali.customer.model.MenuAdapter;
 
 import java.util.ArrayList;
 
-/**
- * Created by Nakul on 11/14/2015.
- */
 public class ProductAdapter extends BaseAdapter {
     Activity con;
     Typeface cr;

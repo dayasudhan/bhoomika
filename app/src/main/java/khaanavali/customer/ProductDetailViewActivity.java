@@ -152,21 +152,32 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
         if (requestCode == 1) {
             Gson gson = new Gson();
             order = gson.fromJson(intent.getStringExtra("order"), Order.class);
-                for (int j = 0; j < mDataAdapter.getmMenulist().size(); j++) {
+              for (int j = 0; j < mDataAdapter.getmMenulist().size(); j++) {
                     boolean hasSelected = false;
 
                     for (int i = 0; i < order.getMenuItems().size(); i++) {
                         MenuAdapter menuAdapter = new MenuAdapter(order.getMenuItems().get(i));
                         if (mDataAdapter.getmMenulist().get(j).getName().equals(menuAdapter.getName())) {
                             mDataAdapter.getmMenulist().get(j).setNo_of_order(menuAdapter.getNo_of_order());
+
                             hasSelected = true;
                         }
                     }
                     if(hasSelected == false && mDataAdapter.getmMenulist().get(j).getNo_of_order()>0) {
                         mDataAdapter.getmMenulist().get(j).setNo_of_order(0);
                     }
+
+                }
+            mDataAdapter.totalCost = 0;
+            mDataAdapter.totalCount = 0;
+                for (int j = 0; j < mDataAdapter.getmMenulist().size(); j++) {
+                    mDataAdapter.totalCost +=  mDataAdapter.getmMenulist().get(j).getNo_of_order() * mDataAdapter.getmMenulist().get(j).getPrice();
+                    mDataAdapter.totalCount += mDataAdapter.getmMenulist().get(j).getNo_of_order();
                 }
             }
+
+            buttonClicked(0,0);
+
             mDataAdapter.notifyDataSetInvalidated();
     }
 

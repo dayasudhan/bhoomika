@@ -1,10 +1,24 @@
 package khaanavali.customer;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
+import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.ArrayList;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.net.ParseException;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -19,13 +33,14 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import khaanavali.customer.model.HotelDetail;
 import com.google.gson.Gson;
 import khaanavali.customer.adapter.HotelListAdapter;
 import khaanavali.customer.model.HotelDetail;
 import khaanavali.customer.model.MenuItem;
 import khaanavali.customer.model.OrderAcceptTimings;
 import khaanavali.customer.utils.Constants;
+import khaanavali.customer.utils.SessionManager;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -39,8 +54,11 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+/**
+ * Created by dganeshappa on 7/14/2016.
+ */
+public class HotelFragment extends Fragment {
 
-public class HotelActivity extends AppCompatActivity {
     private static final String TAG_ID = "_id";
     private static final String TAG_ID2 = "id";
     private static final String TAG_LOGO = "logo";
@@ -61,28 +79,29 @@ public class HotelActivity extends AppCompatActivity {
     private static final String TAG_RATING = "rating";
     private static final String TAG_ISOPEN = "isOpen";
     private static final String TAG_MINIMUM_ORDER = "minimumOrder";
-
     private ArrayList<HotelDetail> hotellist;
     ListView listView ;
+
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hotel);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        View v = inflater.inflate(R.layout.activity_hotel, container, false);
         hotellist =  new ArrayList<HotelDetail>();
-        Intent intent = getIntent();
-        String areaClicked = new String(intent.getStringExtra("area"));
-       // TextView areaname= (TextView) findViewById(R.id.location_text_view_vendor_list);
-       // areaname.setText(areaClicked);
-        getHotelList(areaClicked);
+        SessionManager session = new SessionManager(getActivity().getApplicationContext());
 
-        listView = (ListView) findViewById(R.id.listView_vendor);
+        String areaClicked = session.getlastareasearched();
+        if(!areaClicked.isEmpty())
+            getHotelList(areaClicked);
 
-        setToolBar(areaClicked);
+
+        listView = (ListView) v.findViewById(R.id.listView_vendor);
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(hotellist.get(position).getIsOpen() !=0) {
-                    Intent i = new Intent(HotelActivity.this, ProductDetailViewActivity.class);
+                    Intent i = new Intent(getActivity(), ProductDetailViewActivity.class);
                     Gson gson = new Gson();
                     String hotel = gson.toJson(hotellist.get(position));
                     i.putExtra("hotel", hotel);
@@ -90,44 +109,18 @@ public class HotelActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    Toast.makeText(getApplicationContext(), "Today this hotel Closed. Kindly try other Hotel near by you", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "Today this hotel Closed. Kindly try other Hotel near by you", Toast.LENGTH_LONG).show();
                 }
             }
         });
-//        ImageView filter= (ImageView) findViewById(R.id.filter_btn_vendor_list);
-//
-//        filter.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                showAlertDialogForVendorFilter();
-//            }
-//        });
-    }
-    private void setToolBar(String areaClicked) {
-        Toolbar tb = (Toolbar) findViewById(R.id.toolbar2);
-        setSupportActionBar(tb);
-
-        ActionBar ab = getSupportActionBar();
-        ab.setHomeAsUpIndicator(R.drawable.ic_action_back);
-        ab.setDisplayHomeAsUpEnabled(true);
-        ab.setTitle(areaClicked);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(android.view.MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                // API 5+ solution
-                onBackPressed();
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+        setHasOptionsMenu(true);
+        return v;
     }
 
     public void getHotelList(String areaClicked)
     {
+        ((MainActivity) getActivity())
+                .setActionBarTitle(areaClicked);
         hotellist.clear();
         String order_url = Constants.GET_HOTEL_BY_DELIVERY_AREAS;
         String area = areaClicked.replace(" ", "%20");
@@ -136,9 +129,36 @@ public class HotelActivity extends AppCompatActivity {
     }
     public void initHotelList()
     {
-        HotelListAdapter dataAdapter = new HotelListAdapter(HotelActivity.this,
+        HotelListAdapter dataAdapter = new HotelListAdapter(getActivity(),
                 R.layout.hotel_list_item,hotellist);
         listView.setAdapter(dataAdapter);
+    }
+//    @Override
+//    public boolean onOptionsItemSelected(android.view.MenuItem item) {
+//        int itemId = item.getItemId();
+//        String btnName = null;
+//
+//        switch(itemId) {
+//            case android.R.id.home: {
+//                dLayout.openDrawer(GravityCompat.START);
+//                return true;
+//            }
+//            case R.id.menu_search: {
+//                //  Toast.makeText(getApplicationContext(), "menu selected", Toast.LENGTH_LONG).show();
+//                Intent i = new Intent(this, PlacesActivity.class);
+//                startActivityForResult(i,1);
+//                return true;
+//            }
+//        }
+//        return true;
+//    }
+
+    @Override
+    public void onCreateOptionsMenu(android.view.Menu menu , MenuInflater inflater) {
+      //  MenuInflater menuInflater = getMenuInflater();
+
+        inflater.inflate(R.menu.home_menu, menu);
+     //   return super.onCreateOptionsMenu(menu);
     }
     public  class JSONAsyncTask extends AsyncTask<String, Void, Boolean> {
 
@@ -154,7 +174,7 @@ public class HotelActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog = new ProgressDialog(HotelActivity.this);
+            dialog = new ProgressDialog(getActivity());
             dialog.setMessage("Loading, please wait");
             dialog.setTitle("Connecting server");
             dialog.show();
@@ -228,7 +248,7 @@ public class HotelActivity extends AppCompatActivity {
                                 hotelDetail.getHotel().setEmail(hotelObj.getString(TAG_EMAIL));
                             }
                             if (hotelObj.has(TAG_ID2)) {
-                                    hotelDetail.getHotel().setId(hotelObj.getString(TAG_ID2));
+                                hotelDetail.getHotel().setId(hotelObj.getString(TAG_ID2));
                             }
                             if (hotelObj.has(TAG_LOGO)) {
                                 hotelDetail.getHotel().setLogo(hotelObj.getString(TAG_LOGO));
@@ -281,6 +301,16 @@ public class HotelActivity extends AppCompatActivity {
                                     hotelDetail.getDeliverAreas().add(da_object.getString(TAG_NAME));
                             }
                         }
+                        if(object.has(TAG_ISOPEN))
+                        {
+                            int var=0 ;
+                            try {
+                                var = object.getInt(TAG_ISOPEN);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            hotelDetail.setIsOpen(var);
+                        }
                         if(object.has(TAG_DELIVERY_CHARGE))
                         {
                             int charge=0 ;
@@ -300,16 +330,6 @@ public class HotelActivity extends AppCompatActivity {
                                 e.printStackTrace();
                             }
                             hotelDetail.setRating(rating);
-                        }
-                        if(object.has(TAG_ISOPEN))
-                        {
-                            int var=0 ;
-                            try {
-                                var = object.getInt(TAG_ISOPEN);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            hotelDetail.setIsOpen(var);
                         }
                         if(object.has(TAG_MINIMUM_ORDER))
                         {
@@ -341,11 +361,9 @@ public class HotelActivity extends AppCompatActivity {
 
                         }
                         hotellist.add(hotelDetail);
-                   }
+                    }
                     return true;
                 }
-            } catch (ParseException e1) {
-                e1.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
 
@@ -358,7 +376,7 @@ public class HotelActivity extends AppCompatActivity {
             dialog.cancel();
 
             if (result == false)
-                Toast.makeText(getApplicationContext(), "Unable to fetch data from server", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity().getApplicationContext(), "Unable to fetch data from server", Toast.LENGTH_LONG).show();
             else
             {
                 initHotelList();
@@ -366,97 +384,4 @@ public class HotelActivity extends AppCompatActivity {
 
         }
     }
-    private void showAlertDialogForVendorFilter( ) {
-
-
-        final Dialog detailDialog= new Dialog(HotelActivity.this);
-        detailDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        WindowManager.LayoutParams wmlp = detailDialog.getWindow().getAttributes();
-        wmlp.gravity = Gravity.TOP | Gravity.RIGHT;
-        wmlp.x = 30;   //x position
-        wmlp.y = 130;
-        detailDialog.setContentView(R.layout.filter_hotel_dialog);
-
-        TextView meal= (TextView)detailDialog.findViewById(R.id.checkbox_title_1);
-       // meal.setTypeface(cr);
-
-        TextView night= (TextView)detailDialog.findViewById(R.id.checkbox_title);
-      //  night.setTypeface(cr);
-        CheckBox check= (CheckBox) detailDialog.findViewById(R.id.checkBox_filter);
-        CheckBox check1= (CheckBox) detailDialog.findViewById(R.id.checkBox_filter_1);
-       /* if(mpref.getNightStore().equals("nighttrue")){
-            check.setChecked(true);
-            mNightStoreId=1;
-        }else{
-            check.setChecked(false);
-            mNightStoreId=0;
-        }
-        if(mpref.getMealVoucher().equals("mealtrue")){
-            check1.setChecked(true);
-            mMealVoucher=2;
-        }else{
-            check1.setChecked(false);
-            mMealVoucher=0;
-        }*/
-        check.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                CheckBox cb= (CheckBox)view;
-                if(cb.isChecked()){
-                    // Toast.makeText(getApplicationContext(), "Night Store",Toast.LENGTH_SHORT).show();
-                   // mNightStoreId=1;
-                   // mpref.setNightStore("nighttrue");
-                }else{
-                    // Toast.makeText(getApplicationContext(), "Night Store Deactivated",Toast.LENGTH_SHORT).show();
-                  //  mNightStoreId=0;
-                  //  mpref.setNightStore("nightfalse");
-                }
-            }
-        });
-
-        check1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CheckBox cb1= (CheckBox)view;
-                //   Toast.makeText(getApplicationContext(), "Accept Meal Voucaher",Toast.LENGTH_SHORT).show();
-                if(cb1.isChecked()){
-                    //      Toast.makeText(getApplicationContext(), "Accept Meal Voucaher",Toast.LENGTH_SHORT).show();
-                  //  mMealVoucher=2;
-                  //  mpref.setMealVoucher("mealtrue");
-                }else{
-
-                    //     Toast.makeText(getApplicationContext(), "Accept Meal Voucaher Deactivated",Toast.LENGTH_SHORT).show();
-                  //  mMealVoucher=0;
-                  //  mpref.setMealVoucher("mealfalse");
-                }
-
-            }
-        });
-        TextView update= (TextView) detailDialog.findViewById(R.id.update_filter);
-        update.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                detailDialog.dismiss();
-               // UpdateVendrorList();
-            }
-        });
-        TextView reset= (TextView) detailDialog.findViewById(R.id.reset_filter);
-        reset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                detailDialog.dismiss();
-               // mpref.setMealVoucher("no");
-               // mpref.setNightStore("noNight");
-              //  mMealVoucher=0;
-              //  mNightStoreId=0;
-              //  UpdateVendrorList();
-            }
-        });
-        detailDialog.show();
-
-
-    }
-
-
 }

@@ -4,22 +4,15 @@
     android:layout_height="match_parent"
     tools:context="khaanavali.customer.HotelActivity">
 
-
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:orientation="vertical">
 
-        <include
-            android:id="@+id/toolbar2"
-            layout="@layout/toolbar" />
-
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:layout_marginTop="5dp"
             android:id="@+id/order_details_lay"
             >
@@ -28,7 +21,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/listView_vendor"
-
             android:layout_centerHorizontal="true"
             android:layout_alignParentRight="true"
             android:layout_marginTop="5dp"

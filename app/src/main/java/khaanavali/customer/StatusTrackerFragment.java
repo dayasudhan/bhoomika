@@ -22,6 +22,7 @@ package khaanavali.customer;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.net.ParseException;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -30,11 +31,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -51,6 +56,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import khaanavali.customer.model.Tracker;
 import khaanavali.customer.utils.Constants;
@@ -64,11 +70,12 @@ public class StatusTrackerFragment extends Fragment {
     private static final String TAG_TRACKER = "tracker";
     ArrayList<Tracker> trackerDetails;
     SessionManager session;
+    ListView listView ;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.status_layout, container, false);
-         ed = (EditText)v.findViewById(R.id.editText);
+        View v = inflater.inflate(R.layout.statuslist_layout, container, false);
+        ed = (EditText)v.findViewById(R.id.editText);
         txtViewTracker = (TextView) v.findViewById(R.id.statusText);
 
         session = new SessionManager(getActivity().getApplicationContext());
@@ -78,7 +85,6 @@ public class StatusTrackerFragment extends Fragment {
         ((MainActivity) getActivity())
                 .setActionBarTitle("Status Tracker");
         btnStatus.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View arg0) {
 
@@ -95,6 +101,30 @@ public class StatusTrackerFragment extends Fragment {
                 }
             }
         });
+        List<String> orderList = session.getOrderIdList();
+        if(orderList != null) {
+            listView = (ListView) v.findViewById(R.id.listView_status);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
+                    R.layout.area_list, R.id.location_name, orderList);
+            listView.setAdapter(adapter);
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                if(orderList.get(position).getIsOpen() !=0) {
+//                    Intent i = new Intent(getActivity(), ProductDetailViewActivity.class);
+//                    Gson gson = new Gson();
+//                    String hotel = gson.toJson(hotellist.get(position));
+//                    i.putExtra("hotel", hotel);
+//                    startActivity(i);
+//                }
+//                else
+//                {
+//                    Toast.makeText(getActivity().getApplicationContext(), "Today this hotel Closed. Kindly try other Hotel near by you", Toast.LENGTH_LONG).show();
+//                }
+                }
+            });
+        }
         return v;
     }
     public void getStatus(String orderId)

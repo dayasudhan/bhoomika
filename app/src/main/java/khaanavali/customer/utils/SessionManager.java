@@ -5,10 +5,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import khaanavali.customer.model.Address;
-import khaanavali.customer.model.Customer;
+import khaanavali.customer.model.FavouriteAddress;
+
 
 
 public class SessionManager {
@@ -43,9 +48,15 @@ public class SessionManager {
 	public static final String KEY_ADDRESSLINE2 = "addressline2";
 	public static final String KEY_CITY = "city";
 
-
+	public static final String KEY_FAVOURITE_ADDRESS = "favourite_address";
 	//To store the firebase id in shared preferences
 	public static final String KEY_ORDER_ID = "orderid";
+
+	//To store the firebase id in shared preferences
+	public static final String KEY_ORDER_ID_LIST = "orderidlist";
+
+	//To store the firebase id in shared preferences
+	public static final String KEY_LAST_AREA_SERCHED = "lastareasearched";
 	// Constructor
 	public SessionManager(Context context){
 		this._context = context;
@@ -72,12 +83,17 @@ public class SessionManager {
 		editor.commit();
 
 	}
+	public void setlastareasearched(String orderId)
+	{
+		editor.putString(KEY_LAST_AREA_SERCHED,orderId);
+		editor.commit();
+	}
+	public String getlastareasearched()
+	{
+		String id = pref.getString(KEY_LAST_AREA_SERCHED, "");
+		return id;
+	}
 
-    public void setCurrentOrderId(String orderId)
-    {
-        editor.putString(KEY_ORDER_ID,orderId);
-        editor.commit();
-    }
 	public void setKeyPhone(String orderId)
 	{
 		editor.putString(KEY_PHONE,orderId);
@@ -88,12 +104,8 @@ public class SessionManager {
 		String id = pref.getString(KEY_PHONE, null);
 		return id;
 	}
-	public String getCurrentOrderId()
-	{
-		String id = pref.getString(KEY_ORDER_ID, null);
-		return id;
 
-	}
+
 	public void setAddress(String areaname,String landmark, String addressline1 ,String addressline2, String city)
 	{
 		editor.putString(KEY_AREANAME,areaname);
@@ -111,9 +123,87 @@ public class SessionManager {
 		addr.setLandMark(pref.getString(KEY_LANDMARK, null));
 		addr.setAreaName(pref.getString(KEY_AREANAME, null));
 		addr.setCity(pref.getString(KEY_CITY, null));
-
 		return addr;
+	}
+	public void setCurrentOrderId(String orderId)
+	{
+		editor.putString(KEY_ORDER_ID,orderId);
+		editor.commit();
+		addOrderId(orderId);
+	}
+	public String getCurrentOrderId()
+	{
+		String id = pref.getString(KEY_ORDER_ID, null);
+		return id;
 
+	}
+	public void setOrderIdList(List<String> list)
+	{
+		Gson gson = new Gson();
+		String json = gson.toJson(list);
+		editor.putString(KEY_ORDER_ID_LIST,json);
+		editor.commit();
+	}
+
+	public void addOrderId(String orderid)
+	{
+		String orders = pref.getString(KEY_ORDER_ID_LIST, null);
+
+		Gson gson = new Gson();
+		List<String> list = null;
+		if(orders != null) {
+			list = (List<String>) gson.fromJson(orders, Object.class);
+		}
+		else
+		{
+			list = new ArrayList<String>();
+		}
+
+		list.add(0,orderid);
+		if(list.size()> 10)
+		{
+			list.remove(10);
+		}
+		setOrderIdList(list);
+	}
+	public List<String> getOrderIdList()
+	{
+		String orders = pref.getString(KEY_ORDER_ID_LIST, null);
+		List<String> list = null;
+		if(orders != null) {
+			Gson gson = new Gson();
+			list = (List<String>) gson.fromJson(orders, Object.class);
+		}
+		return list;
+	}
+
+	public void setFavoutrateAddress(FavouriteAddress favoutrateAddress)
+	{
+		String faddrlist = pref.getString(KEY_FAVOURITE_ADDRESS, null);
+		ArrayList<FavouriteAddress> faddresslist = null;
+		if(faddrlist != null)
+		{
+			Gson gson = new Gson();
+			faddresslist = (ArrayList<FavouriteAddress>) gson.fromJson(faddrlist, Object.class);
+		}
+		else {
+			faddresslist = new ArrayList<FavouriteAddress>();
+		}
+		faddresslist.add(favoutrateAddress);
+		Gson gson = new Gson();
+		String json = gson.toJson(faddresslist);
+		editor.putString(KEY_FAVOURITE_ADDRESS,json);
+		editor.commit();
+	}
+	public ArrayList<FavouriteAddress> getFavoutrateAddress()
+	{
+		String faddrlist = pref.getString(KEY_FAVOURITE_ADDRESS, null);
+		ArrayList<FavouriteAddress> faddresslist = null;
+		if(faddrlist != null) {
+			Gson gson = new Gson();
+			faddresslist = (ArrayList<FavouriteAddress>) gson.fromJson(faddrlist, Object.class);
+		}
+		return faddresslist;
 	}
 	public void setName(String orderId)
 	{
@@ -132,30 +222,7 @@ public class SessionManager {
 		String id = pref.getString(KEY_PHONE, null);
 		return id;
 	}
-	/**
-	 * Check login method wil check user login status
-	 * If false it will redirect user to login page
-	 * Else won't do anything
-	 * */
 
-//	public boolean checkLogin(){
-//		// Check login status
-//		if(!this.isLoggedIn()){
-//			// user is not logged in redirect him to Login Activity
-//			Intent i = new Intent(_context, LoginActivity.class);
-//
-//			// Closing all the Activities
-//			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//
-//			// Add new Flag to start new Activity
-//			i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//
-//			// Staring Login Activity
-//			_context.startActivity(i);
-//		}
-//		return true;
-//	}
-	
 	
 	
 	/**
@@ -172,26 +239,7 @@ public class SessionManager {
 		// return user
 		return user;
 	}
-	
-	/**
-	 * Clear session details
-	 * */
-//    public void logoutUser(){
-//        // Clearing all data from Shared Preferences
-//        editor.clear();
-//        editor.commit();
-//        //final boolean b = _context.stopService(new Intent(_context, NotificationListener.class));
-//        // After logout redirect user to Loing Activity
-//        Intent i = new Intent(_context, LoginActivity.class);
-//        // Closing all the Activities
-//        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//
-//        // Add new Flag to start new Activity
-//        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//
-//        // Staring Login Activity
-//        _context.startActivity(i);
-//    }
+
 	
 	/**
 	 * Quick check for login

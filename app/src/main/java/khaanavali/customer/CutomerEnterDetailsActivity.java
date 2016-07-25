@@ -22,16 +22,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.gson.Gson;
-
 import khaanavali.customer.model.HotelDetail;
 import khaanavali.customer.model.Order;
 import khaanavali.customer.utils.Constants;
 import khaanavali.customer.utils.GPSTracker;
 import khaanavali.customer.utils.LocationAddress;
 import khaanavali.customer.utils.SessionManager;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -41,7 +38,6 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
-
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -53,10 +49,10 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
     String responseOrder;
     Button btnShowLocation;
     EditText editName,editPhone,editCity,editHouseNo,editAreaName,editLandmark,editAddress;
-    // GPSTracker class
     GPSTracker gps;
     HotelDetail hotelDetail;
     SessionManager session;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,15 +115,13 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
                     String text  = "Minimum Order for this Hotel is Rs." +  Integer.toString(hotelDetail.getMinimumOrder()) + " Kindly add more items";
                     Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
                 }
-                else if(!checkTimeAllowedForOrder())
-                {
-                    Toast.makeText(getApplicationContext(), "This time no delivery for this Hotel Kindly Check Timings of Hotel for Order timings", Toast.LENGTH_LONG).show();
-                }
+//                else if(!checkTimeAllowedForOrder())
+//                {
+//                    Toast.makeText(getApplicationContext(), "This time no delivery for this Hotel Kindly Check Timings of Hotel for Order timings", Toast.LENGTH_LONG).show();
+//                }
                 else {
                     alertMessage();
                 }
-
-
             }
         });
 
@@ -181,8 +175,6 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
 //                    Location myLocation =
 //                            LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
 //                }
-
-
 
                 // create class object
                 gps = new GPSTracker(CutomerEnterDetailsActivity.this);
@@ -342,8 +334,6 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
                 default:
                     locationAddress = null;
             }
-           // tvAddress.setText(locationAddress);
-            //Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + locationAddress, Toast.LENGTH_LONG).show();
         }
     }
     private static boolean validatePhoneNumber(String phoneNo)
@@ -355,9 +345,7 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
     }
     public void postOrder(String order)
     {
-
-            new PostJSONAsyncTask().execute(Constants.ORDER_URL, order);
-
+       new PostJSONAsyncTask().execute(Constants.ORDER_URL, order);
     }
     public  class PostJSONAsyncTask extends AsyncTask<String, Void, Boolean> {
         ProgressDialog dialog;
@@ -394,32 +382,24 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
                     responseOrder = EntityUtils.toString(entity);
                     return true;
                 }
-
-                //------------------>>
-
             } catch (ParseException e1) {
                 e1.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            return false;
+           return false;
         }
-
         protected void onPostExecute(Boolean result) {
+
             dialog.cancel();
-            // adapter.notifyDataSetChanged();
-            // bindView();
-            if (result == true){
+            if(result == true){
                 Intent i = new Intent(CutomerEnterDetailsActivity.this, FinishActivity.class);
                 i.putExtra("order", responseOrder);
-
                 startActivity(i);
                 finish();
         }
             else if (result == false)
                 Toast.makeText(getApplicationContext(), "Unable to fetch data from server", Toast.LENGTH_LONG).show();
-
         }
     }
 }

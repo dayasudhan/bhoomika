@@ -93,49 +93,19 @@
             android:textColor="@color/third_text_color"
             android:text="60 minutes" />
 
+        <TextView
+            android:id="@+id/textViewIsopen"
+            android:layout_width="0dp"
+            android:layout_weight=".50"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:textColor="@color/red"
+            android:text="" />
+
     </LinearLayout>
 
-    ratingbar1
-    <!--  <View
-        android:layout_width="2dp"
-        android:layout_height="10dp"
-        android:background="#D8D8D8"
-        android:id="@+id/viewleft1"
-        android:layout_marginLeft="5dp"
-        android:visibility="invisible"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="2dp"
-        android:layout_alignBottom="@+id/extra_feature_2"
-        android:layout_toRightOf="@+id/extra_feature_2"
-        android:layout_toEndOf="@+id/extra_feature_2"
-        android:layout_alignTop="@+id/extra_feature_2" />
-   < TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Small Text"
-        android:id="@+id/extra_feature_1"
-        android:layout_below="@+id/minimum_order_val"
-        android:layout_alignLeft="@+id/minimum_order_val"
-        android:layout_marginTop="10dp"
-        android:textSize="12dp"
 
-        android:padding="1dp"
-        android:textColor="#D8D8D8"/>
 
-    TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Small Text"
-        android:id="@+id/extra_feature_2"
-        android:layout_marginLeft="10dp"
-        android:layout_alignTop="@+id/extra_feature_1"
-        android:layout_toRightOf="@+id/extra_feature_1"
-        android:textSize="12dp"
-
-        android:padding="1dp"
-        android:textColor="#D8D8D8"/>-->
 
 
 

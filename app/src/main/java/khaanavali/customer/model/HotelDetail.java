@@ -21,6 +21,16 @@ public class HotelDetail {
     int deliverCharge;
     int minimumOrder;
 
+    public int getIsOpen() {
+        return isOpen;
+    }
+
+    public void setIsOpen(int isOpen) {
+        this.isOpen = isOpen;
+    }
+
+    int isOpen;
+
     public OrderAcceptTimings getOrderAcceptTimings() {
         return orderAcceptTimings;
     }

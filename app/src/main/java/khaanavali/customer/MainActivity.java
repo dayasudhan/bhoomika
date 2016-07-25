@@ -1,26 +1,8 @@
 package khaanavali.customer;
 
-/*
- * Copyright (C) 2015, Francesco Azzola
- *
- *(http://www.survivingwithandroid.com)
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * 20/10/15
- */
 
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.NotificationManager;
 import android.content.Intent;
@@ -33,8 +15,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -67,13 +53,18 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//
-//        getMenuInflater().inflate(R.menu.main_menu, menu);
-//        return true;
-//    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        if(requestCode == 1 && resultCode == Activity.RESULT_OK) {
+            // extract data
 
+            String areaClicked = new String(intent.getStringExtra("area"));
+            HotelFragment fragment = (HotelFragment) getSupportFragmentManager().findFragmentById(R.id.frame);
+            fragment.getHotelList(areaClicked);
+            //getHotelList(areaClicked);
+        }
+    }
     private void setToolBar() {
         Toolbar tb = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(tb);
@@ -90,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationView navView = (NavigationView) findViewById(R.id.navigation);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
     //    transaction.addToBackStack(null);
-        transaction.replace(R.id.frame, new LocationFragment());
+        transaction.replace(R.id.frame, new HotelFragment());
 
         transaction.commit();
 
@@ -100,9 +91,8 @@ public class MainActivity extends AppCompatActivity {
 
                 Fragment frag = null;
                 int itemId = menuItem.getItemId();
-
-            if (itemId == R.id.location) {
-                frag = new LocationFragment();
+            if (itemId == R.id.hotel) {
+                    frag = new HotelFragment();
             }
             else if (itemId == R.id.about_knvl) {
                     frag = new AboutKhaanavali();
@@ -135,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
     public void setActionBarTitle(String title) {
         getSupportActionBar().setTitle(title);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
@@ -145,9 +136,23 @@ public class MainActivity extends AppCompatActivity {
                 dLayout.openDrawer(GravityCompat.START);
                 return true;
             }
+            case R.id.menu_search: {
+              //  Toast.makeText(getApplicationContext(), "menu selected", Toast.LENGTH_LONG).show();
+                Intent i = new Intent(this, PlacesActivity.class);
+                startActivityForResult(i,1);
+                return true;
+            }
         }
         return true;
     }
+//
+//    @Override
+//    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+//        MenuInflater menuInflater = getMenuInflater();
+//        menuInflater.inflate(R.menu.home_menu, menu);
+//        return super.onCreateOptionsMenu(menu);
+//    }
+
     @Override
     public void onBackPressed() {
         if (dLayout.isDrawerOpen(GravityCompat.START)) {
@@ -157,4 +162,5 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
+
 }

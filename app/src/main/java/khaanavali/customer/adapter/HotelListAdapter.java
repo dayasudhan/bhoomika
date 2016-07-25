@@ -1,6 +1,7 @@
 package khaanavali.customer.adapter;
 
 import android.app.Activity;
+import android.content.res.ColorStateList;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,6 +73,7 @@ public class HotelListAdapter extends BaseAdapter{
             itemHolder.hotelRating= (TextView) view.findViewById(R.id.vendor_rating);
             itemHolder.hotelSpeciality= (TextView) view.findViewById(R.id.vendor_speciality);
             itemHolder.hotellogo = (ImageView)view.findViewById(R.id.vendor_image_view);
+            itemHolder.hotelIsClosed = (TextView) view.findViewById(R.id.textViewIsopen);
 //            ratingbar1=(RatingBar)view.findViewById(R.id.ratingBar1);
 //            ratingbar1.setNumStars(5);
 //            ratingbar1.setRating(3);
@@ -85,6 +87,14 @@ public class HotelListAdapter extends BaseAdapter{
         itemHolder.hotelDeliveryTime.setText(String.valueOf(mhotelList.get(position).getDeliveryTime()).concat(" mins"));
         itemHolder.hotelRating.setText(String.valueOf(mhotelList.get(position).getRating()).concat("/5*"));
         itemHolder.hotelSpeciality.setText(mhotelList.get(position).getSpeciality());
+        if(mhotelList.get(position).getIsOpen() == 0)
+        {
+            itemHolder.hotelIsClosed.setText("Closed Today");
+        }
+        else
+        {
+            itemHolder.hotelIsClosed.setText("");
+        }
 
         String image_url = Constants.MAIN_URL + '/' + mhotelList.get(position).getHotel().getLogo();
         imageLoader.DisplayImage(image_url,  itemHolder.hotellogo);
@@ -99,7 +109,7 @@ public class HotelListAdapter extends BaseAdapter{
         TextView hotelSpeciality;
         TextView hotelRating;
         TextView hotelDeliveryTime;
-        TextView hotelDeliveryCharge;
+        TextView hotelIsClosed;
         ImageView hotellogo;
 
     }
