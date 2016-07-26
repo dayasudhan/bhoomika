@@ -30,7 +30,9 @@ import java.net.URLEncoder;
 import java.text.ParseException;
 import java.util.ArrayList;
 
+import khaanavali.customer.adapter.AddressListAdapater;
 import khaanavali.customer.adapter.LocationAdapter;
+import khaanavali.customer.model.FavouriteAddress;
 import khaanavali.customer.utils.Constants;
 import khaanavali.customer.utils.SessionManager;
 
@@ -49,10 +51,11 @@ public class PlacesActivity extends AppCompatActivity{
     private static final String TAG_SUBAREAS = "subAreas";
     private static final String LOG_TAG = "Autocomplete";
     private ArrayList<String> mCityCoverage;
-    //  ArrayAdapter<String> myAdapter;
-    ListView listView;
+    ListView listView,addresslistview;
     SearchView search;
     LocationAdapter dataAdapter;
+    ArrayList<FavouriteAddress> mFavouriteAddressArrayList;
+    AddressListAdapater addressListAdapater;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +63,26 @@ public class PlacesActivity extends AppCompatActivity{
         mCityCoverage =  new ArrayList<String>();
         listView = (ListView) findViewById(R.id.area_listView);
         listView.setAdapter(dataAdapter);
+        SessionManager  session = new SessionManager(getApplicationContext());
+        mFavouriteAddressArrayList = new ArrayList<FavouriteAddress>();
+        if(session.getFavoutrateAddress() !=null) {
+            mFavouriteAddressArrayList = session.getFavoutrateAddress();
+            //addressListAdapater.setmFavouriteAddressArrayList(mFavouriteAddressArrayList);
+        }
+        addressListAdapater = new AddressListAdapater(this,R.layout.address_list_item,mFavouriteAddressArrayList);
+        addresslistview = (ListView) findViewById(R.id.listView_address);
+        addresslistview.setAdapter(addressListAdapater);
 
+
+        addresslistview.setEmptyView(findViewById(R.id.emptyElement));
+        addresslistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+               String areaName =  mFavouriteAddressArrayList.get(position).getAddress().getAreaName();
+               goBackwithAreaName(areaName);
+            }
+        });
         getCityCoverage();
         search = (SearchView)findViewById(R.id.searchView1);
         search.setQueryHint("Search Location");
@@ -80,7 +102,7 @@ public class PlacesActivity extends AppCompatActivity{
                 return false;
             }
         });
-        setToolBar("Select Location");
+        setToolBar("Select delivery location");
     }
 
     public void onReceiveCity()
@@ -92,15 +114,19 @@ public class PlacesActivity extends AppCompatActivity{
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                SessionManager session = new SessionManager(getApplicationContext());
-                session.setlastareasearched(mCityCoverage.get(position));
-                Intent intent = new Intent();
-                intent.putExtra("area", mCityCoverage.get(position));
-                setResult(RESULT_OK, intent);
-                finish();
+                goBackwithAreaName(mCityCoverage.get(position));
             }
         });
 
+    }
+    public void goBackwithAreaName(String areaname)
+    {
+        SessionManager session = new SessionManager(getApplicationContext());
+        session.setlastareasearched(areaname);
+        Intent intent = new Intent();
+        intent.putExtra("area", areaname);
+        setResult(RESULT_OK, intent);
+        finish();
     }
     public void getCityCoverage()
     {
