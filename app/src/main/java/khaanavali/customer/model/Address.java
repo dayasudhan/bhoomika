@@ -15,7 +15,7 @@ public class Address {
     String longitude;
 
     public Address(){
-        addressLine1 = new String();
+
         addressLine1 = new String();
         addressLine2 = new String();
         street = new String();
@@ -27,6 +27,23 @@ public class Address {
         longitude = new String();
     }
 
+    public String toString()
+    {
+        String CustomerAddress = new String();
+        if(!addressLine1.isEmpty())
+            CustomerAddress =  CustomerAddress.concat(addressLine1).concat("\n");
+        if(!addressLine2.isEmpty())
+            CustomerAddress =   CustomerAddress.concat(addressLine2).concat("\n");
+        if(!areaName.isEmpty())
+            CustomerAddress =   CustomerAddress.concat(areaName).concat("\n");
+        if(!LandMark.isEmpty())
+            CustomerAddress =   CustomerAddress.concat(LandMark).concat("\n");
+        if(!street.isEmpty())
+            CustomerAddress =   CustomerAddress.concat(street).concat("\n");
+        if(!city.isEmpty())
+            CustomerAddress =   CustomerAddress.concat(city);
+        return CustomerAddress;
+    }
     public String getAddressLine1() {
         return addressLine1;
     }

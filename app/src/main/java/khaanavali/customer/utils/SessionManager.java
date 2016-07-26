@@ -6,7 +6,9 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -184,7 +186,8 @@ public class SessionManager {
 		if(faddrlist != null)
 		{
 			Gson gson = new Gson();
-			faddresslist = (ArrayList<FavouriteAddress>) gson.fromJson(faddrlist, Object.class);
+			Type listType = new TypeToken<ArrayList<FavouriteAddress>>() {}.getType();
+			faddresslist =  gson.fromJson(faddrlist, listType);
 		}
 		else {
 			faddresslist = new ArrayList<FavouriteAddress>();
@@ -195,13 +198,19 @@ public class SessionManager {
 		editor.putString(KEY_FAVOURITE_ADDRESS,json);
 		editor.commit();
 	}
+	public void clearAddress()
+	{
+		editor.putString(KEY_FAVOURITE_ADDRESS, null);
+		editor.commit();
+	}
 	public ArrayList<FavouriteAddress> getFavoutrateAddress()
 	{
 		String faddrlist = pref.getString(KEY_FAVOURITE_ADDRESS, null);
 		ArrayList<FavouriteAddress> faddresslist = null;
 		if(faddrlist != null) {
 			Gson gson = new Gson();
-			faddresslist = (ArrayList<FavouriteAddress>) gson.fromJson(faddrlist, Object.class);
+			Type listType = new TypeToken<ArrayList<FavouriteAddress>>() {}.getType();
+			faddresslist =  gson.fromJson(faddrlist, listType);
 		}
 		return faddresslist;
 	}

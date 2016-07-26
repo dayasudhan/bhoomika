@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/toolbar2"
+                layout="@layout/toolbar" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="5dp"
+                android:id="@+id/order_details_lay"
+                >
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/my_custom_background"
+                    android:padding="1dip"
+
+                    android:layout_marginTop="1dp"
+                    android:id="@+id/bill_layout"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Bill Details"
+                        android:layout_alignParentStart="true"
+
+                        android:padding="10dip"
+
+                        android:id="@+id/billdetails" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/view_color"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginBottom="25dp"
+                        android:layout_below="@+id/billdetails"
+                        android:id="@+id/view4" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="Bill total"
+                        android:id="@+id/orderbilltotaltext"
+                        android:textSize="13sp"
+                        android:layout_alignTop="@+id/view4"
+                        android:layout_below="@id/view4"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="4dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="Rs.50"
+                        android:layout_marginRight="10dp"
+                        android:id="@+id/orderbilltotaltextrupees"
+                        android:textSize="12sp"
+                        android:layout_alignTop="@+id/orderbilltotaltext"
+                        android:layout_alignParentRight="true" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/view_color"
+                        android:id="@+id/view5"
+                        android:layout_marginBottom="5dp"
+                        android:layout_below="@+id/orderbilltotaltext"
+                        android:layout_alignParentLeft="true" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="Delivery charges"
+                        android:id="@+id/orderDetailDelivery"
+                        android:textSize="13sp"
+
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_below="@+id/view5" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="Rs.50"
+                        android:layout_marginRight="10dp"
+                        android:id="@+id/orderDetailDeliveryRupees"
+                        android:textSize="12sp"
+                        android:layout_alignTop="@+id/orderDetailDelivery"
+                        android:layout_alignParentRight="true" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/view_color"
+                        android:id="@+id/view24"
+                        android:layout_marginBottom="5dp"
+                        android:layout_below="@+id/orderDetailDelivery"
+                        android:layout_alignParentLeft="true" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Grand Total"
+                        android:layout_below="@+id/view24"
+                        android:textSize="14sp"
+                        android:id="@+id/orderDetailTotal"
+                        android:layout_alignBottom="@+id/order_total_charge"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="10dp"
+                        android:singleLine="true" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Rs.381"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/dialy_green"
+                        android:textSize="13sp"
+                        android:id="@+id/order_total_charge"
+                        android:layout_below="@+id/view24"
+                        android:layout_alignRight="@+id/orderDetailDeliveryRupees" />
+
+
+
+
+                </RelativeLayout>
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/my_custom_background"
+    android:padding="10dip"
+    android:layout_below="@id/bill_layout"
+    android:id="@+id/firstlayout"
+    android:layout_width="match_parent" android:layout_height="wrap_content">
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/orderDetailName"
+        android:inputType="textPersonName"
+        android:textSize="15sp"
+        android:hint="Enter Name Here"
+        android:layout_below="@+id/view"
+        android:layout_marginTop="17dp"
+        android:textColorHint="@color/third_text_color"
+        android:textColor="@color/title_text_color"
+        android:background="#ffffff"
+        android:layout_alignRight="@+id/view"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentLeft="true"
+        android:clickable="true"
+        android:enabled="true" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/view_color"
+        android:layout_below="@+id/orderDetailName"
+        android:layout_marginLeft="10dp"
+        android:layout_alignRight="@+id/orderMapSymbol"
+        android:layout_marginTop="7dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:textSize="15sp"
+        android:hint="Enter Phone No"
+        android:textColorHint="@color/third_text_color"
+        android:ems="10"
+        android:layout_marginTop="18dp"
+        android:textColor="@color/title_text_color"
+        android:background="#ffffff"
+        android:id="@+id/orderDetailPhone"
+        android:layout_below="@+id/orderDetailName"
+        android:layout_marginLeft="10dp"
+        android:layout_alignRight="@+id/orderDetailName"
+        android:layout_alignParentLeft="true" />
+
+</RelativeLayout>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="@drawable/my_custom_background"
+        android:padding="10dip"
+        android:layout_below="@+id/firstlayout"
+        android:layout_width="match_parent" android:layout_height="match_parent">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Select Address"
+        android:layout_alignParentStart="true"
+
+        android:padding="10dip"
+
+        android:id="@+id/textView4" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add New Address"
+        android:textColor="#ffffff"
+        android:id="@+id/addnewaddress"
+        android:background="@drawable/locationbuttonselector"
+        android:enabled="true"
+        android:focusable="true"
+        android:clickable="true"
+        android:longClickable="false"
+        android:layout_alignTop="@+id/textView4"
+        android:layout_alignParentEnd="true" />
+    <View
+        android:layout_width="match_parent"
+        android:id="@+id/view2"
+        android:layout_height="1dp"
+        android:background="@color/text_view_grey"
+        android:layout_below="@+id/textView4"
+        android:layout_marginTop="10dp"/>
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView_address"
+        android:divider="#F7F7F7"
+        android:dividerHeight="5dp"
+        android:layout_alignParentStart="true"
+        android:layout_above="@id/placeOrderButton"
+        android:layout_below="@id/view2" />
+
+        <TextView
+            android:id="@+id/emptyElement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="No Address Available! Kindly Add New address"
+            android:textColor="#525252"
+            android:textSize="19.0sp"
+            android:visibility="gone" />
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Place Order"
+            android:textColor="#ffffff"
+            android:id="@+id/placeOrderButton"
+            android:background="@drawable/buttonselector"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:clickable="true" />
+
+    </RelativeLayout>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</ScrollView>

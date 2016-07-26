@@ -22,4 +22,14 @@ public class FavouriteAddress {
 
     String label;
     Address address;
+
+    public String getAddress2() {
+        return address2;
+    }
+
+    public void setAddress2(String address2) {
+        this.address2 = address2;
+    }
+
+    String address2;
 }

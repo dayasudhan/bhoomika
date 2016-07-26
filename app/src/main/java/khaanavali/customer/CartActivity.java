@@ -79,7 +79,7 @@ public class CartActivity extends AppCompatActivity implements PlusMinusButtonLi
                     Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
                 }
                 else {
-                    Intent i = new Intent(CartActivity.this, CutomerEnterDetailsActivity.class);
+                    Intent i = new Intent(CartActivity.this, ReviewDetailsActivity.class);
                     Gson gson = new Gson();
                     order.getMenuItems().clear();
                     for (int j = 0; j < dataAdapter.getmMenulist().size(); j++) {

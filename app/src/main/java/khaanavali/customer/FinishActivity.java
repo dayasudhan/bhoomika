@@ -50,28 +50,28 @@ public class FinishActivity extends AppCompatActivity {
             MenuItemStr += items.get(j).getName() + " (" + items.get(j).getNo_of_order() + ")" + '\n';
         }
         txtViewMenu.setText(MenuItemStr);
-        String CustomerAddress = new String();
-        if(!order.getCustomer().getAddress().getAddressLine1().isEmpty())
-            CustomerAddress =  CustomerAddress.concat(order.getCustomer().getAddress().getAddressLine1()).concat("\n");
-        if(!order.getCustomer().getAddress().getAddressLine2().isEmpty())
-            CustomerAddress =   CustomerAddress.concat(order.getCustomer().getAddress().getAddressLine2()).concat("\n");
-        if(!order.getCustomer().getAddress().getAreaName().isEmpty())
-            CustomerAddress =   CustomerAddress.concat(order.getCustomer().getAddress().getAreaName()).concat("\n");
-        if(!order.getCustomer().getAddress().getLandMark().isEmpty())
-            CustomerAddress =   CustomerAddress.concat(order.getCustomer().getAddress().getLandMark().concat("\n"));
-        if(!order.getCustomer().getAddress().getStreet().isEmpty())
-            CustomerAddress =   CustomerAddress.concat(order.getCustomer().getAddress().getStreet()).concat("\n");
-        if(!order.getCustomer().getAddress().getCity().isEmpty())
-            CustomerAddress =   CustomerAddress.concat(order.getCustomer().getAddress().getCity());
+        String CustomerAddress = order.getCustomer().getAddress().toString();
+//        if(!order.getCustomer().getAddress().getAddressLine1().isEmpty())
+//            CustomerAddress =  CustomerAddress.concat(order.getCustomer().getAddress().getAddressLine1()).concat("\n");
+//        if(!order.getCustomer().getAddress().getAddressLine2().isEmpty())
+//            CustomerAddress =   CustomerAddress.concat(order.getCustomer().getAddress().getAddressLine2()).concat("\n");
+//        if(!order.getCustomer().getAddress().getAreaName().isEmpty())
+//            CustomerAddress =   CustomerAddress.concat(order.getCustomer().getAddress().getAreaName()).concat("\n");
+//        if(!order.getCustomer().getAddress().getLandMark().isEmpty())
+//            CustomerAddress =   CustomerAddress.concat(order.getCustomer().getAddress().getLandMark().concat("\n"));
+//        if(!order.getCustomer().getAddress().getStreet().isEmpty())
+//            CustomerAddress =   CustomerAddress.concat(order.getCustomer().getAddress().getStreet()).concat("\n");
+//        if(!order.getCustomer().getAddress().getCity().isEmpty())
+//            CustomerAddress =   CustomerAddress.concat(order.getCustomer().getAddress().getCity());
 
         session = new SessionManager(getApplicationContext());
         session.setCurrentOrderId(order.getId());
-        if(!session.isLoggedIn())
-            alertMessage();
-        else if(session.isLoggedIn())
-        {
-            saveAddress();
-        }
+//        if(!session.isLoggedIn())
+//            alertMessage();
+//        else if(session.isLoggedIn())
+//        {
+//            saveAddress();
+//        }
         txtViewAddress.setText(CustomerAddress);
         setToolBar();
     }
