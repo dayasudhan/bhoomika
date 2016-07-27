@@ -9,34 +9,23 @@
         android:layout_height="match_parent"
         android:background="#ffffff"
         >
-
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:orientation="vertical">
-
             <include
                 android:id="@+id/toolbar2"
                 layout="@layout/toolbar" />
-
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:layout_marginTop="5dp"
                 android:id="@+id/order_details_lay"
                 >
-
-
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/my_custom_background"
-                    android:padding="1dip"
-
-                    android:layout_marginTop="1dp"
                     android:id="@+id/bill_layout"
                     >
                     <TextView
@@ -46,7 +35,7 @@
                         android:text="Bill Details"
                         android:layout_alignParentStart="true"
 
-                        android:padding="10dip"
+                        android:padding="10dp"
 
                         android:id="@+id/billdetails" />
 
@@ -56,8 +45,11 @@
                         android:background="@color/view_color"
                         android:layout_alignParentLeft="true"
                         android:layout_marginBottom="25dp"
+
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
                         android:layout_below="@+id/billdetails"
-                        android:id="@+id/view4" />
+                        android:id="@+id/view1" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -66,17 +58,17 @@
                         android:text="Bill total"
                         android:id="@+id/orderbilltotaltext"
                         android:textSize="13sp"
-                        android:layout_alignTop="@+id/view4"
-                        android:layout_below="@id/view4"
+                        android:layout_below="@id/view1"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginTop="4dp" />
+
+                        />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:text="Rs.50"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginRight="20dp"
                         android:id="@+id/orderbilltotaltextrupees"
                         android:textSize="12sp"
                         android:layout_alignTop="@+id/orderbilltotaltext"
@@ -89,6 +81,7 @@
                         android:id="@+id/view5"
                         android:layout_marginBottom="5dp"
                         android:layout_below="@+id/orderbilltotaltext"
+                        android:layout_alignEnd="@+id/view1"
                         android:layout_alignParentLeft="true" />
                     <TextView
                         android:layout_width="wrap_content"
@@ -107,7 +100,7 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:text="Rs.50"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginRight="20dp"
                         android:id="@+id/orderDetailDeliveryRupees"
                         android:textSize="12sp"
                         android:layout_alignTop="@+id/orderDetailDelivery"
@@ -120,6 +113,7 @@
                         android:id="@+id/view24"
                         android:layout_marginBottom="5dp"
                         android:layout_below="@+id/orderDetailDelivery"
+                        android:layout_alignEnd="@+id/view1"
                         android:layout_alignParentLeft="true" />
 
                     <TextView
@@ -147,7 +141,16 @@
                         android:layout_below="@+id/view24"
                         android:layout_alignRight="@+id/orderDetailDeliveryRupees" />
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/view_color"
+                        android:id="@+id/view25"
+                        android:layout_marginBottom="5dp"
+                        android:layout_below="@+id/orderDetailTotal"
+                        android:layout_alignEnd="@+id/view1"
 
+                        android:layout_alignParentLeft="true" />
 
 
                 </RelativeLayout>
