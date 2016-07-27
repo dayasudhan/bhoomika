@@ -32,7 +32,6 @@
             android:name=".ProductDetailViewActivity"
             />
         <activity android:name=".CartActivity" />
-        <activity android:name=".CutomerEnterDetailsActivity" />
         <activity android:name=".ReviewDetailsActivity" />
         <activity android:name=".FinishActivity" />
         <activity android:name=".PlacesActivity" />
