@@ -1,8 +1,10 @@
 package khaanavali.customer;
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -13,6 +15,7 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -131,10 +134,8 @@ public class PlacesActivity extends AppCompatActivity{
 
     public  class JSONAsyncTask extends AsyncTask<String, Void, Boolean> {
 
-        ProgressDialog dialog;
+        Dialog dialog;
 
-        ListView mListView;
-        Activity mContex;
         public  JSONAsyncTask()
         {
 
@@ -143,9 +144,10 @@ public class PlacesActivity extends AppCompatActivity{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog = new ProgressDialog(PlacesActivity.this);
-            dialog.setMessage("Loading, please wait");
-            dialog.setTitle("Connecting server");
+            dialog = new Dialog(PlacesActivity.this,android.R.style.Theme_Translucent);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.custom_progress_dialog);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
             dialog.show();
             dialog.setCancelable(false);
         }

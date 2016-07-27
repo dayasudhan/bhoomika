@@ -1,5 +1,6 @@
 package khaanavali.customer;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -136,12 +138,7 @@ public class HotelFragment extends Fragment {
      //   return super.onCreateOptionsMenu(menu);
     }
     public  class JSONAsyncTask extends AsyncTask<String, Void, Boolean> {
-
-        ProgressDialog dialog;
-
-        ListView mListView;
-        Activity mContex;
-
+        Dialog dialog;
         public JSONAsyncTask() {
 
         }
@@ -149,12 +146,11 @@ public class HotelFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog = new ProgressDialog(getActivity());
-//            dialog.setMessage("Loading, please wait");
-//            dialog.setTitle("Connecting server");
-            //dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            dialog = new Dialog(getActivity(),android.R.style.Theme_Translucent);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.custom_progress_dialog);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
             dialog.show();
-
             dialog.setCancelable(false);
         }
 
@@ -350,7 +346,7 @@ public class HotelFragment extends Fragment {
             return false;
         }
         protected void onPostExecute(Boolean result) {
-   //         dialog.cancel();
+            dialog.cancel();
 
             if (result == false) {
                 Toast.makeText(getActivity().getApplicationContext(), "Unable to fetch data from server", Toast.LENGTH_LONG).show();
