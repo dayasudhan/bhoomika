@@ -1,17 +1,15 @@
 package khaanavali.customer;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import com.google.gson.Gson;
-
 import khaanavali.customer.model.Address;
 import khaanavali.customer.model.FavouriteAddress;
 import khaanavali.customer.utils.SessionManager;
@@ -38,20 +36,25 @@ public class AddAdressActivity  extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(editHouseNo.getText().length() == 0){
-                    Toast.makeText(getApplicationContext(), "Enter House No or Flat No ", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), "Enter House No or Flat No ", Toast.LENGTH_LONG).show();
+                    alertMessage("Enter House or Flat No ");
                 }
                 else if(editAreaName.getText().length() == 0){
-                    Toast.makeText(getApplicationContext(), "Enter areaname ", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), "Enter areaname ", Toast.LENGTH_LONG).show();
+                    alertMessage("Enter areaname ");
                 }
                 else if(editAddress.getText().length() == 0){
-                    Toast.makeText(getApplicationContext(), "Enter Address ", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), "Enter Address ", Toast.LENGTH_LONG).show();
+                    alertMessage("Enter Address ");
                 }
                 else if(editLandmark.getText().length() == 0){
-                    Toast.makeText(getApplicationContext(), "Enter Landmark/locality ", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), "Enter Landmark/locality ", Toast.LENGTH_LONG).show();
+                    alertMessage("Enter Landmark/locality ");
                 }
 
                 else if(editTagLabel.getText().length() == 0){
-                    Toast.makeText(getApplicationContext(), "Enter City ", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), "Enter City ", Toast.LENGTH_LONG).show();
+                    alertMessage("Enter City ");
                 }
                 else
                 {
@@ -67,11 +70,6 @@ public class AddAdressActivity  extends AppCompatActivity {
                     SessionManager session = new SessionManager(getApplicationContext());
                     session.setFavoutrateAddress(favouriteAddress);
                     Intent intent = new Intent();
-
-//                    Gson gson = new Gson();
-//                    String strfaddress = gson.toJson(favouriteAddress);
-//                    intent.putExtra("FavouriteAddress", strfaddress);
-//                    setResult(RESULT_OK, intent);
                     finish();
                 }
             }
@@ -80,7 +78,7 @@ public class AddAdressActivity  extends AppCompatActivity {
     }
 
 
-private void setToolBar(String title) {
+    private void setToolBar(String title) {
         Toolbar tb = (Toolbar) findViewById(R.id.toolbar2);
         setSupportActionBar(tb);
 
@@ -89,4 +87,20 @@ private void setToolBar(String title) {
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setTitle(title);
         }
+    public void alertMessage(String message) {
+        DialogInterface.OnClickListener dialogClickListeneryesno = new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+
+                    case DialogInterface.BUTTON_NEUTRAL:
+                        break;
+                }
+            }
+        };
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Khaanavali");
+        builder.setMessage(message).setNeutralButton("Ok", dialogClickListeneryesno)
+                .setIcon(R.drawable.ic_action_about).show();
+
+    }
 }

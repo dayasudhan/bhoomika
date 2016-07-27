@@ -1,8 +1,10 @@
 package khaanavali.customer;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuInflater;
@@ -11,7 +13,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import khaanavali.customer.adapter.PlusMinusButtonListener;
@@ -21,8 +22,10 @@ import khaanavali.customer.model.Menu;
 import khaanavali.customer.model.MenuAdapter;
 import khaanavali.customer.model.Order;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
 
 public class ProductDetailViewActivity extends AppCompatActivity implements PlusMinusButtonListener {
 
@@ -115,15 +118,24 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
 
     public void moveNext()
     {
-        if(mDataAdapter.totalCount <= 0)
+        if(!checkTimeAllowedForOrder())
         {
-            Toast.makeText(getApplicationContext(), "Cart Empty -please select Some Items", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "This time no delivery for this Hotel Kindly Check Timings of Hotel for Order timings", Toast.LENGTH_LONG).show();
+            alertMessage("This time no delivery for this Hotel Kindly Check Timings of Hotel for Order timings");
+        }
+        else if(mDataAdapter.totalCount <= 0)
+        {
+           // Toast.makeText(getApplicationContext(), "Cart Empty -please select Some Items", Toast.LENGTH_LONG).show();
+            alertMessage("Cart Empty -please select Some Items");
         }
         else if(mDataAdapter.totalCost < hotelDetail.getMinimumOrder())
         {
             String text  = "Minimum Order for this Hotel is Rs." +  Integer.toString(hotelDetail.getMinimumOrder()) + " Kindly add more items";
-            Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
+
+           // Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
+            alertMessage(text);
         }
+
         else {
             Intent i = new Intent(ProductDetailViewActivity.this, CartActivity.class);
             Gson gson = new Gson();
@@ -195,7 +207,6 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
     }
     @Override
     public void buttonClicked(int postion,int value) {
-
         counttxt.setText(String.valueOf(mDataAdapter.totalCount));
         priceTxt.setText("₹ " + String.valueOf(mDataAdapter.totalCost));
     }
@@ -232,5 +243,56 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
             }
         };*/
         return super.onCreateOptionsMenu(menu);
+    }
+    public boolean checkTimeAllowedForOrder()
+    {
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+            Date orderTime  = dateFormat.parse( dateFormat.format(new Date()));
+            if (hotelDetail.getOrderAcceptTimings().getMorning().getAvailable().equals("Yes")) {
+                Date starttime = dateFormat.parse(hotelDetail.getOrderAcceptTimings().getMorning().getStartTime()   );
+                starttime.setMinutes( starttime.getMinutes() -  hotelDetail.getDeliveryTime());
+                Date endtime = dateFormat.parse(hotelDetail.getOrderAcceptTimings().getMorning().getEndTime());
+                if ((orderTime.after(starttime) && orderTime.before(endtime))) {
+                    return true;
+                }
+            }
+            if (hotelDetail.getOrderAcceptTimings().getLunch().getAvailable().equals("Yes")) {
+                Date starttime = dateFormat.parse(hotelDetail.getOrderAcceptTimings().getLunch().getStartTime());
+                starttime.setMinutes( starttime.getMinutes() -  hotelDetail.getDeliveryTime());
+                Date endtime = dateFormat.parse(hotelDetail.getOrderAcceptTimings().getLunch().getEndTime());
+                if ((orderTime.after(starttime) && orderTime.before(endtime))) {
+                    return true;
+                }
+            }
+            if (hotelDetail.getOrderAcceptTimings().getDinner().getAvailable().equals("Yes")) {
+                Date starttime = dateFormat.parse(hotelDetail.getOrderAcceptTimings().getDinner().getStartTime());
+                starttime.setMinutes( starttime.getMinutes() -  hotelDetail.getDeliveryTime());
+                Date endtime = dateFormat.parse(hotelDetail.getOrderAcceptTimings().getDinner().getEndTime());
+                if ((orderTime.after(starttime) && orderTime.before(endtime))) {
+                    return true;
+                }
+            }
+        }
+        catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public void alertMessage(String message) {
+        DialogInterface.OnClickListener dialogClickListeneryesno = new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+
+                    case DialogInterface.BUTTON_NEUTRAL:
+                        break;
+                }
+            }
+        };
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Khaanavali");
+        builder.setMessage(message).setNeutralButton("Ok", dialogClickListeneryesno)
+                .setIcon(R.drawable.ic_action_about).show();
+
     }
 }

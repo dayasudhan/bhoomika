@@ -22,12 +22,14 @@ package khaanavali.customer;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ParseException;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,10 +96,7 @@ public class StatusTrackerFragment extends Fragment {
                 }
                 else
                 {
-                    Toast toast = Toast.makeText(getActivity().getApplicationContext(),
-                            "Please enter valid status id",
-                            Toast.LENGTH_SHORT);
-                    toast.show();
+                    alertMessage("Please enter valid status id");
                 }
             }
         });
@@ -148,8 +147,6 @@ public void updateStatus()
             }
             Calendar cal = Calendar.getInstance();
             cal.setTime(getDate);
-//            cal.add(Calendar.HOUR, 5);
-//            cal.add(Calendar.MINUTE, 30);
             String newTime = requiredFormat.format(cal.getTime());
             trackerItemStr += trackerDetails.get(j).getStatus() + " (" + newTime + ")" + '\n';
         }
@@ -248,5 +245,20 @@ public void updateStatus()
                 Toast.makeText(getActivity().getApplicationContext(), "Unable to fetch data from server", Toast.LENGTH_LONG).show();
 
         }
+    }
+    public void alertMessage(String message) {
+        DialogInterface.OnClickListener dialogClickListeneryesno = new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+
+                    case DialogInterface.BUTTON_NEUTRAL:
+                        break;
+                }
+            }
+        };
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage(message).setNeutralButton("Ok", dialogClickListeneryesno)
+                .setIcon(R.drawable.ic_action_about).show();
+
     }
 }

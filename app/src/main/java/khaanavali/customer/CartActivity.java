@@ -1,15 +1,16 @@
 package khaanavali.customer;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import khaanavali.customer.adapter.PlusMinusButtonListener;
@@ -77,7 +78,8 @@ public class CartActivity extends AppCompatActivity implements PlusMinusButtonLi
                 if(order.getTotalCost() < hotelDetail.getMinimumOrder())
                 {
                     String text  = "Minimum Order for this Hotel is Rs." +  Integer.toString(hotelDetail.getMinimumOrder()) + " Kindly add more items";
-                    Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
+                    alertMessage(text);
                 }
                 else {
                     Intent i = new Intent(CartActivity.this, ReviewDetailsActivity.class);
@@ -153,5 +155,21 @@ public class CartActivity extends AppCompatActivity implements PlusMinusButtonLi
         order.setBill_value(total,hotelDetail.getDeliverCharge());
         orderTotalCharge.setText(String.valueOf(order.getTotalCost()));
         billvalue.setText(String.valueOf(order.getBill_value()));
+    }
+    public void alertMessage(String message) {
+        DialogInterface.OnClickListener dialogClickListeneryesno = new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+
+                    case DialogInterface.BUTTON_NEUTRAL:
+                        break;
+                }
+            }
+        };
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Khaanavali");
+        builder.setMessage(message).setNeutralButton("Ok", dialogClickListeneryesno)
+                .setIcon(R.drawable.ic_action_about).show();
+
     }
 }

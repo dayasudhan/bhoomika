@@ -40,7 +40,7 @@ public class SplashActivity extends Activity implements Animation.AnimationListe
                 try{
                     imgBack.startAnimation(animZoomIn);
 
-                    sleep(4000);
+                    sleep(3000);
                 }catch(Exception e){
                     e.printStackTrace();
                 }finally{

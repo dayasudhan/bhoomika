@@ -1,9 +1,13 @@
 package khaanavali.customer;
 
+import android.content.DialogInterface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.GravityCompat;
+
+import android.support.v7.app.AlertDialog;
+
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
@@ -12,31 +16,21 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.text.ParseException;
+
 import java.util.ArrayList;
 import android.app.Activity;
-import android.app.Dialog;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 
 import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
+
 import android.widget.AdapterView;
-import android.widget.CheckBox;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+
 import khaanavali.customer.model.HotelDetail;
 import com.google.gson.Gson;
 import khaanavali.customer.adapter.HotelListAdapter;
-import khaanavali.customer.model.HotelDetail;
+
 import khaanavali.customer.model.MenuItem;
 import khaanavali.customer.model.OrderAcceptTimings;
 import khaanavali.customer.utils.Constants;
@@ -52,8 +46,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.util.ArrayList;
+
 /**
  * Created by dganeshappa on 7/14/2016.
  */
@@ -109,7 +102,8 @@ public class HotelFragment extends Fragment {
                 }
                 else
                 {
-                    Toast.makeText(getActivity().getApplicationContext(), "Today this hotel Closed. Kindly try other Hotel near by you", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getActivity().getApplicationContext(), "Today this hotel Closed. Kindly try other Hotel near by you", Toast.LENGTH_LONG).show();
+                    alertMessage("Today this hotel closed. kindly try other hotel near by you");
                 }
             }
         });
@@ -133,25 +127,6 @@ public class HotelFragment extends Fragment {
                 R.layout.hotel_list_item,hotellist);
         listView.setAdapter(dataAdapter);
     }
-//    @Override
-//    public boolean onOptionsItemSelected(android.view.MenuItem item) {
-//        int itemId = item.getItemId();
-//        String btnName = null;
-//
-//        switch(itemId) {
-//            case android.R.id.home: {
-//                dLayout.openDrawer(GravityCompat.START);
-//                return true;
-//            }
-//            case R.id.menu_search: {
-//                //  Toast.makeText(getApplicationContext(), "menu selected", Toast.LENGTH_LONG).show();
-//                Intent i = new Intent(this, PlacesActivity.class);
-//                startActivityForResult(i,1);
-//                return true;
-//            }
-//        }
-//        return true;
-//    }
 
     @Override
     public void onCreateOptionsMenu(android.view.Menu menu , MenuInflater inflater) {
@@ -175,9 +150,11 @@ public class HotelFragment extends Fragment {
         protected void onPreExecute() {
             super.onPreExecute();
             dialog = new ProgressDialog(getActivity());
-            dialog.setMessage("Loading, please wait");
-            dialog.setTitle("Connecting server");
+//            dialog.setMessage("Loading, please wait");
+//            dialog.setTitle("Connecting server");
+            //dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
             dialog.show();
+
             dialog.setCancelable(false);
         }
 
@@ -373,15 +350,33 @@ public class HotelFragment extends Fragment {
             return false;
         }
         protected void onPostExecute(Boolean result) {
-            dialog.cancel();
+   //         dialog.cancel();
 
-            if (result == false)
+            if (result == false) {
                 Toast.makeText(getActivity().getApplicationContext(), "Unable to fetch data from server", Toast.LENGTH_LONG).show();
+                //alertMessage("Unable to fetch data from server");
+            }
             else
             {
                 initHotelList();
             }
 
         }
+    }
+    public void alertMessage(String message) {
+        DialogInterface.OnClickListener dialogClickListeneryesno = new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+
+                    case DialogInterface.BUTTON_NEUTRAL:
+                        break;
+                }
+            }
+        };
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Khaanavali");
+        builder.setMessage(message).setNeutralButton("Ok", dialogClickListeneryesno)
+                    .setIcon(R.drawable.ic_action_about).show();
+
     }
 }

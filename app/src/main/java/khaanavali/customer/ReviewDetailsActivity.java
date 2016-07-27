@@ -1,23 +1,20 @@
 package khaanavali.customer;
 
-import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
+
 import android.graphics.Color;
 import android.net.ParseException;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.support.v4.app.ActivityCompat;
+
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.AbsListView;
+
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,20 +33,14 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
-
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-
 import khaanavali.customer.adapter.AddressListAdapater;
 import khaanavali.customer.model.Address;
 import khaanavali.customer.model.FavouriteAddress;
 import khaanavali.customer.model.HotelDetail;
 import khaanavali.customer.model.Order;
 import khaanavali.customer.utils.Constants;
-import khaanavali.customer.utils.GPSTracker;
-import khaanavali.customer.utils.LocationAddress;
 import khaanavali.customer.utils.SessionManager;
 
 public class ReviewDetailsActivity extends AppCompatActivity {
@@ -138,10 +129,6 @@ public class ReviewDetailsActivity extends AppCompatActivity {
                     String text  = "Minimum Order for this Hotel is Rs." +  Integer.toString(hotelDetail.getMinimumOrder()) + " Kindly add more items";
                     alertMessage(false,"text");
                 }
-//                else if(!checkTimeAllowedForOrder())
-//                {
-//                    Toast.makeText(getApplicationContext(), "This time no delivery for this Hotel Kindly Check Timings of Hotel for Order timings", Toast.LENGTH_LONG).show();
-//                }
                 else {
                     alertMessage(true,"Are you sure about this order(Address, Phone)?");
                 }
@@ -205,7 +192,9 @@ public class ReviewDetailsActivity extends AppCompatActivity {
             }
         };
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Khaanavali");
         if (yesnotype) {
+
             builder.setMessage(message).setPositiveButton("Yes", dialogClickListeneryesno)
                     .setNegativeButton("No", dialogClickListeneryesno).show();
         } else {
@@ -214,41 +203,7 @@ public class ReviewDetailsActivity extends AppCompatActivity {
 
         }
     }
-    public boolean checkTimeAllowedForOrder()
-    {
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
-            Date orderTime  = dateFormat.parse( dateFormat.format(new Date()));
-            if (hotelDetail.getOrderAcceptTimings().getMorning().getAvailable().equals("Yes")) {
-                Date starttime = dateFormat.parse(hotelDetail.getOrderAcceptTimings().getMorning().getStartTime()   );
-                starttime.setMinutes( starttime.getMinutes() -  hotelDetail.getDeliveryTime());
-                Date endtime = dateFormat.parse(hotelDetail.getOrderAcceptTimings().getMorning().getEndTime());
-                if ((orderTime.after(starttime) && orderTime.before(endtime))) {
-                    return true;
-                }
-            }
-            if (hotelDetail.getOrderAcceptTimings().getLunch().getAvailable().equals("Yes")) {
-                Date starttime = dateFormat.parse(hotelDetail.getOrderAcceptTimings().getLunch().getStartTime());
-                starttime.setMinutes( starttime.getMinutes() -  hotelDetail.getDeliveryTime());
-                Date endtime = dateFormat.parse(hotelDetail.getOrderAcceptTimings().getLunch().getEndTime());
-                if ((orderTime.after(starttime) && orderTime.before(endtime))) {
-                    return true;
-                }
-            }
-            if (hotelDetail.getOrderAcceptTimings().getDinner().getAvailable().equals("Yes")) {
-                Date starttime = dateFormat.parse(hotelDetail.getOrderAcceptTimings().getDinner().getStartTime());
-                starttime.setMinutes( starttime.getMinutes() -  hotelDetail.getDeliveryTime());
-                Date endtime = dateFormat.parse(hotelDetail.getOrderAcceptTimings().getDinner().getEndTime());
-                if ((orderTime.after(starttime) && orderTime.before(endtime))) {
-                    return true;
-                }
-            }
-        }
-        catch (java.text.ParseException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
+
 
     private static boolean validatePhoneNumber(String phoneNo)
     {
@@ -318,4 +273,5 @@ public class ReviewDetailsActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Unable to fetch data from server", Toast.LENGTH_LONG).show();
         }
     }
+
 }
