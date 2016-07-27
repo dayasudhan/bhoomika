@@ -29,6 +29,7 @@ public class CartActivity extends AppCompatActivity implements PlusMinusButtonLi
     ArrayList<MenuAdapter> mMenulist;
     ProductAdapter dataAdapter;
     TextView orderTotalCharge,billvalue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

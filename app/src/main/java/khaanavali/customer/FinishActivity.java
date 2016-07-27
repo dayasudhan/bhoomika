@@ -42,7 +42,7 @@ public class FinishActivity extends AppCompatActivity {
         txtViewPhone.setText(String.valueOf(order.getHotel().getPhone()));
         txtViewOrderId.setText(order.getId());
 
-        txtViewBillValue.setText(String.valueOf(order.getBill_value()));
+        txtViewBillValue.setText(String.valueOf(order.getTotalCost()));
         ArrayList<Menu> items = order.getMenuItems();
         String MenuItemStr = "";
         for(int j = 0 ; j < items.size() ; j++)
@@ -51,19 +51,6 @@ public class FinishActivity extends AppCompatActivity {
         }
         txtViewMenu.setText(MenuItemStr);
         String CustomerAddress = order.getCustomer().getAddress().toString();
-//        if(!order.getCustomer().getAddress().getAddressLine1().isEmpty())
-//            CustomerAddress =  CustomerAddress.concat(order.getCustomer().getAddress().getAddressLine1()).concat("\n");
-//        if(!order.getCustomer().getAddress().getAddressLine2().isEmpty())
-//            CustomerAddress =   CustomerAddress.concat(order.getCustomer().getAddress().getAddressLine2()).concat("\n");
-//        if(!order.getCustomer().getAddress().getAreaName().isEmpty())
-//            CustomerAddress =   CustomerAddress.concat(order.getCustomer().getAddress().getAreaName()).concat("\n");
-//        if(!order.getCustomer().getAddress().getLandMark().isEmpty())
-//            CustomerAddress =   CustomerAddress.concat(order.getCustomer().getAddress().getLandMark().concat("\n"));
-//        if(!order.getCustomer().getAddress().getStreet().isEmpty())
-//            CustomerAddress =   CustomerAddress.concat(order.getCustomer().getAddress().getStreet()).concat("\n");
-//        if(!order.getCustomer().getAddress().getCity().isEmpty())
-//            CustomerAddress =   CustomerAddress.concat(order.getCustomer().getAddress().getCity());
-
         session = new SessionManager(getApplicationContext());
         session.setCurrentOrderId(order.getId());
 //        if(!session.isLoggedIn())

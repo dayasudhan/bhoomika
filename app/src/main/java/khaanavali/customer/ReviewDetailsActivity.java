@@ -66,6 +66,7 @@ public class ReviewDetailsActivity extends AppCompatActivity {
     ArrayList<FavouriteAddress> mFavouriteAddressArrayList;
     AddressListAdapater addressListAdapater;
     Address deliveryAddress ;
+    TextView orderTotalCharge,billvalue,deliveryCharge;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +76,6 @@ public class ReviewDetailsActivity extends AppCompatActivity {
         order = gson.fromJson(intent.getStringExtra("order"), Order.class);
         hotelDetail = gson.fromJson(intent.getStringExtra("HotelDetail"), HotelDetail.class);
         responseOrder = new String();
-//        deliveryAddress = new Address();
         session = new SessionManager(getApplicationContext());
         Button btn= (Button) findViewById(R.id.placeOrderButton);
         btnAddNewAddress = (Button) findViewById(R.id.addnewaddress);
@@ -86,6 +86,13 @@ public class ReviewDetailsActivity extends AppCompatActivity {
         addressListAdapater = new AddressListAdapater(this,R.layout.address_list_item,mFavouriteAddressArrayList);
         listView.setAdapter(addressListAdapater);
         listView.setEmptyView(findViewById(R.id.emptyElement));
+        deliveryCharge = (TextView) findViewById(R.id.orderDetailDeliveryRupees);
+        orderTotalCharge = (TextView) findViewById(R.id.order_total_charge);
+        billvalue = (TextView) findViewById(R.id.orderbilltotaltextrupees);
+        deliveryCharge.setText(String.valueOf(hotelDetail.getDeliverCharge()));
+        billvalue.setText(String.valueOf(order.getBill_value()));
+        orderTotalCharge.setText(String.valueOf(order.getTotalCost()));
+
         //session.clearAddress();
         if(session.isLoggedIn()) {
             try {
@@ -118,25 +125,25 @@ public class ReviewDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!validatePhoneNumber(editPhone.getText().toString())) {
-                    Toast.makeText(getApplicationContext(), "Enter Valid Phone Number ", Toast.LENGTH_LONG).show();
+                    alertMessage(false,"Enter Valid Phone Number");
                 }
                 else if(editName.getText().length() == 0){
-                    Toast.makeText(getApplicationContext(), "Enter Name ", Toast.LENGTH_LONG).show();
+                    alertMessage(false,"Enter Name");
                 }
                 else if(deliveryAddress == null){
-                    Toast.makeText(getApplicationContext(), "Address Empty", Toast.LENGTH_LONG).show();
+                    alertMessage(false,"Address Empty");
                 }
                 else if(hotelDetail.getMinimumOrder() > order.getTotalCost())
                 {
                     String text  = "Minimum Order for this Hotel is Rs." +  Integer.toString(hotelDetail.getMinimumOrder()) + " Kindly add more items";
-                    Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
+                    alertMessage(false,"text");
                 }
 //                else if(!checkTimeAllowedForOrder())
 //                {
 //                    Toast.makeText(getApplicationContext(), "This time no delivery for this Hotel Kindly Check Timings of Hotel for Order timings", Toast.LENGTH_LONG).show();
 //                }
                 else {
-                    alertMessage();
+                    alertMessage(true,"Are you sure about this order(Address, Phone)?");
                 }
             }
         });
@@ -174,13 +181,10 @@ public class ReviewDetailsActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-    public void alertMessage()
-    {
-        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener()
-        {
-            public void onClick(DialogInterface dialog, int which)
-            {
-                switch (which){
+    public void alertMessage(boolean yesnotype ,String message) {
+        DialogInterface.OnClickListener dialogClickListeneryesno = new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
                     case DialogInterface.BUTTON_POSITIVE: // Yes button clicked
                     {
                         order.getCustomer().setPhone(editPhone.getText().toString());
@@ -193,14 +197,22 @@ public class ReviewDetailsActivity extends AppCompatActivity {
                     }
                     break;
                     case DialogInterface.BUTTON_NEGATIVE:
-                        Toast.makeText(getApplicationContext(), "Correct the Information", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Correct the Details", Toast.LENGTH_LONG).show();
                         break;
-                    }
+                    case DialogInterface.BUTTON_NEUTRAL:
+                        break;
+                }
             }
         };
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Are you sure about this order(Address, Phone)?" ) .setPositiveButton("Yes", dialogClickListener)
-                .setNegativeButton("No", dialogClickListener).show();
+        if (yesnotype) {
+            builder.setMessage(message).setPositiveButton("Yes", dialogClickListeneryesno)
+                    .setNegativeButton("No", dialogClickListeneryesno).show();
+        } else {
+            builder.setMessage(message).setNeutralButton("Ok", dialogClickListeneryesno)
+                    .setIcon(R.drawable.ic_action_about).show();
+
+        }
     }
     public boolean checkTimeAllowedForOrder()
     {

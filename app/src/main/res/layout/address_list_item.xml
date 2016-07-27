@@ -30,8 +30,7 @@
         android:textSize="12sp"
         android:layout_alignTop="@+id/address_label"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="15dp"
-        android:layout_alignBottom="@+id/address_label" />
+        android:layout_marginEnd="15dp" />
 
 
 
