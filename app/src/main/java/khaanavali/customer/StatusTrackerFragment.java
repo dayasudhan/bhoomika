@@ -44,8 +44,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -103,7 +101,7 @@ public class StatusTrackerFragment extends Fragment {
                 }
             }
         });
-        List<String> orderList = session.getOrderIdList();
+        final List<String> orderList = session.getOrderIdList();
         if(orderList != null) {
             listView = (ListView) v.findViewById(R.id.listView_status);
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
@@ -113,17 +111,7 @@ public class StatusTrackerFragment extends Fragment {
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                if(orderList.get(position).getIsOpen() !=0) {
-//                    Intent i = new Intent(getActivity(), ProductDetailViewActivity.class);
-//                    Gson gson = new Gson();
-//                    String hotel = gson.toJson(hotellist.get(position));
-//                    i.putExtra("hotel", hotel);
-//                    startActivity(i);
-//                }
-//                else
-//                {
-//                    Toast.makeText(getActivity().getApplicationContext(), "Today this hotel Closed. Kindly try other Hotel near by you", Toast.LENGTH_LONG).show();
-//                }
+                    ed.setText(orderList.get(position));
                 }
             });
         }

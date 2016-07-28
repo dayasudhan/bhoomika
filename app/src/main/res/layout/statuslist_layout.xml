@@ -3,38 +3,16 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:orientation="horizontal"
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentEnd="true">
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-
-            <TextView
-                style="@android:style/TextAppearance.Large"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Order History"
-                android:layout_gravity="center_horizontal"
-                android:id="@+id/textView3" />
-
-            <ListView
-                android:layout_width="137dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/listView_status"
-                android:layout_marginTop="5dp"
-                android:divider="#F7F7F7"
-                android:dividerHeight="5dp"
-                />
-
-        </LinearLayout>
+        android:layout_height="wrap_content"
+        android:background="@drawable/my_custom_background"
+        android:id="@+id/first_layout"
+        >
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:orientation="vertical" android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
 
             <TextView
@@ -49,6 +27,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/editText"
                 android:singleLine="true"
+                android:padding="10dp"
                 android:layout_gravity="center_vertical|right" />
 
             <Button
@@ -70,20 +49,50 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="10dip"
                 android:layout_gravity="right">
 
                 <TextView
-                    style="@android:style/TextAppearance.Large"
+                    style="@android:style/TextAppearance.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/statusText"
+                    android:padding="10dip"
                     android:text="" />
 
             </LinearLayout>
+        </LinearLayout>
+        </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/my_custom_background"
+        android:id="@+id/second_layout"
+        android:layout_below="@id/first_layout"
+        android:padding="10dip"
+        >
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
 
+            <TextView
+                style="@android:style/TextAppearance.Large"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Order History"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/textView3" />
 
+            <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/listView_status"
+                android:layout_marginTop="5dp"
+                android:divider="#F7F7F7"
+                android:dividerHeight="5dp"
+                />
 
         </LinearLayout>
-    </LinearLayout>
-
+    </RelativeLayout>
 </RelativeLayout>
