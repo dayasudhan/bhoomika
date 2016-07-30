@@ -11,6 +11,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/MyAppTheme">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action
@@ -35,7 +38,10 @@
         <activity android:name=".ReviewDetailsActivity" />
         <activity android:name=".FinishActivity" />
         <activity android:name=".PlacesActivity" />
-        <activity android:name=".AddAdressActivity" />
+        <activity android:name=".AddAdressActivity"
+            android:windowSoftInputMode="adjustResize"
+            />
+        <activity android:name=".MapsActivity"/>
         <!-- adding our service -->
         <service android:name=".NotificationListener" />
     </application>

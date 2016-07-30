@@ -111,7 +111,8 @@ public class ReviewDetailsActivity extends AppCompatActivity {
         btnAddNewAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ReviewDetailsActivity.this, AddAdressActivity.class);
+                Intent i = new Intent(ReviewDetailsActivity.this, MapsActivity.class);
+
                 startActivity(i);
             }
         });
@@ -277,5 +278,17 @@ public class ReviewDetailsActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Unable to fetch data from server", Toast.LENGTH_LONG).show();
         }
     }
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+//        super.onActivityResult(requestCode, resultCode, intent);
+//        if(requestCode == 1 && resultCode == Activity.RESULT_OK) {
+//            // extract data
+//
+//            String areaClicked = new String(intent.getStringExtra("area"));
+//            HotelFragment fragment = (HotelFragment) getSupportFragmentManager().findFragmentById(R.id.frame);
+//            fragment.getHotelList(areaClicked);
+//            //getHotelList(areaClicked);
+//        }
+//    }
 
 }

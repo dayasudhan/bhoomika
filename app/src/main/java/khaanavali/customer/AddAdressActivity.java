@@ -7,9 +7,19 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
 import khaanavali.customer.model.Address;
 import khaanavali.customer.model.FavouriteAddress;
 import khaanavali.customer.utils.SessionManager;
@@ -21,16 +31,26 @@ public class AddAdressActivity  extends AppCompatActivity {
     EditText editTagLabel,editCity,editHouseNo,editAreaName,editLandmark,editAddress;
     Button btnSave;
     Address address;
+    List<android.location.Address> mAddresses;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_address_layout);
+        Intent intent = getIntent();
+        Gson gson = new Gson();
+        Type listType = new TypeToken<List<android.location.Address>>() {}.getType();
+        mAddresses = gson.fromJson(intent.getStringExtra("locationaddress"), listType);
+    //    String strAddress = intent.getStringExtra("address");
+
         editCity=(EditText)findViewById(R.id.orderDetailEmail);
         editHouseNo=(EditText)findViewById(R.id.orderDetailAddress_house_no);
         editAreaName=(EditText)findViewById(R.id.orderDetailAddress_areaname);
         editLandmark=(EditText)findViewById(R.id.orderDetailAddress_landmark);
         editAddress=(EditText)findViewById(R.id.orderDetailAddress_address);
         editTagLabel=(EditText)findViewById(R.id.tag_address_label);
+        editAddress.setText(mAddresses.get(0).getAddressLine(1));
+        editCity.setText(mAddresses.get(0).getLocality());
+        editAreaName.setText(mAddresses.get(0).getSubLocality());
         btnSave= (Button) findViewById(R.id.saveAddressbutton);
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +74,7 @@ public class AddAdressActivity  extends AppCompatActivity {
 
                 else if(editTagLabel.getText().length() == 0){
                     //Toast.makeText(getApplicationContext(), "Enter City ", Toast.LENGTH_LONG).show();
-                    alertMessage("Enter City ");
+                    alertMessage("Enter lable for this address");
                 }
                 else
                 {
@@ -64,12 +84,20 @@ public class AddAdressActivity  extends AppCompatActivity {
                     address.setAddressLine1(editHouseNo.getText().toString());
                     address.setAddressLine2(editAddress.getText().toString());
                     address.setCity(editCity.getText().toString());
+
+                    address.setZip(mAddresses.get(0).getPostalCode());
+                    address.setLatitude(String.valueOf(mAddresses.get(0).getLatitude()));
+                    address.setLongitude(String.valueOf(mAddresses.get(0).getLongitude()));
                     FavouriteAddress favouriteAddress = new FavouriteAddress();
                     favouriteAddress.setLabel(editTagLabel.getText().toString());
                     favouriteAddress.setAddress(address);
                     SessionManager session = new SessionManager(getApplicationContext());
                     session.setFavoutrateAddress(favouriteAddress);
+//                    Intent intent = new Intent(AddAdressActivity.this , ReviewDetailsActivity.class);
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                    startActivity(intent);
                     Intent intent = new Intent();
+                    setResult(RESULT_OK, intent);
                     finish();
                 }
             }
@@ -100,7 +128,16 @@ public class AddAdressActivity  extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Khaanavali");
         builder.setMessage(message).setNeutralButton("Ok", dialogClickListeneryesno)
-                .setIcon(R.drawable.ic_action_about).show();
+                .setIcon(R.drawable.ic_action_about);
+
+        final AlertDialog dialog = builder.create();
+        dialog.show(); //show() should be called before dialog.getButton().
+
+
+        final Button neutralButton = dialog.getButton(AlertDialog.BUTTON_NEUTRAL);
+        LinearLayout.LayoutParams positiveButtonLL = (LinearLayout.LayoutParams) neutralButton.getLayoutParams();
+        positiveButtonLL.gravity = Gravity.CENTER;
+        neutralButton.setLayoutParams(positiveButtonLL);
 
     }
 }
