@@ -93,10 +93,11 @@ public class AddAdressActivity  extends AppCompatActivity {
                     favouriteAddress.setAddress(address);
                     SessionManager session = new SessionManager(getApplicationContext());
                     session.setFavoutrateAddress(favouriteAddress);
-//                    Intent intent = new Intent(AddAdressActivity.this , ReviewDetailsActivity.class);
-//                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                    startActivity(intent);
+
                     Intent intent = new Intent();
+                    Gson gson = new Gson();
+                    String locationaddress = gson.toJson(address);
+                    intent.putExtra("locationaddress", locationaddress);
                     setResult(RESULT_OK, intent);
                     finish();
                 }

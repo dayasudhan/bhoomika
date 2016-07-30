@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
@@ -32,8 +33,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Locale;
 
@@ -71,13 +74,12 @@ public class MapsActivity extends FragmentActivity implements
             @Override
             public void onClick(View v) {
                 setAddress(mSelectedLatlang.latitude,mSelectedLatlang.longitude);
-            //    LatLng bangalore = new LatLng(12.9716, 77.5946);
-             //   setAddress(bangalore.latitude,bangalore.longitude);
+//                LatLng bangalore = new LatLng(12.9716, 77.5946);
+//                setAddress(bangalore.latitude,bangalore.longitude);
                 Intent i = new Intent(MapsActivity.this, AddAdressActivity.class);
                 Gson gson = new Gson();
                 String locationaddress = gson.toJson(mAddresses);
-       //         String address = new String("Address");
-             //   i.putExtra("address", mAddress);
+
                 i.putExtra("locationaddress", locationaddress);
                 startActivityForResult(i,1);
                // finish();
@@ -303,6 +305,12 @@ public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         if(requestCode == 1 && resultCode == Activity.RESULT_OK) {
+
+            Gson gson = new Gson();
+
+            khaanavali.customer.model.Address address = gson.fromJson(intent.getStringExtra("locationaddress"), khaanavali.customer.model.Address.class);
+            intent.putExtra("locationaddress", intent.getStringExtra("locationaddress"));
+            setResult(RESULT_OK, intent);
             finish();
         }
     }

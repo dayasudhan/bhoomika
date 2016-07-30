@@ -82,7 +82,8 @@ public class CartActivity extends AppCompatActivity implements PlusMinusButtonLi
                     alertMessage(text);
                 }
                 else {
-                    Intent i = new Intent(CartActivity.this, ReviewDetailsActivity.class);
+                    //Intent i = new Intent(CartActivity.this, ReviewDetailsActivity.class);
+                    Intent i = new Intent(CartActivity.this, CutomerEnterDetailsActivity.class);
                     Gson gson = new Gson();
                     order.getMenuItems().clear();
                     for (int j = 0; j < dataAdapter.getmMenulist().size(); j++) {

@@ -38,6 +38,8 @@
         <activity android:name=".ReviewDetailsActivity" />
         <activity android:name=".FinishActivity" />
         <activity android:name=".PlacesActivity" />
+        <activity android:name=".CutomerEnterDetailsActivity" />
+        <activity android:name=".SelectAddressActivity"/>
         <activity android:name=".AddAdressActivity"
             android:windowSoftInputMode="adjustResize"
             />

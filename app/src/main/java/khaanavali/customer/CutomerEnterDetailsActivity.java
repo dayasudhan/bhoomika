@@ -1,32 +1,38 @@
 package khaanavali.customer;
 
-import android.app.Dialog;
+import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.location.Location;
 import android.net.ParseException;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-
-import android.view.Window;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import khaanavali.customer.model.HotelDetail;
+import khaanavali.customer.model.Order;
+import khaanavali.customer.utils.Constants;
+import khaanavali.customer.utils.GPSTracker;
+import khaanavali.customer.model.Address;
+import khaanavali.customer.utils.SessionManager;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -37,34 +43,26 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import khaanavali.customer.adapter.AddressListAdapater;
-import khaanavali.customer.model.Address;
-import khaanavali.customer.model.FavouriteAddress;
-import khaanavali.customer.model.HotelDetail;
-import khaanavali.customer.model.Order;
-import khaanavali.customer.utils.Constants;
-import khaanavali.customer.utils.SessionManager;
+import java.util.Date;
+import java.util.List;
 
-public class ReviewDetailsActivity extends AppCompatActivity {
+public class CutomerEnterDetailsActivity extends AppCompatActivity {
 
     Order order;
     String responseOrder;
-
-    Button btnAddNewAddress;
-    EditText editName,editPhone,editAddress;
-
+    Button btnShowLocation;
+    EditText editName,editPhone,editCity,editHouseNo,editAreaName,editLandmark,editAddress;
+    GPSTracker gps;
     HotelDetail hotelDetail;
     SessionManager session;
-    ListView listView ;
-    ArrayList<FavouriteAddress> mFavouriteAddressArrayList;
-    AddressListAdapater addressListAdapater;
-    Address deliveryAddress ;
-    TextView orderTotalCharge,billvalue,deliveryCharge;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.review_layout);
+        setContentView(R.layout.activity_cutomer_enter_details);
         Intent intent = getIntent();
         Gson gson = new Gson();
         order = gson.fromJson(intent.getStringExtra("order"), Order.class);
@@ -72,50 +70,31 @@ public class ReviewDetailsActivity extends AppCompatActivity {
         responseOrder = new String();
         session = new SessionManager(getApplicationContext());
         Button btn= (Button) findViewById(R.id.placeOrderButton);
-        btnAddNewAddress = (Button) findViewById(R.id.addnewaddress);
+        btnShowLocation= (Button) findViewById(R.id.locationButton);
         editName=(EditText)findViewById(R.id.orderDetailName);
         editPhone=(EditText)findViewById(R.id.orderDetailPhone);
-        mFavouriteAddressArrayList = new ArrayList<FavouriteAddress>();
-        listView = (ListView)findViewById(R.id.listView_address);
-        addressListAdapater = new AddressListAdapater(this,R.layout.address_list_item,mFavouriteAddressArrayList);
-        listView.setAdapter(addressListAdapater);
-        listView.setEmptyView(findViewById(R.id.emptyElement));
-        deliveryCharge = (TextView) findViewById(R.id.orderDetailDeliveryRupees);
-        orderTotalCharge = (TextView) findViewById(R.id.order_total_charge);
-        billvalue = (TextView) findViewById(R.id.orderbilltotaltextrupees);
-        deliveryCharge.setText(String.valueOf(hotelDetail.getDeliverCharge()));
-        billvalue.setText(String.valueOf(order.getBill_value()));
+        editCity=(EditText)findViewById(R.id.orderDetailEmail);
+        editHouseNo=(EditText)findViewById(R.id.orderDetailAddress_house_no);
+        editAreaName=(EditText)findViewById(R.id.orderDetailAddress_areaname);
+        editLandmark=(EditText)findViewById(R.id.orderDetailAddress_landmark);
+        editAddress=(EditText)findViewById(R.id.orderDetailAddress_address);
+        final TextView orderTotalCharge = (TextView) findViewById(R.id.textView);
         orderTotalCharge.setText(String.valueOf(order.getTotalCost()));
-
-        //session.clearAddress();
         if(session.isLoggedIn()) {
             try {
                 editName.setText(session.getName());
                 editPhone.setText(session.getKeyPhone());
+                editAreaName.setText(session.getAddress().getAreaName());
+                editLandmark.setText(session.getAddress().getLandMark());
+                editHouseNo.setText(session.getAddress().getAddressLine1());
+                editAddress.setText(session.getAddress().getAddressLine2());
+                editCity.setText(session.getAddress().getCity());
             }
             catch(Exception e)
             {
 
             }
-      }
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                for (int j = 0; j < parent.getChildCount(); j++)
-                    parent.getChildAt(j).setBackgroundColor(Color.TRANSPARENT);
-                view.setBackgroundColor(Color.LTGRAY);
-                deliveryAddress = mFavouriteAddressArrayList.get(position).getAddress();
-            }
-        });
-        btnAddNewAddress.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(ReviewDetailsActivity.this, MapsActivity.class);
-
-                startActivity(i);
-            }
-        });
+        }
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,8 +104,17 @@ public class ReviewDetailsActivity extends AppCompatActivity {
                 else if(editName.getText().length() == 0){
                     alertMessage(false,"Enter Name");
                 }
-                else if(deliveryAddress == null){
-                    alertMessage(false,"Address Empty");
+                else if(editHouseNo.getText().length() == 0){
+                    alertMessage(false,"Enter House No or Flat No ");
+                }
+                else if(editAreaName.getText().length() == 0){
+                    alertMessage(false,"Enter areaname ");
+                }
+                else if(editAddress.getText().length() == 0){
+                    alertMessage(false,"Enter Address ");
+                }
+                else if(editLandmark.getText().length() == 0){
+                    alertMessage(false,"Enter Landmark/locality ");
                 }
                 else if(hotelDetail.getMinimumOrder() > order.getTotalCost())
                 {
@@ -139,17 +127,16 @@ public class ReviewDetailsActivity extends AppCompatActivity {
             }
         });
 
-        setToolBar("Delivery Details");
-    }
-    @Override
-    public void onResume() {
-        super.onResume();  // Always call the superclass method first
+        btnShowLocation.setOnClickListener(new View.OnClickListener() {
 
-        if(session.getFavoutrateAddress() !=null) {
-            mFavouriteAddressArrayList = session.getFavoutrateAddress();
-            addressListAdapater.setmFavouriteAddressArrayList(mFavouriteAddressArrayList);
-            deliveryAddress = mFavouriteAddressArrayList.get(0).getAddress();
-        }
+            @Override
+            public void onClick(View arg0) {
+                Intent i = new Intent(CutomerEnterDetailsActivity.this, SelectAddressActivity.class);
+                startActivityForResult(i,1);
+
+            }
+        });
+        setToolBar("Delivery Details");
     }
     private void setToolBar(String title) {
         Toolbar tb = (Toolbar) findViewById(R.id.toolbar2);
@@ -160,6 +147,7 @@ public class ReviewDetailsActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setTitle(title);
     }
+
     @Override
     public boolean onOptionsItemSelected(android.view.MenuItem item) {
         switch (item.getItemId()) {
@@ -172,23 +160,46 @@ public class ReviewDetailsActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-    public void alertMessage(boolean yesnotype ,String message) {
-        DialogInterface.OnClickListener dialogClickListeneryesno = new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        if(requestCode == 1 && resultCode == Activity.RESULT_OK) {
+
+            Gson gson = new Gson();
+
+            Address address = gson.fromJson(intent.getStringExtra("locationaddress"), Address.class);
+
+            editAreaName.setText(address.getAreaName());
+            editLandmark.setText(address.getLandMark());
+            editHouseNo.setText(address.getAddressLine1());
+            editAddress.setText(address.getAddressLine2());
+            editCity.setText(address.getCity());
+        }
+    }
+    public void alertMessage(boolean yesnotype ,String message)
+    {
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int which)
+            {
+                switch (which){
                     case DialogInterface.BUTTON_POSITIVE: // Yes button clicked
                     {
                         order.getCustomer().setPhone(editPhone.getText().toString());
                         order.getCustomer().setName(editName.getText().toString());
-
-                        order.getCustomer().setAddress(deliveryAddress);
+                        order.getCustomer().setEmail(editCity.getText().toString());
+                        order.getCustomer().getAddress().setAreaName(editAreaName.getText().toString());
+                        order.getCustomer().getAddress().setLandMark(editLandmark.getText().toString());
+                        order.getCustomer().getAddress().setAddressLine1(editHouseNo.getText().toString());
+                        order.getCustomer().getAddress().setAddressLine2(editAddress.getText().toString());
+                        order.getCustomer().getAddress().setCity(editCity.getText().toString());
                         Gson gson = new Gson();
                         String strOrder = gson.toJson(order);
                         postOrder(strOrder);
                     }
                     break;
                     case DialogInterface.BUTTON_NEGATIVE:
-                        Toast.makeText(getApplicationContext(), "Correct the Details", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Correct the Information", Toast.LENGTH_LONG).show();
                         break;
                     case DialogInterface.BUTTON_NEUTRAL:
                         break;
@@ -199,10 +210,10 @@ public class ReviewDetailsActivity extends AppCompatActivity {
         builder.setTitle("Khaanavali");
         if (yesnotype) {
 
-            builder.setMessage(message).setPositiveButton("Yes", dialogClickListeneryesno)
-                    .setNegativeButton("No", dialogClickListeneryesno).show();
+            builder.setMessage(message).setPositiveButton("Yes", dialogClickListener)
+                    .setNegativeButton("No", dialogClickListener).show();
         } else {
-            builder.setMessage(message).setNeutralButton("Ok", dialogClickListeneryesno)
+            builder.setMessage(message).setNeutralButton("Ok", dialogClickListener)
                     .setIcon(R.drawable.ic_action_about).show();
 
         }
@@ -216,24 +227,21 @@ public class ReviewDetailsActivity extends AppCompatActivity {
         else if(phoneNo.matches("\\+\\d{12}")) return true;
         else return false;
     }
-
     public void postOrder(String order)
     {
-       new PostJSONAsyncTask().execute(Constants.ORDER_URL, order);
+        new PostJSONAsyncTask().execute(Constants.ORDER_URL, order);
     }
-
     public  class PostJSONAsyncTask extends AsyncTask<String, Void, Boolean> {
-        Dialog dialog;
+        ProgressDialog dialog;
         public  PostJSONAsyncTask()
         {
         }
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog = new Dialog(ReviewDetailsActivity.this,android.R.style.Theme_Translucent);
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            dialog.setContentView(R.layout.custom_progress_dialog);
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            dialog = new ProgressDialog(CutomerEnterDetailsActivity.this);
+            dialog.setMessage("Posting Order, please wait");
+            dialog.setTitle("Connecting....");
             dialog.show();
             dialog.setCancelable(false);
         }
@@ -263,32 +271,20 @@ public class ReviewDetailsActivity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-           return false;
+            return false;
         }
         protected void onPostExecute(Boolean result) {
 
             dialog.cancel();
             if(result == true){
-                Intent i = new Intent(ReviewDetailsActivity.this, FinishActivity.class);
+                Intent i = new Intent(CutomerEnterDetailsActivity.this, FinishActivity.class);
                 i.putExtra("order", responseOrder);
                 startActivity(i);
                 finish();
-        }
+            }
             else if (result == false)
                 Toast.makeText(getApplicationContext(), "Unable to fetch data from server", Toast.LENGTH_LONG).show();
         }
     }
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-//        super.onActivityResult(requestCode, resultCode, intent);
-//        if(requestCode == 1 && resultCode == Activity.RESULT_OK) {
-//            // extract data
-//
-//            String areaClicked = new String(intent.getStringExtra("area"));
-//            HotelFragment fragment = (HotelFragment) getSupportFragmentManager().findFragmentById(R.id.frame);
-//            fragment.getHotelList(areaClicked);
-//            //getHotelList(areaClicked);
-//        }
-//    }
 
 }
