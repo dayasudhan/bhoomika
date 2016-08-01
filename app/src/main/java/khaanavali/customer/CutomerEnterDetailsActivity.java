@@ -25,7 +25,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+
 
 import khaanavali.customer.model.HotelDetail;
 import khaanavali.customer.model.Order;
@@ -43,11 +43,9 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import java.io.IOException;
-import java.lang.reflect.Type;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+
 
 public class CutomerEnterDetailsActivity extends AppCompatActivity {
 
@@ -58,6 +56,7 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
     GPSTracker gps;
     HotelDetail hotelDetail;
     SessionManager session;
+    TextView orderTotalCharge,billvalue,deliveryCharge;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,8 +77,12 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
         editAreaName=(EditText)findViewById(R.id.orderDetailAddress_areaname);
         editLandmark=(EditText)findViewById(R.id.orderDetailAddress_landmark);
         editAddress=(EditText)findViewById(R.id.orderDetailAddress_address);
-        final TextView orderTotalCharge = (TextView) findViewById(R.id.textView);
+        orderTotalCharge = (TextView) findViewById(R.id.textView);
+        billvalue = (TextView) findViewById(R.id.orderbilltotaltextrupees);
+        deliveryCharge = (TextView) findViewById(R.id.orderDetailDeliveryRupees);
         orderTotalCharge.setText(String.valueOf(order.getTotalCost()));
+        billvalue.setText(String.valueOf(order.getBill_value()));
+        deliveryCharge.setText(String.valueOf(order.getDeliveryCharge()));
         if(session.isLoggedIn()) {
             try {
                 editName.setText(session.getName());

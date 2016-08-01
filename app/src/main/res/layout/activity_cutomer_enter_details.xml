@@ -250,24 +250,6 @@
         android:layout_marginTop="7dp"
         android:id="@+id/view4" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/orderAddAddressList"
-
-        android:layout_below="@+id/view4"
-        android:layout_marginTop="6dp"
-        android:visibility="gone"/>
-
-
-            <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/view_color"
-        android:layout_above="@+id/orderEntercode"
-        android:layout_alignParentLeft="true"
-        android:id="@+id/view5"
-        />
 
 
 
@@ -275,58 +257,47 @@
         android:layout_width="200dp"
         android:layout_height="0.5dp"
         android:background="@color/view_color"
-        android:layout_alignBottom="@+id/orderDetailCouponcode"
-        android:layout_alignLeft="@+id/orderEntercode"
         android:layout_alignRight="@+id/textView"
         android:id="@+id/view7" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/view_color"
+                android:layout_above="@+id/view3"
+                android:layout_alignParentLeft="true"
+                android:layout_marginBottom="25dp"
 
+                android:id="@+id/view41" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:id="@+id/orderEntercode"
-        android:inputType="text"
-        android:textSize="10sp"
-        android:textColorHint="@color/title_text_color"
-        android:background="#ffffff"
-        android:hint="Enter your Code Here"
-        android:layout_above="@+id/view3"
-        android:layout_alignParentRight="true"
-        android:layout_toRightOf="@+id/orderDetailCouponcode"
-        android:visibility="gone"
-        android:layout_marginLeft="18dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Bill total"
+                android:id="@+id/orderbilltotaltext"
+                android:textSize="13sp"
+                android:layout_alignTop="@+id/view41"
 
-    <View
-        android:layout_width="200dp"
-        android:layout_height="0.5dp"
-        android:background="@color/view_color"
-        android:layout_alignBottom="@+id/orderDetailCouponcode"
-        android:layout_alignLeft="@+id/orderEntercode"
-        android:layout_alignRight="@+id/textView" />
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="4dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Coupon Code"
-        android:textColor="@color/title_text_color"
-        android:id="@+id/orderDetailCouponcode"
-        android:layout_alignBottom="@+id/orderEntercode"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="7dp"
-        android:textSize="13sp"
-        android:visibility="gone"
-        />
-
-
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Rs.50"
+                android:layout_marginRight="10dp"
+                android:id="@+id/orderbilltotaltextrupees"
+                android:textSize="12sp"
+                android:layout_alignTop="@+id/orderbilltotaltext"
+                android:layout_alignParentRight="true" />
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:background="@color/view_color"
         android:layout_above="@+id/view2"
         android:layout_alignParentLeft="true"
-        android:visibility="gone"
+
         android:layout_marginBottom="25dp"
         android:id="@+id/view3" />
 
@@ -334,13 +305,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Delivery"
+        android:text="Delivery Charges"
         android:id="@+id/orderDetailDelivery"
-        android:textSize="13sp"
+
+        android:textSize="12sp"
         android:layout_alignTop="@+id/view3"
-        android:textColor="@color/title_text_color"
         android:layout_marginLeft="10dp"
-        android:visibility="gone"
+
         android:layout_marginTop="4dp" />
 
     <TextView
@@ -348,12 +319,13 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Rs.50"
-        android:textColor="@color/title_text_color"
+        android:layout_marginRight="10dp"
+
         android:id="@+id/orderDetailDeliveryRupees"
         android:layout_alignTop="@+id/orderDetailDelivery"
-        android:layout_alignRight="@+id/view4"
+        android:layout_alignRight="@+id/view41"
         android:textSize="12sp"
-        android:visibility="gone"
+
         android:layout_marginTop="1dp" />
 
 
@@ -370,7 +342,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Approx Total"
+        android:text="Grand Total"
         android:textSize="14sp"
         android:id="@+id/orderDetailTotal"
         android:layout_alignBottom="@+id/textView"
@@ -387,7 +359,7 @@
         android:id="@+id/textView"
         
         android:layout_above="@+id/placeOrderButton"
-        android:layout_alignRight="@+id/orderDetailEmail"
+        android:layout_alignRight="@+id/orderDetailDeliveryRupees"
         android:layout_marginBottom="4dp"
         android:layout_marginTop="3dp" />
 

@@ -50,7 +50,7 @@ public class CartActivity extends AppCompatActivity implements PlusMinusButtonLi
             totalCost +=  menuAdapter.getNo_of_order() * menuAdapter.getPrice();
         }
         order.setBill_value(totalCost,hotelDetail.getDeliverCharge());
-
+        order.setDeliveryCharge(hotelDetail.getDeliverCharge());
 
         dataAdapter = new ProductAdapter(CartActivity.this,
                 R.layout.product_detail_list_layout,mMenulist);
@@ -66,7 +66,7 @@ public class CartActivity extends AppCompatActivity implements PlusMinusButtonLi
         //TextView vendor_name = (TextView) findViewById(R.id.vendor_add_cart_name);
         //vendor_name.setText(order.getHotel().getName());
 
-        deliveryCharge.setText(String.valueOf(hotelDetail.getDeliverCharge()));
+        deliveryCharge.setText(String.valueOf(order.getDeliveryCharge()));
         orderTotalCharge.setText(String.valueOf(order.getTotalCost()));
 
         billvalue = (TextView) findViewById(R.id.orderbilltotaltextrupees);
