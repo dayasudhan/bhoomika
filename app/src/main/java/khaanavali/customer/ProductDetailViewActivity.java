@@ -34,7 +34,7 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
     ArrayList<MenuAdapter> mMenulist;
     ProductAdapter mDataAdapter;
     TextView counttxt,priceTxt;
-    TextView vendorName,speciality,phone,deliveryTime,minimumOrder,deliverycharge,orderTimings;
+    TextView vendorRating,speciality,deliveryTime,minimumOrder,deliverycharge,orderTimings;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,11 +56,16 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
         mDataAdapter.setListener(this);
         ListView listView = (ListView) findViewById(R.id.listView_product_detail);
         listView.setAdapter(mDataAdapter);
-        vendorName  = (TextView)findViewById(R.id.vendor_name_info);
-        vendorName.setText(hotelDetail.getHotel().getName());
+        vendorRating  = (TextView)findViewById(R.id.vendor_name_info);
+        vendorRating.setText(hotelDetail.getHotel().getName());
 
-        vendorName  = (TextView)findViewById(R.id.vendor_name_info);
-        vendorName.setText(hotelDetail.getHotel().getName());
+        vendorRating  = (TextView)findViewById(R.id.vendor_name_info);
+        String rating = "";
+        for(int i = 0 ; i < hotelDetail.getRating() ; i++)
+        {
+            rating = rating  + "*";
+        }
+        vendorRating.setText(rating);
         speciality  = (TextView)findViewById(R.id.vendor_speciality_info);
         speciality.setText(hotelDetail.getSpeciality());
         deliverycharge  = (TextView)findViewById(R.id.delievercharge);
@@ -68,11 +73,10 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
         deliveryTime  = (TextView)findViewById(R.id.vendor_delivery_time_info);
         deliveryTime.setText("Deliver Time: " + Integer.toString(hotelDetail.getDeliveryTime()) + " mins");
         minimumOrder  = (TextView)findViewById(R.id.vendor_rating_info);
-        minimumOrder.setText("Minumu Order: ₹"+Integer.toString(hotelDetail.getMinimumOrder()));
-        phone    = (TextView)findViewById(R.id.phone);
-        phone.setText("Phone :"+Integer.toString(hotelDetail.getPhone()));
+        minimumOrder.setText("Minumum Order: ₹"+Integer.toString(hotelDetail.getMinimumOrder()));
+//        phone    = (TextView)findViewById(R.id.phone);
+//        phone.setText("Phone :"+Integer.toString(hotelDetail.getPhone()));
         orderTimings = (TextView)findViewById(R.id.ordertimings);
-        orderTimings.setText("Morning: 09.30 - 12.00" + "\n" + "Lunch   :  09.30 - 12.00 " +"\n" + "Dinner :  09.30 - 12.00");
 
         String strorderTimings = new String();
         if (hotelDetail.getOrderAcceptTimings().getMorning().getAvailable().equals("Yes")) {
@@ -93,16 +97,6 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
                 moveNext();
             }
         });
-        /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(ProductDetailViewActivity.this, CartActivity.class);
-
-                startActivity(i);
-            }
-        });*/
-
-
         setToolBar(hotelDetail.getHotel().getName());
     }
 
@@ -120,19 +114,15 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
     {
         if(!checkTimeAllowedForOrder())
         {
-            //Toast.makeText(getApplicationContext(), "This time no delivery for this Hotel Kindly Check Timings of Hotel for Order timings", Toast.LENGTH_LONG).show();
             alertMessage("This time no delivery for this Hotel Kindly Check Timings of Hotel for Order timings");
         }
         else if(mDataAdapter.totalCount <= 0)
         {
-           // Toast.makeText(getApplicationContext(), "Cart Empty -please select Some Items", Toast.LENGTH_LONG).show();
             alertMessage("Cart Empty -please select Some Items");
         }
         else if(mDataAdapter.totalCost < hotelDetail.getMinimumOrder())
         {
             String text  = "Minimum Order for this Hotel is Rs." +  Integer.toString(hotelDetail.getMinimumOrder()) + " Kindly add more items";
-
-           // Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
             alertMessage(text);
         }
 

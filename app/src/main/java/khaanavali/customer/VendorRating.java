@@ -1,25 +1,25 @@
 package khaanavali.customer;
 
-import android.app.Activity;
+
 import android.app.Dialog;
-import android.app.NotificationManager;
+
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ParseException;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
+
 import android.view.View;
-import android.view.ViewGroup;
+
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
-import android.widget.RelativeLayout;
+
 import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
@@ -28,10 +28,10 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
+
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -123,10 +123,7 @@ public class VendorRating extends AppCompatActivity {
                 HttpPost request = new HttpPost(urls[0]);
                 HttpClient httpclient = new DefaultHttpClient();
                 UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(postParameters);
-                //StringEntity se = new StringEntity(urls[1]);
                 request.setEntity(formEntity);
-//                request.setHeader("Accept", "application/json");
-//                request.setHeader("Content-type", "application/json");
                 HttpResponse response = httpclient.execute(request);
 
                 int status = response.getStatusLine().getStatusCode();

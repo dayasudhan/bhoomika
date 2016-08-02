@@ -20,8 +20,5 @@
             android:title="About Khaanavali"
             android:icon="@drawable/ic_action_upload" />
 
-        <item android:id="@+id/vendor_rating"
-            android:title="Rate"
-            android:icon="@drawable/ic_action_upload" />
     </group>
 </menu>

@@ -38,10 +38,8 @@ public class MainActivity extends AppCompatActivity {
         setToolBar();
         if (!checkNotificationListenerServiceRunning()) {
             startService(new Intent(this, NotificationListener.class));
-            // stopService(new Intent(this,NotificationListener.class));
         }
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        // int notificationId = getIntent().getExtras().getInt("notificationID");
         notificationManager.cancelAll();
     }
 
@@ -107,10 +105,6 @@ public class MainActivity extends AppCompatActivity {
             {
                 frag = new ShareAppFragment();
             }
-//            else if(itemId == R.id.vendor_rating)
-//            {
-//                frag = new VendorRating();
-//            }
             if (frag != null) {
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
@@ -168,32 +162,5 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
-//    protected void showInputDialog() {
-//
-//        // get prompts.xml view
-//        LayoutInflater layoutInflater = LayoutInflater.from(MainActivity.this);
-//        View promptView = layoutInflater.inflate(R.layout.input_dialog, null);
-//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
-//        alertDialogBuilder.setView(promptView);
-//
-//      //  final EditText editText = (EditText) promptView.findViewById(R.id.edittext);
-//        // setup a dialog window
-//        alertDialogBuilder.setCancelable(false)
-//                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int id) {
-//                       // resultText.setText("Hello, " + editText.getText());
-//                    }
-//                })
-//                .setNegativeButton("Cancel",
-//                        new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface dialog, int id) {
-//                                dialog.cancel();
-//                            }
-//                        });
-//
-//        // create an alert dialog
-//        AlertDialog alert = alertDialogBuilder.create();
-//        alert.show();
-//    }
 
 }
