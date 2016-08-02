@@ -2,12 +2,14 @@ package khaanavali.customer;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.net.ParseException;
 import android.os.AsyncTask;
@@ -20,6 +22,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -235,16 +238,17 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
         new PostJSONAsyncTask().execute(Constants.ORDER_URL, order);
     }
     public  class PostJSONAsyncTask extends AsyncTask<String, Void, Boolean> {
-        ProgressDialog dialog;
+        Dialog dialog;
         public  PostJSONAsyncTask()
         {
         }
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog = new ProgressDialog(CutomerEnterDetailsActivity.this);
-            dialog.setMessage("Posting Order, please wait");
-            dialog.setTitle("Connecting....");
+            dialog = new Dialog(CutomerEnterDetailsActivity.this,android.R.style.Theme_Translucent);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.custom_progress_dialog);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
             dialog.show();
             dialog.setCancelable(false);
         }

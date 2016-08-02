@@ -35,6 +35,5 @@ dependencies {
     compile 'com.firebase:firebase-client-android:2.5.1+'
     compile 'com.google.android.gms:play-services-maps:9.2.1'
     compile 'com.google.android.gms:play-services-location:9.2.1'
-    compile group: 'cz.msebera.android' , name: 'httpclient', version: '4.4.1.1'
     compile files('libs/gson-2.2.jar')
 }
