@@ -10,8 +10,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Vendor Name 1"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Rating"
         android:textColor="@color/title_text_color"
         android:id="@+id/vendor_name_info"
         android:layout_marginTop="3dp"
@@ -25,8 +25,9 @@
         android:text="Hotel description comes here"
         android:id="@+id/vendor_speciality_info"
         android:textColor="@color/secondary_text_color"
-        android:textSize="11dp"
+        android:textSize="12dp"
         android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
         android:layout_below="@+id/vendor_name_info"
         android:layout_alignLeft="@+id/vendor_name_info"
         android:layout_alignStart="@+id/vendor_name_info" />
@@ -39,14 +40,14 @@
         android:layout_alignLeft="@+id/vendor_name_info"
         android:layout_alignStart="@+id/vendor_name_info"
         android:orientation="horizontal"
-        android:layout_marginTop="3dp"
-        android:layout_below="@+id/phone">
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/vendor_speciality_info">
 
         <TextView
             android:id="@+id/vendor_rating_info"
             android:layout_width="0dp"
             android:layout_weight=".50"
-            android:textSize="11dp"
+            android:textSize="12dp"
             android:layout_height="wrap_content"
             android:textColor="@color/third_text_color"
             android:text="Rating " />
@@ -57,30 +58,30 @@
             android:layout_weight=".50"
             android:layout_height="wrap_content"
 
-            android:textSize="11dp"
+            android:textSize="12dp"
             android:textColor="@color/third_text_color"
             android:text="60 minutes" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="11dp"
+            android:textSize="12dp"
             android:textColor="@color/third_text_color"
             android:text="Small Text"
             android:id="@+id/delievercharge" />
 
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/third_text_color"
-        android:textSize="13dp"
-        android:layout_marginTop="3dp"
-        android:text="Phone"
-        android:id="@+id/phone"
-        android:layout_below="@+id/vendor_speciality_info"
-        android:layout_alignStart="@+id/vendor_speciality_info" />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textColor="@color/third_text_color"-->
+        <!--android:textSize="13dp"-->
+        <!--android:layout_marginTop="3dp"-->
+        <!--android:text="Phone"-->
+        <!--android:id="@+id/phone"-->
+        <!--android:layout_below="@+id/vendor_speciality_info"-->
+        <!--android:layout_alignStart="@+id/vendor_speciality_info" />-->
 
     <TextView
         android:layout_width="wrap_content"
@@ -91,7 +92,7 @@
         android:id="@+id/ordertimings"
         android:layout_alignTop="@+id/vendor_name_info"
         android:layout_alignEnd="@+id/linear"
-        android:layout_alignBottom="@+id/phone" />
+        android:layout_above="@+id/linear" />
 
 
     <!--  <View

@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -14,6 +15,7 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action
@@ -31,19 +33,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ProductDetailViewActivity"
-            />
+        <activity android:name=".ProductDetailViewActivity" />
         <activity android:name=".CartActivity" />
         <activity android:name=".ReviewDetailsActivity" />
         <activity android:name=".FinishActivity" />
         <activity android:name=".PlacesActivity" />
-        <activity android:name=".AddAdressActivity"
-            android:windowSoftInputMode="adjustResize"
-            />
-        <activity android:name=".MapsActivity"/>
+        <activity android:name=".CutomerEnterDetailsActivity" />
+        <activity android:name=".SelectAddressActivity" />
+        <activity
+            android:name=".AddAdressActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".MapsActivity" />
         <!-- adding our service -->
         <service android:name=".NotificationListener" />
+        <activity android:name=".VendorRating" />
     </application>
 
 </manifest>

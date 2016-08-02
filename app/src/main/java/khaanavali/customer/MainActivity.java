@@ -5,6 +5,7 @@ package khaanavali.customer;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.NotificationManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -13,9 +14,13 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 
 
@@ -33,10 +38,8 @@ public class MainActivity extends AppCompatActivity {
         setToolBar();
         if (!checkNotificationListenerServiceRunning()) {
             startService(new Intent(this, NotificationListener.class));
-            // stopService(new Intent(this,NotificationListener.class));
         }
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        // int notificationId = getIntent().getExtras().getInt("notificationID");
         notificationManager.cancelAll();
     }
 

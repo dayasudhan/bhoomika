@@ -2,8 +2,10 @@ package khaanavali.customer;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
@@ -14,6 +16,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -32,8 +35,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Locale;
 
@@ -63,6 +68,7 @@ public class MapsActivity extends FragmentActivity implements
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
            checkLocationPermission();
         }
+        //checkLocationPermission();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -71,13 +77,12 @@ public class MapsActivity extends FragmentActivity implements
             @Override
             public void onClick(View v) {
                 setAddress(mSelectedLatlang.latitude,mSelectedLatlang.longitude);
-            //    LatLng bangalore = new LatLng(12.9716, 77.5946);
-             //   setAddress(bangalore.latitude,bangalore.longitude);
+//                LatLng bangalore = new LatLng(12.9716, 77.5946);
+//                setAddress(bangalore.latitude,bangalore.longitude);
                 Intent i = new Intent(MapsActivity.this, AddAdressActivity.class);
                 Gson gson = new Gson();
                 String locationaddress = gson.toJson(mAddresses);
-       //         String address = new String("Address");
-             //   i.putExtra("address", mAddress);
+
                 i.putExtra("locationaddress", locationaddress);
                 startActivityForResult(i,1);
                // finish();
@@ -223,27 +228,44 @@ public class MapsActivity extends FragmentActivity implements
 
 public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     public boolean checkLocationPermission(){
-        if (ContextCompat.checkSelfPermission(this,
+        if (ContextCompat.checkSelfPermission(getApplicationContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
 
             // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+            if (ActivityCompat.shouldShowRequestPermissionRationale(MapsActivity.this,
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
 
                 // Show an expanation to the user *asynchronously* -- don't block
                 // this thread waiting for the user's response! After the user
                 // sees the explanation, try again to request the permission.
-
+                new AlertDialog.Builder(MapsActivity.this)
+                        .setTitle("Permission Required")
+                        .setMessage("This permission was denied earlier by you. This permission is required to call from app .So, in order to use this feature please allow this permission by clicking ok.")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                ActivityCompat.requestPermissions(MapsActivity.this,
+                                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                                        MY_PERMISSIONS_REQUEST_LOCATION);
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
                 //Prompt the user once explanation has been shown
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        MY_PERMISSIONS_REQUEST_LOCATION);
+//                ActivityCompat.requestPermissions(this,
+//                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+//                        MY_PERMISSIONS_REQUEST_LOCATION);
 
 
             } else {
                 // No explanation needed, we can request the permission.
-                ActivityCompat.requestPermissions(this,
+                ActivityCompat.requestPermissions(MapsActivity.this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_LOCATION);
             }
@@ -267,11 +289,14 @@ public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
                     if (ContextCompat.checkSelfPermission(this,
                             Manifest.permission.ACCESS_FINE_LOCATION)
                             == PackageManager.PERMISSION_GRANTED) {
-
+//                        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+//                                .findFragmentById(R.id.map);
+//                        mapFragment.getMapAsync(this);
                         if (mGoogleApiClient == null) {
                             buildGoogleApiClient();
                         }
                         mMap.setMyLocationEnabled(true);
+
                     }
 
                 } else {
@@ -303,6 +328,12 @@ public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         if(requestCode == 1 && resultCode == Activity.RESULT_OK) {
+
+            Gson gson = new Gson();
+
+            khaanavali.customer.model.Address address = gson.fromJson(intent.getStringExtra("locationaddress"), khaanavali.customer.model.Address.class);
+            intent.putExtra("locationaddress", intent.getStringExtra("locationaddress"));
+            setResult(RESULT_OK, intent);
             finish();
         }
     }
