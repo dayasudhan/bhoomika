@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
+    <uses-permission android:name="android.permission.READ_LOGS" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -35,7 +35,6 @@
         </activity>
         <activity android:name=".ProductDetailViewActivity" />
         <activity android:name=".CartActivity" />
-        <activity android:name=".ReviewDetailsActivity" />
         <activity android:name=".FinishActivity" />
         <activity android:name=".PlacesActivity" />
         <activity android:name=".CutomerEnterDetailsActivity" />

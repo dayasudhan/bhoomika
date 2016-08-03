@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
+import com.splunk.mint.Mint;
 
 import java.util.ArrayList;
 
@@ -46,6 +47,7 @@ public class SelectAddressActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Mint.initAndStartSession(this, "49d903c2");
         setContentView(R.layout.select_address);
         btnAddNewAddress = (Button) findViewById(R.id.addnewaddress);
         SessionManager  session = new SessionManager(getApplicationContext());

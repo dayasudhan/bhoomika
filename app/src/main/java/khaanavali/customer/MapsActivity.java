@@ -36,6 +36,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.splunk.mint.Mint;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -62,6 +63,7 @@ public class MapsActivity extends FragmentActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Mint.initAndStartSession(MapsActivity.this, "49d903c2");
         setContentView(R.layout.activity_maps);
         btnpicklocation= (Button) findViewById(R.id.pickaddressbtn);
 
@@ -137,7 +139,9 @@ public class MapsActivity extends FragmentActivity implements
 
             }
         }
-        setPosition(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude()));
+        if(mLastLocation!=null) {
+            setPosition(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude()));
+        }
     }
     @Override
     public void onCameraChange(CameraPosition cameraPosition) {
@@ -220,7 +224,7 @@ public class MapsActivity extends FragmentActivity implements
     @Override
     protected void onStop() {
     super.onStop();
-        if (mGoogleApiClient.isConnected()) {
+        if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
             mGoogleApiClient.disconnect();
         }
     }
@@ -233,7 +237,7 @@ public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
                 != PackageManager.PERMISSION_GRANTED) {
 
             // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(MapsActivity.this,
+            if (ActivityCompat.shouldShowRequestPermissionRationale(getParent(),
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
 
                 // Show an expanation to the user *asynchronously* -- don't block
@@ -241,11 +245,11 @@ public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
                 // sees the explanation, try again to request the permission.
                 new AlertDialog.Builder(MapsActivity.this)
                         .setTitle("Permission Required")
-                        .setMessage("This permission was denied earlier by you. This permission is required to call from app .So, in order to use this feature please allow this permission by clicking ok.")
+                        .setMessage("This permission was denied earlier by you. This permission is required to get your locatin .So, in order to use this feature please allow this permission by clicking ok.")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
-                                ActivityCompat.requestPermissions(MapsActivity.this,
+                                ActivityCompat.requestPermissions(getParent(),
                                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                                         MY_PERMISSIONS_REQUEST_LOCATION);
                             }
@@ -265,7 +269,7 @@ public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
             } else {
                 // No explanation needed, we can request the permission.
-                ActivityCompat.requestPermissions(MapsActivity.this,
+                ActivityCompat.requestPermissions(getParent(),
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_LOCATION);
             }

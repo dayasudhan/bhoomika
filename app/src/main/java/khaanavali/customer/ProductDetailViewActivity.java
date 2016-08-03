@@ -15,6 +15,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.splunk.mint.Mint;
+
 import khaanavali.customer.adapter.PlusMinusButtonListener;
 import khaanavali.customer.adapter.ProductAdapter;
 import khaanavali.customer.model.HotelDetail;
@@ -38,6 +40,7 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Mint.initAndStartSession(this, "49d903c2");
         setContentView(R.layout.activity_product_detail_view);
 
         order = new Order();

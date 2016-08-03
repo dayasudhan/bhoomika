@@ -8,6 +8,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.splunk.mint.Mint;
+
 public class SplashActivity extends Activity implements Animation.AnimationListener {
 
 
@@ -21,6 +23,7 @@ public class SplashActivity extends Activity implements Animation.AnimationListe
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
+        Mint.initAndStartSession(this, "49d903c2");
         setContentView(R.layout.activity_zoom_in);
 
        // imgPoster = (ImageView) findViewById(R.id.imgLogo);
