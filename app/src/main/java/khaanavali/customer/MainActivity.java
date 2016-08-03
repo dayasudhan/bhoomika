@@ -17,6 +17,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.splunk.mint.Mint;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Mint.initAndStartSession(this, "49d903c2");
         setContentView(R.layout.activity_main_nav);
         setNavigationDrawer();
         setToolBar();

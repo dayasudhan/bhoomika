@@ -28,6 +28,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.gson.Gson;
+import com.splunk.mint.Mint;
 
 
 import khaanavali.customer.model.HotelDetail;
@@ -64,6 +65,7 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Mint.initAndStartSession(this, "49d903c2");
         setContentView(R.layout.activity_cutomer_enter_details);
         Intent intent = getIntent();
         Gson gson = new Gson();

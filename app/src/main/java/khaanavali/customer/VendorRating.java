@@ -22,6 +22,8 @@ import android.widget.RatingBar;
 
 import android.widget.Toast;
 
+import com.splunk.mint.Mint;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -46,6 +48,7 @@ public class VendorRating extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Mint.initAndStartSession(this, "49d903c2");
         setContentView(R.layout.activity_vendor_rating);
         Intent intent = getIntent();
 

@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.splunk.mint.Mint;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public class AddAdressActivity  extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Mint.initAndStartSession(this, "49d903c2");
         setContentView(R.layout.add_address_layout);
         Intent intent = getIntent();
         Gson gson = new Gson();
