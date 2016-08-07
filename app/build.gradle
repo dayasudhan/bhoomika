@@ -38,6 +38,7 @@ dependencies {
     compile 'com.firebase:firebase-client-android:2.5.1+'
     compile 'com.google.android.gms:play-services-maps:9.2.1'
     compile 'com.google.android.gms:play-services-location:9.2.1'
+    compile files('libs/universal-image-loader-1.9.4-SNAPSHOT.jar')
     compile 'com.splunk.mint:mint:5.0.0'
     compile files('libs/gson-2.2.jar')
 

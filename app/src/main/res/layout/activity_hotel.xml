@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    >.
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -14,7 +15,21 @@
             android:layout_marginTop="5dp"
             android:id="@+id/order_details_lay"
             >
-
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:id="@+id/imageslider"
+            >
+            <include layout="@layout/homepage_slider_layout"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/imageslider"
+            android:id="@+id/hotellidtid"
+            >
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,7 +55,7 @@
             android:gravity="center"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true" />
-
+        </RelativeLayout>
     </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>

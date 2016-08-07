@@ -2,41 +2,24 @@ package khaanavali.customer;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
-
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.io.IOException;
-
-import java.util.ArrayList;
-import android.app.Activity;
-
-import android.app.ProgressDialog;
-import android.content.Intent;
-
-import android.os.AsyncTask;
-
-import android.widget.AdapterView;
-
-import khaanavali.customer.model.HotelDetail;
 import com.google.gson.Gson;
-import khaanavali.customer.adapter.HotelListAdapter;
-
-import khaanavali.customer.model.MenuItem;
-import khaanavali.customer.model.OrderAcceptTimings;
-import khaanavali.customer.utils.Constants;
-import khaanavali.customer.utils.SessionManager;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -47,6 +30,19 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import khaanavali.customer.adapter.HotelListAdapter;
+import khaanavali.customer.model.HotelDetail;
+import khaanavali.customer.model.MenuItem;
+import khaanavali.customer.model.OrderAcceptTimings;
+import khaanavali.customer.slider.CirclePageIndicator;
+import khaanavali.customer.slider.ScreenSlidePagerAdapter;
+import khaanavali.customer.utils.Constants;
+import khaanavali.customer.utils.SessionManager;
 
 
 /**
@@ -77,9 +73,24 @@ public class HotelFragment extends Fragment {
     private ArrayList<HotelDetail> hotellist;
     ListView listView ;
 
+
+    //gagan
+
+    private static final String[] IMAGES = new String[] {
+
+            "https://s25.postimg.org/90c5sdtob/img1.jpg",
+            "https://s25.postimg.org/79t4qwc57/img2.jpg",
+            "https://s25.postimg.org/s7zaozbzv/img3.jpg",
+            "https://s25.postimg.org/w5mkedyt7/img4.jpg",
+    };
+    private ViewPager pager;
+    //gagan
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+
 
         View v = inflater.inflate(R.layout.activity_hotel, container, false);
         hotellist =  new ArrayList<HotelDetail>();
@@ -88,6 +99,20 @@ public class HotelFragment extends Fragment {
         String areaClicked = session.getlastareasearched();
         if(!areaClicked.isEmpty())
             getHotelList(areaClicked);
+
+        //gagan
+
+
+        pager = (ViewPager) v.findViewById(R.id.pager);
+        //Resimlermizi arayüzde göstermek için kullancagmız ScreenSlidePagerAdapter sınıfına resim, yollarnı set ettim.
+        ScreenSlidePagerAdapter pagerAdapter =new ScreenSlidePagerAdapter(getActivity().getSupportFragmentManager());
+
+        pagerAdapter.addAll(Arrays.asList(IMAGES));
+        pager.setAdapter(pagerAdapter);
+        //Resmin altındaki kucuk yuvarlak iconları resim saysına göre üreten CirclePageIndicator sınıfını cagırdık
+        CirclePageIndicator indicator = (CirclePageIndicator) v.findViewById(R.id.indicator);
+        indicator.setViewPager(pager);
+        //gagan end
 
 
         listView = (ListView) v.findViewById(R.id.listView_vendor);
