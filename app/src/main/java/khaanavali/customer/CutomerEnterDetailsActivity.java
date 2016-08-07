@@ -59,6 +59,7 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
     EditText editName,editPhone,editCity,editHouseNo,editAreaName,editLandmark,editAddress;
     GPSTracker gps;
     HotelDetail hotelDetail;
+    String strHotelDetail;
     SessionManager session;
     TextView orderTotalCharge,billvalue,deliveryCharge;
 
@@ -70,7 +71,9 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Gson gson = new Gson();
         order = gson.fromJson(intent.getStringExtra("order"), Order.class);
+        strHotelDetail = intent.getStringExtra("HotelDetail");
         hotelDetail = gson.fromJson(intent.getStringExtra("HotelDetail"), HotelDetail.class);
+
         responseOrder = new String();
         session = new SessionManager(getApplicationContext());
         Button btn= (Button) findViewById(R.id.placeOrderButton);
@@ -106,10 +109,7 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!validatePhoneNumber(editPhone.getText().toString())) {
-                    alertMessage(false,"Enter Valid Phone Number");
-                }
-                else if(editName.getText().length() == 0){
+                if(editName.getText().length() == 0){
                     alertMessage(false,"Enter Name");
                 }
                 else if(editHouseNo.getText().length() == 0){
@@ -128,6 +128,10 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
                 {
                     String text  = "Minimum Order for this Hotel is Rs." +  Integer.toString(hotelDetail.getMinimumOrder()) + " Kindly add more items";
                     alertMessage(false,text);
+                }
+                else if(!session.isLoggedIn())
+                {
+                    verifyOTP(editPhone.getText().toString());
                 }
                 else {
                     alertMessage(true,"Are you sure about this order(Address, Phone)?");
@@ -156,6 +160,10 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
         ab.setTitle(title);
     }
 
+    private void verifyOTP(String phoneNo)
+    {
+
+    }
     @Override
     public boolean onOptionsItemSelected(android.view.MenuItem item) {
         switch (item.getItemId()) {
@@ -226,15 +234,6 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
 
         }
     }
-
-
-    private static boolean validatePhoneNumber(String phoneNo)
-    {
-        if (phoneNo.matches("\\d{10}"))
-            return true;
-        else if(phoneNo.matches("\\+\\d{12}")) return true;
-        else return false;
-    }
     public void postOrder(String order)
     {
         new PostJSONAsyncTask().execute(Constants.ORDER_URL, order);
@@ -288,6 +287,7 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
             if(result == true){
                 Intent i = new Intent(CutomerEnterDetailsActivity.this, FinishActivity.class);
                 i.putExtra("order", responseOrder);
+                i.putExtra("HotelDetail",strHotelDetail);
                 startActivity(i);
                 finish();
             }

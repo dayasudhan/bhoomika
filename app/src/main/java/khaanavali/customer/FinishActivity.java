@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.splunk.mint.Mint;
 
+import khaanavali.customer.model.HotelDetail;
 import khaanavali.customer.model.Menu;
 import khaanavali.customer.model.Order;
 import khaanavali.customer.utils.SessionManager;
@@ -32,19 +33,20 @@ public class FinishActivity extends AppCompatActivity {
 
         Gson gson = new Gson();
         order = gson.fromJson(intent.getStringExtra("order"), Order.class);
-
+        HotelDetail hotelDetail = gson.fromJson(intent.getStringExtra("HotelDetail"), HotelDetail.class);
         TextView txtViewName = (TextView) findViewById(R.id.vendor_name_value);
         TextView txtViewPhone = (TextView) findViewById(R.id.vendor_contact_value);
         TextView txtViewAddress = (TextView) findViewById(R.id.address_value);
         TextView txtViewMenu = (TextView) findViewById(R.id.items_value);
         TextView txtViewOrderId = (TextView) findViewById(R.id.order_id_value);
         TextView txtViewBillValue = (TextView) findViewById(R.id.bill_value_value);
+        TextView txtViewdeliveryTime = (TextView) findViewById(R.id.vendor_delivery_time_value);
       // TextView txtVieworderTime = (TextView) findViewById(R.id.order_time_value);
 
         txtViewName.setText(order.getHotel().getName());
         txtViewPhone.setText(String.valueOf(order.getHotel().getPhone()));
         txtViewOrderId.setText(order.getId());
-
+        txtViewdeliveryTime.setText(Integer.toString(hotelDetail.getDeliveryTime()) + " mins");
         txtViewBillValue.setText(String.valueOf(order.getTotalCost()));
         ArrayList<Menu> items = order.getMenuItems();
         String MenuItemStr = "";

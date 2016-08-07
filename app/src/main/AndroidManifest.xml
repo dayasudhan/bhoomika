@@ -46,6 +46,8 @@
         <!-- adding our service -->
         <service android:name=".NotificationListener" />
         <activity android:name=".VendorRating" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".OtpVeirificationActivity" />
     </application>
 
 </manifest>
