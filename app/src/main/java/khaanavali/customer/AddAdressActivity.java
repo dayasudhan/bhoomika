@@ -50,9 +50,11 @@ public class AddAdressActivity  extends AppCompatActivity {
         editLandmark=(EditText)findViewById(R.id.orderDetailAddress_landmark);
         editAddress=(EditText)findViewById(R.id.orderDetailAddress_address);
         editTagLabel=(EditText)findViewById(R.id.tag_address_label);
-        editAddress.setText(mAddresses.get(0).getAddressLine(1));
-        editCity.setText(mAddresses.get(0).getLocality());
-        editAreaName.setText(mAddresses.get(0).getSubLocality());
+        if(mAddresses != null) {
+            editAddress.setText(mAddresses.get(0).getAddressLine(1));
+            editCity.setText(mAddresses.get(0).getLocality());
+            editAreaName.setText(mAddresses.get(0).getSubLocality());
+        }
         btnSave= (Button) findViewById(R.id.saveAddressbutton);
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,10 +88,11 @@ public class AddAdressActivity  extends AppCompatActivity {
                     address.setAddressLine1(editHouseNo.getText().toString());
                     address.setAddressLine2(editAddress.getText().toString());
                     address.setCity(editCity.getText().toString());
-
-                    address.setZip(mAddresses.get(0).getPostalCode());
-                    address.setLatitude(String.valueOf(mAddresses.get(0).getLatitude()));
-                    address.setLongitude(String.valueOf(mAddresses.get(0).getLongitude()));
+                    if(mAddresses != null) {
+                        address.setZip(mAddresses.get(0).getPostalCode());
+                        address.setLatitude(String.valueOf(mAddresses.get(0).getLatitude()));
+                        address.setLongitude(String.valueOf(mAddresses.get(0).getLongitude()));
+                    }
                     FavouriteAddress favouriteAddress = new FavouriteAddress();
                     favouriteAddress.setLabel(editTagLabel.getText().toString());
                     favouriteAddress.setAddress(address);
