@@ -143,4 +143,23 @@ public class AddAdressActivity  extends AppCompatActivity {
         neutralButton.setLayoutParams(positiveButtonLL);
 
     }
+    @Override
+    public boolean onOptionsItemSelected(android.view.MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // API 5+ solution
+                onBackPressed();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    public void onBackPressed() {
+
+        Intent start = new Intent(AddAdressActivity.this,SelectAddressActivity.class);
+        start.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(start);
+        finish();
+    }
 }
