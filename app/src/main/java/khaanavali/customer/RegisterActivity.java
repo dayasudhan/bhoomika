@@ -42,7 +42,7 @@ import khaanavali.customer.utils.Constants;
  */
 public class RegisterActivity extends AppCompatActivity {
     Button btnSubmit;
-    private EditText phoneNumber,editName;
+    private EditText phoneNumber,editName,editemail;
     private String apiReponse;
     private String order ,hotelDetail;
 
@@ -57,13 +57,17 @@ public class RegisterActivity extends AppCompatActivity {
         hotelDetail = intent.getStringExtra("HotelDetail");
 
         phoneNumber = (EditText)findViewById(R.id.phoneInput);
-       // editName=(EditText)findViewById(R.id.orderDetailName);
+        editName=(EditText)findViewById(R.id.nameregisterinput);
+        editemail = (EditText)findViewById(R.id.emailregisterinput);
         btnSubmit= (Button) findViewById(R.id.registerSubmitButton);
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 if (!validatePhoneNumber(phoneNumber.getText().toString())) {
                     alertMessage("Enter Valid Phone Number");
+                }
+                else if(editName.getText().length() == 0){
+                    alertMessage("Enter Name");
                 }
                 else
                 {
@@ -176,9 +180,13 @@ public class RegisterActivity extends AppCompatActivity {
                 if(apiReponse.equals("Success"))
                 {
                     Intent i = new Intent(RegisterActivity.this, OtpVeirificationActivity.class);
+
                     i.putExtra("order", order);
                     i.putExtra("HotelDetail",hotelDetail);
                     i.putExtra("phoneNumber",phoneNumber.getText().toString());
+                    i.putExtra("name",editName.getText().toString());
+                    i.putExtra("email", editemail.getText().toString());
+
                     startActivity(i);
                 }
             }

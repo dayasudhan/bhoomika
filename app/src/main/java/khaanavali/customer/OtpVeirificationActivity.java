@@ -43,7 +43,7 @@ public class OtpVeirificationActivity extends AppCompatActivity {
     Button btnSubmit;
     private EditText otp;
     String apiReponse;
-    private String order ,hotelDetail,phoneNumber;
+    private String order ,hotelDetail,phoneNumber,name,email;
     SessionManager session;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,6 +54,8 @@ public class OtpVeirificationActivity extends AppCompatActivity {
         order = intent.getStringExtra("order");
         hotelDetail = intent.getStringExtra("HotelDetail");
         phoneNumber = intent.getStringExtra("phoneNumber");
+        name = intent.getStringExtra("name");
+        email = intent.getStringExtra("email");
         session = new SessionManager(getApplicationContext());
 
         otp = (EditText)findViewById(R.id.otpInput);
@@ -169,7 +171,7 @@ public class OtpVeirificationActivity extends AppCompatActivity {
             if(result == true){
                 if(apiReponse.equals("Success"))
                 {
-                    session.createLoginSession();
+                    session.createLoginSession(name,phoneNumber,email);
                     Intent i = new Intent(OtpVeirificationActivity.this, CutomerEnterDetailsActivity.class);
                     i.putExtra("order", order);
                     i.putExtra("HotelDetail",hotelDetail);

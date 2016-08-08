@@ -5,8 +5,8 @@
     android:fillViewport="true">
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@color/background_color"
         >
         <LinearLayout
@@ -40,26 +40,27 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:id="@+id/linernearlayout"
-                        android:padding="40dp">
+                        android:padding="20dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="Please enter your phone number"
+                            android:text="Please enter your details"
                             android:id="@+id/registermessage"
                             android:layout_gravity="center_horizontal" />
 
 
                     </LinearLayout>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="+91 - "
+                        android:text="Phone: +91- "
                         android:id="@+id/indianphonecode"
 
-                        android:paddingTop="80dp"
+                        android:paddingTop="20dp"
                         android:layout_below="@+id/linernearlayout"
                         android:layout_alignParentStart="true"
                         android:layout_marginStart="20dp" />
@@ -68,9 +69,52 @@
                         android:id="@+id/phoneInput"
                         android:layout_width="240dp"
                         android:layout_height="wrap_content"
-                        android:hint="Phone Number"
-                        android:paddingTop="80dp"
+                        android:hint="*"
+                        android:inputType="phone"
+                        android:paddingTop="20dp"
+                        android:padding="20dp"
                         android:layout_below="@+id/linernearlayout"
+                        android:layout_toEndOf="@+id/indianphonecode" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Name : "
+                        android:id="@+id/nametoregister"
+
+                        android:paddingTop="30dp"
+                        android:layout_below="@+id/indianphonecode"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="20dp" />
+
+                    <EditText
+                        android:id="@+id/nameregisterinput"
+                        android:layout_width="240dp"
+                        android:layout_height="wrap_content"
+                        android:hint="*"
+                        android:paddingTop="30dp"
+                        android:layout_below="@+id/indianphonecode"
+                        android:layout_toEndOf="@+id/indianphonecode" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Email : "
+                        android:id="@+id/emailregister"
+
+                        android:paddingTop="30dp"
+                        android:layout_below="@+id/nametoregister"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="20dp" />
+
+                    <EditText
+                        android:id="@+id/emailregisterinput"
+                        android:layout_width="240dp"
+                        android:layout_height="wrap_content"
+                        android:hint="Optional"
+                        android:paddingTop="30dp"
+                        android:layout_below="@+id/nametoregister"
+
                         android:layout_toEndOf="@+id/indianphonecode" />
                     <Button
                         android:layout_width="wrap_content"

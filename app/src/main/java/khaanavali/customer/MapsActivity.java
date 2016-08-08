@@ -17,6 +17,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -43,7 +44,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Locale;
 
-public class MapsActivity extends FragmentActivity implements
+public class MapsActivity extends AppCompatActivity implements
         OnMapReadyCallback, GoogleMap.OnCameraChangeListener ,GoogleMap.OnMyLocationButtonClickListener,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
@@ -237,7 +238,7 @@ public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
                 != PackageManager.PERMISSION_GRANTED) {
 
             // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(getParent(),
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
 
                 // Show an expanation to the user *asynchronously* -- don't block
@@ -249,7 +250,7 @@ public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
-                                ActivityCompat.requestPermissions(getParent(),
+                                ActivityCompat.requestPermissions(MapsActivity.this,
                                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                                         MY_PERMISSIONS_REQUEST_LOCATION);
                             }
@@ -269,7 +270,7 @@ public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
             } else {
                 // No explanation needed, we can request the permission.
-                ActivityCompat.requestPermissions(getParent(),
+                ActivityCompat.requestPermissions(MapsActivity.this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_LOCATION);
             }

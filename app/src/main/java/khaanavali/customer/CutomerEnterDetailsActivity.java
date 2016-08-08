@@ -109,6 +109,9 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!validatePhoneNumber(editPhone.getText().toString())) {
+                    alertMessage(false,"Enter Valid Phone Number");
+                }
                 if(editName.getText().length() == 0){
                     alertMessage(false,"Enter Name");
                 }
@@ -128,10 +131,6 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
                 {
                     String text  = "Minimum Order for this Hotel is Rs." +  Integer.toString(hotelDetail.getMinimumOrder()) + " Kindly add more items";
                     alertMessage(false,text);
-                }
-                else if(!session.isLoggedIn())
-                {
-                    verifyOTP(editPhone.getText().toString());
                 }
                 else {
                     alertMessage(true,"Are you sure about this order(Address, Phone)?");
@@ -160,10 +159,7 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
         ab.setTitle(title);
     }
 
-    private void verifyOTP(String phoneNo)
-    {
 
-    }
     @Override
     public boolean onOptionsItemSelected(android.view.MenuItem item) {
         switch (item.getItemId()) {
@@ -203,7 +199,7 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
                     {
                         order.getCustomer().setPhone(editPhone.getText().toString());
                         order.getCustomer().setName(editName.getText().toString());
-                        order.getCustomer().setEmail(editCity.getText().toString());
+                        order.getCustomer().setEmail(session.getEmail());
                         order.getCustomer().getAddress().setAreaName(editAreaName.getText().toString());
                         order.getCustomer().getAddress().setLandMark(editLandmark.getText().toString());
                         order.getCustomer().getAddress().setAddressLine1(editHouseNo.getText().toString());
@@ -233,6 +229,13 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
                     .setIcon(R.drawable.ic_action_about).show();
 
         }
+    }
+    private static boolean validatePhoneNumber(String phoneNo)
+    {
+        if (phoneNo.matches("\\d{10}"))
+            return true;
+        else if(phoneNo.matches("\\+\\d{12}")) return true;
+        else return false;
     }
     public void postOrder(String order)
     {

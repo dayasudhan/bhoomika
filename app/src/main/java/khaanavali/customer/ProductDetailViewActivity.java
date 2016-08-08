@@ -200,8 +200,12 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
     }
     @Override
     public void buttonClicked(int postion,int value) {
-        counttxt.setText(String.valueOf(mDataAdapter.totalCount));
-        priceTxt.setText("₹ " + String.valueOf(mDataAdapter.totalCost));
+        if(counttxt != null) {
+            counttxt.setText(String.valueOf(mDataAdapter.totalCount));
+        }
+        if(priceTxt != null) {
+            priceTxt.setText("₹ " + String.valueOf(mDataAdapter.totalCost));
+        }
     }
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
