@@ -79,9 +79,12 @@ public class MapsActivity extends AppCompatActivity implements
         btnpicklocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setAddress(mSelectedLatlang.latitude,mSelectedLatlang.longitude);
-//                LatLng bangalore = new LatLng(12.9716, 77.5946);
-//                setAddress(bangalore.latitude,bangalore.longitude);
+                if(mSelectedLatlang != null)
+                    setAddress(mSelectedLatlang.latitude,mSelectedLatlang.longitude);
+                else {
+                    LatLng bangalore = new LatLng(12.9716, 77.5946);
+                    setAddress(bangalore.latitude, bangalore.longitude);
+                }
                 Intent i = new Intent(MapsActivity.this, AddAdressActivity.class);
                 Gson gson = new Gson();
                 String locationaddress = gson.toJson(mAddresses);

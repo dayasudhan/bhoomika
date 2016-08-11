@@ -49,6 +49,7 @@ public class PlacesActivity extends AppCompatActivity{
 
     private static final String PLACES_API_BASE2 = "http://kuruva.herokuapp.com/v1/admin/coverageArea";
     private static final String TAG_SUBAREAS = "subAreas";
+    private static final String TAG_NAME = "name";
     private static final String LOG_TAG = "Autocomplete";
     private ArrayList<String> mCityCoverage;
     ListView listView,addresslistview;
@@ -180,7 +181,9 @@ public class PlacesActivity extends AppCompatActivity{
                             JSONArray subAreasArray = object.getJSONArray(TAG_SUBAREAS);
                             for (int j = 0; j < subAreasArray.length(); j++) {
                                 JSONObject city_object = subAreasArray.getJSONObject(j);
-                                mCityCoverage.add(city_object.get("name").toString());
+                                if(city_object.has(TAG_NAME)) {
+                                    mCityCoverage.add(city_object.get(TAG_NAME).toString());
+                                }
                             }
                         }
                     }
