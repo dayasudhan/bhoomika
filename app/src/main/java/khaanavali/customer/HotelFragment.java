@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -70,7 +71,7 @@ public class HotelFragment extends Fragment {
     private static final String TAG_MINIMUM_ORDER = "minimumOrder";
     private ArrayList<HotelDetail> hotellist;
     ListView listView ;
-
+    TextView textview;
 
     //gagan
 
@@ -96,6 +97,8 @@ public class HotelFragment extends Fragment {
         String areaClicked = session.getlastareasearched();
         if(!areaClicked.isEmpty())
             getHotelList(areaClicked);
+        else
+            getHotelList("VijayaNagara");
 
         //gagan
 
@@ -111,7 +114,7 @@ public class HotelFragment extends Fragment {
         indicator.setViewPager(pager);
         //gagan end
 
-
+        textview = (TextView) v.findViewById(R.id.textView_no_vendors);
         listView = (ListView) v.findViewById(R.id.listView_vendor);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -146,9 +149,16 @@ public class HotelFragment extends Fragment {
     }
     public void initHotelList()
     {
-        HotelListAdapter dataAdapter = new HotelListAdapter(getActivity(),
-                R.layout.hotel_list_item,hotellist);
-        listView.setAdapter(dataAdapter);
+        if(hotellist.size() > 0 ) {
+            HotelListAdapter dataAdapter = new HotelListAdapter(getActivity(),
+                    R.layout.hotel_list_item, hotellist);
+            listView.setAdapter(dataAdapter);
+            textview.setVisibility(View.INVISIBLE);
+        }
+        else
+        {
+            textview.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
