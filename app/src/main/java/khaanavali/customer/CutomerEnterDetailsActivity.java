@@ -268,6 +268,9 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
                 request.setEntity(se);
                 request.setHeader("Accept", "application/json");
                 request.setHeader("Content-type", "application/json");
+                request.setHeader(Constants.SECUREKEY_KEY, Constants.SECUREKEY_VALUE);
+                request.setHeader(Constants.VERSION_KEY, Constants.VERSION_VALUE);
+                request.setHeader(Constants.CLIENT_KEY, Constants.CLIENT_VALUE);
                 HttpResponse response = httpclient.execute(request);
 
                 int status = response.getStatusLine().getStatusCode();

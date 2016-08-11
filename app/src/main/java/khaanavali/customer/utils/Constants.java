@@ -26,4 +26,13 @@ public class Constants {
             " Download Android App: https://play.google.com/store/apps/details?id=khaanavali.customer";
     public static final String INVITE_SUBJECT = "Khaanavali ( ಖಾನಾವಳಿ) the real taste of Karnataka";
 
+
+    public static final String SECUREKEY_KEY = "securekey";
+    public static final String VERSION_KEY = "version";
+    public static final String CLIENT_KEY = "client";
+
+    public static final String SECUREKEY_VALUE = "EjR7tUPWx7WhsVs9FuVO6veFxFISIgIxhFZh6dM66rs";
+    public static final String VERSION_VALUE = "1";
+    public static final String CLIENT_VALUE = "bhoomika";
+
 }

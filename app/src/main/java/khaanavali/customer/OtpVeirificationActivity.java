@@ -147,6 +147,9 @@ public class OtpVeirificationActivity extends AppCompatActivity {
                 postParameters.add(new BasicNameValuePair("otpText", urls[2]));
 
                 HttpPost request = new HttpPost(urls[0]);
+                request.addHeader(Constants.SECUREKEY_KEY, Constants.SECUREKEY_VALUE);
+                request.addHeader(Constants.VERSION_KEY, Constants.VERSION_VALUE);
+                request.addHeader(Constants.CLIENT_KEY, Constants.CLIENT_VALUE);
                 HttpClient httpclient = new DefaultHttpClient();
                 UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(postParameters);
                 request.setEntity(formEntity);

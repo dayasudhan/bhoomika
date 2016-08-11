@@ -47,10 +47,9 @@ import org.apache.http.util.EntityUtils;
  */
 public class PlacesActivity extends AppCompatActivity{
 
-    private static final String PLACES_API_BASE2 = "http://kuruva.herokuapp.com/v1/admin/coverageArea";
     private static final String TAG_SUBAREAS = "subAreas";
     private static final String TAG_NAME = "name";
-    private static final String LOG_TAG = "Autocomplete";
+
     private ArrayList<String> mCityCoverage;
     ListView listView,addresslistview;
     SearchView search;
@@ -161,9 +160,12 @@ public class PlacesActivity extends AppCompatActivity{
             try {
 
                 //------------------>>
-                HttpGet httppost = new HttpGet(urls[0]);
+                HttpGet request = new HttpGet(urls[0]);
                 HttpClient httpclient = new DefaultHttpClient();
-                HttpResponse response = httpclient.execute(httppost);
+                request.addHeader(Constants.SECUREKEY_KEY, Constants.SECUREKEY_VALUE);
+                request.addHeader(Constants.VERSION_KEY, Constants.VERSION_VALUE);
+                request.addHeader(Constants.CLIENT_KEY, Constants.CLIENT_VALUE);
+                HttpResponse response = httpclient.execute(request);
 
                 // StatusLine stat = response.getStatusLine();
                 int status = response.getStatusLine().getStatusCode();
