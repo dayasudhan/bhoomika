@@ -51,32 +51,26 @@
 
 
 
-    <TextView
+    <ImageView
 
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:text="-"
-
-        android:textColor="@color/text_view_grey"
-        android:textSize="15sp"
+        android:src="@drawable/minus"
         android:gravity="center_horizontal|center_vertical"
-        android:background="#ffffff"
         android:id="@+id/sub_btn"
         android:layout_below="@+id/add_sub_val"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
-    <TextView
+    <ImageView
 
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:text="+"
-        android:textSize="16sp"
-        android:textColor="@color/text_view_grey"
-        android:background="#ffffff"
+        android:src="@drawable/pluse"
+
         android:gravity="center_horizontal|center_vertical"
         android:id="@+id/add_btn"
 
-        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true" />
 
     <TextView
@@ -88,12 +82,9 @@
         android:textColor="@color/text_view_grey"
         android:gravity="center_horizontal|center_vertical"
         android:id="@+id/add_sub_val"
-        android:background="#ffffff"
-        android:layout_below="@+id/add_btn"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignLeft="@+id/add_btn"
-        android:layout_alignStart="@+id/add_btn" />
+        android:layout_below="@+id/product_detail_name"
+        android:layout_alignBottom="@+id/approx_price_val"
+        android:layout_alignParentEnd="true" />
 
 
 </RelativeLayout>

@@ -82,6 +82,15 @@ public class HotelFragment extends Fragment {
     };
     private ViewPager pager;
     //gagan
+    private boolean isBulk;
+
+    public boolean isBulk() {
+        return isBulk;
+    }
+
+    public void setBulk(boolean bulk) {
+        isBulk = bulk;
+    }
 
     @Nullable
     @Override

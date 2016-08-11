@@ -11,7 +11,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -98,17 +97,29 @@ public class MainActivity extends AppCompatActivity {
                 int itemId = menuItem.getItemId();
             if (itemId == R.id.hotel) {
                     frag = new HotelFragment();
+                ((HotelFragment)frag).setBulk(false);
+
+            }
+            else if(itemId==R.id.bulk_activity)
+            {
+                frag = new HotelFragment();
+                ((HotelFragment)frag).setBulk(true);
+
             }
             else if (itemId == R.id.about_knvl) {
                     frag = new AboutKhaanavali();
+
+
             }
             else if(itemId == R.id.status)
             {
                 frag = new StatusTrackerFragment();
+
             }
             else if(itemId == R.id.invite)
             {
                 frag = new ShareAppFragment();
+
             }
             if (frag != null) {
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
