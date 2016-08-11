@@ -34,5 +34,11 @@ public class Constants {
     public static final String SECUREKEY_VALUE = "EjR7tUPWx7WhsVs9FuVO6veFxFISIgIxhFZh6dM66rs";
     public static final String VERSION_VALUE = "1";
     public static final String CLIENT_VALUE = "bhoomika";
+	
+	//gagan
+    public static final String SLIDER_URL1="https://s25.postimg.org/4fv1akgaj/image.jpg";
+    public static final String SLIDER_URL2="https://s25.postimg.org/hkn40labf/Independence_day2.jpg";
+    public static final String SLIDER_URL3="https://s25.postimg.org/hkn40labf/Independence_day2.jpg";
+    public static final String SLIDER_URL4="http://tugbaustundag.com/slider/indirmobil700.jpg";
 
 }
