@@ -39,8 +39,6 @@ import khaanavali.customer.adapter.HotelListAdapter;
 import khaanavali.customer.model.HotelDetail;
 import khaanavali.customer.model.MenuItem;
 import khaanavali.customer.model.OrderAcceptTimings;
-import khaanavali.customer.slider.CirclePageIndicator;
-import khaanavali.customer.slider.ScreenSlidePagerAdapter;
 import khaanavali.customer.utils.Constants;
 import khaanavali.customer.utils.SessionManager;
 
@@ -77,11 +75,10 @@ public class HotelFragment extends Fragment {
     //gagan
 
     private static final String[] IMAGES = new String[] {
-
-            "https://s25.postimg.org/90c5sdtob/img1.jpg",
-            "https://s25.postimg.org/79t4qwc57/img2.jpg",
-            "https://s25.postimg.org/s7zaozbzv/img3.jpg",
-            "https://s25.postimg.org/w5mkedyt7/img4.jpg",
+            Constants.SLIDER_URL1,
+            Constants.SLIDER_URL2,
+            Constants.SLIDER_URL3,
+            Constants.SLIDER_URL4
     };
     private ViewPager pager;
     //gagan

@@ -15,7 +15,7 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-
+        <!--gagan
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action
@@ -24,11 +24,20 @@
                     android:theme="@style/AppTheme2" />
             </intent-filter>
         </activity>
+        -->
+        <!--gagan-->
+        <activity android:name=".WelcomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".SplashActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+           <intent-filter>
+               <!-- <action android:name="android.intent.action.MAIN" />-->
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
@@ -43,6 +52,7 @@
             android:name=".AddAdressActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".MapsActivity" />
+        <activity android:name=".MainActivity"/>
         <!-- adding our service -->
         <service android:name=".NotificationListener" />
         <activity android:name=".VendorRating" />
