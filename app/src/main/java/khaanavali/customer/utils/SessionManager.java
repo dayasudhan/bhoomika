@@ -69,15 +69,17 @@ public class SessionManager {
 	/**
 	 * Create login session
 	 * */
-	public void createLoginSession(){
+	public void createLoginSession(String name, String phone,String email){
 		// Storing login value as TRUE
 		editor.putBoolean(IS_LOGIN, true);
-		
+		editor.putString(KEY_PHONE,phone);
 //		// Storing name in pref
-//		editor.putString(KEY_NAME, name);
+		editor.putString(KEY_NAME, name);
 //
 //		// Storing email in pref
-//		editor.putString(KEY_EMAIL, email);
+		editor.putString(KEY_EMAIL, email);
+
+
 //
 //		//Storing the unique id
 //		editor.putString(Constants.UNIQUE_ID, uniqueId);
@@ -107,6 +109,11 @@ public class SessionManager {
 		return id;
 	}
 
+	public String getEmail()
+	{
+		String id = pref.getString(KEY_EMAIL, null);
+		return id;
+	}
 
 	public void setAddress(String areaname,String landmark, String addressline1 ,String addressline2, String city)
 	{

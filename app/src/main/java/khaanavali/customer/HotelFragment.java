@@ -129,7 +129,6 @@ public class HotelFragment extends Fragment {
                 }
                 else
                 {
-                    //Toast.makeText(getActivity().getApplicationContext(), "Today this hotel Closed. Kindly try other Hotel near by you", Toast.LENGTH_LONG).show();
                     alertMessage("Today this hotel closed. kindly try other hotel near by you");
                 }
             }
@@ -157,10 +156,7 @@ public class HotelFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(android.view.Menu menu , MenuInflater inflater) {
-      //  MenuInflater menuInflater = getMenuInflater();
-
-        inflater.inflate(R.menu.home_menu, menu);
-     //   return super.onCreateOptionsMenu(menu);
+           inflater.inflate(R.menu.home_menu, menu);
     }
     public  class JSONAsyncTask extends AsyncTask<String, Void, Boolean> {
         Dialog dialog;
@@ -184,9 +180,12 @@ public class HotelFragment extends Fragment {
             try {
 
                 //------------------>>
-                HttpGet httppost = new HttpGet(urls[0]);
+                HttpGet request = new HttpGet(urls[0]);
+                request.addHeader(Constants.SECUREKEY_KEY, Constants.SECUREKEY_VALUE);
+                request.addHeader(Constants.VERSION_KEY, Constants.VERSION_VALUE);
+                request.addHeader(Constants.CLIENT_KEY, Constants.CLIENT_VALUE);
                 HttpClient httpclient = new DefaultHttpClient();
-                HttpResponse response = httpclient.execute(httppost);
+                HttpResponse response = httpclient.execute(request);
 
                 // StatusLine stat = response.getStatusLine();
                 int status = response.getStatusLine().getStatusCode();

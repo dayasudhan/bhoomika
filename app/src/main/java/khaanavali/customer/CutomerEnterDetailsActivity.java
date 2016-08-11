@@ -59,6 +59,7 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
     EditText editName,editPhone,editCity,editHouseNo,editAreaName,editLandmark,editAddress;
     GPSTracker gps;
     HotelDetail hotelDetail;
+    String strHotelDetail;
     SessionManager session;
     TextView orderTotalCharge,billvalue,deliveryCharge;
 
@@ -70,7 +71,9 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Gson gson = new Gson();
         order = gson.fromJson(intent.getStringExtra("order"), Order.class);
+        strHotelDetail = intent.getStringExtra("HotelDetail");
         hotelDetail = gson.fromJson(intent.getStringExtra("HotelDetail"), HotelDetail.class);
+
         responseOrder = new String();
         session = new SessionManager(getApplicationContext());
         Button btn= (Button) findViewById(R.id.placeOrderButton);
@@ -109,7 +112,7 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
                 if (!validatePhoneNumber(editPhone.getText().toString())) {
                     alertMessage(false,"Enter Valid Phone Number");
                 }
-                else if(editName.getText().length() == 0){
+                if(editName.getText().length() == 0){
                     alertMessage(false,"Enter Name");
                 }
                 else if(editHouseNo.getText().length() == 0){
@@ -156,6 +159,7 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
         ab.setTitle(title);
     }
 
+
     @Override
     public boolean onOptionsItemSelected(android.view.MenuItem item) {
         switch (item.getItemId()) {
@@ -195,7 +199,7 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
                     {
                         order.getCustomer().setPhone(editPhone.getText().toString());
                         order.getCustomer().setName(editName.getText().toString());
-                        order.getCustomer().setEmail(editCity.getText().toString());
+                        order.getCustomer().setEmail(session.getEmail());
                         order.getCustomer().getAddress().setAreaName(editAreaName.getText().toString());
                         order.getCustomer().getAddress().setLandMark(editLandmark.getText().toString());
                         order.getCustomer().getAddress().setAddressLine1(editHouseNo.getText().toString());
@@ -226,8 +230,6 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
 
         }
     }
-
-
     private static boolean validatePhoneNumber(String phoneNo)
     {
         if (phoneNo.matches("\\d{10}"))
@@ -266,6 +268,9 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
                 request.setEntity(se);
                 request.setHeader("Accept", "application/json");
                 request.setHeader("Content-type", "application/json");
+                request.setHeader(Constants.SECUREKEY_KEY, Constants.SECUREKEY_VALUE);
+                request.setHeader(Constants.VERSION_KEY, Constants.VERSION_VALUE);
+                request.setHeader(Constants.CLIENT_KEY, Constants.CLIENT_VALUE);
                 HttpResponse response = httpclient.execute(request);
 
                 int status = response.getStatusLine().getStatusCode();
@@ -288,6 +293,7 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
             if(result == true){
                 Intent i = new Intent(CutomerEnterDetailsActivity.this, FinishActivity.class);
                 i.putExtra("order", responseOrder);
+                i.putExtra("HotelDetail",strHotelDetail);
                 startActivity(i);
                 finish();
             }

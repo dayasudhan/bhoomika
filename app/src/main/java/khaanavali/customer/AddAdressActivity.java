@@ -50,9 +50,11 @@ public class AddAdressActivity  extends AppCompatActivity {
         editLandmark=(EditText)findViewById(R.id.orderDetailAddress_landmark);
         editAddress=(EditText)findViewById(R.id.orderDetailAddress_address);
         editTagLabel=(EditText)findViewById(R.id.tag_address_label);
-        editAddress.setText(mAddresses.get(0).getAddressLine(1));
-        editCity.setText(mAddresses.get(0).getLocality());
-        editAreaName.setText(mAddresses.get(0).getSubLocality());
+        if(mAddresses != null) {
+            editAddress.setText(mAddresses.get(0).getAddressLine(1));
+            editCity.setText(mAddresses.get(0).getLocality());
+            editAreaName.setText(mAddresses.get(0).getSubLocality());
+        }
         btnSave= (Button) findViewById(R.id.saveAddressbutton);
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,10 +88,11 @@ public class AddAdressActivity  extends AppCompatActivity {
                     address.setAddressLine1(editHouseNo.getText().toString());
                     address.setAddressLine2(editAddress.getText().toString());
                     address.setCity(editCity.getText().toString());
-
-                    address.setZip(mAddresses.get(0).getPostalCode());
-                    address.setLatitude(String.valueOf(mAddresses.get(0).getLatitude()));
-                    address.setLongitude(String.valueOf(mAddresses.get(0).getLongitude()));
+                    if(mAddresses != null) {
+                        address.setZip(mAddresses.get(0).getPostalCode());
+                        address.setLatitude(String.valueOf(mAddresses.get(0).getLatitude()));
+                        address.setLongitude(String.valueOf(mAddresses.get(0).getLongitude()));
+                    }
                     FavouriteAddress favouriteAddress = new FavouriteAddress();
                     favouriteAddress.setLabel(editTagLabel.getText().toString());
                     favouriteAddress.setAddress(address);
@@ -142,5 +145,24 @@ public class AddAdressActivity  extends AppCompatActivity {
         positiveButtonLL.gravity = Gravity.CENTER;
         neutralButton.setLayoutParams(positiveButtonLL);
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(android.view.MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // API 5+ solution
+                onBackPressed();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    public void onBackPressed() {
+
+        Intent start = new Intent(AddAdressActivity.this,SelectAddressActivity.class);
+        start.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(start);
+        finish();
     }
 }

@@ -12,6 +12,8 @@ public class Constants {
     public static final String GET_COVERAGE_AREAS = MAIN_URL +"/v1/admin/coverageArea";
     public static final String GET_STATUS_URL= MAIN_URL + "/v1/vendor/order_by_id/";
     public static final String REVIEW_URL = MAIN_URL + "/v1/vendor/review/";
+    public static final String OTP_REGISTER_URL = "http://kuruva.herokuapp.com/v1/vendor/otp/register";
+    public static final String OTP_CONFIRM_URL = "http://kuruva.herokuapp.com/v1/vendor/otp/confirm";
     public static final String FIREBASE_APP = "https://project-8598805513533999178.firebaseio.com";
     //To store the firebase id in shared preferences
     public static final String UNIQUE_ID = "uniqueid";
@@ -23,5 +25,14 @@ public class Constants {
             "\t\n" +
             " Download Android App: https://play.google.com/store/apps/details?id=khaanavali.customer";
     public static final String INVITE_SUBJECT = "Khaanavali ( ಖಾನಾವಳಿ) the real taste of Karnataka";
+
+
+    public static final String SECUREKEY_KEY = "securekey";
+    public static final String VERSION_KEY = "version";
+    public static final String CLIENT_KEY = "client";
+
+    public static final String SECUREKEY_VALUE = "EjR7tUPWx7WhsVs9FuVO6veFxFISIgIxhFZh6dM66rs";
+    public static final String VERSION_VALUE = "1";
+    public static final String CLIENT_VALUE = "bhoomika";
 
 }

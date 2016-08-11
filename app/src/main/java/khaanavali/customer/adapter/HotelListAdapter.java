@@ -22,21 +22,14 @@ public class HotelListAdapter extends BaseAdapter{
     Activity con;
     Typeface cr;
     int layoutResID;
-    private String[] city;
     private ArrayList<HotelDetail> mhotelList;
-    int pos;
     public ImageLoader imageLoader;
-
-    // PreferenceManager mpref;
-
     public HotelListAdapter(Activity context, int layoutResourceID,
                             ArrayList<HotelDetail> hotelList) {
-
         con = context;
         mhotelList = hotelList;
         layoutResID = layoutResourceID;
-        // this.cr=cr;
-        imageLoader = new ImageLoader(context.getApplicationContext());
+        imageLoader = new ImageLoader(con.getApplicationContext());
     }
 
     @Override

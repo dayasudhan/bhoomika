@@ -21,6 +21,7 @@ import khaanavali.customer.model.HotelDetail;
 import khaanavali.customer.model.Menu;
 import khaanavali.customer.model.MenuAdapter;
 import khaanavali.customer.model.Order;
+import khaanavali.customer.utils.SessionManager;
 
 import java.util.ArrayList;
 
@@ -32,13 +33,13 @@ public class CartActivity extends AppCompatActivity implements PlusMinusButtonLi
     ArrayList<MenuAdapter> mMenulist;
     ProductAdapter dataAdapter;
     TextView orderTotalCharge,billvalue;
-
+    SessionManager session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Mint.initAndStartSession(this, "49d903c2");
         setContentView(R.layout.activity_cart);
-
+        session = new SessionManager(getApplicationContext());
         Intent intent = getIntent();
         Gson gson = new Gson();
         order = gson.fromJson(intent.getStringExtra("order"), Order.class);
@@ -86,7 +87,6 @@ public class CartActivity extends AppCompatActivity implements PlusMinusButtonLi
                 }
                 else {
                     //Intent i = new Intent(CartActivity.this, ReviewDetailsActivity.class);
-                    Intent i = new Intent(CartActivity.this, CutomerEnterDetailsActivity.class);
                     Gson gson = new Gson();
                     order.getMenuItems().clear();
                     for (int j = 0; j < dataAdapter.getmMenulist().size(); j++) {
@@ -96,10 +96,22 @@ public class CartActivity extends AppCompatActivity implements PlusMinusButtonLi
                         }
                     }
                     String strOrder = gson.toJson(order);
-                    i.putExtra("order", strOrder);
                     String strHotelDetail = gson.toJson(hotelDetail);
-                    i.putExtra("HotelDetail",strHotelDetail);
-                    startActivity(i);
+                    if(session.isLoggedIn())
+                    {
+                        Intent i = new Intent(CartActivity.this, CutomerEnterDetailsActivity.class);
+                        i.putExtra("order", strOrder);
+                        i.putExtra("HotelDetail",strHotelDetail);
+                        startActivity(i);
+                    }
+                    else
+                    {
+                        Intent i = new Intent(CartActivity.this, RegisterActivity.class);
+                        i.putExtra("order", strOrder);
+                        i.putExtra("HotelDetail",strHotelDetail);
+                        startActivity(i);
+                    }
+
                 }
             }
         });

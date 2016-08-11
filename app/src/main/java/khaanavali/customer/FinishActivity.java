@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.splunk.mint.Mint;
 
+import khaanavali.customer.model.HotelDetail;
 import khaanavali.customer.model.Menu;
 import khaanavali.customer.model.Order;
 import khaanavali.customer.utils.SessionManager;
@@ -32,19 +33,20 @@ public class FinishActivity extends AppCompatActivity {
 
         Gson gson = new Gson();
         order = gson.fromJson(intent.getStringExtra("order"), Order.class);
-
+        HotelDetail hotelDetail = gson.fromJson(intent.getStringExtra("HotelDetail"), HotelDetail.class);
         TextView txtViewName = (TextView) findViewById(R.id.vendor_name_value);
         TextView txtViewPhone = (TextView) findViewById(R.id.vendor_contact_value);
         TextView txtViewAddress = (TextView) findViewById(R.id.address_value);
         TextView txtViewMenu = (TextView) findViewById(R.id.items_value);
         TextView txtViewOrderId = (TextView) findViewById(R.id.order_id_value);
         TextView txtViewBillValue = (TextView) findViewById(R.id.bill_value_value);
+        TextView txtViewdeliveryTime = (TextView) findViewById(R.id.vendor_delivery_time_value);
       // TextView txtVieworderTime = (TextView) findViewById(R.id.order_time_value);
 
         txtViewName.setText(order.getHotel().getName());
         txtViewPhone.setText(String.valueOf(order.getHotel().getPhone()));
         txtViewOrderId.setText(order.getId());
-
+        txtViewdeliveryTime.setText(Integer.toString(hotelDetail.getDeliveryTime()) + " mins");
         txtViewBillValue.setText(String.valueOf(order.getTotalCost()));
         ArrayList<Menu> items = order.getMenuItems();
         String MenuItemStr = "";
@@ -62,6 +64,7 @@ public class FinishActivity extends AppCompatActivity {
 //        {
 //            saveAddress();
 //        }
+        saveAddress();
         txtViewAddress.setText(CustomerAddress);
         setToolBar();
     }
@@ -76,29 +79,29 @@ public class FinishActivity extends AppCompatActivity {
         session.setName(order.getCustomer().getName());
     }
 
-    public void alertMessage()
-    {
-        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener()
-        {
-            public void onClick(DialogInterface dialog, int which)
-            {
-                switch (which){
-                    case DialogInterface.BUTTON_POSITIVE: // Yes button clicked
-                    {
-                        session.createLoginSession();
-                        saveAddress();
-                    }
-                    break;
-                    case DialogInterface.BUTTON_NEGATIVE:
-                        //Toast.makeText(getApplicationContext(), "Correct the Information", Toast.LENGTH_LONG).show();
-                        break;
-                }
-            }
-        };
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Do you want to save  Address, Phone Number for Future transactiion? " ) .setPositiveButton("Yes", dialogClickListener)
-                .setNegativeButton("No", dialogClickListener).show();
-    }
+//    public void alertMessage()
+//    {
+//        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener()
+//        {
+//            public void onClick(DialogInterface dialog, int which)
+//            {
+//                switch (which){
+//                    case DialogInterface.BUTTON_POSITIVE: // Yes button clicked
+//                    {
+//                        session.createLoginSession();
+//                        saveAddress();
+//                    }
+//                    break;
+//                    case DialogInterface.BUTTON_NEGATIVE:
+//                        //Toast.makeText(getApplicationContext(), "Correct the Information", Toast.LENGTH_LONG).show();
+//                        break;
+//                }
+//            }
+//        };
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setMessage("Do you want to save  Address, Phone Number for Future transaction? " ) .setPositiveButton("Yes", dialogClickListener)
+//                .setNegativeButton("No", dialogClickListener).show();
+//    }
     private void setToolBar() {
         Toolbar tb = (Toolbar) findViewById(R.id.toolbar2);
         setSupportActionBar(tb);
