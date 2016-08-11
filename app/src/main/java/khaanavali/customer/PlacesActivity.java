@@ -51,11 +51,12 @@ public class PlacesActivity extends AppCompatActivity{
     private static final String TAG_NAME = "name";
 
     private ArrayList<String> mCityCoverage;
-    ListView listView,addresslistview;
+    ListView listView;
+    //ListView addresslistview;
     SearchView search;
     LocationAdapter dataAdapter;
-    ArrayList<FavouriteAddress> mFavouriteAddressArrayList;
-    AddressListAdapater addressListAdapater;
+//    ArrayList<FavouriteAddress> mFavouriteAddressArrayList;
+//    AddressListAdapater addressListAdapater;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,26 +65,26 @@ public class PlacesActivity extends AppCompatActivity{
         mCityCoverage =  new ArrayList<String>();
         listView = (ListView) findViewById(R.id.area_listView);
         listView.setAdapter(dataAdapter);
-        SessionManager  session = new SessionManager(getApplicationContext());
-        mFavouriteAddressArrayList = new ArrayList<FavouriteAddress>();
-        if(session.getFavoutrateAddress() !=null) {
-            mFavouriteAddressArrayList = session.getFavoutrateAddress();
-            //addressListAdapater.setmFavouriteAddressArrayList(mFavouriteAddressArrayList);
-        }
-        addressListAdapater = new AddressListAdapater(this,R.layout.address_list_item,mFavouriteAddressArrayList);
-        addresslistview = (ListView) findViewById(R.id.listView_address);
-        addresslistview.setAdapter(addressListAdapater);
+//        SessionManager  session = new SessionManager(getApplicationContext());
+//        mFavouriteAddressArrayList = new ArrayList<FavouriteAddress>();
+//        if(session.getFavoutrateAddress() !=null) {
+//            mFavouriteAddressArrayList = session.getFavoutrateAddress();
+//            //addressListAdapater.setmFavouriteAddressArrayList(mFavouriteAddressArrayList);
+//        }
+//        addressListAdapater = new AddressListAdapater(this,R.layout.address_list_item,mFavouriteAddressArrayList);
+//        addresslistview = (ListView) findViewById(R.id.listView_address);
+//        addresslistview.setAdapter(addressListAdapater);
 
 
-        addresslistview.setEmptyView(findViewById(R.id.emptyElement));
-        addresslistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-               String areaName =  mFavouriteAddressArrayList.get(position).getAddress().getAreaName();
-               goBackwithAreaName(areaName);
-            }
-        });
+//        addresslistview.setEmptyView(findViewById(R.id.emptyElement));
+//        addresslistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//               String areaName =  mFavouriteAddressArrayList.get(position).getAddress().getAreaName();
+//               goBackwithAreaName(areaName);
+//            }
+//        });
         getCityCoverage();
         search = (SearchView)findViewById(R.id.searchView1);
         search.setQueryHint("Search Location");
