@@ -50,6 +50,14 @@
                             android:id="@+id/otptext"
                             android:layout_gravity="center_horizontal" />
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="which has sent to your number"
+                            android:id="@+id/textView6"
+                            android:layout_gravity="center_horizontal" />
+
                         <EditText
                             android:id="@+id/otpInput"
                             android:layout_width="200dp"
