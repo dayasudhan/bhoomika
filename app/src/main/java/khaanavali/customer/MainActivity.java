@@ -7,6 +7,7 @@ import android.app.ActivityManager;
 import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -16,6 +17,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.splunk.mint.Mint;
 
@@ -156,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
               //  Toast.makeText(getApplicationContext(), "menu selected", Toast.LENGTH_LONG).show();
                 Intent i = new Intent(this, PlacesActivity.class);
                 startActivityForResult(i,1);
+
                 return true;
             }
         }
@@ -168,15 +171,31 @@ public class MainActivity extends AppCompatActivity {
 //        menuInflater.inflate(R.menu.home_menu, menu);
 //        return super.onCreateOptionsMenu(menu);
 //    }
-
+    boolean doubleBackToExitPressedOnce = false;
     @Override
     public void onBackPressed() {
         if (dLayout.isDrawerOpen(GravityCompat.START)) {
             dLayout.closeDrawer(GravityCompat.START);
         }
         else {
-            super.onBackPressed();
+            //super.onBackPressed();
+            if (doubleBackToExitPressedOnce) {
+                super.onBackPressed();
+                return;
+            }
+
+            this.doubleBackToExitPressedOnce = true;
+            Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce=false;
+                }
+            }, 2000);
         }
     }
+
 
 }
