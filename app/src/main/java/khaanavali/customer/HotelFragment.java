@@ -78,7 +78,7 @@ public class HotelFragment extends Fragment {
             Constants.SLIDER_URL1,
             Constants.SLIDER_URL2,
             Constants.SLIDER_URL3,
-            Constants.SLIDER_URL4
+          //  Constants.SLIDER_URL4
     };
     private ViewPager pager;
     //gagan
@@ -158,6 +158,8 @@ public class HotelFragment extends Fragment {
         HotelListAdapter dataAdapter = new HotelListAdapter(getActivity(),
                 R.layout.hotel_list_item,hotellist);
         listView.setAdapter(dataAdapter);
+        dataAdapter.notifyDataSetChanged();
+
     }
 
     @Override

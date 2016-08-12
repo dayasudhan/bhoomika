@@ -67,19 +67,19 @@ public class CirclePageIndicator extends LinearLayout implements ViewPager.OnPag
                     LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
             params.leftMargin = indicatorSpacing;
             params.rightMargin = indicatorSpacing;
-            img.setImageResource(R.drawable.circle_indicator_stroke);
+            img.setImageResource(R.drawable.circle_indicator_white);
             addView(img, params);
         }
 
         if (count > 0) {
-            ((ImageView) getChildAt(0)).setImageResource(R.drawable.circle_indicator_solid);
+            ((ImageView) getChildAt(0)).setImageResource(R.drawable.circle_indicator_stroke);
         }
     }
 
     private void updateIndicator(int position) {
         if (activePosition != position) {
-            ((ImageView) getChildAt(activePosition)).setImageResource(R.drawable.circle_indicator_stroke);
-            ((ImageView) getChildAt(position)).setImageResource(R.drawable.circle_indicator_solid);
+            ((ImageView) getChildAt(activePosition)).setImageResource(R.drawable.circle_indicator_white);
+            ((ImageView) getChildAt(position)).setImageResource(R.drawable.circle_indicator_stroke);
             activePosition = position;
         }
     }
