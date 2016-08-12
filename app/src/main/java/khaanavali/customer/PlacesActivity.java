@@ -1,19 +1,14 @@
 package khaanavali.customer;
-import android.app.Activity;
-import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.content.Intent;
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -22,26 +17,22 @@ import android.widget.Toast;
 
 import com.splunk.mint.Mint;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-
-import java.util.ArrayList;
-
-import khaanavali.customer.adapter.AddressListAdapater;
-import khaanavali.customer.adapter.LocationAdapter;
-import khaanavali.customer.model.FavouriteAddress;
-import khaanavali.customer.utils.Constants;
-import khaanavali.customer.utils.SessionManager;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import khaanavali.customer.adapter.LocationAdapter;
+import khaanavali.customer.utils.Constants;
+import khaanavali.customer.utils.SessionManager;
 /**
  * Created by dganeshappa on 7/14/2016.
  */
@@ -49,6 +40,7 @@ public class PlacesActivity extends AppCompatActivity{
 
     private static final String TAG_SUBAREAS = "subAreas";
     private static final String TAG_NAME = "name";
+
 
     private ArrayList<String> mCityCoverage;
     ListView listView;
@@ -87,6 +79,8 @@ public class PlacesActivity extends AppCompatActivity{
 //        });
         getCityCoverage();
         search = (SearchView)findViewById(R.id.searchView1);
+        search.setIconified(false);
+
         search.setQueryHint("Search Location");
 
         search.setIconified(false);
@@ -220,6 +214,9 @@ public class PlacesActivity extends AppCompatActivity{
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setTitle(title);
     }
+
+
+
     @Override
     public boolean onOptionsItemSelected(android.view.MenuItem item) {
         switch (item.getItemId()) {
@@ -228,7 +225,13 @@ public class PlacesActivity extends AppCompatActivity{
                 return true;
 
             default:
+
                 return super.onOptionsItemSelected(item);
+
         }
     }
+
+
+
+
 }

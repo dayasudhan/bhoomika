@@ -57,7 +57,12 @@
             />
         <activity android:name=".PlacesActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            />
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+
+            </activity>
         <activity android:name=".CutomerEnterDetailsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             />
