@@ -11,26 +11,25 @@
         android:layout_alignParentTop="true"
         android:orientation="vertical">
         <RelativeLayout
+
             android:layout_width="fill_parent"
             android:layout_height="200dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="0dp"
             android:id="@+id/imageslider"
+
             >
             <!--gagan-->
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="match_parent"
                 android:id="@+id/swypingImage"
                 android:orientation="horizontal"
                 android:layout_alignParentBottom="true">
 
                 <android.support.v4.view.ViewPager
                     android:id="@+id/pager"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentStart="true" />
-
+                    android:layout_width="fill_parent"
+                    android:layout_height="200dp" />
                 <khaanavali.customer.CirclePageIndicator
                     android:id="@+id/indicator"
                     android:gravity="bottom|center_horizontal"
@@ -38,10 +37,11 @@
                     android:layout_marginBottom="20dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginLeft="20dp"
-                    android:layout_width="match_parent"
+                    android:layout_width="fill_parent"
                     android:layout_height="170dp" />
 
-            </LinearLayout>
+
+            </RelativeLayout>
             <!--gagan-->
 
         </RelativeLayout>

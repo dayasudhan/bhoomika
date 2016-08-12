@@ -79,10 +79,19 @@ public class HotelFragment extends Fragment {
             Constants.SLIDER_URL1,
             Constants.SLIDER_URL2,
             Constants.SLIDER_URL3,
-            Constants.SLIDER_URL4
+          //  Constants.SLIDER_URL4
     };
     private ViewPager pager;
     //gagan
+    private boolean isBulk;
+
+    public boolean isBulk() {
+        return isBulk;
+    }
+
+    public void setBulk(boolean bulk) {
+        isBulk = bulk;
+    }
 
     @Nullable
     @Override
@@ -149,16 +158,19 @@ public class HotelFragment extends Fragment {
     }
     public void initHotelList()
     {
+
         if(hotellist.size() > 0 ) {
             HotelListAdapter dataAdapter = new HotelListAdapter(getActivity(),
                     R.layout.hotel_list_item, hotellist);
             listView.setAdapter(dataAdapter);
             textview.setVisibility(View.INVISIBLE);
+            dataAdapter.notifyDataSetChanged();
         }
         else
         {
             textview.setVisibility(View.VISIBLE);
         }
+
     }
 
     @Override

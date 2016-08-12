@@ -57,7 +57,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Phone: +91- "
+                        android:text="Phone*: +91- "
                         android:id="@+id/indianphonecode"
 
                         android:paddingTop="20dp"
@@ -69,7 +69,7 @@
                         android:id="@+id/phoneInput"
                         android:layout_width="240dp"
                         android:layout_height="wrap_content"
-                        android:hint="*"
+
                         android:inputType="phone"
                         android:paddingTop="20dp"
                         android:padding="20dp"
@@ -79,19 +79,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Name : "
+                        android:text="Name* : "
                         android:id="@+id/nametoregister"
 
                         android:paddingTop="30dp"
-                        android:layout_below="@+id/indianphonecode"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginStart="20dp" />
+                        android:layout_above="@+id/emailregister"
+                        android:layout_alignStart="@+id/emailregister" />
 
                     <EditText
                         android:id="@+id/nameregisterinput"
                         android:layout_width="240dp"
                         android:layout_height="wrap_content"
-                        android:hint="*"
+
                         android:paddingTop="30dp"
                         android:layout_below="@+id/indianphonecode"
                         android:layout_toEndOf="@+id/indianphonecode" />
@@ -99,23 +98,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Email : "
+                        android:text="   Email:\n(Optional) "
                         android:id="@+id/emailregister"
 
                         android:paddingTop="30dp"
-                        android:layout_below="@+id/nametoregister"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginStart="20dp" />
+                        android:layout_alignStart="@+id/indianphonecode"
+                        android:layout_below="@+id/nameregisterinput" />
 
                     <EditText
                         android:id="@+id/emailregisterinput"
                         android:layout_width="240dp"
                         android:layout_height="wrap_content"
-                        android:hint="Optional"
+                        android:hint="example@xyz.com"
                         android:paddingTop="30dp"
-                        android:layout_below="@+id/nametoregister"
 
-                        android:layout_toEndOf="@+id/indianphonecode" />
+                        android:layout_below="@+id/nametoregister"
+                        android:layout_alignStart="@+id/nameregisterinput" />
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

@@ -36,9 +36,9 @@ public class Constants {
     public static final String CLIENT_VALUE = "bhoomika";
 	
 	//gagan
-    public static final String SLIDER_URL1="https://s25.postimg.org/4fv1akgaj/image.jpg";
-    public static final String SLIDER_URL2="https://s25.postimg.org/hkn40labf/Independence_day2.jpg";
-    public static final String SLIDER_URL3="https://s25.postimg.org/hkn40labf/Independence_day2.jpg";
-    public static final String SLIDER_URL4="http://tugbaustundag.com/slider/indirmobil700.jpg";
+    public static final String SLIDER_URL3="https://s25.postimg.org/owjty0upn/slider1.jpg";
+    public static final String SLIDER_URL2="https://s25.postimg.org/4doxsygsb/slider2.jpg";
+    public static final String SLIDER_URL1="https://s25.postimg.org/54hnyqj5n/slider3.jpg";
+    //public static final String SLIDER_URL4="http://tugbaustundag.com/slider/indirmobil700.jpg";
 
 }

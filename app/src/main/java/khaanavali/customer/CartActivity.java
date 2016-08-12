@@ -15,6 +15,8 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.splunk.mint.Mint;
 
+import java.util.ArrayList;
+
 import khaanavali.customer.adapter.PlusMinusButtonListener;
 import khaanavali.customer.adapter.ProductAdapter;
 import khaanavali.customer.model.HotelDetail;
@@ -22,8 +24,6 @@ import khaanavali.customer.model.Menu;
 import khaanavali.customer.model.MenuAdapter;
 import khaanavali.customer.model.Order;
 import khaanavali.customer.utils.SessionManager;
-
-import java.util.ArrayList;
 
 public class CartActivity extends AppCompatActivity implements PlusMinusButtonListener {
 
@@ -79,7 +79,7 @@ public class CartActivity extends AppCompatActivity implements PlusMinusButtonLi
             @Override
             public void onClick(View v) {
 
-                if(order.getTotalCost() < hotelDetail.getMinimumOrder())
+                if(order.getBill_value() < hotelDetail.getMinimumOrder())
                 {
                     String text  = "Minimum Order for this Hotel is Rs." +  Integer.toString(hotelDetail.getMinimumOrder()) + " Kindly add more items";
                     //Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();

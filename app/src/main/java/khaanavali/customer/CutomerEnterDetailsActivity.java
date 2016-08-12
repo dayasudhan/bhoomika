@@ -1,22 +1,13 @@
 package khaanavali.customer;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-
 import android.graphics.drawable.ColorDrawable;
-import android.location.Location;
 import android.net.ParseException;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -27,16 +18,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.google.gson.Gson;
 import com.splunk.mint.Mint;
 
-
-import khaanavali.customer.model.HotelDetail;
-import khaanavali.customer.model.Order;
-import khaanavali.customer.utils.Constants;
-import khaanavali.customer.utils.GPSTracker;
-import khaanavali.customer.model.Address;
-import khaanavali.customer.utils.SessionManager;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -46,9 +31,16 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
-import java.io.IOException;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import khaanavali.customer.model.Address;
+import khaanavali.customer.model.HotelDetail;
+import khaanavali.customer.model.Order;
+import khaanavali.customer.utils.Constants;
+import khaanavali.customer.utils.GPSTracker;
+import khaanavali.customer.utils.SessionManager;
 
 
 public class CutomerEnterDetailsActivity extends AppCompatActivity {
@@ -79,7 +71,10 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
         Button btn= (Button) findViewById(R.id.placeOrderButton);
         btnShowLocation= (Button) findViewById(R.id.locationButton);
         editName=(EditText)findViewById(R.id.orderDetailName);
+
         editPhone=(EditText)findViewById(R.id.orderDetailPhone);
+        editPhone.setKeyListener(null);
+
         editCity=(EditText)findViewById(R.id.orderDetailEmail);
         editHouseNo=(EditText)findViewById(R.id.orderDetailAddress_house_no);
         editAreaName=(EditText)findViewById(R.id.orderDetailAddress_areaname);

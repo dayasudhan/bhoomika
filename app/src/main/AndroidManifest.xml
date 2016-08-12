@@ -26,7 +26,10 @@
         </activity>
         -->
         <!--gagan-->
-        <activity android:name=".WelcomeActivity">
+        <activity android:name=".WelcomeActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,6 +37,7 @@
             </intent-filter>
         </activity>
         <activity
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:name=".SplashActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
            <intent-filter>
@@ -42,22 +46,50 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ProductDetailViewActivity" />
-        <activity android:name=".CartActivity" />
-        <activity android:name=".FinishActivity" />
-        <activity android:name=".PlacesActivity" />
-        <activity android:name=".CutomerEnterDetailsActivity" />
-        <activity android:name=".SelectAddressActivity" />
+        <activity android:name=".ProductDetailViewActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".CartActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".FinishActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".PlacesActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".CutomerEnterDetailsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".SelectAddressActivity"
+            android:windowSoftInputMode="adjustPan|adjustResize"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
         <activity
             android:name=".AddAdressActivity"
-            android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".MapsActivity" />
-        <activity android:name=".MainActivity"/>
+            android:windowSoftInputMode="adjustPan|adjustResize"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".MapsActivity"
+            android:windowSoftInputMode="adjustPan|adjustResize"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
         <!-- adding our service -->
-        <service android:name=".NotificationListener" />
-        <activity android:name=".VendorRating" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".OtpVeirificationActivity" />
+        <service android:name=".NotificationListener"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".VendorRating"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".RegisterActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".OtpVeirificationActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
     </application>
 
 </manifest>
