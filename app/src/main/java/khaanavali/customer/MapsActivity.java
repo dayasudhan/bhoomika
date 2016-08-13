@@ -50,6 +50,7 @@ public class MapsActivity extends AppCompatActivity implements
 
     private GoogleMap mMap;
     Button btnpicklocation;
+    Button btnManuallAddress;
     Marker mCurrLocationMarker;
     int zoomleval = 15;
     /**
@@ -67,7 +68,7 @@ public class MapsActivity extends AppCompatActivity implements
         Mint.initAndStartSession(MapsActivity.this, "49d903c2");
         setContentView(R.layout.activity_maps);
         btnpicklocation= (Button) findViewById(R.id.pickaddressbtn);
-
+        btnManuallAddress = (Button)findViewById(R.id.buttonEnterManual);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
            checkLocationPermission();
         }
@@ -92,6 +93,16 @@ public class MapsActivity extends AppCompatActivity implements
                 i.putExtra("locationaddress", locationaddress);
                 startActivityForResult(i,1);
                // finish();
+            }
+        });
+
+        btnManuallAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(MapsActivity.this, AddAdressActivity.class);
+                Gson gson = new Gson();
+                startActivityForResult(i,1);
             }
         });
         setToolBar("Add Address");

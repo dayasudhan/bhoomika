@@ -9,10 +9,7 @@
         android:layout_alignParentTop="true"
         android:orientation="vertical">
 
-    <include
-        android:id="@+id/toolbar2"
-        layout="@layout/toolbar" />
-        <RelativeLayout
+       <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
@@ -70,8 +67,21 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:clickable="true" />
+            </RelativeLayout>
 
-        </RelativeLayout>
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enter Manually"
+                android:background="@drawable/locationbuttonselector"
+                android:id="@+id/buttonEnterManual"
+                android:textColor="#ffffff"
+                android:layout_marginStart="10dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp" />
+
         </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>
