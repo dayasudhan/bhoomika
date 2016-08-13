@@ -1,9 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/progres"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:gravity="center"
+    android:orientation="vertical"
+    android:id="@+id/progres"
+     android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <khaanavali.customer.Loader.LoadingView
+            android:id="@+id/guard_view"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:loading_renderer="GuardLoadingRenderer" />
+
+    </LinearLayout>
+
+</LinearLayout>
+
+
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
     >
     <ProgressBar
         android:indeterminate="true"
@@ -13,4 +37,4 @@
         android:layout_centerInParent="true"
         android:indeterminateDrawable="@drawable/custom_progress_background"
         android:id="@+id/progressBar" />
-</RelativeLayout>
+</RelativeLayout>-->

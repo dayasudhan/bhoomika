@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.splunk.mint.Mint;
@@ -136,7 +135,7 @@ public class OtpVeirificationActivity extends AppCompatActivity {
             dialog.setContentView(R.layout.custom_progress_dialog);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
             dialog.show();
-            dialog.setCancelable(false);
+            dialog.setCancelable(true);
         }
 
         @Override

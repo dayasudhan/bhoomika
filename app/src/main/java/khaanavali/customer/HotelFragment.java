@@ -79,7 +79,7 @@ public class HotelFragment extends Fragment {
             Constants.SLIDER_URL1,
             Constants.SLIDER_URL2,
             Constants.SLIDER_URL3,
-          //  Constants.SLIDER_URL4
+            Constants.SLIDER_URL4
     };
     private ViewPager pager;
     //gagan
@@ -113,12 +113,10 @@ public class HotelFragment extends Fragment {
 
 
         pager = (ViewPager) v.findViewById(R.id.pager);
-        //Resimlermizi arayüzde göstermek için kullancagmız ScreenSlidePagerAdapter sınıfına resim, yollarnı set ettim.
         ScreenSlidePagerAdapter pagerAdapter =new ScreenSlidePagerAdapter(getActivity().getSupportFragmentManager());
 
         pagerAdapter.addAll(Arrays.asList(IMAGES));
         pager.setAdapter(pagerAdapter);
-        //Resmin altındaki kucuk yuvarlak iconları resim saysına göre üreten CirclePageIndicator sınıfını cagırdık
         CirclePageIndicator indicator = (CirclePageIndicator) v.findViewById(R.id.indicator);
         indicator.setViewPager(pager);
         //gagan end
@@ -191,7 +189,7 @@ public class HotelFragment extends Fragment {
             dialog.setContentView(R.layout.custom_progress_dialog);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
             dialog.show();
-            dialog.setCancelable(false);
+            dialog.setCancelable(true);
         }
 
         @Override
