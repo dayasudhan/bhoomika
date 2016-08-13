@@ -6,6 +6,16 @@ import java.util.ArrayList;
  * Created by dganeshappa on 5/19/2016.
  */
 public class Order {
+    public int getOrdertype() {
+        return ordertype;
+    }
+
+    public void setOrdertype(int ordertype) {
+        this.ordertype = ordertype;
+    }
+
+    private int ordertype;
+
     public Customer getCustomer() {
         return customer;
     }
@@ -98,6 +108,7 @@ public class Order {
         bill_value = 0;
         deliveryCharge = 0;
         totalCost = 0;
+        ordertype = 0;
     }
 
 }

@@ -69,6 +69,15 @@ public class HotelFragment extends Fragment {
     private static final String TAG_RATING = "rating";
     private static final String TAG_ISOPEN = "isOpen";
     private static final String TAG_MINIMUM_ORDER = "minimumOrder";
+    private static final String TAG_BULK_DELIVERY_TIME = "bulkdeliveryTime";
+    private static final String TAG_BULK_DELIVERY_RANGE = "bulkdeliverRange";
+    private static final String TAG_BULK_DELIVERY_CHARGE = "bulkdeliverCharge";
+    private static final String TAG_BULK_MINIMUM_ORDER = "bulkminimumOrder";
+    private static final String TAG_BULK_TYPE = "isBulkVendor";
+
+
+
+
     private ArrayList<HotelDetail> hotellist;
     ListView listView ;
     TextView textview;
@@ -132,6 +141,14 @@ public class HotelFragment extends Fragment {
                     Gson gson = new Gson();
                     String hotel = gson.toJson(hotellist.get(position));
                     i.putExtra("hotel", hotel);
+                    if(isBulk() == true)
+                    {
+                        i.putExtra("isBulk","true");
+                    }
+                    else
+                    {
+                        i.putExtra("isBulk","false");
+                    }
                     startActivity(i);
                 }
                 else
@@ -152,17 +169,27 @@ public class HotelFragment extends Fragment {
         String order_url = Constants.GET_HOTEL_BY_DELIVERY_AREAS;
         String area = areaClicked.replace(" ", "%20");
         order_url = order_url + area;
+        if(isBulk)
+        {
+            order_url = order_url + "&isbulkrequest=1";
+        }
+        else
+        {
+            order_url = order_url + "&isbulkrequest=0";
+        }
         new JSONAsyncTask().execute(order_url);
     }
     public void initHotelList()
     {
 
-        if(hotellist.size() > 0 ) {
+
             HotelListAdapter dataAdapter = new HotelListAdapter(getActivity(),
                     R.layout.hotel_list_item, hotellist);
             listView.setAdapter(dataAdapter);
-            textview.setVisibility(View.INVISIBLE);
+
             dataAdapter.notifyDataSetChanged();
+        if(hotellist.size() > 0 ) {
+            textview.setVisibility(View.INVISIBLE);
         }
         else
         {
@@ -295,16 +322,7 @@ public class HotelFragment extends Fragment {
                             if(addrObj.has("street"))
                                 hotelDetail.getAddress().setZip(addrObj.getString("street"));
                         }
-                        if(object.has(TAG_DELIVERY_RANGE))
-                        {
-                            int range=0 ;
-                            try {
-                                range = object.getInt(TAG_DELIVERY_RANGE);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            hotelDetail.setDeliverRange(range);
-                        }
+
                         if(object.has(TAG_DELIVERY_AREAS))
                         {
                             JSONArray delieveryArray = object.getJSONArray(TAG_DELIVERY_AREAS);
@@ -325,16 +343,6 @@ public class HotelFragment extends Fragment {
                             }
                             hotelDetail.setIsOpen(var);
                         }
-                        if(object.has(TAG_DELIVERY_CHARGE))
-                        {
-                            int charge=0 ;
-                            try {
-                                charge = object.getInt(TAG_DELIVERY_CHARGE);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            hotelDetail.setDeliverCharge(charge);
-                        }
                         if(object.has(TAG_RATING))
                         {
                             int rating=0 ;
@@ -345,27 +353,7 @@ public class HotelFragment extends Fragment {
                             }
                             hotelDetail.setRating(rating);
                         }
-                        if(object.has(TAG_MINIMUM_ORDER))
-                        {
-                            int rating=0 ;
-                            try {
-                                rating = object.getInt(TAG_MINIMUM_ORDER);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            hotelDetail.setMinimumOrder(rating);
-                        }
 
-                        if(object.has(TAG_DELIVERY_TIME))
-                        {
-                            int delieveryTime=0 ;
-                            try {
-                                delieveryTime = object.getInt(TAG_DELIVERY_TIME);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            hotelDetail.setDeliveryTime(delieveryTime);
-                        }
                         if(object.has(TAG_ORDER_ACCEPT_TIMINGS))
                         {
                             JSONObject ordAcctime = object.getJSONObject(TAG_ORDER_ACCEPT_TIMINGS);
@@ -373,6 +361,90 @@ public class HotelFragment extends Fragment {
                             OrderAcceptTimings ordacctimeobj =  gson.fromJson(ordAcctime.toString(),OrderAcceptTimings.class);
                             hotelDetail.setOrderAcceptTimings(ordacctimeobj);
 
+                        }
+                        if(isBulk)
+                        {
+                            if (object.has(TAG_BULK_DELIVERY_RANGE)) {
+                                int range = 0;
+                                try {
+                                    range = object.getInt(TAG_BULK_DELIVERY_RANGE);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                hotelDetail.setDeliverRange(range);
+                            }
+
+                            if (object.has(TAG_BULK_DELIVERY_CHARGE)) {
+                                int charge = 0;
+                                try {
+                                    charge = object.getInt(TAG_BULK_DELIVERY_CHARGE);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                hotelDetail.setDeliverCharge(charge);
+                            }
+
+                            if (object.has(TAG_BULK_MINIMUM_ORDER)) {
+                                int rating = 0;
+                                try {
+                                    rating = object.getInt(TAG_BULK_MINIMUM_ORDER);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                hotelDetail.setMinimumOrder(rating);
+                            }
+
+                            if (object.has(TAG_BULK_DELIVERY_TIME)) {
+                                int delieveryTime = 0;
+                                try {
+                                    delieveryTime = object.getInt(TAG_BULK_DELIVERY_TIME);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                hotelDetail.setDeliveryTime(delieveryTime);
+                            }
+                        }
+                        else {
+
+                            if (object.has(TAG_DELIVERY_RANGE)) {
+                                int range = 0;
+                                try {
+                                    range = object.getInt(TAG_DELIVERY_RANGE);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                hotelDetail.setDeliverRange(range);
+                            }
+
+                            if (object.has(TAG_DELIVERY_CHARGE)) {
+                                int charge = 0;
+                                try {
+                                    charge = object.getInt(TAG_DELIVERY_CHARGE);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                hotelDetail.setDeliverCharge(charge);
+                            }
+
+                            if (object.has(TAG_MINIMUM_ORDER)) {
+                                int rating = 0;
+                                try {
+                                    rating = object.getInt(TAG_MINIMUM_ORDER);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                hotelDetail.setMinimumOrder(rating);
+                            }
+
+                            if (object.has(TAG_DELIVERY_TIME)) {
+                                int delieveryTime = 0;
+                                try {
+                                    delieveryTime = object.getInt(TAG_DELIVERY_TIME);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                hotelDetail.setDeliveryTime(delieveryTime);
+                            }
                         }
                         hotellist.add(hotelDetail);
                     }

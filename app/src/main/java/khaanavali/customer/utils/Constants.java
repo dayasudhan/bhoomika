@@ -3,7 +3,7 @@ package khaanavali.customer.utils;
 
 public class Constants {
 
-    public static final String LOCALHOST = "http://10.239.54.38:3000";
+    public static final String LOCALHOST = "http://192.168.1.107:3000";
     public static final String RELEASE_URL = "http://oota.herokuapp.com";
     public static final String DEBUG_URL = "http://kuruva.herokuapp.com";
     public static final String MAIN_URL = DEBUG_URL;

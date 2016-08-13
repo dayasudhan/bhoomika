@@ -33,6 +33,7 @@ import com.splunk.mint.Mint;
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout dLayout;
+
     private boolean ishotelFragmentOpen;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
                 int itemId = menuItem.getItemId();
                 if (itemId == R.id.hotel) {
                     frag = new HotelFragment();
+
                     ((HotelFragment) frag).setBulk(false);
                     ishotelFragmentOpen = true;
 
@@ -162,6 +165,7 @@ public class MainActivity extends AppCompatActivity {
                     ((HotelFragment) frag).setBulk(true);
                     ishotelFragmentOpen = true;
                 } else if (itemId == R.id.about_knvl) {
+
                     frag = new AboutKhaanavali();
                     ishotelFragmentOpen = false;
 

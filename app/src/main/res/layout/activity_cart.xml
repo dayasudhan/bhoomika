@@ -152,7 +152,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Review Order"
+        android:text="Cart Details"
         android:id="@+id/vendor_add_cart_name"
         android:textColor="@color/heading_color"
         android:textSize="20dp"
