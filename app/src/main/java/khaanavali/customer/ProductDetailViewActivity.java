@@ -47,6 +47,14 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
         Intent intent = getIntent();
         Gson gson = new Gson();
         hotelDetail = gson.fromJson(intent.getStringExtra("hotel"), HotelDetail.class);
+        if(intent.getStringExtra("isBulk").equals("true"))
+        {
+            order.setOrdertype(1);
+        }
+        else
+        {
+            order.setOrdertype(0);
+        }
         order.setHotel(hotelDetail.getHotel());
         mMenulist = new ArrayList<MenuAdapter>();
         for(int i = 0; i< hotelDetail.getMenu().size(); i++)

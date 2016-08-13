@@ -23,6 +23,7 @@ import com.splunk.mint.Mint;
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout dLayout;
+    private boolean isBulk;
 
 
     @Override
@@ -97,13 +98,16 @@ public class MainActivity extends AppCompatActivity {
                 int itemId = menuItem.getItemId();
             if (itemId == R.id.hotel) {
                     frag = new HotelFragment();
+                MainActivity.this.setBulk(false);
                 ((HotelFragment)frag).setBulk(false);
 
             }
             else if(itemId==R.id.bulk_activity)
             {
                 frag = new HotelFragment();
+                MainActivity.this.setBulk(true);
                 ((HotelFragment)frag).setBulk(true);
+
 
             }
             else if (itemId == R.id.about_knvl) {
@@ -155,6 +159,14 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_search: {
               //  Toast.makeText(getApplicationContext(), "menu selected", Toast.LENGTH_LONG).show();
                 Intent i = new Intent(this, PlacesActivity.class);
+                if(this.isBulk() == true)
+                {
+                    i.putExtra("isBulk","true");
+                }
+                else
+                {
+                    i.putExtra("isBulk","false");
+                }
                 startActivityForResult(i,1);
                 return true;
             }
@@ -178,5 +190,11 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
+    public boolean isBulk() {
+        return isBulk;
+    }
 
+    public void setBulk(boolean bulk) {
+        isBulk = bulk;
+    }
 }
