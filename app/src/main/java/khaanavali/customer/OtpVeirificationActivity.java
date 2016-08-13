@@ -180,6 +180,10 @@ public class OtpVeirificationActivity extends AppCompatActivity {
                     i.putExtra("HotelDetail",hotelDetail);
                     startActivity(i);
                 }
+                else
+                {
+                    alertMessage("Invalid OTP");
+                }
             }
             else if (result == false)
                 Toast.makeText(getApplicationContext(), "Unable to push data to server", Toast.LENGTH_LONG).show();
