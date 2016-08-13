@@ -192,10 +192,6 @@ public class MapsActivity extends AppCompatActivity implements
 
             e2.printStackTrace();
         }
-
-        TextView myTextView = (TextView) findViewById(R.id.test);
-
-        myTextView.setText("Address is: " + mAddress);
     }
 
     protected synchronized void buildGoogleApiClient() {

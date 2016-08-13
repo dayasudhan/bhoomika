@@ -90,14 +90,16 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
         orderTimings = (TextView)findViewById(R.id.ordertimings);
 
         String strorderTimings = new String();
-        if (hotelDetail.getOrderAcceptTimings().getMorning().getAvailable().equals("Yes")) {
-            strorderTimings = "Breakfast: " + hotelDetail.getOrderAcceptTimings().getMorning().getStartTime() + "-" + hotelDetail.getOrderAcceptTimings().getMorning().getEndTime();
-        }
-        if (hotelDetail.getOrderAcceptTimings().getLunch().getAvailable().equals("Yes")) {
-            strorderTimings = strorderTimings + "\n"  + "Lunch   : " + hotelDetail.getOrderAcceptTimings().getLunch().getStartTime() + "-" + hotelDetail.getOrderAcceptTimings().getLunch().getEndTime();
-        }
-        if (hotelDetail.getOrderAcceptTimings().getDinner().getAvailable().equals("Yes")) {
-            strorderTimings = strorderTimings + "\n"  + "Dinner  : " + hotelDetail.getOrderAcceptTimings().getDinner().getStartTime() + "-" + hotelDetail.getOrderAcceptTimings().getDinner().getEndTime();
+        if(hotelDetail.getOrderAcceptTimings()!=null) {
+            if (hotelDetail.getOrderAcceptTimings().getMorning().getAvailable().equals("Yes")) {
+                strorderTimings = "Breakfast: " + hotelDetail.getOrderAcceptTimings().getMorning().getStartTime() + "-" + hotelDetail.getOrderAcceptTimings().getMorning().getEndTime();
+            }
+            if (hotelDetail.getOrderAcceptTimings().getLunch().getAvailable().equals("Yes")) {
+                strorderTimings = strorderTimings + "\n" + "Lunch   : " + hotelDetail.getOrderAcceptTimings().getLunch().getStartTime() + "-" + hotelDetail.getOrderAcceptTimings().getLunch().getEndTime();
+            }
+            if (hotelDetail.getOrderAcceptTimings().getDinner().getAvailable().equals("Yes")) {
+                strorderTimings = strorderTimings + "\n" + "Dinner  : " + hotelDetail.getOrderAcceptTimings().getDinner().getStartTime() + "-" + hotelDetail.getOrderAcceptTimings().getDinner().getEndTime();
+            }
         }
         orderTimings.setText(strorderTimings);
         Button nextButton = (Button) findViewById(R.id.button);
