@@ -38,9 +38,10 @@ public class ScreenSlidePageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_screen_slide_page, container, false);
 
-        ImageView imageView = (ImageView)rootView.findViewById(R.id.image);//Resmin gösterilcegi controller
-        //ProgressBar; resim ilk yüklenirken,  yüklendiğine dair görseli sağlamak icin tanımladık
+        ImageView imageView = (ImageView)rootView.findViewById(R.id.image);
+
         final ProgressBar progressBar = (ProgressBar) rootView.findViewById(R.id.progress);//
+
 
         //ve Resim yollarını aldık
         Bundle arguments = getArguments();

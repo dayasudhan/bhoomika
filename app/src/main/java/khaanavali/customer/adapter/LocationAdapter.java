@@ -9,10 +9,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import khaanavali.customer.R;
-
 import java.util.ArrayList;
 import java.util.Locale;
+
+import khaanavali.customer.R;
 
 
 public class LocationAdapter extends BaseAdapter{
@@ -94,6 +94,7 @@ public class LocationAdapter extends BaseAdapter{
             {
                 if (city.toLowerCase(Locale.getDefault()).contains(charText))
                 {
+
                     mCityCoverage.add(city);
                 }
             }

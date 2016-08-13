@@ -88,13 +88,19 @@ public class PlacesActivity extends AppCompatActivity{
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-                dataAdapter.filter(query);
+                if(dataAdapter!= null)
+                {
+                    dataAdapter.filter(query);
+                }
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String query) {
-                dataAdapter.filter(query);
+                if(dataAdapter!=null)
+                {
+                    dataAdapter.filter(query);
+                }
                 return false;
             }
         });
@@ -147,7 +153,7 @@ public class PlacesActivity extends AppCompatActivity{
             dialog.setContentView(R.layout.custom_progress_dialog);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
             dialog.show();
-            dialog.setCancelable(false);
+            dialog.setCancelable(true);
         }
 
         @Override

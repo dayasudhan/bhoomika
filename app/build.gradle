@@ -42,4 +42,5 @@ dependencies {
     compile 'com.splunk.mint:mint:5.0.0'
     compile files('libs/gson-2.2.jar')
 
+    compile 'com.google.android.gms:play-services-appindexing:9.2.1'
 }

@@ -113,7 +113,7 @@ public class VendorRating extends AppCompatActivity {
             dialog.setContentView(R.layout.custom_progress_dialog);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
             dialog.show();
-            dialog.setCancelable(false);
+            dialog.setCancelable(true);
         }
 
         @Override

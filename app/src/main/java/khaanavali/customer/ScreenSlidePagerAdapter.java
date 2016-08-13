@@ -16,7 +16,6 @@ public class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int i) {
-        //Resimleri Image loader kütüphanesini kullanarak yüklenmesi icin resim url, ScreenSlidePageFragment sınıfına atadık.
         return ScreenSlidePageFragment.newInstance(picList.get(i));
     }
 
