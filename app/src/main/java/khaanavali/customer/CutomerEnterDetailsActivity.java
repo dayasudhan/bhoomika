@@ -128,7 +128,7 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
                     alertMessage(false,text);
                 }
                 else {
-                    alertMessage(true,"Are you sure about this order(Address, Phone)?");
+                    alertMessage(true,"Are you sure to place this order");
                 }
             }
         });

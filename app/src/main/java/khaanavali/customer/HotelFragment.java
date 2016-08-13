@@ -155,7 +155,7 @@ public class HotelFragment extends Fragment {
                 }
                 else
                 {
-                    alertMessage("Today this hotel closed. kindly try other hotel near by you");
+                    alertMessage("Delevery for this hotel is not available at this time. kindly try other hotel near by you");
                 }
             }
         });

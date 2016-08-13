@@ -7,6 +7,7 @@ import android.app.ActivityManager;
 import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -16,6 +17,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.splunk.mint.Mint;
 
@@ -23,8 +25,6 @@ import com.splunk.mint.Mint;
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout dLayout;
-    private boolean isBulk;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,14 +98,13 @@ public class MainActivity extends AppCompatActivity {
                 int itemId = menuItem.getItemId();
             if (itemId == R.id.hotel) {
                     frag = new HotelFragment();
-                MainActivity.this.setBulk(false);
+
                 ((HotelFragment)frag).setBulk(false);
 
             }
             else if(itemId==R.id.bulk_activity)
             {
                 frag = new HotelFragment();
-                MainActivity.this.setBulk(true);
                 ((HotelFragment)frag).setBulk(true);
 
 
@@ -159,15 +158,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_search: {
               //  Toast.makeText(getApplicationContext(), "menu selected", Toast.LENGTH_LONG).show();
                 Intent i = new Intent(this, PlacesActivity.class);
-                if(this.isBulk() == true)
-                {
-                    i.putExtra("isBulk","true");
-                }
-                else
-                {
-                    i.putExtra("isBulk","false");
-                }
                 startActivityForResult(i,1);
+
                 return true;
             }
         }
@@ -180,21 +172,31 @@ public class MainActivity extends AppCompatActivity {
 //        menuInflater.inflate(R.menu.home_menu, menu);
 //        return super.onCreateOptionsMenu(menu);
 //    }
-
+    boolean doubleBackToExitPressedOnce = false;
     @Override
     public void onBackPressed() {
         if (dLayout.isDrawerOpen(GravityCompat.START)) {
             dLayout.closeDrawer(GravityCompat.START);
         }
         else {
-            super.onBackPressed();
+            //super.onBackPressed();
+            if (doubleBackToExitPressedOnce) {
+                super.onBackPressed();
+                return;
+            }
+
+            this.doubleBackToExitPressedOnce = true;
+            Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce=false;
+                }
+            }, 2000);
         }
     }
-    public boolean isBulk() {
-        return isBulk;
-    }
 
-    public void setBulk(boolean bulk) {
-        isBulk = bulk;
-    }
+
 }

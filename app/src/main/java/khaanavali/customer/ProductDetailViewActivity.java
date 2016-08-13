@@ -17,16 +17,16 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.splunk.mint.Mint;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
 import khaanavali.customer.adapter.PlusMinusButtonListener;
 import khaanavali.customer.adapter.ProductAdapter;
 import khaanavali.customer.model.HotelDetail;
 import khaanavali.customer.model.Menu;
 import khaanavali.customer.model.MenuAdapter;
 import khaanavali.customer.model.Order;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 
 
 public class ProductDetailViewActivity extends AppCompatActivity implements PlusMinusButtonListener {
@@ -91,7 +91,7 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
 
         String strorderTimings = new String();
         if (hotelDetail.getOrderAcceptTimings().getMorning().getAvailable().equals("Yes")) {
-            strorderTimings = "Morning: " + hotelDetail.getOrderAcceptTimings().getMorning().getStartTime() + "-" + hotelDetail.getOrderAcceptTimings().getMorning().getEndTime();
+            strorderTimings = "Breakfast: " + hotelDetail.getOrderAcceptTimings().getMorning().getStartTime() + "-" + hotelDetail.getOrderAcceptTimings().getMorning().getEndTime();
         }
         if (hotelDetail.getOrderAcceptTimings().getLunch().getAvailable().equals("Yes")) {
             strorderTimings = strorderTimings + "\n"  + "Lunch   : " + hotelDetail.getOrderAcceptTimings().getLunch().getStartTime() + "-" + hotelDetail.getOrderAcceptTimings().getLunch().getEndTime();
