@@ -84,7 +84,7 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
         deliveryTime  = (TextView)findViewById(R.id.vendor_delivery_time_info);
         deliveryTime.setText("Deliver Time: " + Integer.toString(hotelDetail.getDeliveryTime()) + " mins");
         minimumOrder  = (TextView)findViewById(R.id.vendor_rating_info);
-        minimumOrder.setText("Minumum Order: ₹"+Integer.toString(hotelDetail.getMinimumOrder()));
+        minimumOrder.setText("Min Order: ₹ "+Integer.toString(hotelDetail.getMinimumOrder()));
 //        phone    = (TextView)findViewById(R.id.phone);
 //        phone.setText("Phone :"+Integer.toString(hotelDetail.getPhone()));
         orderTimings = (TextView)findViewById(R.id.ordertimings);

@@ -214,7 +214,6 @@ public class PlacesActivity extends AppCompatActivity{
     private void setToolBar(String title) {
         Toolbar tb = (Toolbar) findViewById(R.id.toolbar2);
         setSupportActionBar(tb);
-
         ActionBar ab = getSupportActionBar();
         ab.setHomeAsUpIndicator(R.drawable.ic_action_back);
         ab.setDisplayHomeAsUpEnabled(true);
@@ -232,12 +231,11 @@ public class PlacesActivity extends AppCompatActivity{
 
             default:
 
-                return super.onOptionsItemSelected(item);
+               return super.onOptionsItemSelected(item);
+
 
         }
     }
-
-
 
 
 }

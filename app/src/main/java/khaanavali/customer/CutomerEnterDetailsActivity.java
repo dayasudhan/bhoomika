@@ -113,11 +113,11 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
                 else if(editHouseNo.getText().length() == 0){
                     alertMessage(false,"Enter House No or Flat No ");
                 }
-                else if(editAreaName.getText().length() == 0){
-                    alertMessage(false,"Enter areaname ");
-                }
                 else if(editAddress.getText().length() == 0){
                     alertMessage(false,"Enter Address ");
+                }
+                else if(editAreaName.getText().length() == 0){
+                    alertMessage(false,"Enter areaname  ");
                 }
                 else if(editLandmark.getText().length() == 0){
                     alertMessage(false,"Enter Landmark/locality ");
