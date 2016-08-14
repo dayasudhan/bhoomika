@@ -49,7 +49,11 @@ public class WelcomeActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
         btnSkip = (Button) findViewById(R.id.btn_skip);
+        btnSkip.setTextColor(Color.GREEN);
+
+
         btnNext = (Button) findViewById(R.id.btn_next);
+        btnNext.setTextColor(Color.GREEN);
 
 
         // layouts of all welcome sliders
@@ -119,7 +123,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
     private void launchHomeScreen() {
         prefManager.setFirstTimeLaunch(false);
-        startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
+        startActivity(new Intent(WelcomeActivity.this, SplashActivity.class));
         finish();
     }
 
@@ -134,11 +138,16 @@ public class WelcomeActivity extends AppCompatActivity {
             if (position == layouts.length - 1) {
                 // last page. make button text to GOT IT
                 btnNext.setText(getString(R.string.start));
+                btnNext.setTextColor(Color.GREEN);
                 btnSkip.setVisibility(View.GONE);
+                btnSkip.setTextColor(Color.GREEN);
             } else {
                 // still pages are left
                 btnNext.setText(getString(R.string.next));
                 btnSkip.setVisibility(View.VISIBLE);
+                btnNext.setTextColor(Color.GREEN);
+                btnSkip.setTextColor(Color.GREEN);
+
             }
         }
 

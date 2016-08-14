@@ -78,7 +78,8 @@
         android:id="@+id/add_sub_val"
 
         android:layout_centerVertical="true"
-        android:layout_toStartOf="@+id/add_btn" />
+        android:layout_toStartOf="@+id/add_btn"
+        android:editable="true" />
 
 
 </RelativeLayout>

@@ -18,7 +18,6 @@ import com.google.gson.reflect.TypeToken;
 import com.splunk.mint.Mint;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 import khaanavali.customer.model.Address;
@@ -63,13 +62,13 @@ public class AddAdressActivity  extends AppCompatActivity {
                     //Toast.makeText(getApplicationContext(), "Enter House No or Flat No ", Toast.LENGTH_LONG).show();
                     alertMessage("Enter House or Flat No ");
                 }
-                else if(editAreaName.getText().length() == 0){
-                    //Toast.makeText(getApplicationContext(), "Enter areaname ", Toast.LENGTH_LONG).show();
-                    alertMessage("Enter areaname ");
-                }
                 else if(editAddress.getText().length() == 0){
+                    //Toast.makeText(getApplicationContext(), "Enter areaname ", Toast.LENGTH_LONG).show();
+                    alertMessage("Enter adress ");
+                }
+                else if(editAreaName.getText().length() == 0){
                     //Toast.makeText(getApplicationContext(), "Enter Address ", Toast.LENGTH_LONG).show();
-                    alertMessage("Enter Address ");
+                    alertMessage("Enter Areaname ");
                 }
                 else if(editLandmark.getText().length() == 0){
                     //Toast.makeText(getApplicationContext(), "Enter Landmark/locality ", Toast.LENGTH_LONG).show();

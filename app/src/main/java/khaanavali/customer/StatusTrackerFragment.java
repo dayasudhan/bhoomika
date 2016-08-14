@@ -97,7 +97,7 @@ public class StatusTrackerFragment extends Fragment {
                 }
                 else
                 {
-                    alertMessage("Please enter valid status id");
+                    alertMessage("Please enter valid Order id");
                 }
             }
         });

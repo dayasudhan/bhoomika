@@ -1,7 +1,6 @@
 package khaanavali.customer.adapter;
 
 import android.app.Activity;
-import android.content.res.ColorStateList;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +9,12 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import khaanavali.customer.R;
 import khaanavali.customer.model.HotelDetail;
 import khaanavali.customer.utils.Constants;
 import khaanavali.customer.utils.ImageLoader;
-
-import java.util.ArrayList;
 
 
 public class HotelListAdapter extends BaseAdapter{
@@ -82,7 +81,7 @@ public class HotelListAdapter extends BaseAdapter{
         itemHolder.hotelSpeciality.setText(mhotelList.get(position).getSpeciality());
         if(mhotelList.get(position).getIsOpen() == 0)
         {
-            itemHolder.hotelIsClosed.setText("Closed Today");
+            itemHolder.hotelIsClosed.setText("Closed now");
         }
         else
         {
