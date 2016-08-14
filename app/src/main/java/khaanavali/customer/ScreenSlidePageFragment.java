@@ -69,7 +69,7 @@ public class ScreenSlidePageFragment extends Fragment {
                     @Override
                     public void onLoadingStarted(String imageUri, View view) {
                         progressBar.setProgress(2);
-                        progressBar.setVisibility(View.VISIBLE);//Yüklenme işlemi başladığında progressBar iconu görünür yaptık
+                        progressBar.setVisibility(View.GONE);//Yüklenme işlemi başladığında progressBar iconu görünür yaptık
                     }
 
                     @Override
