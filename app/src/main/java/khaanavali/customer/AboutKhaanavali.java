@@ -59,7 +59,7 @@ public class AboutKhaanavali extends Fragment {
             gmail.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View arg0) {
-                    goToUrl("http://khaanavali@gmail.com");
+                    goToUrl("http://gmail.com");
                 }
             });
             webPage.setOnClickListener(new View.OnClickListener() {

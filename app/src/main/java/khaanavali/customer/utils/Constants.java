@@ -4,8 +4,8 @@ package khaanavali.customer.utils;
 public class Constants {
 
     public static final String LOCALHOST = "http://192.168.1.107:3000";
-    public static final String RELEASE_URL = "http://oota.herokuapp.com";
-    public static final String DEBUG_URL = "http://kuruva.herokuapp.com";
+    public static final String RELEASE_URL = "https://oota.herokuapp.com";
+    public static final String DEBUG_URL = "https://kuruva.herokuapp.com";
     public static final String MAIN_URL = DEBUG_URL;
     public static final String ORDER_URL = MAIN_URL + "/v1/vendor/order";
     public static final String GET_HOTEL_BY_DELIVERY_AREAS =  MAIN_URL +"/v1/vendor/delieveryareas?areaName=";
