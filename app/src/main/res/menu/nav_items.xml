@@ -7,7 +7,12 @@
               <!--android:icon="@drawable/ic_action_fab" />-->
         <item android:id="@+id/hotel"
             android:title="Hotels"
-            android:icon="@drawable/ic_action_fab" />
+            android:icon="@drawable/home" />
+
+        <item android:id="@+id/bulk_activity"
+            android:title="Bulk"
+            android:icon="@drawable/bulk_order" />
+
         <item android:id="@+id/status"
             android:title="Order Status"
             android:icon="@drawable/ic_action_star" />

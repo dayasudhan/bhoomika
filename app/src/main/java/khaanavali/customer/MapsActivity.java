@@ -17,6 +17,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -43,12 +44,13 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Locale;
 
-public class MapsActivity extends FragmentActivity implements
+public class MapsActivity extends AppCompatActivity implements
         OnMapReadyCallback, GoogleMap.OnCameraChangeListener ,GoogleMap.OnMyLocationButtonClickListener,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private GoogleMap mMap;
     Button btnpicklocation;
+    Button btnManuallAddress;
     Marker mCurrLocationMarker;
     int zoomleval = 15;
     /**
@@ -66,7 +68,7 @@ public class MapsActivity extends FragmentActivity implements
         Mint.initAndStartSession(MapsActivity.this, "49d903c2");
         setContentView(R.layout.activity_maps);
         btnpicklocation= (Button) findViewById(R.id.pickaddressbtn);
-
+        btnManuallAddress = (Button)findViewById(R.id.buttonEnterManual);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
            checkLocationPermission();
         }
@@ -78,9 +80,12 @@ public class MapsActivity extends FragmentActivity implements
         btnpicklocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setAddress(mSelectedLatlang.latitude,mSelectedLatlang.longitude);
-//                LatLng bangalore = new LatLng(12.9716, 77.5946);
-//                setAddress(bangalore.latitude,bangalore.longitude);
+                if(mSelectedLatlang != null)
+                    setAddress(mSelectedLatlang.latitude,mSelectedLatlang.longitude);
+                else {
+                    LatLng bangalore = new LatLng(12.9716, 77.5946);
+                    setAddress(bangalore.latitude, bangalore.longitude);
+                }
                 Intent i = new Intent(MapsActivity.this, AddAdressActivity.class);
                 Gson gson = new Gson();
                 String locationaddress = gson.toJson(mAddresses);
@@ -88,6 +93,16 @@ public class MapsActivity extends FragmentActivity implements
                 i.putExtra("locationaddress", locationaddress);
                 startActivityForResult(i,1);
                // finish();
+            }
+        });
+
+        btnManuallAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(MapsActivity.this, AddAdressActivity.class);
+                Gson gson = new Gson();
+                startActivityForResult(i,1);
             }
         });
         setToolBar("Add Address");
@@ -188,10 +203,6 @@ public class MapsActivity extends FragmentActivity implements
 
             e2.printStackTrace();
         }
-
-        TextView myTextView = (TextView) findViewById(R.id.test);
-
-        myTextView.setText("Address is: " + mAddress);
     }
 
     protected synchronized void buildGoogleApiClient() {
@@ -237,7 +248,7 @@ public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
                 != PackageManager.PERMISSION_GRANTED) {
 
             // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(getParent(),
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
 
                 // Show an expanation to the user *asynchronously* -- don't block
@@ -249,7 +260,7 @@ public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
-                                ActivityCompat.requestPermissions(getParent(),
+                                ActivityCompat.requestPermissions(MapsActivity.this,
                                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                                         MY_PERMISSIONS_REQUEST_LOCATION);
                             }
@@ -269,7 +280,7 @@ public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
             } else {
                 // No explanation needed, we can request the permission.
-                ActivityCompat.requestPermissions(getParent(),
+                ActivityCompat.requestPermissions(MapsActivity.this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_LOCATION);
             }

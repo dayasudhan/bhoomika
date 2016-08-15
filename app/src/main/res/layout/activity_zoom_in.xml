@@ -8,7 +8,7 @@
     <ImageView android:id="@+id/imgback"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@drawable/appstart"
+        android:background="@drawable/splash"
 
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"

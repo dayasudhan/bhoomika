@@ -1,20 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tmall="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:orientation="vertical">
+
+            <!--gagan-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:id="@+id/swypingImage"
+                android:orientation="horizontal"
+                android:layout_alignParentBottom="true"
+                android:scaleType="fitXY"
+                >
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/pager"
+                    android:layout_height="fill_parent"
+                    android:layout_width="fill_parent"
+                    android:scaleType="fitXY" />
+
+                <khaanavali.customer.CirclePageIndicator
+                    android:id="@+id/indicator"
+                    android:gravity="bottom|center_horizontal"
+                    tmall:indicator_spacing="5dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="170dp"
+                    />
+
+
+            <!--gagan-->
+
+        </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:id="@+id/order_details_lay"
-            >
+            android:layout_below="@+id/imageslider"
 
+        android:id="@+id/order_details_lay"
+            >
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

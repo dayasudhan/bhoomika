@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,7 +16,7 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-
+        <!--gagan
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action
@@ -24,28 +25,83 @@
                     android:theme="@style/AppTheme2" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".SplashActivity"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+        -->
+        <!--gagan-->
+        <activity android:name=".WelcomeActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ProductDetailViewActivity" />
-        <activity android:name=".CartActivity" />
-        <activity android:name=".FinishActivity" />
-        <activity android:name=".PlacesActivity" />
-        <activity android:name=".CutomerEnterDetailsActivity" />
-        <activity android:name=".SelectAddressActivity" />
+        <activity
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:name=".SplashActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+           <intent-filter>
+               <!-- <action android:name="android.intent.action.MAIN" />-->
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ProductDetailViewActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".CartActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".FinishActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".PlacesActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+
+            </activity>
+        <activity android:name=".CutomerEnterDetailsActivity"
+            android:windowSoftInputMode="adjustPan|adjustResize"
+
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".SelectAddressActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
         <activity
             android:name=".AddAdressActivity"
-            android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".MapsActivity" />
+            android:windowSoftInputMode="adjustPan|adjustResize"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".MapsActivity"
+            android:windowSoftInputMode="adjustPan|adjustResize"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
         <!-- adding our service -->
-        <service android:name=".NotificationListener" />
-        <activity android:name=".VendorRating" />
+        <service android:name=".NotificationListener"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".VendorRating"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".RegisterActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".OtpVeirificationActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            /><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>

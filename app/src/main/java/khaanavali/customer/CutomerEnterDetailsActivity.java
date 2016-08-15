@@ -1,22 +1,13 @@
 package khaanavali.customer;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-
 import android.graphics.drawable.ColorDrawable;
-import android.location.Location;
 import android.net.ParseException;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -27,16 +18,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.google.gson.Gson;
 import com.splunk.mint.Mint;
 
-
-import khaanavali.customer.model.HotelDetail;
-import khaanavali.customer.model.Order;
-import khaanavali.customer.utils.Constants;
-import khaanavali.customer.utils.GPSTracker;
-import khaanavali.customer.model.Address;
-import khaanavali.customer.utils.SessionManager;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -46,9 +31,16 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
-import java.io.IOException;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import khaanavali.customer.model.Address;
+import khaanavali.customer.model.HotelDetail;
+import khaanavali.customer.model.Order;
+import khaanavali.customer.utils.Constants;
+import khaanavali.customer.utils.GPSTracker;
+import khaanavali.customer.utils.SessionManager;
 
 
 public class CutomerEnterDetailsActivity extends AppCompatActivity {
@@ -59,6 +51,7 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
     EditText editName,editPhone,editCity,editHouseNo,editAreaName,editLandmark,editAddress;
     GPSTracker gps;
     HotelDetail hotelDetail;
+    String strHotelDetail;
     SessionManager session;
     TextView orderTotalCharge,billvalue,deliveryCharge;
 
@@ -70,13 +63,18 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Gson gson = new Gson();
         order = gson.fromJson(intent.getStringExtra("order"), Order.class);
+        strHotelDetail = intent.getStringExtra("HotelDetail");
         hotelDetail = gson.fromJson(intent.getStringExtra("HotelDetail"), HotelDetail.class);
+
         responseOrder = new String();
         session = new SessionManager(getApplicationContext());
         Button btn= (Button) findViewById(R.id.placeOrderButton);
         btnShowLocation= (Button) findViewById(R.id.locationButton);
         editName=(EditText)findViewById(R.id.orderDetailName);
+
         editPhone=(EditText)findViewById(R.id.orderDetailPhone);
+        editPhone.setKeyListener(null);
+
         editCity=(EditText)findViewById(R.id.orderDetailEmail);
         editHouseNo=(EditText)findViewById(R.id.orderDetailAddress_house_no);
         editAreaName=(EditText)findViewById(R.id.orderDetailAddress_areaname);
@@ -109,17 +107,17 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
                 if (!validatePhoneNumber(editPhone.getText().toString())) {
                     alertMessage(false,"Enter Valid Phone Number");
                 }
-                else if(editName.getText().length() == 0){
+                if(editName.getText().length() == 0){
                     alertMessage(false,"Enter Name");
                 }
                 else if(editHouseNo.getText().length() == 0){
                     alertMessage(false,"Enter House No or Flat No ");
                 }
-                else if(editAreaName.getText().length() == 0){
-                    alertMessage(false,"Enter areaname ");
-                }
                 else if(editAddress.getText().length() == 0){
                     alertMessage(false,"Enter Address ");
+                }
+                else if(editAreaName.getText().length() == 0){
+                    alertMessage(false,"Enter areaname  ");
                 }
                 else if(editLandmark.getText().length() == 0){
                     alertMessage(false,"Enter Landmark/locality ");
@@ -130,7 +128,7 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
                     alertMessage(false,text);
                 }
                 else {
-                    alertMessage(true,"Are you sure about this order(Address, Phone)?");
+                    alertMessage(true,"Are you sure to place this order");
                 }
             }
         });
@@ -155,6 +153,7 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setTitle(title);
     }
+
 
     @Override
     public boolean onOptionsItemSelected(android.view.MenuItem item) {
@@ -195,7 +194,7 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
                     {
                         order.getCustomer().setPhone(editPhone.getText().toString());
                         order.getCustomer().setName(editName.getText().toString());
-                        order.getCustomer().setEmail(editCity.getText().toString());
+                        order.getCustomer().setEmail(session.getEmail());
                         order.getCustomer().getAddress().setAreaName(editAreaName.getText().toString());
                         order.getCustomer().getAddress().setLandMark(editLandmark.getText().toString());
                         order.getCustomer().getAddress().setAddressLine1(editHouseNo.getText().toString());
@@ -226,8 +225,6 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
 
         }
     }
-
-
     private static boolean validatePhoneNumber(String phoneNo)
     {
         if (phoneNo.matches("\\d{10}"))
@@ -252,7 +249,7 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
             dialog.setContentView(R.layout.custom_progress_dialog);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
             dialog.show();
-            dialog.setCancelable(false);
+            dialog.setCancelable(true);
         }
 
         @Override
@@ -266,6 +263,9 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
                 request.setEntity(se);
                 request.setHeader("Accept", "application/json");
                 request.setHeader("Content-type", "application/json");
+                request.setHeader(Constants.SECUREKEY_KEY, Constants.SECUREKEY_VALUE);
+                request.setHeader(Constants.VERSION_KEY, Constants.VERSION_VALUE);
+                request.setHeader(Constants.CLIENT_KEY, Constants.CLIENT_VALUE);
                 HttpResponse response = httpclient.execute(request);
 
                 int status = response.getStatusLine().getStatusCode();
@@ -288,6 +288,7 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
             if(result == true){
                 Intent i = new Intent(CutomerEnterDetailsActivity.this, FinishActivity.class);
                 i.putExtra("order", responseOrder);
+                i.putExtra("HotelDetail",strHotelDetail);
                 startActivity(i);
                 finish();
             }

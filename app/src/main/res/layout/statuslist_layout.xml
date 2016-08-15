@@ -33,10 +33,10 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Status"
+                android:text="Track status"
                 android:id="@+id/status_button"
                 android:textColor="#ffffff"
-                android:background="@drawable/buttonselector"
+                android:background="@drawable/locationbuttonselector"
                 android:clickable="true"
 
                 android:layout_alignParentBottom="true"

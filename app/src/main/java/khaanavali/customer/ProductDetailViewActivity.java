@@ -17,16 +17,16 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.splunk.mint.Mint;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
 import khaanavali.customer.adapter.PlusMinusButtonListener;
 import khaanavali.customer.adapter.ProductAdapter;
 import khaanavali.customer.model.HotelDetail;
 import khaanavali.customer.model.Menu;
 import khaanavali.customer.model.MenuAdapter;
 import khaanavali.customer.model.Order;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 
 
 public class ProductDetailViewActivity extends AppCompatActivity implements PlusMinusButtonListener {
@@ -47,6 +47,14 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
         Intent intent = getIntent();
         Gson gson = new Gson();
         hotelDetail = gson.fromJson(intent.getStringExtra("hotel"), HotelDetail.class);
+        if(intent.getStringExtra("isBulk").equals("true"))
+        {
+            order.setOrdertype(1);
+        }
+        else
+        {
+            order.setOrdertype(0);
+        }
         order.setHotel(hotelDetail.getHotel());
         mMenulist = new ArrayList<MenuAdapter>();
         for(int i = 0; i< hotelDetail.getMenu().size(); i++)
@@ -76,20 +84,22 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
         deliveryTime  = (TextView)findViewById(R.id.vendor_delivery_time_info);
         deliveryTime.setText("Deliver Time: " + Integer.toString(hotelDetail.getDeliveryTime()) + " mins");
         minimumOrder  = (TextView)findViewById(R.id.vendor_rating_info);
-        minimumOrder.setText("Minumum Order: ₹"+Integer.toString(hotelDetail.getMinimumOrder()));
+        minimumOrder.setText("Min Order: ₹ "+Integer.toString(hotelDetail.getMinimumOrder()));
 //        phone    = (TextView)findViewById(R.id.phone);
 //        phone.setText("Phone :"+Integer.toString(hotelDetail.getPhone()));
         orderTimings = (TextView)findViewById(R.id.ordertimings);
 
         String strorderTimings = new String();
-        if (hotelDetail.getOrderAcceptTimings().getMorning().getAvailable().equals("Yes")) {
-            strorderTimings = "Morning: " + hotelDetail.getOrderAcceptTimings().getMorning().getStartTime() + "-" + hotelDetail.getOrderAcceptTimings().getMorning().getEndTime();
-        }
-        if (hotelDetail.getOrderAcceptTimings().getLunch().getAvailable().equals("Yes")) {
-            strorderTimings = strorderTimings + "\n"  + "Lunch   : " + hotelDetail.getOrderAcceptTimings().getLunch().getStartTime() + "-" + hotelDetail.getOrderAcceptTimings().getLunch().getEndTime();
-        }
-        if (hotelDetail.getOrderAcceptTimings().getDinner().getAvailable().equals("Yes")) {
-            strorderTimings = strorderTimings + "\n"  + "Dinner  : " + hotelDetail.getOrderAcceptTimings().getDinner().getStartTime() + "-" + hotelDetail.getOrderAcceptTimings().getDinner().getEndTime();
+        if(hotelDetail.getOrderAcceptTimings()!=null) {
+            if (hotelDetail.getOrderAcceptTimings().getMorning().getAvailable().equals("Yes")) {
+                strorderTimings = "Breakfast: " + hotelDetail.getOrderAcceptTimings().getMorning().getStartTime() + "-" + hotelDetail.getOrderAcceptTimings().getMorning().getEndTime();
+            }
+            if (hotelDetail.getOrderAcceptTimings().getLunch().getAvailable().equals("Yes")) {
+                strorderTimings = strorderTimings + "\n" + "Lunch   : " + hotelDetail.getOrderAcceptTimings().getLunch().getStartTime() + "-" + hotelDetail.getOrderAcceptTimings().getLunch().getEndTime();
+            }
+            if (hotelDetail.getOrderAcceptTimings().getDinner().getAvailable().equals("Yes")) {
+                strorderTimings = strorderTimings + "\n" + "Dinner  : " + hotelDetail.getOrderAcceptTimings().getDinner().getStartTime() + "-" + hotelDetail.getOrderAcceptTimings().getDinner().getEndTime();
+            }
         }
         orderTimings.setText(strorderTimings);
         Button nextButton = (Button) findViewById(R.id.button);
@@ -200,8 +210,12 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
     }
     @Override
     public void buttonClicked(int postion,int value) {
-        counttxt.setText(String.valueOf(mDataAdapter.totalCount));
-        priceTxt.setText("₹ " + String.valueOf(mDataAdapter.totalCost));
+        if(counttxt != null) {
+            counttxt.setText(String.valueOf(mDataAdapter.totalCount));
+        }
+        if(priceTxt != null) {
+            priceTxt.setText("₹ " + String.valueOf(mDataAdapter.totalCost));
+        }
     }
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {

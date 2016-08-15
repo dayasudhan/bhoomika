@@ -1,20 +1,20 @@
 package khaanavali.customer.adapter;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import khaanavali.customer.R;
 import khaanavali.customer.model.MenuAdapter;
-
-import java.util.ArrayList;
 
 public class ProductAdapter extends BaseAdapter {
     Activity con;
@@ -89,17 +89,16 @@ public class ProductAdapter extends BaseAdapter {
         }
 
         //   itemHolder.city.setTypeface(cr);
-        itemHolder.mAddBtn = (TextView) view.findViewById(R.id.add_btn);
-        itemHolder.mAddBtn.setTag(position);
-        itemHolder.mAddBtn = (TextView) view.findViewById(R.id.add_btn);
-        itemHolder.mSubBtn = (TextView) view.findViewById(R.id.sub_btn);
-        itemHolder.mSubBtn.setTag(position);
+        itemHolder.mAddImg = (ImageView) view.findViewById(R.id.add_btn);
+        itemHolder.mAddImg.setTag(position);
+        itemHolder.mSubImg = (ImageView) view.findViewById(R.id.sub_btn);
+        itemHolder.mSubImg.setTag(position);
         itemHolder.city.setText(mMenulist.get(position).getName());
         itemHolder.price_value.setText(new String("₹ ").concat(String.valueOf(mMenulist.get(position).getPrice())));
 
         itemHolder.mValue = (TextView) view.findViewById(R.id.add_sub_val);
         itemHolder.mValue.setText(String.valueOf(mMenulist.get(position).getNo_of_order()));
-        itemHolder.mAddBtn.setOnClickListener(new View.OnClickListener() {
+        itemHolder.mAddImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 totalCount =  totalCount + 1;
@@ -120,8 +119,8 @@ public class ProductAdapter extends BaseAdapter {
                 int val = count + 1;
                 String sVal = "" + val;
                 tiew.setText(sVal);
-                TextView btn = (TextView) parentRow.findViewById(R.id.add_btn);
-                btn.setTextColor(Color.parseColor("#07c2b1"));
+                ImageView btn = (ImageView) parentRow.findViewById(R.id.add_btn);
+             //   btn.setTextColor(Color.parseColor("#07c2b1"));
                 mMenulist.get(posi).setNo_of_order(val);
                 totalCost = totalCost +mMenulist.get(posi).getPrice();
                 mListener.buttonClicked(pos,val);
@@ -154,7 +153,7 @@ public class ProductAdapter extends BaseAdapter {
         });
 
 
-        itemHolder.mSubBtn.setOnClickListener(new View.OnClickListener() {
+        itemHolder.mSubImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 v.getTag();
@@ -175,10 +174,10 @@ public class ProductAdapter extends BaseAdapter {
                     // Toast.makeText(getApplicationContext(),""+val,Toast.LENGTH_LONG).show();
                     String sVal = "" + val;
                     tiew.setText(sVal);
-                    TextView subbtn = (TextView) parentRow.findViewById(R.id.sub_btn);
-                    subbtn.setTextColor(Color.parseColor("#07c2b1"));
-                    TextView addbtn = (TextView) parentRow.findViewById(R.id.add_btn);
-                    addbtn.setTextColor(Color.parseColor("#8A8A8A"));
+                    ImageView subbtn = (ImageView) parentRow.findViewById(R.id.sub_btn);
+                 //   subbtn.setTextColor(Color.parseColor("#07c2b1"));
+                    ImageView addbtn = (ImageView) parentRow.findViewById(R.id.add_btn);
+                  //  addbtn.setTextColor(Color.parseColor("#8A8A8A"));
                     String productname = textName.getText().toString();
                     mMenulist.get(posi).setNo_of_order(val);
                     totalCost = totalCost  -mMenulist.get(posi).getPrice();
@@ -207,6 +206,7 @@ public class ProductAdapter extends BaseAdapter {
         city=rowItems;
     }*/
     private static class CityItemHolder {
-        TextView city,mAddBtn,mSubBtn,mValue,price_value;
+        TextView city,mValue,price_value;
+        ImageView mSubImg,mAddImg;
    }
 }

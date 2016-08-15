@@ -28,11 +28,9 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
 
-        android:layout_alignTop="@+id/product_detail_image_view"
-        android:layout_toRightOf="@+id/product_detail_image_view"
-        android:layout_marginTop="25dp"
-        android:layout_toLeftOf="@+id/add_btn"
-        android:layout_toStartOf="@+id/add_btn" />
+        android:layout_below="@+id/sub_btn"
+        android:layout_toEndOf="@+id/product_detail_image_view"
+        android:layout_marginStart="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -43,41 +41,31 @@
         android:id="@+id/approx_price_val"
         android:textColor="@color/secondary_text_color"
         android:textSize="14sp"
-        android:layout_marginTop="5dp"
         android:layout_below="@+id/product_detail_name"
-        android:layout_alignLeft="@+id/product_detail_name"
         android:layout_alignStart="@+id/product_detail_name" />
 
 
 
 
-    <TextView
+    <ImageView
 
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:text="-"
-
-        android:textColor="@color/text_view_grey"
-        android:textSize="15sp"
-        android:gravity="center_horizontal|center_vertical"
-        android:background="#ffffff"
-        android:id="@+id/sub_btn"
-        android:layout_below="@+id/add_sub_val"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-    <TextView
-
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:text="+"
-        android:textSize="16sp"
-        android:textColor="@color/text_view_grey"
-        android:background="#ffffff"
+        android:src="@drawable/plus"
         android:gravity="center_horizontal|center_vertical"
         android:id="@+id/add_btn"
-
-        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
         android:layout_alignParentEnd="true" />
+    <ImageView
+
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/minus"
+
+        android:gravity="center_horizontal|center_vertical"
+        android:id="@+id/sub_btn"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@+id/add_sub_val" />
 
     <TextView
         android:layout_width="40dp"
@@ -88,12 +76,10 @@
         android:textColor="@color/text_view_grey"
         android:gravity="center_horizontal|center_vertical"
         android:id="@+id/add_sub_val"
-        android:background="#ffffff"
-        android:layout_below="@+id/add_btn"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignLeft="@+id/add_btn"
-        android:layout_alignStart="@+id/add_btn" />
+
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@+id/add_btn"
+        android:editable="true" />
 
 
 </RelativeLayout>

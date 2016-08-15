@@ -1,7 +1,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    >
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical" android:layout_width="match_parent"
@@ -173,10 +174,6 @@
                     android:layout_marginTop="7dp"
                     />
 
-
-
-
-
                 <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -212,30 +209,9 @@
                 android:layout_below="@id/address_details_layout"
                 android:id="@+id/layout2"
                 >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Tag Address"
-                    android:id="@+id/tag_address"
-                    android:textSize="15sp"
 
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp" />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/view_color"
-                    android:layout_below="@+id/tag_address"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_alignParentLeft="true"
-
-                    android:layout_marginTop="7dp"
-                    android:id="@+id/view11" />
                 <EditText
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/tag_address_label"
                     android:textSize="15sp"
@@ -243,12 +219,12 @@
                     android:textColor="@color/title_text_color"
                     android:textColorHint="@color/third_text_color"
                     android:background="#ffffff"
-                    android:layout_below="@+id/view11"
                     android:layout_marginLeft="10dp"
-                    android:layout_alignRight="@+id/view11"
                     android:layout_marginTop="18dp"
+                    android:layout_below="@+id/view11"
 
-                    android:layout_alignParentLeft="true" />
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentEnd="true" />
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
@@ -258,6 +234,28 @@
                     android:layout_alignRight="@+id/orderMapSymbol"
                     android:layout_marginTop="7dp"
                     android:id="@+id/view5" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Tag name"
+                    android:id="@+id/textTagName"
+                    android:textSize="15sp"
+
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"  />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/view_color"
+                    android:layout_below="@+id/textTagName"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="7dp"
+                    android:id="@+id/view11" />
             </RelativeLayout>
 
                 <Button

@@ -1,19 +1,14 @@
 package khaanavali.customer;
-import android.app.Activity;
-import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.content.Intent;
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -22,40 +17,38 @@ import android.widget.Toast;
 
 import com.splunk.mint.Mint;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-
-import java.util.ArrayList;
-
-import khaanavali.customer.adapter.AddressListAdapater;
-import khaanavali.customer.adapter.LocationAdapter;
-import khaanavali.customer.model.FavouriteAddress;
-import khaanavali.customer.utils.Constants;
-import khaanavali.customer.utils.SessionManager;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import khaanavali.customer.adapter.LocationAdapter;
+import khaanavali.customer.utils.Constants;
+import khaanavali.customer.utils.SessionManager;
 /**
  * Created by dganeshappa on 7/14/2016.
  */
 public class PlacesActivity extends AppCompatActivity{
 
-    private static final String PLACES_API_BASE2 = "http://kuruva.herokuapp.com/v1/admin/coverageArea";
     private static final String TAG_SUBAREAS = "subAreas";
-    private static final String LOG_TAG = "Autocomplete";
+    private static final String TAG_NAME = "name";
+
+
     private ArrayList<String> mCityCoverage;
-    ListView listView,addresslistview;
+    ListView listView;
+    //ListView addresslistview;
     SearchView search;
     LocationAdapter dataAdapter;
-    ArrayList<FavouriteAddress> mFavouriteAddressArrayList;
-    AddressListAdapater addressListAdapater;
+//    ArrayList<FavouriteAddress> mFavouriteAddressArrayList;
+//    AddressListAdapater addressListAdapater;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,28 +57,30 @@ public class PlacesActivity extends AppCompatActivity{
         mCityCoverage =  new ArrayList<String>();
         listView = (ListView) findViewById(R.id.area_listView);
         listView.setAdapter(dataAdapter);
-        SessionManager  session = new SessionManager(getApplicationContext());
-        mFavouriteAddressArrayList = new ArrayList<FavouriteAddress>();
-        if(session.getFavoutrateAddress() !=null) {
-            mFavouriteAddressArrayList = session.getFavoutrateAddress();
-            //addressListAdapater.setmFavouriteAddressArrayList(mFavouriteAddressArrayList);
-        }
-        addressListAdapater = new AddressListAdapater(this,R.layout.address_list_item,mFavouriteAddressArrayList);
-        addresslistview = (ListView) findViewById(R.id.listView_address);
-        addresslistview.setAdapter(addressListAdapater);
+//        SessionManager  session = new SessionManager(getApplicationContext());
+//        mFavouriteAddressArrayList = new ArrayList<FavouriteAddress>();
+//        if(session.getFavoutrateAddress() !=null) {
+//            mFavouriteAddressArrayList = session.getFavoutrateAddress();
+//            //addressListAdapater.setmFavouriteAddressArrayList(mFavouriteAddressArrayList);
+//        }
+//        addressListAdapater = new AddressListAdapater(this,R.layout.address_list_item,mFavouriteAddressArrayList);
+//        addresslistview = (ListView) findViewById(R.id.listView_address);
+//        addresslistview.setAdapter(addressListAdapater);
 
 
-        addresslistview.setEmptyView(findViewById(R.id.emptyElement));
-        addresslistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-               String areaName =  mFavouriteAddressArrayList.get(position).getAddress().getAreaName();
-               goBackwithAreaName(areaName);
-            }
-        });
+//        addresslistview.setEmptyView(findViewById(R.id.emptyElement));
+//        addresslistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//               String areaName =  mFavouriteAddressArrayList.get(position).getAddress().getAreaName();
+//               goBackwithAreaName(areaName);
+//            }
+//        });
         getCityCoverage();
         search = (SearchView)findViewById(R.id.searchView1);
+        search.setIconified(false);
+
         search.setQueryHint("Search Location");
 
         search.setIconified(false);
@@ -93,13 +88,19 @@ public class PlacesActivity extends AppCompatActivity{
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-                dataAdapter.filter(query);
+                if(dataAdapter!= null)
+                {
+                    dataAdapter.filter(query);
+                }
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String query) {
-                dataAdapter.filter(query);
+                if(dataAdapter!=null)
+                {
+                    dataAdapter.filter(query);
+                }
                 return false;
             }
         });
@@ -152,7 +153,7 @@ public class PlacesActivity extends AppCompatActivity{
             dialog.setContentView(R.layout.custom_progress_dialog);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
             dialog.show();
-            dialog.setCancelable(false);
+            dialog.setCancelable(true);
         }
 
         @Override
@@ -160,9 +161,12 @@ public class PlacesActivity extends AppCompatActivity{
             try {
 
                 //------------------>>
-                HttpGet httppost = new HttpGet(urls[0]);
+                HttpGet request = new HttpGet(urls[0]);
                 HttpClient httpclient = new DefaultHttpClient();
-                HttpResponse response = httpclient.execute(httppost);
+                request.addHeader(Constants.SECUREKEY_KEY, Constants.SECUREKEY_VALUE);
+                request.addHeader(Constants.VERSION_KEY, Constants.VERSION_VALUE);
+                request.addHeader(Constants.CLIENT_KEY, Constants.CLIENT_VALUE);
+                HttpResponse response = httpclient.execute(request);
 
                 // StatusLine stat = response.getStatusLine();
                 int status = response.getStatusLine().getStatusCode();
@@ -180,7 +184,9 @@ public class PlacesActivity extends AppCompatActivity{
                             JSONArray subAreasArray = object.getJSONArray(TAG_SUBAREAS);
                             for (int j = 0; j < subAreasArray.length(); j++) {
                                 JSONObject city_object = subAreasArray.getJSONObject(j);
-                                mCityCoverage.add(city_object.get("name").toString());
+                                if(city_object.has(TAG_NAME)) {
+                                    mCityCoverage.add(city_object.get(TAG_NAME).toString());
+                                }
                             }
                         }
                     }
@@ -208,12 +214,14 @@ public class PlacesActivity extends AppCompatActivity{
     private void setToolBar(String title) {
         Toolbar tb = (Toolbar) findViewById(R.id.toolbar2);
         setSupportActionBar(tb);
-
         ActionBar ab = getSupportActionBar();
         ab.setHomeAsUpIndicator(R.drawable.ic_action_back);
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setTitle(title);
     }
+
+
+
     @Override
     public boolean onOptionsItemSelected(android.view.MenuItem item) {
         switch (item.getItemId()) {
@@ -222,7 +230,12 @@ public class PlacesActivity extends AppCompatActivity{
                 return true;
 
             default:
-                return super.onOptionsItemSelected(item);
+
+               return super.onOptionsItemSelected(item);
+
+
         }
     }
+
+
 }

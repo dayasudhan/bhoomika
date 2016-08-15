@@ -2,41 +2,25 @@ package khaanavali.customer;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
-
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
-
-import java.util.ArrayList;
-import android.app.Activity;
-
-import android.app.ProgressDialog;
-import android.content.Intent;
-
-import android.os.AsyncTask;
-
-import android.widget.AdapterView;
-
-import khaanavali.customer.model.HotelDetail;
 import com.google.gson.Gson;
-import khaanavali.customer.adapter.HotelListAdapter;
-
-import khaanavali.customer.model.MenuItem;
-import khaanavali.customer.model.OrderAcceptTimings;
-import khaanavali.customer.utils.Constants;
-import khaanavali.customer.utils.SessionManager;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -47,6 +31,17 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import khaanavali.customer.adapter.HotelListAdapter;
+import khaanavali.customer.model.HotelDetail;
+import khaanavali.customer.model.MenuItem;
+import khaanavali.customer.model.OrderAcceptTimings;
+import khaanavali.customer.utils.Constants;
+import khaanavali.customer.utils.SessionManager;
 
 
 /**
@@ -74,12 +69,44 @@ public class HotelFragment extends Fragment {
     private static final String TAG_RATING = "rating";
     private static final String TAG_ISOPEN = "isOpen";
     private static final String TAG_MINIMUM_ORDER = "minimumOrder";
+    private static final String TAG_BULK_DELIVERY_TIME = "bulkdeliveryTime";
+    private static final String TAG_BULK_DELIVERY_RANGE = "bulkdeliverRange";
+    private static final String TAG_BULK_DELIVERY_CHARGE = "bulkdeliverCharge";
+    private static final String TAG_BULK_MINIMUM_ORDER = "bulkminimumOrder";
+    private static final String TAG_BULK_TYPE = "isBulkVendor";
+
+
+
+
     private ArrayList<HotelDetail> hotellist;
     ListView listView ;
+    TextView textview;
+
+    //gagan
+
+    private static final String[] IMAGES = new String[] {
+            Constants.SLIDER_URL1,
+            Constants.SLIDER_URL2,
+            Constants.SLIDER_URL3,
+            Constants.SLIDER_URL4
+    };
+    private ViewPager pager;
+    //gagan
+    private boolean isBulk;
+
+    public boolean isBulk() {
+        return isBulk;
+    }
+
+    public void setBulk(boolean bulk) {
+        isBulk = bulk;
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+
 
         View v = inflater.inflate(R.layout.activity_hotel, container, false);
         hotellist =  new ArrayList<HotelDetail>();
@@ -88,8 +115,22 @@ public class HotelFragment extends Fragment {
         String areaClicked = session.getlastareasearched();
         if(!areaClicked.isEmpty())
             getHotelList(areaClicked);
+        else
+            getHotelList("VijayaNagara");
+
+        //gagan
 
 
+        pager = (ViewPager) v.findViewById(R.id.pager);
+        ScreenSlidePagerAdapter pagerAdapter =new ScreenSlidePagerAdapter(getActivity().getSupportFragmentManager());
+
+        pagerAdapter.addAll(Arrays.asList(IMAGES));
+        pager.setAdapter(pagerAdapter);
+        CirclePageIndicator indicator = (CirclePageIndicator) v.findViewById(R.id.indicator);
+        indicator.setViewPager(pager);
+        //gagan end
+
+        textview = (TextView) v.findViewById(R.id.textView_no_vendors);
         listView = (ListView) v.findViewById(R.id.listView_vendor);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -100,12 +141,19 @@ public class HotelFragment extends Fragment {
                     Gson gson = new Gson();
                     String hotel = gson.toJson(hotellist.get(position));
                     i.putExtra("hotel", hotel);
+                    if(isBulk() == true)
+                    {
+                        i.putExtra("isBulk","true");
+                    }
+                    else
+                    {
+                        i.putExtra("isBulk","false");
+                    }
                     startActivity(i);
                 }
                 else
                 {
-                    //Toast.makeText(getActivity().getApplicationContext(), "Today this hotel Closed. Kindly try other Hotel near by you", Toast.LENGTH_LONG).show();
-                    alertMessage("Today this hotel closed. kindly try other hotel near by you");
+                    alertMessage("Delevery for this hotel is not available at this time. kindly try other hotel near by you");
                 }
             }
         });
@@ -121,21 +169,38 @@ public class HotelFragment extends Fragment {
         String order_url = Constants.GET_HOTEL_BY_DELIVERY_AREAS;
         String area = areaClicked.replace(" ", "%20");
         order_url = order_url + area;
+        if(isBulk)
+        {
+            order_url = order_url + "&isbulkrequest=1";
+        }
+        else
+        {
+            order_url = order_url + "&isbulkrequest=0";
+        }
         new JSONAsyncTask().execute(order_url);
     }
     public void initHotelList()
     {
-        HotelListAdapter dataAdapter = new HotelListAdapter(getActivity(),
-                R.layout.hotel_list_item,hotellist);
-        listView.setAdapter(dataAdapter);
+
+
+            HotelListAdapter dataAdapter = new HotelListAdapter(getActivity(),
+                    R.layout.hotel_list_item, hotellist);
+            listView.setAdapter(dataAdapter);
+
+            dataAdapter.notifyDataSetChanged();
+        if(hotellist.size() > 0 ) {
+            textview.setVisibility(View.INVISIBLE);
+        }
+        else
+        {
+            textview.setVisibility(View.VISIBLE);
+        }
+
     }
 
     @Override
     public void onCreateOptionsMenu(android.view.Menu menu , MenuInflater inflater) {
-      //  MenuInflater menuInflater = getMenuInflater();
-
-        inflater.inflate(R.menu.home_menu, menu);
-     //   return super.onCreateOptionsMenu(menu);
+           inflater.inflate(R.menu.home_menu, menu);
     }
     public  class JSONAsyncTask extends AsyncTask<String, Void, Boolean> {
         Dialog dialog;
@@ -151,7 +216,7 @@ public class HotelFragment extends Fragment {
             dialog.setContentView(R.layout.custom_progress_dialog);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
             dialog.show();
-            dialog.setCancelable(false);
+            dialog.setCancelable(true);
         }
 
         @Override
@@ -159,9 +224,12 @@ public class HotelFragment extends Fragment {
             try {
 
                 //------------------>>
-                HttpGet httppost = new HttpGet(urls[0]);
+                HttpGet request = new HttpGet(urls[0]);
+                request.addHeader(Constants.SECUREKEY_KEY, Constants.SECUREKEY_VALUE);
+                request.addHeader(Constants.VERSION_KEY, Constants.VERSION_VALUE);
+                request.addHeader(Constants.CLIENT_KEY, Constants.CLIENT_VALUE);
                 HttpClient httpclient = new DefaultHttpClient();
-                HttpResponse response = httpclient.execute(httppost);
+                HttpResponse response = httpclient.execute(request);
 
                 // StatusLine stat = response.getStatusLine();
                 int status = response.getStatusLine().getStatusCode();
@@ -254,16 +322,7 @@ public class HotelFragment extends Fragment {
                             if(addrObj.has("street"))
                                 hotelDetail.getAddress().setZip(addrObj.getString("street"));
                         }
-                        if(object.has(TAG_DELIVERY_RANGE))
-                        {
-                            int range=0 ;
-                            try {
-                                range = object.getInt(TAG_DELIVERY_RANGE);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            hotelDetail.setDeliverRange(range);
-                        }
+
                         if(object.has(TAG_DELIVERY_AREAS))
                         {
                             JSONArray delieveryArray = object.getJSONArray(TAG_DELIVERY_AREAS);
@@ -284,16 +343,6 @@ public class HotelFragment extends Fragment {
                             }
                             hotelDetail.setIsOpen(var);
                         }
-                        if(object.has(TAG_DELIVERY_CHARGE))
-                        {
-                            int charge=0 ;
-                            try {
-                                charge = object.getInt(TAG_DELIVERY_CHARGE);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            hotelDetail.setDeliverCharge(charge);
-                        }
                         if(object.has(TAG_RATING))
                         {
                             int rating=0 ;
@@ -304,27 +353,7 @@ public class HotelFragment extends Fragment {
                             }
                             hotelDetail.setRating(rating);
                         }
-                        if(object.has(TAG_MINIMUM_ORDER))
-                        {
-                            int rating=0 ;
-                            try {
-                                rating = object.getInt(TAG_MINIMUM_ORDER);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            hotelDetail.setMinimumOrder(rating);
-                        }
 
-                        if(object.has(TAG_DELIVERY_TIME))
-                        {
-                            int delieveryTime=0 ;
-                            try {
-                                delieveryTime = object.getInt(TAG_DELIVERY_TIME);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            hotelDetail.setDeliveryTime(delieveryTime);
-                        }
                         if(object.has(TAG_ORDER_ACCEPT_TIMINGS))
                         {
                             JSONObject ordAcctime = object.getJSONObject(TAG_ORDER_ACCEPT_TIMINGS);
@@ -332,6 +361,90 @@ public class HotelFragment extends Fragment {
                             OrderAcceptTimings ordacctimeobj =  gson.fromJson(ordAcctime.toString(),OrderAcceptTimings.class);
                             hotelDetail.setOrderAcceptTimings(ordacctimeobj);
 
+                        }
+                        if(isBulk)
+                        {
+                            if (object.has(TAG_BULK_DELIVERY_RANGE)) {
+                                int range = 0;
+                                try {
+                                    range = object.getInt(TAG_BULK_DELIVERY_RANGE);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                hotelDetail.setDeliverRange(range);
+                            }
+
+                            if (object.has(TAG_BULK_DELIVERY_CHARGE)) {
+                                int charge = 0;
+                                try {
+                                    charge = object.getInt(TAG_BULK_DELIVERY_CHARGE);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                hotelDetail.setDeliverCharge(charge);
+                            }
+
+                            if (object.has(TAG_BULK_MINIMUM_ORDER)) {
+                                int rating = 0;
+                                try {
+                                    rating = object.getInt(TAG_BULK_MINIMUM_ORDER);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                hotelDetail.setMinimumOrder(rating);
+                            }
+
+                            if (object.has(TAG_BULK_DELIVERY_TIME)) {
+                                int delieveryTime = 0;
+                                try {
+                                    delieveryTime = object.getInt(TAG_BULK_DELIVERY_TIME);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                hotelDetail.setDeliveryTime(delieveryTime);
+                            }
+                        }
+                        else {
+
+                            if (object.has(TAG_DELIVERY_RANGE)) {
+                                int range = 0;
+                                try {
+                                    range = object.getInt(TAG_DELIVERY_RANGE);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                hotelDetail.setDeliverRange(range);
+                            }
+
+                            if (object.has(TAG_DELIVERY_CHARGE)) {
+                                int charge = 0;
+                                try {
+                                    charge = object.getInt(TAG_DELIVERY_CHARGE);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                hotelDetail.setDeliverCharge(charge);
+                            }
+
+                            if (object.has(TAG_MINIMUM_ORDER)) {
+                                int rating = 0;
+                                try {
+                                    rating = object.getInt(TAG_MINIMUM_ORDER);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                hotelDetail.setMinimumOrder(rating);
+                            }
+
+                            if (object.has(TAG_DELIVERY_TIME)) {
+                                int delieveryTime = 0;
+                                try {
+                                    delieveryTime = object.getInt(TAG_DELIVERY_TIME);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                hotelDetail.setDeliveryTime(delieveryTime);
+                            }
                         }
                         hotellist.add(hotelDetail);
                     }
@@ -347,14 +460,14 @@ public class HotelFragment extends Fragment {
         }
         protected void onPostExecute(Boolean result) {
             dialog.cancel();
+            if(getActivity() != null) {
+                if (result == false) {
 
-            if (result == false) {
-                Toast.makeText(getActivity().getApplicationContext(), "Unable to fetch data from server", Toast.LENGTH_LONG).show();
-                //alertMessage("Unable to fetch data from server");
-            }
-            else
-            {
-                initHotelList();
+                    Toast.makeText(getActivity().getApplicationContext(), "Unable to fetch data from server", Toast.LENGTH_LONG).show();
+                    //alertMessage("Unable to fetch data from server");
+                } else {
+                    initHotelList();
+                }
             }
 
         }

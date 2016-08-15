@@ -20,11 +20,8 @@ package khaanavali.customer;
  * 20/10/15
  */
 
-import android.app.Activity;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ParseException;
 import android.os.AsyncTask;
@@ -77,6 +74,9 @@ public class StatusTrackerFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+
+
         View v = inflater.inflate(R.layout.statuslist_layout, container, false);
         ed = (EditText)v.findViewById(R.id.editText);
         txtViewTracker = (TextView) v.findViewById(R.id.statusText);
@@ -97,7 +97,7 @@ public class StatusTrackerFragment extends Fragment {
                 }
                 else
                 {
-                    alertMessage("Please enter valid status id");
+                    alertMessage("Please enter valid Order id");
                 }
             }
         });
@@ -159,7 +159,7 @@ public void updateStatus()
             dialog.setContentView(R.layout.custom_progress_dialog);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
             dialog.show();
-            dialog.setCancelable(false);
+            dialog.setCancelable(true);
         }
 
         @Override
