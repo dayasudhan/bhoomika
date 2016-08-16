@@ -5,8 +5,10 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.IBinder;
+import android.provider.Settings;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 
@@ -75,10 +77,19 @@ public class NotificationListener extends Service {
         final String GROUP_KEY_ORDER_IDS = "group_order_ids";
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
         builder.setSmallIcon(R.mipmap.ic_launcher);
+        //Vibration
+        builder.setVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 });
+
+        //LED
+        builder.setLights(Color.RED, 3000, 3000);
+        //Sound
+        builder.setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
+
         Intent intent;
 //        if (intent_type == 1 )
 //        {
-//            intent = new Intent(getApplicationContext(), StatusTrackerFragment.class);
+//            intent = new Intent(getApplicationContext(
+// ), StatusTrackerFragment.class);
 //        }
         if (intent_type == 1 )
         {
@@ -92,6 +103,7 @@ public class NotificationListener extends Service {
             {
                 intent = new Intent(getApplicationContext(), MainActivity.class);
             }
+
         }
         else if(intent_type == 3)
             intent = new Intent(getApplicationContext(), MainActivity.class);
