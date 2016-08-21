@@ -41,6 +41,7 @@ import khaanavali.customer.utils.SessionManager;
 public class OtpVeirificationActivity extends AppCompatActivity {
     Button btnSubmit;
     private EditText otp;
+    private boolean verifyPressed=true;
     String apiReponse;
     private String order ,hotelDetail,phoneNumber,name,email;
     SessionManager session;
@@ -60,19 +61,19 @@ public class OtpVeirificationActivity extends AppCompatActivity {
         otp = (EditText)findViewById(R.id.otpInput);
 
         btnSubmit= (Button) findViewById(R.id.verifyButton);
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                if(otp.getText().toString().equals(""))
-                {
-                    alertMessage("Enter valid OTP");
+        if(verifyPressed) {
+            btnSubmit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View arg0) {
+                    if (otp.getText().toString().equals("")) {
+                        alertMessage("Enter valid OTP");
+                    } else {
+                        confirmOtp(phoneNumber, otp.getText().toString());
+                        verifyPressed=false;
+                    }
                 }
-                else {
-                    confirmOtp(phoneNumber, otp.getText().toString());
-                }
-            }
-        });
-
+            });
+        }
         setToolBar("OTP Verification");
     }
 

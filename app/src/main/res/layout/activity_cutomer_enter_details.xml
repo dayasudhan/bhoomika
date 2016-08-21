@@ -70,8 +70,9 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Name*:"
                 android:id="@+id/name"
-                android:layout_alignTop="@+id/orderDetailName"
-                android:layout_alignStart="@+id/view" />
+                android:layout_above="@+id/view11"
+                android:layout_alignRight="@+id/textPhNo"
+                android:layout_alignEnd="@+id/textPhNo" />
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -79,16 +80,14 @@
         android:inputType="textPersonName"
         android:textSize="15sp"
         android:hint="Enter Name Here"
-        android:layout_below="@+id/view"
-        android:layout_marginTop="17dp"
         android:textColorHint="@color/third_text_color"
         android:textColor="@color/title_text_color"
         android:background="#ffffff"
-        android:layout_alignRight="@+id/view"
-        android:layout_marginLeft="10dp"
         android:clickable="true"
         android:enabled="true"
-        android:layout_toEndOf="@+id/name" />
+        android:layout_below="@+id/view"
+        android:layout_toRightOf="@+id/orderDetailTotal"
+        android:layout_toEndOf="@+id/orderDetailTotal" />
 
     <View
         android:layout_width="match_parent"
@@ -108,18 +107,17 @@
         android:hint="Enter Phone No"
         android:textColorHint="@color/third_text_color"
         android:ems="10"
-        android:layout_marginTop="11dp"
-        android:textColor="@color/title_text_color"
+                android:textColor="@color/title_text_color"
         android:background="#1f000000"
         android:id="@+id/orderDetailPhone"
-                android:layout_marginLeft="10dp"
                 android:editable="false"
         android:clickable="false"
         android:cursorVisible="false"
         android:focusable="false"
         android:focusableInTouchMode="false"
                 android:layout_below="@+id/view11"
-                android:layout_alignStart="@+id/orderDetailName" />
+                android:layout_toRightOf="@+id/orderDetailTotal"
+                android:layout_toEndOf="@+id/orderDetailTotal" />
 
     <View
         android:layout_width="match_parent"
@@ -140,10 +138,9 @@
         android:hint="Enter House/Flat No"
         android:textColorHint="@color/third_text_color"
         android:background="#ffffff"
-        android:layout_marginLeft="10dp"
         android:textColor="@color/title_text_color"
-        android:layout_alignTop="@+id/textView7"
-        android:layout_alignEnd="@+id/textView"
+        android:layout_alignBottom="@+id/textView7"
+        android:layout_alignLeft="@+id/orderDetailPhone"
         android:layout_alignStart="@+id/orderDetailPhone" />
 
     <View
@@ -414,8 +411,9 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Phone:"
                 android:id="@+id/textPhNo"
-                android:layout_alignTop="@+id/orderDetailPhone"
-                android:layout_alignStart="@+id/view11" />
+                android:layout_alignBottom="@+id/orderDetailPhone"
+                android:layout_alignRight="@+id/textView7"
+                android:layout_alignEnd="@+id/textView7" />
 
             <TextView
                 android:layout_width="wrap_content"

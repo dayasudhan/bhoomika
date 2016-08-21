@@ -2,14 +2,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="#ffffff"
     android:paddingRight="5dp"
-    android:layout_width="match_parent" android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <ImageView
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:id="@+id/product_detail_image_view"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="5dip"
         android:background="@color/img_background"
         android:src="@drawable/knvl1"
+        android:layout_marginBottom="5dip"
+        android:layout_marginTop="5dip"
+        android:scaleType="fitCenter"
         android:layout_centerVertical="true"
 
         />
@@ -17,7 +21,7 @@
 
 
     <TextView
-        android:layout_width="200dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="item name"
@@ -25,12 +29,8 @@
         android:id="@+id/product_detail_name"
         android:textSize="16sp"
 
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-
-        android:layout_below="@+id/sub_btn"
-        android:layout_toEndOf="@+id/product_detail_image_view"
-        android:layout_marginStart="10dp" />
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -41,8 +41,10 @@
         android:id="@+id/approx_price_val"
         android:textColor="@color/secondary_text_color"
         android:textSize="14sp"
-        android:layout_below="@+id/product_detail_name"
-        android:layout_alignStart="@+id/product_detail_name" />
+        android:layout_alignBottom="@+id/product_detail_image_view"
+        android:layout_alignLeft="@+id/product_detail_name"
+        android:layout_alignStart="@+id/product_detail_name"
+        android:layout_marginBottom="10dp"/>
 
 
 
@@ -55,6 +57,7 @@
         android:gravity="center_horizontal|center_vertical"
         android:id="@+id/add_btn"
         android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
     <ImageView
 
@@ -65,6 +68,7 @@
         android:gravity="center_horizontal|center_vertical"
         android:id="@+id/sub_btn"
         android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/add_sub_val"
         android:layout_toStartOf="@+id/add_sub_val" />
 
     <TextView
@@ -77,9 +81,10 @@
         android:gravity="center_horizontal|center_vertical"
         android:id="@+id/add_sub_val"
 
+        android:editable="true"
         android:layout_centerVertical="true"
-        android:layout_toStartOf="@+id/add_btn"
-        android:editable="true" />
+        android:layout_toLeftOf="@+id/add_btn"
+        android:layout_toStartOf="@+id/add_btn" />
 
 
 </RelativeLayout>

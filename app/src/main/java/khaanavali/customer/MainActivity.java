@@ -8,9 +8,9 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -24,7 +24,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.splunk.mint.Mint;
@@ -63,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         //gaganwelcome
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         //gaganwelcome
         //gagan internet
         if (!isOnline(MainActivity.this))
@@ -131,7 +131,6 @@ public class MainActivity extends AppCompatActivity {
     private void setToolBar() {
         Toolbar tb = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(tb);
-
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
             ab.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
@@ -253,4 +252,5 @@ public class MainActivity extends AppCompatActivity {
             }, 2000);
         }
     }
+
 }

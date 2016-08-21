@@ -13,15 +13,16 @@
 
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         >
 
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/textView8"
             android:layout_gravity="center_vertical"
             android:layout_below="@+id/webPage"
@@ -34,6 +35,7 @@
             android:text="Khaanavali brings you the best food to "
             android:id="@+id/textView9"
             android:layout_gravity="center_vertical"
+
             android:layout_below="@+id/textView10"
             android:layout_alignParentStart="true" />
 
@@ -47,6 +49,8 @@
             android:onClick="onClick"
             android:clickable="true"
             android:layout_alignParentBottom="true"
+
+            android:layout_toLeftOf="@+id/gmail"
             android:layout_toStartOf="@+id/gmail" />
 
         <ImageButton
@@ -70,11 +74,12 @@
             android:onClick="onCilck"
             android:clickable="true"
             android:layout_marginTop="157dp"
+            android:gravity="center"
             android:textColor="@color/parrotgreen3"
             android:layout_alignParentTop="true"
             android:layout_gravity="center_vertical"
-            android:layout_alignEnd="@+id/textView10"
-            android:layout_alignParentStart="false"
+
+
             android:layout_centerVertical="true"
             android:textAlignment="center"/>
 
@@ -91,7 +96,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="your door step at cheaper price."
+
+            android:text="your doorstep at cheeper price."
             android:id="@+id/textView11"
             android:layout_below="@+id/textView9"
             android:layout_alignParentStart="true" />

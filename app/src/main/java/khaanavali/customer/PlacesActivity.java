@@ -78,12 +78,15 @@ public class PlacesActivity extends AppCompatActivity{
 //            }
 //        });
         getCityCoverage();
+
+
         search = (SearchView)findViewById(R.id.searchView1);
         search.setIconified(false);
 
         search.setQueryHint("Search Location");
 
         search.setIconified(false);
+
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override
@@ -102,6 +105,15 @@ public class PlacesActivity extends AppCompatActivity{
                     dataAdapter.filter(query);
                 }
                 return false;
+            }
+
+        });
+        search.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    search.setIconified(true);
+                }
             }
         });
         setToolBar("Select delivery location");
@@ -226,6 +238,7 @@ public class PlacesActivity extends AppCompatActivity{
     public boolean onOptionsItemSelected(android.view.MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                search.onActionViewCollapsed();
                 onBackPressed();
                 return true;
 
@@ -236,6 +249,9 @@ public class PlacesActivity extends AppCompatActivity{
 
         }
     }
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 
 }
