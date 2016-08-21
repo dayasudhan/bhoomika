@@ -53,13 +53,13 @@ public class AboutKhaanavali extends Fragment {
             facebook.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View arg0) {
-                    goToUrl("http://facebook.com");
+                    goToUrl("http://www.facebook.com/khaanavali/");
                 }
             });
             gmail.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View arg0) {
-                    goToUrl("http://gmail.com");
+                    goToUrl("http://khaanavali@gmail.com");
                 }
             });
             webPage.setOnClickListener(new View.OnClickListener() {
