@@ -62,7 +62,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 R.layout.welcome_slide1,
                 R.layout.welcome_slide2,
                 R.layout.welcome_slide3,
-              //  R.layout.welcome_slide4
+                //R.layout.activity_place
         };
 
         // adding bottom dots
@@ -122,9 +122,13 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     private void launchHomeScreen() {
-        prefManager.setFirstTimeLaunch(false);
-        startActivity(new Intent(WelcomeActivity.this, SplashActivity.class));
-        finish();
+        if (prefManager.isFirstTimeLaunch()) {
+            startActivity(new Intent(WelcomeActivity.this, PlacesActivity.class));
+            prefManager.setFirstTimeLaunch(false);
+        } else {
+            startActivity(new Intent(WelcomeActivity.this, SplashActivity.class));
+            finish();
+        }
     }
 
     //	viewpager change listener
@@ -138,9 +142,11 @@ public class WelcomeActivity extends AppCompatActivity {
             if (position == layouts.length - 1) {
                 // last page. make button text to GOT IT
                 btnNext.setText(getString(R.string.start));
+
                 btnNext.setTextColor(Color.GREEN);
                 btnSkip.setVisibility(View.GONE);
                 btnSkip.setTextColor(Color.GREEN);
+
             } else {
                 // still pages are left
                 btnNext.setText(getString(R.string.next));

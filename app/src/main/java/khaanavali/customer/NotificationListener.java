@@ -34,7 +34,7 @@ public class NotificationListener extends Service {
 
     //When the service is started
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
+    public int onStartCommand(Intent iintent, int flags, int startId) {
 
 
         Firebase.setAndroidContext(getApplicationContext());
@@ -77,6 +77,7 @@ public class NotificationListener extends Service {
         final String GROUP_KEY_ORDER_IDS = "group_order_ids";
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
         builder.setSmallIcon(R.mipmap.ic_launcher);
+
         //Vibration
         builder.setVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 });
 
@@ -86,6 +87,7 @@ public class NotificationListener extends Service {
         builder.setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
 
         Intent intent;
+
 //        if (intent_type == 1 )
 //        {
 //            intent = new Intent(getApplicationContext(
