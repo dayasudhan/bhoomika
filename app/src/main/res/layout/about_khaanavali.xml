@@ -47,6 +47,7 @@
             android:onClick="onClick"
             android:clickable="true"
             android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@+id/gmail"
             android:layout_toStartOf="@+id/gmail" />
 
         <ImageButton
@@ -73,8 +74,7 @@
             android:textColor="@color/parrotgreen3"
             android:layout_alignParentTop="true"
             android:layout_gravity="center_vertical"
-            android:layout_alignEnd="@+id/textView10"
-            android:layout_alignParentStart="false"
+            android:gravity="center"
             android:layout_centerVertical="true"
             android:textAlignment="center"/>
 
