@@ -460,14 +460,14 @@ public class HotelFragment extends Fragment {
         }
         protected void onPostExecute(Boolean result) {
             dialog.cancel();
+            if(getActivity() != null) {
+                if (result == false) {
 
-            if (result == false) {
-                Toast.makeText(getActivity().getApplicationContext(), "Unable to fetch data from server", Toast.LENGTH_LONG).show();
-                //alertMessage("Unable to fetch data from server");
-            }
-            else
-            {
-                initHotelList();
+                    Toast.makeText(getActivity().getApplicationContext(), "Unable to fetch data from server", Toast.LENGTH_LONG).show();
+                    //alertMessage("Unable to fetch data from server");
+                } else {
+                    initHotelList();
+                }
             }
 
         }

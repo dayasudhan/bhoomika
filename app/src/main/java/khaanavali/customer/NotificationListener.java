@@ -90,7 +90,8 @@ public class NotificationListener extends Service {
 
 //        if (intent_type == 1 )
 //        {
-//            intent = new Intent(getApplicationContext(), StatusTrackerFragment.class);
+//            intent = new Intent(getApplicationContext(
+// ), StatusTrackerFragment.class);
 //        }
         if (intent_type == 1 )
         {
@@ -104,6 +105,7 @@ public class NotificationListener extends Service {
             {
                 intent = new Intent(getApplicationContext(), MainActivity.class);
             }
+
         }
         else if(intent_type == 3)
             intent = new Intent(getApplicationContext(), MainActivity.class);
