@@ -46,6 +46,8 @@ public class AboutKhaanavali extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootview = inflater.inflate(R.layout.about_khaanavali, container, false);
+        ((MainActivity) getActivity())
+                .setActionBarTitle("About Khaanavali");
         facebook = (ImageButton) rootview.findViewById(R.id.facebook);
         gmail = (ImageButton) rootview.findViewById(R.id.gmail);
         webPage=(TextView) rootview.findViewById(R.id.webPage);

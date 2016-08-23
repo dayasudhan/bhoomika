@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout dLayout;
 
     private boolean ishotelFragmentOpen;
+    private boolean isdrawerbackpressed;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         Mint.initAndStartSession(this, "49d903c2");
         setContentView(R.layout.activity_main_nav);
         ishotelFragmentOpen = true;
+        isdrawerbackpressed =  false;
         //gaganwelcome
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -152,6 +154,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(MenuItem menuItem) {
 
                 Fragment frag = null;
+                isdrawerbackpressed = false;
                 int itemId = menuItem.getItemId();
                 if (itemId == R.id.hotel) {
                     frag = new HotelFragment();
@@ -232,7 +235,17 @@ public class MainActivity extends AppCompatActivity {
         if (dLayout.isDrawerOpen(GravityCompat.START)) {
             dLayout.closeDrawer(GravityCompat.START);
         } else if (ishotelFragmentOpen == false) {
-            dLayout.openDrawer(GravityCompat.START);
+            if(!isdrawerbackpressed) {
+                dLayout.openDrawer(GravityCompat.START);
+                isdrawerbackpressed = true;
+            }
+            else {
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame, new HotelFragment());
+                ishotelFragmentOpen = true;
+                transaction.commit();
+                isdrawerbackpressed = false;
+            }
         } else {
             //super.onBackPressed();
             if (doubleBackToExitPressedOnce) {
