@@ -8,7 +8,6 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -21,7 +20,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.GestureDetector;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.widget.Toast;
 
 import com.google.android.gms.appindexing.AppIndex;
@@ -35,11 +36,22 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean ishotelFragmentOpen;
     private boolean isdrawerbackpressed;
+    private boolean isFirst=true;
+    Fragment fragment=null;
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+
+    final GestureDetector mGestureDetector = new GestureDetector(MainActivity.this, new GestureDetector.SimpleOnGestureListener() {
+
+        @Override public boolean onSingleTapUp(MotionEvent e) {
+            return true;
+        }
+
+    });
 
     public boolean isOnline(Context context) {
         ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -152,8 +164,7 @@ public class MainActivity extends AppCompatActivity {
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
-
-                Fragment frag = null;
+                 Fragment frag = null;
                 isdrawerbackpressed = false;
                 int itemId = menuItem.getItemId();
                 if (itemId == R.id.hotel) {
@@ -162,7 +173,12 @@ public class MainActivity extends AppCompatActivity {
                     ((HotelFragment) frag).setBulk(false);
                     ishotelFragmentOpen = true;
 
-                } else if (itemId == R.id.bulk_activity) {
+                }else
+                if (itemId == R.id.recentOrders) {
+                    frag = new RecentOrders();
+                    ishotelFragmentOpen = false;
+                }
+                else if (itemId == R.id.bulk_activity) {
                     frag = new HotelFragment();
                     ((HotelFragment) frag).setBulk(true);
                     ishotelFragmentOpen = true;
@@ -174,15 +190,27 @@ public class MainActivity extends AppCompatActivity {
                 } else if (itemId == R.id.status) {
                     frag = new StatusTrackerFragment();
                     ishotelFragmentOpen = false;
+                } else if (itemId == R.id.myprofile) {
+                    if(isFirst==true) {
+                        fragment=new MyProfile();
+                        ishotelFragmentOpen = false;
+                        isFirst=false;
+                    }
                 } else if (itemId == R.id.invite) {
                     frag = new ShareAppFragment();
                     ishotelFragmentOpen = false;
                 }
-                if (frag != null) {
+                if (frag != null || fragment!=null) {
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-                    transaction.replace(R.id.frame, frag);
-//                if(itemId != R.id.location) {
+                    if(itemId!=R.id.myprofile)
+                    {
+                        transaction.replace(R.id.frame, frag);
+                    }
+                    else{
+                        transaction.replace(R.id.frame, fragment);
+                    }
+//
+//      if(itemId != R.id.location) {
 //                    transaction.addToBackStack(null);
 //                }
                     transaction.commit();
@@ -202,6 +230,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         int itemId = item.getItemId();
         String btnName = null;
 

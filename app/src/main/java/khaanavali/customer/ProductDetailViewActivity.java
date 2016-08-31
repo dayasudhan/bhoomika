@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -33,6 +34,7 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
 
     HotelDetail hotelDetail;
     Order order;
+    ImageView background;
     ArrayList<MenuAdapter> mMenulist;
     ProductAdapter mDataAdapter;
     TextView counttxt,priceTxt;

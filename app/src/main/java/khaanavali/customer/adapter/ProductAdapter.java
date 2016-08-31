@@ -68,8 +68,9 @@ public class ProductAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        CityItemHolder itemHolder;
         View view = convertView;
+        CityItemHolder itemHolder;
+
         //  mpref= PreferenceManager.instance(con);
         //  LocationListNameModel city = getItem(position);
 
@@ -98,6 +99,12 @@ public class ProductAdapter extends BaseAdapter {
 
         itemHolder.mValue = (TextView) view.findViewById(R.id.add_sub_val);
         itemHolder.mValue.setText(String.valueOf(mMenulist.get(position).getNo_of_order()));
+
+        if(totalCount==0)
+        {
+            itemHolder.mSubImg.setVisibility(View.GONE);
+        }
+        final CityItemHolder finalItemHolder1 = itemHolder;
         itemHolder.mAddImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,9 +160,11 @@ public class ProductAdapter extends BaseAdapter {
         });
 
 
+        final CityItemHolder finalItemHolder = itemHolder;
         itemHolder.mSubImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 v.getTag();
                 int posi = (Integer) v.getTag();
                 View parentRow = (View) v.getParent();

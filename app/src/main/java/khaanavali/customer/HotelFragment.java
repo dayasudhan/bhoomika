@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -83,6 +84,7 @@ public class HotelFragment extends Fragment {
     TextView textview;
 
     //gagan
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     private static final String[] IMAGES = new String[] {
             Constants.SLIDER_URL1,
@@ -108,11 +110,35 @@ public class HotelFragment extends Fragment {
 
 
 
-        View v = inflater.inflate(R.layout.activity_hotel, container, false);
+         View v = inflater.inflate(R.layout.activity_hotel, container, false);
+        swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh_layout);
+
+
+
         hotellist =  new ArrayList<HotelDetail>();
         SessionManager session = new SessionManager(getActivity().getApplicationContext());
 
-        String areaClicked = session.getlastareasearched();
+
+        final String areaClicked = session.getlastareasearched();
+
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                if (!areaClicked.isEmpty())
+                    getHotelList(areaClicked);
+                else
+                    getHotelList("VijayaNagara");
+            }
+
+        });
+
+        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light, R.color.colorAccent, R.color.colorPrimaryDark);
+        swipeRefreshLayout.setProgressBackgroundColor(android.R.color.transparent);
+
+
+
         if(!areaClicked.isEmpty())
             getHotelList(areaClicked);
         else
@@ -447,6 +473,7 @@ public class HotelFragment extends Fragment {
                             }
                         }
                         hotellist.add(hotelDetail);
+
                     }
                     return true;
                 }
@@ -456,7 +483,9 @@ public class HotelFragment extends Fragment {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
             return false;
+
         }
         protected void onPostExecute(Boolean result) {
             dialog.cancel();
@@ -467,6 +496,8 @@ public class HotelFragment extends Fragment {
                     //alertMessage("Unable to fetch data from server");
                 } else {
                     initHotelList();
+
+                    swipeRefreshLayout.setRefreshing(false);
                 }
             }
 
