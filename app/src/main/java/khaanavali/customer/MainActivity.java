@@ -20,9 +20,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.GestureDetector;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.widget.Toast;
 
 import com.google.android.gms.appindexing.AppIndex;
@@ -45,13 +43,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private GoogleApiClient client;
 
-    final GestureDetector mGestureDetector = new GestureDetector(MainActivity.this, new GestureDetector.SimpleOnGestureListener() {
 
-        @Override public boolean onSingleTapUp(MotionEvent e) {
-            return true;
-        }
-
-    });
 
     public boolean isOnline(Context context) {
         ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -76,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         //gaganwelcome
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         //gaganwelcome
         //gagan internet
@@ -144,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setToolBar() {
         Toolbar tb = (Toolbar) findViewById(R.id.toolbar);
+
         setSupportActionBar(tb);
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
@@ -164,9 +158,11 @@ public class MainActivity extends AppCompatActivity {
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
+
                  Fragment frag = null;
                 isdrawerbackpressed = false;
                 int itemId = menuItem.getItemId();
+
                 if (itemId == R.id.hotel) {
                     frag = new HotelFragment();
 

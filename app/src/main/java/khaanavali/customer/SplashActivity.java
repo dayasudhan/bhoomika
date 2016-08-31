@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import com.splunk.mint.Mint;
@@ -13,11 +12,11 @@ import com.splunk.mint.Mint;
 public class SplashActivity extends Activity implements Animation.AnimationListener {
 
 
-    ImageView imgPoster,imgBack;
-    Button btnStart;
+    ImageView splashImage,splashOneLogo;
+
 
     // Animation
-    Animation animZoomIn;
+    Animation animBike,animLogo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,23 +26,26 @@ public class SplashActivity extends Activity implements Animation.AnimationListe
         setContentView(R.layout.activity_zoom_in);
 
        // imgPoster = (ImageView) findViewById(R.id.imgLogo);
-        imgBack = (ImageView) findViewById(R.id.imgback);
+        splashImage = (ImageView) findViewById(R.id.food_deliver_bike);
+        splashOneLogo=(ImageView) findViewById(R.id.splashlogo);
 
         // load the animation
-        animZoomIn = AnimationUtils.loadAnimation(getApplicationContext(),
-                R.anim.zoom_in);
-
+        animBike = AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.move);
+        animLogo= AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.fade_in);
         // set animation listener
-        animZoomIn.setAnimationListener(this);
-
+        animBike.setAnimationListener(this);
+        animLogo.setAnimationListener(this);
         // button click event
 
         Thread timer= new Thread(){
             public void run(){
                 try{
-                    imgBack.startAnimation(animZoomIn);
-
+                    splashOneLogo.startAnimation(animLogo);
+                    splashImage.startAnimation(animBike);
                     sleep(3000);
+
                 }catch(Exception e){
                     e.printStackTrace();
                 }finally{
@@ -66,7 +68,8 @@ public class SplashActivity extends Activity implements Animation.AnimationListe
         // Take any action after completing the animation
 
         // check for zoom in animation
-        if (animation == animZoomIn) {
+        if (animation == animBike) {
+
         }
 
     }
@@ -79,6 +82,7 @@ public class SplashActivity extends Activity implements Animation.AnimationListe
 
     @Override
     public void onAnimationStart(Animation animation) {
+
         // TODO Auto-generated method stub
 
     }

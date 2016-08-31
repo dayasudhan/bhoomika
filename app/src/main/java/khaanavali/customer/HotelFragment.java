@@ -3,7 +3,6 @@ package khaanavali.customer;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -154,6 +152,7 @@ public class HotelFragment extends Fragment {
         pager.setAdapter(pagerAdapter);
         CirclePageIndicator indicator = (CirclePageIndicator) v.findViewById(R.id.indicator);
         indicator.setViewPager(pager);
+
         //gagan end
 
         textview = (TextView) v.findViewById(R.id.textView_no_vendors);
@@ -237,12 +236,8 @@ public class HotelFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog = new Dialog(getActivity(),android.R.style.Theme_Translucent);
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            dialog.setContentView(R.layout.custom_progress_dialog);
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-            dialog.show();
-            dialog.setCancelable(true);
+
+
         }
 
         @Override
@@ -488,7 +483,7 @@ public class HotelFragment extends Fragment {
 
         }
         protected void onPostExecute(Boolean result) {
-            dialog.cancel();
+
             if(getActivity() != null) {
                 if (result == false) {
 

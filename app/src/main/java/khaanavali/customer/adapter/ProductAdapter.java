@@ -100,10 +100,7 @@ public class ProductAdapter extends BaseAdapter {
         itemHolder.mValue = (TextView) view.findViewById(R.id.add_sub_val);
         itemHolder.mValue.setText(String.valueOf(mMenulist.get(position).getNo_of_order()));
 
-        if(totalCount==0)
-        {
-            itemHolder.mSubImg.setVisibility(View.GONE);
-        }
+
         final CityItemHolder finalItemHolder1 = itemHolder;
         itemHolder.mAddImg.setOnClickListener(new View.OnClickListener() {
             @Override
