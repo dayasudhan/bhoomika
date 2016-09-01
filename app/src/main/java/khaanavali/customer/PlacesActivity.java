@@ -1,6 +1,8 @@
 package khaanavali.customer;
 
 import android.app.Dialog;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
@@ -12,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -44,6 +47,7 @@ public class PlacesActivity extends AppCompatActivity{
 
     private ArrayList<String> mCityCoverage;
     ListView listView;
+    LinearLayout navigation;
     //ListView addresslistview;
     SearchView search;
     LocationAdapter dataAdapter;
@@ -54,9 +58,13 @@ public class PlacesActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         Mint.initAndStartSession(this, "49d903c2");
         setContentView(R.layout.activity_place);
+        navigation=(LinearLayout) findViewById(R.id.location);
         mCityCoverage =  new ArrayList<String>();
         listView = (ListView) findViewById(R.id.area_listView);
         listView.setAdapter(dataAdapter);
+        listView.setTextFilterEnabled(true);
+
+
 //        SessionManager  session = new SessionManager(getApplicationContext());
 //        mFavouriteAddressArrayList = new ArrayList<FavouriteAddress>();
 //        if(session.getFavoutrateAddress() !=null) {
@@ -78,15 +86,20 @@ public class PlacesActivity extends AppCompatActivity{
 //            }
 //        });
         getCityCoverage();
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
 
 
         search = (SearchView)findViewById(R.id.searchView1);
+
+        search.setSearchableInfo( searchManager.getSearchableInfo(getComponentName()) );
+
+
         search.setIconified(false);
 
         search.setQueryHint("Search Location");
 
         search.setIconified(false);
-
+        setToolBar("Select delivery location");
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override
@@ -102,7 +115,10 @@ public class PlacesActivity extends AppCompatActivity{
             public boolean onQueryTextChange(String query) {
                 if(dataAdapter!=null)
                 {
-                    dataAdapter.filter(query);
+                //    dataAdapter.filter(query);
+                    dataAdapter.filter(query.toString().trim());
+                    listView.invalidate();
+                    return true;
                 }
                 return false;
             }
@@ -115,8 +131,19 @@ public class PlacesActivity extends AppCompatActivity{
                     search.setIconified(true);
                 }
             }
+
         });
-        setToolBar("Select delivery location");
+
+        navigation.setOnClickListener(new View.OnClickListener()
+        {
+
+            @Override
+            public void onClick(View v)
+            {
+                Intent i = new Intent(PlacesActivity.this, MapsActivity2.class);
+                startActivity(i);
+            }
+        });
     }
 
     public void onReceiveCity()

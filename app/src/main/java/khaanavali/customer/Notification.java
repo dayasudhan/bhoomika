@@ -11,7 +11,7 @@ import android.support.v4.app.Fragment;
 /**
  * Created by Gagan on 8/30/2016.
  */
-public class RecentOrders extends Fragment {
+public class Notification extends Fragment {
 
     View rootview;
 

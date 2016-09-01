@@ -5,32 +5,32 @@
         <!--<item android:id="@+id/location"-->
               <!--android:title="Location"-->
               <!--android:icon="@drawable/ic_action_fab" />-->
-        <item android:id="@+id/myprofile"
-            android:title="My Profile"
-            android:icon="@drawable/profilepng" />
-
-        <item android:id="@+id/recentOrders"
-            android:title="Notifications"
-            android:icon="@drawable/profilepng" />
-
         <item android:id="@+id/hotel"
             android:title="Hotels"
             android:icon="@drawable/home" />
-
         <item android:id="@+id/bulk_activity"
             android:title="Bulk"
             android:icon="@drawable/bulk_order" />
+       <!-- <item android:id="@+id/myprofile"
+            android:title="My Profile"
+            android:icon="@drawable/profilepng" />-->
 
         <item android:id="@+id/status"
-            android:title="My Order"
+            android:title="My Orders"
             android:icon="@drawable/ic_action_star" />
+
+        <item android:id="@+id/notification"
+            android:title="Notifications"
+            android:icon="@drawable/profilepng" />
+
+
 
         <item android:id="@+id/invite"
             android:title="Invite"
             android:icon="@drawable/ic_action_share" />
 
         <item android:id="@+id/about_knvl"
-            android:title="About Khaanavali"
+            android:title="Help"
             android:icon="@drawable/ic_action_upload" />
 
     </group>

@@ -26,19 +26,21 @@ import android.widget.TextView;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import khaanavali.customer.utils.SessionManager;
+
 /**
  * Created by Gagan on 8/27/2016.
  */
 public class MyProfile extends Fragment {
+    SessionManager session;
     ImageView headerCoverImage;
     ImageView coverPhoto,profilePhoto;
-    TextView name,phno,addrOne,addrTwo,addrThree;
-    EditText editName,editPhno,editAddrOne,editaddrTwo,editAddrThree;
+    TextView name,phno,email;//addrOne,addrTwo,addrThree;
+    EditText editName,editPhno,editEmail;//editAddrOne,editaddrTwo,editAddrThree;
     View rootview,editView;
     Button editButton;
-    ImageView editCoverPhoto;
     Button save;
-    String nameText,phnoText,addrOneText,addrTwoText,addrThreeText;
+    String nameText,phnoText,emailText;//addrOneText,addrTwoText,addrThreeText;
     // private int PICK_IMAGE_REQUEST = 1;
     private static Bitmap Image = null;
     private static Bitmap rotateImage = null;
@@ -66,29 +68,50 @@ public class MyProfile extends Fragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         rootview = inflater.inflate(R.layout.my_profile, container, false);
+        session = new SessionManager(getActivity().getApplicationContext());
         ((MainActivity) getActivity())
                 .setActionBarTitle("My Profile");
 
         name=(TextView) rootview.findViewById(R.id.name);
         phno=(TextView) rootview.findViewById(R.id.phoneNumber);
-        addrOne=(TextView) rootview.findViewById(R.id.addressOne);
-        addrTwo=(TextView) rootview.findViewById(R.id.addressTwo);
-        addrThree=(TextView) rootview.findViewById(R.id.addressThree);
+        email=(TextView) rootview.findViewById(R.id.email);
+      // addrOne=(TextView) rootview.findViewById(R.id.addressOne);
+       // addrTwo=(TextView) rootview.findViewById(R.id.addressTwo);
+       // addrThree=(TextView) rootview.findViewById(R.id.addressThree);
+
+        name.setText(session.getName());
+        phno.setText(session.getKeyPhone());
+        email.setText(session.getEmail());
+
+        /*
         if(nameText!=null) {
             name.setText(nameText);
+            editName.setText(nameText);
         }else{
             name.setText("Name");
+           // editName.setText("Name");
         }
         if(phnoText!=null)
         {
+           // editPhno.setText(phnoText);
             phno.setText(phnoText);
         }else{
+          //  editPhno.setText("PhoneNumber");
             phno.setText("PhoneNumber");
         }
-        if(addrOneText!=null){
-            addrOne.setText(addrOneText);
+        if(emailText!=null)
+        {
+           // email.setText(emailText);
+            editEmail.setText(emailText);
         }else{
-            addrOne.setText("Android one");
+            email.setText("PhoneNumber");
+            //editEmail.setText("PhoneNumber");
+        }*/
+
+        /*  if(addrOneText!=null){
+           // addrOne.setText(addrOneText);
+        }else{
+           // addrOne.setText("Android one");
         }
         if(addrTwoText!=null){
             addrTwo.setText(addrTwoText);
@@ -99,7 +122,8 @@ public class MyProfile extends Fragment {
             addrThree.setText(addrThreeText);
         }else{
             addrThree.setText("Android Three");
-        }
+        }*/
+
         coverPhoto=(ImageView) rootview.findViewById(R.id.header_cover_image);
          profilePhoto=(ImageView) rootview.findViewById(R.id.user_profile_photo);
         if(Image!=null)
@@ -107,7 +131,7 @@ public class MyProfile extends Fragment {
             profilePhoto.setImageBitmap(Image);
             coverPhoto.setImageBitmap(Image);
             coverPhoto.setImageAlpha(128);
-            editCoverPhoto.setImageBitmap(Image);
+          //  editCoverPhoto.setImageBitmap(Image);
 
         }
 
@@ -131,13 +155,14 @@ public class MyProfile extends Fragment {
                 dialog.show();
                 editName =(EditText) dialog.findViewById(R.id.editName);
                 editPhno =(EditText) dialog.findViewById(R.id.editPhoneNumber);
-                editAddrOne =(EditText) dialog.findViewById(R.id.edotAddressOne);
+                editEmail=(EditText) dialog.findViewById(R.id.editEmail);
+               /* editAddrOne =(EditText) dialog.findViewById(R.id.edotAddressOne);
                 editaddrTwo =(EditText) dialog.findViewById(R.id.editAddressTwo);
                 editAddrThree =(EditText) dialog.findViewById(R.id.editAddressThree);
-                editCoverPhoto=(ImageView) dialog.findViewById(R.id.header_cover_image);
+                editCoverPhoto=(ImageView) dialog.findViewById(R.id.header_cover_image);*/
                 Button save = (Button) dialog.findViewById(R.id.saveEdit);
 
-                editCoverPhoto.setOnClickListener(new View.OnClickListener() {
+               /* editCoverPhoto.setOnClickListener(new View.OnClickListener() {
                                                       @Override
                                                       public void onClick(View v) {
                                                           if (Image != null)
@@ -152,28 +177,40 @@ public class MyProfile extends Fragment {
                                                           intent.setAction(Intent.ACTION_GET_CONTENT);
                                                           startActivityForResult(Intent.createChooser(intent, "Select Picture"), GALLERY);
                                                       }
-                                                  });
+                                                  });*/
                         save.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
-                            nameText = editName.getText().toString();
-                            phnoText=editPhno.getText().toString();
-                            addrOneText=editAddrOne.getText().toString();
+                        nameText = editName.getText().toString();
+                        phnoText=editPhno.getText().toString();
+                        emailText=editEmail.getText().toString();
+                            /*addrOneText=editAddrOne.getText().toString();
                             addrTwoText=editaddrTwo.getText().toString();
-                            addrThreeText=editAddrThree.getText().toString();
+                            addrThreeText=editAddrThree.getText().toString();*/
+                        session.setName(nameText);
+                        session.setKeyPhone(phnoText);
+                        session.setEmail(emailText);
                         if(nameText!=null) {
-                            name.setText(nameText);
+                            name.setText(session.getName());
                         }else{
                             name.setText("Name");
                         }
                         if(phnoText!=null)
                         {
-                            phno.setText(phnoText);
+                            phno.setText(session.getKeyPhone());
                         }else{
                             phno.setText("PhoneNumber");
                         }
-                        if(addrOneText!=null){
+                        if(emailText!=null)
+                        {
+                            email.setText(session.getEmail());
+                        }else{
+                            email.setText("E-Mail");
+                        }
+
+
+
+                        /*if(addrOneText!=null){
                             addrOne.setText(addrOneText);
                         }else{
                             addrOne.setText("Android one");
@@ -187,7 +224,7 @@ public class MyProfile extends Fragment {
                             addrThree.setText(addrThreeText);
                         }else{
                             addrThree.setText("Android Three");
-                        }
+                        }*/
                         dialog.dismiss();
 
                     }

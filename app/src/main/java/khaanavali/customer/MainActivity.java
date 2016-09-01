@@ -21,21 +21,28 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.splunk.mint.Mint;
 
+import khaanavali.customer.utils.SessionManager;
+
 
 public class MainActivity extends AppCompatActivity {
 
+    RelativeLayout navHead;
     private DrawerLayout dLayout;
-
+    TextView name,email,phno;
     private boolean ishotelFragmentOpen;
     private boolean isdrawerbackpressed;
     private boolean isFirst=true;
     Fragment fragment=null;
+    SessionManager session;
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -60,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        session= new SessionManager(getApplicationContext());
         Mint.initAndStartSession(this, "49d903c2");
         setContentView(R.layout.activity_main_nav);
         ishotelFragmentOpen = true;
@@ -137,7 +144,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void setToolBar() {
         Toolbar tb = (Toolbar) findViewById(R.id.toolbar);
-
         setSupportActionBar(tb);
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
@@ -150,12 +156,41 @@ public class MainActivity extends AppCompatActivity {
         dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navView = (NavigationView) findViewById(R.id.navigation);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        View hView =  navView.inflateHeaderView(R.layout.header);
+        navHead = (RelativeLayout) hView.findViewById(R.id.profileinfo);
+        name = (TextView) hView.findViewById(R.id.myNameHeader);
+        phno = (TextView) hView.findViewById(R.id.phNoHeader);
+        email = (TextView)hView.findViewById(R.id.eMailHeader);
+
+        name.setText(session.getName());
+        phno.setText(session.getKeyPhone());
+        email.setText(session.getEmail());
+
+        navHead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment frag = null;
+                isdrawerbackpressed = false;
+
+                frag=new MyProfile();
+                ishotelFragmentOpen = true;
+                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+                        transaction.replace(R.id.frame, frag);
+                transaction.commit();
+                dLayout.closeDrawers();
+            }
+        });
+
         //    transaction.addToBackStack(null);
         transaction.replace(R.id.frame, new HotelFragment());
         ishotelFragmentOpen = true;
         transaction.commit();
 
+
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
 
@@ -170,8 +205,8 @@ public class MainActivity extends AppCompatActivity {
                     ishotelFragmentOpen = true;
 
                 }else
-                if (itemId == R.id.recentOrders) {
-                    frag = new RecentOrders();
+                if (itemId == R.id.notification) {
+                    frag = new Notification();
                     ishotelFragmentOpen = false;
                 }
                 else if (itemId == R.id.bulk_activity) {
@@ -186,25 +221,21 @@ public class MainActivity extends AppCompatActivity {
                 } else if (itemId == R.id.status) {
                     frag = new StatusTrackerFragment();
                     ishotelFragmentOpen = false;
-                } else if (itemId == R.id.myprofile) {
-                    if(isFirst==true) {
+                } else /*if (itemId == R.id.profileinfo) {
+                                if(isFirst==true) {
                         fragment=new MyProfile();
                         ishotelFragmentOpen = false;
                         isFirst=false;
                     }
-                } else if (itemId == R.id.invite) {
+                } else*/ if (itemId == R.id.invite) {
                     frag = new ShareAppFragment();
                     ishotelFragmentOpen = false;
                 }
-                if (frag != null || fragment!=null) {
+                if (frag != null ) {
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                    if(itemId!=R.id.myprofile)
-                    {
+
                         transaction.replace(R.id.frame, frag);
-                    }
-                    else{
-                        transaction.replace(R.id.frame, fragment);
-                    }
+
 //
 //      if(itemId != R.id.location) {
 //                    transaction.addToBackStack(null);
@@ -242,6 +273,8 @@ public class MainActivity extends AppCompatActivity {
 
                 return true;
             }
+
+
         }
         return true;
     }

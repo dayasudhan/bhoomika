@@ -1,7 +1,6 @@
 package khaanavali.customer.utils;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
@@ -107,6 +106,12 @@ public class SessionManager {
 	{
 		String id = pref.getString(KEY_PHONE, null);
 		return id;
+	}
+//gagan
+	public void setEmail(String orderId)
+	{
+		editor.putString(KEY_EMAIL,orderId);
+		editor.commit();
 	}
 
 	public String getEmail()

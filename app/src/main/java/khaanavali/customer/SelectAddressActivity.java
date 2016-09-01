@@ -1,21 +1,11 @@
 package khaanavali.customer;
 import android.app.Activity;
-import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
-
-import android.graphics.drawable.ColorDrawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
-
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-
 import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
@@ -26,10 +16,8 @@ import com.splunk.mint.Mint;
 import java.util.ArrayList;
 
 import khaanavali.customer.adapter.AddressListAdapater;
-import khaanavali.customer.adapter.LocationAdapter;
 import khaanavali.customer.model.Address;
 import khaanavali.customer.model.FavouriteAddress;
-import khaanavali.customer.utils.Constants;
 import khaanavali.customer.utils.SessionManager;
 
 
@@ -71,9 +59,13 @@ public class SelectAddressActivity extends AppCompatActivity{
         btnAddNewAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent i = new Intent(SelectAddressActivity.this, MapsActivity.class);
-                startActivityForResult(i,1);
-               // startActivity(i);
+                //startActivityForResult(i,1);
+                Bundle b = new Bundle();
+                b.putInt("key", 1); //Your id
+                i.putExtras(b); //
+                startActivity(i);
             }
         });
         setToolBar("Select address");
