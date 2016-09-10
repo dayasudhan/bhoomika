@@ -13,6 +13,7 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.io.FileNotFoundException;
@@ -182,49 +184,41 @@ public class MyProfile extends Fragment {
                     @Override
                     public void onClick(View v) {
                         nameText = editName.getText().toString();
-                        phnoText=editPhno.getText().toString();
-                        emailText=editEmail.getText().toString();
+                        phnoText = editPhno.getText().toString();
+                        emailText = editEmail.getText().toString();
+
+                        if(nameText.trim().length()<=0) {
+                            alertMessage1("enter the name");
+                        }else if(phnoText.trim().length()<=0){
+                            alertMessage1("enter the ph no");
+                        }else if(emailText.trim().length()<=0){
+                            alertMessage1("enter the email");
+                        }else {
+
+
                             /*addrOneText=editAddrOne.getText().toString();
                             addrTwoText=editaddrTwo.getText().toString();
                             addrThreeText=editAddrThree.getText().toString();*/
-                        session.setName(nameText);
-                        session.setKeyPhone(phnoText);
-                        session.setEmail(emailText);
-                        if(nameText!=null) {
-                            name.setText(session.getName());
-                        }else{
-                            name.setText("Name");
-                        }
-                        if(phnoText!=null)
-                        {
-                            phno.setText(session.getKeyPhone());
-                        }else{
-                            phno.setText("PhoneNumber");
-                        }
-                        if(emailText!=null)
-                        {
-                            email.setText(session.getEmail());
-                        }else{
-                            email.setText("E-Mail");
+                            session.setName(nameText);
+                            session.setKeyPhone(phnoText);
+                            session.setEmail(emailText);
+                            if (nameText != null) {
+                                name.setText(session.getName());
+                            } else {
+                                name.setText("Name");
+                            }
+                            if (phnoText != null) {
+                                phno.setText(session.getKeyPhone());
+                            } else {
+                                phno.setText("PhoneNumber");
+                            }
+                            if (emailText != null) {
+                                email.setText(session.getEmail());
+                            } else {
+                                email.setText("E-Mail");
+                            }
                         }
 
-
-
-                        /*if(addrOneText!=null){
-                            addrOne.setText(addrOneText);
-                        }else{
-                            addrOne.setText("Android one");
-                        }
-                        if(addrTwoText!=null){
-                            addrTwo.setText(addrTwoText);
-                        }else{
-                            addrTwo.setText("Android Two");
-                        }
-                        if(addrThreeText!=null){
-                            addrThree.setText(addrThreeText);
-                        }else{
-                            addrThree.setText("Android Three");
-                        }*/
                         dialog.dismiss();
 
                     }
@@ -239,6 +233,31 @@ public class MyProfile extends Fragment {
 
 
         return rootview;
+    }
+    public void alertMessage1(String message) {
+        DialogInterface.OnClickListener dialogClickListeneryesno = new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+
+                    case DialogInterface.BUTTON_NEUTRAL:
+                        break;
+                }
+            }
+        };
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Khaanavali");
+        builder.setMessage(message).setNeutralButton("Ok", dialogClickListeneryesno)
+                .setIcon(R.drawable.ic_action_about);
+
+        final AlertDialog dialog = builder.create();
+        dialog.show(); //show() should be called before dialog.getButton().
+
+
+        final Button neutralButton = dialog.getButton(AlertDialog.BUTTON_NEUTRAL);
+        LinearLayout.LayoutParams positiveButtonLL = (LinearLayout.LayoutParams) neutralButton.getLayoutParams();
+        positiveButtonLL.gravity = Gravity.CENTER;
+        neutralButton.setLayoutParams(positiveButtonLL);
+
     }
 
     @Override

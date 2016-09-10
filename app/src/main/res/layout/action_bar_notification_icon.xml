@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:layout_gravity="center"
     android:clickable="true"
+
     style="@android:style/Widget.ActionButton"
     android:gravity="center">
 

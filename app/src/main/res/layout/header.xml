@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="178dp"
     android:id="@+id/profileinfo"
-    android:background="@drawable/navbackground"
+    android:background="@color/backgroundgagan"
     android:orientation="vertical"
     android:weightSum="1">
 

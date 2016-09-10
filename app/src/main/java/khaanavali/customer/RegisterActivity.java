@@ -60,11 +60,20 @@ public class RegisterActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
+
+                String name=editName.getText().toString();
+                String email=editemail.getText().toString();
+
+
                 if (!validatePhoneNumber(phoneNumber.getText().toString())) {
                     alertMessage("Enter Valid Phone Number");
                 }
-                else if(editName.getText().length() == 0){
+                else if(name.trim().length() == 0){
                     alertMessage("Enter Name");
+                }
+                else if(validateEmail(editemail.getText().toString()))
+                {
+                    alertMessage("Enter email");
                 }
                 else
                 {
@@ -82,6 +91,18 @@ public class RegisterActivity extends AppCompatActivity {
             return true;
         else if(phoneNo.matches("\\+\\d{12}")) return true;
         else return false;
+    }
+    private boolean validateEmail(String email)
+    {
+        if(email.trim().length() <= 0)
+        {
+            return false;
+        }
+        if(email.matches("[a-zA-Z0-9]+@[a-z]+\\.+[a-z]+"))
+        {
+            return true;
+        }
+        return false;
     }
     private void setToolBar(String title) {
         Toolbar tb = (Toolbar) findViewById(R.id.toolbar2);
