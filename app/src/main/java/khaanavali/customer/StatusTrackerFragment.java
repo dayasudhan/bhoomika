@@ -114,9 +114,11 @@ public class StatusTrackerFragment extends Fragment {
                     ed.setText(orderList.get(position));
                 }
             });
+
         }
         return v;
     }
+
     public void getStatus(String orderId)
     {
        String order_url = Constants.GET_STATUS_URL;

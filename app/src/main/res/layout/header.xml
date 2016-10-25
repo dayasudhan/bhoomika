@@ -25,28 +25,27 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="My name"
         android:id="@+id/myNameHeader"
-        android:layout_alignParentBottom="true"
+        android:layout_alignTop="@+id/user_profile_photo"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="phone  no"
+        android:id="@+id/phNoHeader"
+        android:layout_below="@+id/eMailHeader"
         android:layout_alignLeft="@+id/eMailHeader"
         android:layout_alignStart="@+id/eMailHeader" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="ph no"
-        android:id="@+id/phNoHeader"
-        android:layout_below="@+id/user_profile_photo"
-        android:layout_alignLeft="@+id/user_profile_photo"
-        android:layout_alignStart="@+id/user_profile_photo" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="E-mail"
         android:id="@+id/eMailHeader"
-        android:layout_below="@+id/phNoHeader"
-        android:layout_alignLeft="@+id/phNoHeader"
-        android:layout_alignStart="@+id/phNoHeader" />
+        android:layout_below="@+id/myNameHeader"
+        android:layout_alignLeft="@+id/myNameHeader"
+        android:layout_alignStart="@+id/myNameHeader" />
 
     <!--<de.hdodenhof.circleimageview.CircleImageView-->
     <!--android:layout_width="70dp"-->

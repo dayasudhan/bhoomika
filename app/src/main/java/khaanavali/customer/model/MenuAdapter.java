@@ -46,10 +46,19 @@ public class MenuAdapter {
         this.available = available;
     }
 
+   /* public String getItemDescription() {
+        return itemDescription;
+    }
+
+    public void setItemDescription(String itemDescription) {
+        this.itemDescription = itemDescription;
+    }*/
+
     String name;
     int no_of_order;
     int price;
     String id;
+   // String itemDescription;
     boolean available;
     public MenuAdapter()
     {

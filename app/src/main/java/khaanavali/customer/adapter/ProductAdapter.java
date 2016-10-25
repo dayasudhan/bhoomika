@@ -82,6 +82,8 @@ public class ProductAdapter extends BaseAdapter {
 
             itemHolder = new CityItemHolder();
             itemHolder.city= (TextView) view.findViewById(R.id.product_detail_name);
+            itemHolder.itemDescription=(TextView) view.findViewById(R.id.itemdescription);
+
             itemHolder.price_value = (TextView) view.findViewById(R.id.approx_price_val);
 
             view.setTag(itemHolder);
@@ -93,8 +95,15 @@ public class ProductAdapter extends BaseAdapter {
         itemHolder.mAddImg = (ImageView) view.findViewById(R.id.add_btn);
         itemHolder.mAddImg.setTag(position);
         itemHolder.mSubImg = (ImageView) view.findViewById(R.id.sub_btn);
+
+        itemHolder.mItemImg=(ImageView) view.findViewById(R.id.product_detail_image_view);
+
+
         itemHolder.mSubImg.setTag(position);
         itemHolder.city.setText(mMenulist.get(position).getName());
+
+        itemHolder.itemDescription.setText("item description comes here mMenulist.get(position).getItemDescription()");
+
         itemHolder.price_value.setText(new String("₹ ").concat(String.valueOf(mMenulist.get(position).getPrice())));
 
         itemHolder.mValue = (TextView) view.findViewById(R.id.add_sub_val);
@@ -212,7 +221,8 @@ public class ProductAdapter extends BaseAdapter {
         city=rowItems;
     }*/
     private static class CityItemHolder {
-        TextView city,mValue,price_value;
+        TextView city,mValue,price_value,itemDescription;
         ImageView mSubImg,mAddImg;
+        ImageView mItemImg;
    }
 }

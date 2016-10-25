@@ -17,11 +17,11 @@
 
         <item android:id="@+id/status"
             android:title="My Orders"
-            android:icon="@drawable/ic_action_star" />
+            android:icon="@drawable/order_status" />
 
         <item android:id="@+id/notification"
             android:title="Notifications"
-            android:icon="@drawable/profilepng" />
+            android:icon="@drawable/order_status" />
 
 
 

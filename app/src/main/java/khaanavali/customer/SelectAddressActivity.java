@@ -2,6 +2,7 @@ package khaanavali.customer;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -43,6 +44,15 @@ public class SelectAddressActivity extends AppCompatActivity{
         if(session.getFavoutrateAddress() !=null) {
             mFavouriteAddressArrayList = session.getFavoutrateAddress();
         }
+        final Handler handler = new Handler();
+        handler.postDelayed( new Runnable() {
+
+            @Override
+            public void run() {
+                addressListAdapater.notifyDataSetChanged();
+                handler.postDelayed( this, 1 * 1000 );
+            }
+        }, 60 * 1000 );
 
         addressListAdapater = new AddressListAdapater(this,R.layout.address_list_item,mFavouriteAddressArrayList);
         addresslistview = (ListView) findViewById(R.id.listView_address);

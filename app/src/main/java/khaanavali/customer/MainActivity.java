@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         isdrawerbackpressed =  false;
         //gaganwelcome
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setSubtitle("Khaanavali");
         setSupportActionBar(toolbar);
 
 
@@ -166,23 +167,23 @@ public class MainActivity extends AppCompatActivity {
         name.setText(session.getName());
         phno.setText(session.getKeyPhone());
         email.setText(session.getEmail());
+        if(session.isLoggedIn()) {
+            navHead.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Fragment frag = null;
+                    isdrawerbackpressed = false;
 
-        navHead.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment frag = null;
-                isdrawerbackpressed = false;
+                    frag = new MyProfile();
+                    ishotelFragmentOpen = true;
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-                frag=new MyProfile();
-                ishotelFragmentOpen = true;
-                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-                        transaction.replace(R.id.frame, frag);
-                transaction.commit();
-                dLayout.closeDrawers();
-            }
-        });
-
+                    transaction.replace(R.id.frame, frag);
+                    transaction.commit();
+                    dLayout.closeDrawers();
+                }
+            });
+        }
         //    transaction.addToBackStack(null);
         transaction.replace(R.id.frame, new HotelFragment());
         ishotelFragmentOpen = true;

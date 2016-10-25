@@ -107,6 +107,10 @@ public class NotificationListener extends Service {
             }
 
         }
+        else if(intent_type==4)
+        {
+            intent = new Intent((getApplicationContext()), Notification.class);
+        }
         else if(intent_type == 3)
             intent = new Intent(getApplicationContext(), MainActivity.class);
         else

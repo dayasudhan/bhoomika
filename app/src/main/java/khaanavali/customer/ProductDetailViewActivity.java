@@ -38,6 +38,7 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
     ArrayList<MenuAdapter> mMenulist;
     ProductAdapter mDataAdapter;
     TextView counttxt,priceTxt;
+
     TextView vendorRating,speciality,deliveryTime,minimumOrder,deliverycharge,orderTimings;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

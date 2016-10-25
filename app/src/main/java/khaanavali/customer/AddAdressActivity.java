@@ -108,6 +108,7 @@ public class AddAdressActivity  extends AppCompatActivity {
                     String locationaddress = gson.toJson(address);
                     intent.putExtra("locationaddress", locationaddress);
                     setResult(RESULT_OK, intent);
+
                     finish();
                 }
             }

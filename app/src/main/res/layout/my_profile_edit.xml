@@ -13,24 +13,41 @@
         android:layout_height="match_parent"
         android:gravity="center">
 
-        <ImageView
-            android:id="@+id/header_cover_image"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/profile"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:orientation="vertical"
-            android:layout_below="@+id/header_cover_image"
             android:id="@+id/linearLayout">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:clickable="true"
+                android:elevation="4dp"
+                android:padding="20dp"
+                android:hint="Name"
+                android:id="@+id/editName"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center_horizontal" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:clickable="true"
+                android:elevation="4dp"
+                android:padding="20dp"
+                android:hint="Ph num"
+                android:id="@+id/editPhoneNumber"
+                android:layout_below="@+id/editName"
+                android:layout_toEndOf="@+id/textView12"
+                android:layout_alignLeft="@+id/editName"
+                android:layout_alignStart="@+id/editName" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -56,7 +73,7 @@
                 android:elevation="4dp"
                 android:padding="20dp"
                 android:hint="Address1"
-                android:id="@+id/edotAddressOne" />
+                android:id="@+id/editAddressOne" />
 
             <EditText
                 android:layout_width="fill_parent"
@@ -68,16 +85,6 @@
                 android:padding="20dp"
                 android:hint="Address2"
                 android:id="@+id/editAddressTwo" />
-            <EditText
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:background="#fff"
-                android:clickable="true"
-                android:elevation="4dp"
-                android:padding="20dp"
-                android:hint="Address3"
-                android:id="@+id/editAddressThree" />
 
             <Button
                 android:layout_width="match_parent"
@@ -93,41 +100,6 @@
 
         </LinearLayout>
 
-        <EditText
-            android:layout_width="238dp"
-            android:layout_height="wrap_content"
-            android:background="#fff"
-            android:clickable="true"
-            android:elevation="4dp"
-            android:padding="20dp"
-            android:hint="Name"
-            android:id="@+id/editName"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add Profile Pic"
-            android:id="@+id/textView12"
-            android:layout_alignBottom="@+id/header_cover_image"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <EditText
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="#fff"
-            android:clickable="true"
-            android:elevation="4dp"
-            android:padding="20dp"
-            android:hint="Ph num"
-            android:id="@+id/editPhoneNumber"
-            android:layout_below="@+id/editName"
-            android:layout_toEndOf="@+id/textView12"
-            android:layout_alignLeft="@+id/editName"
-            android:layout_alignStart="@+id/editName" />
     </RelativeLayout>
 </RelativeLayout>
 
