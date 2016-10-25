@@ -28,7 +28,7 @@ public class Notification extends Fragment {
                 .setActionBarTitle("Offers");
         notifImage=(ImageView)rootview.findViewById(R.id.notifimg);
         Picasso.with(getContext()).load(Constants.SLIDER_URL1).into(notifImage);
-        notifImage.
+        
         //notifImage.setImageURI(Uri.parse("http://l.yimg.com/a/i/us/we/52/21.gif"));
         return rootview;
     }
