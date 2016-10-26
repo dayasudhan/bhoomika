@@ -71,7 +71,7 @@ public class RegisterActivity extends AppCompatActivity {
                 else if(name.trim().length() == 0){
                     alertMessage("Enter Name");
                 }
-                else if(validateEmail(editemail.getText().toString()))
+                else if(!validateEmail(editemail.getText().toString()))
                 {
                     alertMessage("Enter email");
                 }

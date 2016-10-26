@@ -1,6 +1,7 @@
 package khaanavali.customer;
 
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -26,10 +27,12 @@ public class Notification extends Fragment {
         rootview = inflater.inflate(R.layout.notification, container, false);
         ((MainActivity) getActivity())
                 .setActionBarTitle("Offers");
-        notifImage=(ImageView)rootview.findViewById(R.id.notifimg);
-        Picasso.with(getContext()).load(Constants.SLIDER_URL1).into(notifImage);
-        
-        //notifImage.setImageURI(Uri.parse("http://l.yimg.com/a/i/us/we/52/21.gif"));
+        final Dialog dialog1 =new Dialog(getContext());
+        dialog1.setContentView(R.layout.notification);
+        notifImage=(ImageView)dialog1.findViewById(R.id.notifimg);
+        Picasso.with(getContext()).load(Constants.NOTIFICATION_URL).into(notifImage);
+        dialog1.show();
+
         return rootview;
     }
 

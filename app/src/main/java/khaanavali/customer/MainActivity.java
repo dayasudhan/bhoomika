@@ -4,6 +4,7 @@ package khaanavali.customer;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -22,6 +23,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,7 +31,9 @@ import android.widget.Toast;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.splunk.mint.Mint;
+import com.squareup.picasso.Picasso;
 
+import khaanavali.customer.utils.Constants;
 import khaanavali.customer.utils.SessionManager;
 
 
@@ -42,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean isdrawerbackpressed;
     private boolean isFirst=true;
     Fragment fragment=null;
+    String notification;
     SessionManager session;
 
     /**
@@ -70,6 +75,25 @@ public class MainActivity extends AppCompatActivity {
         session= new SessionManager(getApplicationContext());
         Mint.initAndStartSession(this, "49d903c2");
         setContentView(R.layout.activity_main_nav);
+
+        notification=getIntent().getStringExtra("notificationFragment");
+        final Dialog dialog1 =new Dialog(MainActivity.this);
+        dialog1.setContentView(R.layout.notification);
+        ImageView notif = (ImageView) dialog1.findViewById(R.id.notifimg);
+        if(dialog1!=null) {
+                if (notification!=null &&notification.equals("accepted")) {
+                    Picasso.with(getApplicationContext()).load(Constants.ACCEPTED_URL).into(notif);
+                }else if (notification!=null &&notification.equals("rejected")){
+                    Picasso.with(getApplicationContext()).load(Constants.REJECTED_URL).into(notif);
+                }else if(notification!=null && notification.equals("notify")){
+                    Picasso.with(getApplicationContext()).load(Constants.NOTIFICATION_URL).into(notif);
+                }
+            dialog1.show();
+            if(notification==null){
+                    dialog1.cancel();
+                }
+
+        }
         ishotelFragmentOpen = true;
         isdrawerbackpressed =  false;
         //gaganwelcome
@@ -135,7 +159,6 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, intent);
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
             // extract data
-
             String areaClicked = new String(intent.getStringExtra("area"));
             HotelFragment fragment = (HotelFragment) getSupportFragmentManager().findFragmentById(R.id.frame);
             fragment.getHotelList(areaClicked);
@@ -157,6 +180,9 @@ public class MainActivity extends AppCompatActivity {
         dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navView = (NavigationView) findViewById(R.id.navigation);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        Fragment frag = null;
+
+
 
         View hView =  navView.inflateHeaderView(R.layout.header);
         navHead = (RelativeLayout) hView.findViewById(R.id.profileinfo);
@@ -171,9 +197,8 @@ public class MainActivity extends AppCompatActivity {
             navHead.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Fragment frag = null;
-                    isdrawerbackpressed = false;
-
+                   isdrawerbackpressed = false;
+                    Fragment frag=null;
                     frag = new MyProfile();
                     ishotelFragmentOpen = true;
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
