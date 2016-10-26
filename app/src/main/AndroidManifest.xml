@@ -90,7 +90,8 @@
         <activity
             android:name=".SelectAddressActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
+            />
         <activity
             android:name=".AddAdressActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
