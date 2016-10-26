@@ -77,7 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    registerUser(phoneNumber.getText().toString(),"name","deviceid","email");
+                    registerUser(phoneNumber.getText().toString(),editName.getText().toString(),editemail.getText().toString(),"deviceid");
                 }
                // postReview(hotelid,comment.getText().toString(),rating.getRating());
             }
