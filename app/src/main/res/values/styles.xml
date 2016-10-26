@@ -24,9 +24,9 @@
     </style>
     <style name="AppTheme.ActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/parrotgreen6</item>
-        <item name="colorAccent">@color/parrotgreen6</item>
+        <item name="colorPrimary">@color/gaganprimary</item>
+        <item name="colorPrimaryDark">@color/gaganparrotgreen6</item>
+        <item name="colorAccent">@color/gaganparrotgreen6</item>
     </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

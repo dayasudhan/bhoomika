@@ -15,11 +15,14 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:id="@+id/layout1">
 
         <include
             android:id="@+id/toolbar2"
-            layout="@layout/toolbar" />
+            layout="@layout/toolbar">
+        </include>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -47,12 +50,15 @@
                 android:clickable="true"
 
                                 />
-
-
-
+            <ScrollView  android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:background="@color/background_color"
+                android:fillViewport="true"
+                android:layout_below="@+id/searchView1">
             <ListView
+
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="250dp"
                 android:id="@+id/area_listView"
                 android:layout_marginTop="5dp"
                 android:minHeight="20dp"
@@ -68,6 +74,7 @@
                 android:layout_alignParentStart="true"
                 android:background="@color/background_color"
                  />
+            </ScrollView>
             <View
                 android:layout_width="match_parent"
                 android:id="@+id/view3"
@@ -128,6 +135,27 @@
 
 
         </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout1">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/navigationsymbol"
+            android:id="@+id/imageView3" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Use My Location"
+            android:id="@+id/textView13"
+            android:layout_gravity="center_vertical" />
+
     </LinearLayout>
 
 

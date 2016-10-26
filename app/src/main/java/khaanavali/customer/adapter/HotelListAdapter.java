@@ -19,6 +19,7 @@ import khaanavali.customer.utils.ImageLoader;
 
 public class HotelListAdapter extends BaseAdapter{
     Activity con;
+   // RelativeLayout background;
     Typeface cr;
     int layoutResID;
     private ArrayList<HotelDetail> mhotelList;
@@ -57,6 +58,7 @@ public class HotelListAdapter extends BaseAdapter{
         if(view==null){
             LayoutInflater inflater = ((Activity)con).getLayoutInflater();
             view = inflater.inflate(layoutResID, parent, false);
+
 
 
             itemHolder = new HotelItemHolder();

@@ -2,13 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:paddingLeft="10dp"
-
+    android:background="@drawable/list_background"
     android:paddingBottom="10dp"
-    android:background="@drawable/list_background" android:layout_height="match_parent">
+     android:layout_height="match_parent">
 
     <ImageView
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:id="@+id/vendor_image_view"
         android:layout_marginTop="10dp"
         android:background="@color/img_background"
@@ -25,11 +25,11 @@
         android:text="Vendor Name 1"
         android:textColor="@color/title_text_color"
         android:id="@+id/vendor_name"
+
+        android:layout_marginTop="22dp"
+        android:textSize="16sp"
         android:layout_alignTop="@+id/vendor_image_view"
-        android:layout_toRightOf="@+id/vendor_image_view"
-        android:layout_marginTop="3dp"
-        android:layout_marginLeft="15dp"
-        android:textSize="16sp"/>
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -103,13 +103,6 @@
             android:text="" />
 
     </LinearLayout>
-
-
-
-
-
-
-
 
 
 </RelativeLayout>

@@ -4,11 +4,11 @@ package khaanavali.customer;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -22,24 +22,40 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.splunk.mint.Mint;
+import com.squareup.picasso.Picasso;
+
+import khaanavali.customer.utils.Constants;
+import khaanavali.customer.utils.SessionManager;
 
 
 public class MainActivity extends AppCompatActivity {
 
+    RelativeLayout navHead;
     private DrawerLayout dLayout;
-
+    TextView name,email,phno;
     private boolean ishotelFragmentOpen;
     private boolean isdrawerbackpressed;
+    private boolean isFirst=true;
+    Fragment fragment=null;
+    String notification;
+    SessionManager session;
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+
+
 
     public boolean isOnline(Context context) {
         ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -56,14 +72,35 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        session= new SessionManager(getApplicationContext());
         Mint.initAndStartSession(this, "49d903c2");
         setContentView(R.layout.activity_main_nav);
+
+        notification=getIntent().getStringExtra("notificationFragment");
+        final Dialog dialog1 =new Dialog(MainActivity.this);
+        dialog1.setContentView(R.layout.notification);
+        ImageView notif = (ImageView) dialog1.findViewById(R.id.notifimg);
+        if(dialog1!=null) {
+                if (notification!=null &&notification.equals("accepted")) {
+                    Picasso.with(getApplicationContext()).load(Constants.ACCEPTED_URL).into(notif);
+                }else if (notification!=null &&notification.equals("rejected")){
+                    Picasso.with(getApplicationContext()).load(Constants.REJECTED_URL).into(notif);
+                }else if(notification!=null && notification.equals("notify")){
+                    Picasso.with(getApplicationContext()).load(Constants.NOTIFICATION_URL).into(notif);
+                }
+            dialog1.show();
+            if(notification==null){
+                    dialog1.cancel();
+                }
+
+        }
         ishotelFragmentOpen = true;
         isdrawerbackpressed =  false;
         //gaganwelcome
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setSubtitle("Khaanavali");
         setSupportActionBar(toolbar);
+
 
         //gaganwelcome
         //gagan internet
@@ -122,7 +159,6 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, intent);
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
             // extract data
-
             String areaClicked = new String(intent.getStringExtra("area"));
             HotelFragment fragment = (HotelFragment) getSupportFragmentManager().findFragmentById(R.id.frame);
             fragment.getHotelList(areaClicked);
@@ -144,25 +180,62 @@ public class MainActivity extends AppCompatActivity {
         dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navView = (NavigationView) findViewById(R.id.navigation);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        Fragment frag = null;
+
+
+
+        View hView =  navView.inflateHeaderView(R.layout.header);
+        navHead = (RelativeLayout) hView.findViewById(R.id.profileinfo);
+        name = (TextView) hView.findViewById(R.id.myNameHeader);
+        phno = (TextView) hView.findViewById(R.id.phNoHeader);
+        email = (TextView)hView.findViewById(R.id.eMailHeader);
+
+        name.setText(session.getName());
+        phno.setText(session.getKeyPhone());
+        email.setText(session.getEmail());
+        if(session.isLoggedIn()) {
+            navHead.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                   isdrawerbackpressed = false;
+                    Fragment frag=null;
+                    frag = new MyProfile();
+                    ishotelFragmentOpen = true;
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+                    transaction.replace(R.id.frame, frag);
+                    transaction.commit();
+                    dLayout.closeDrawers();
+                }
+            });
+        }
         //    transaction.addToBackStack(null);
         transaction.replace(R.id.frame, new HotelFragment());
         ishotelFragmentOpen = true;
         transaction.commit();
 
+
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
 
-                Fragment frag = null;
+                 Fragment frag = null;
                 isdrawerbackpressed = false;
                 int itemId = menuItem.getItemId();
+
                 if (itemId == R.id.hotel) {
                     frag = new HotelFragment();
 
                     ((HotelFragment) frag).setBulk(false);
                     ishotelFragmentOpen = true;
 
-                } else if (itemId == R.id.bulk_activity) {
+                }else
+                if (itemId == R.id.notification) {
+                    frag = new Notification();
+                    ishotelFragmentOpen = false;
+                }
+                else if (itemId == R.id.bulk_activity) {
                     frag = new HotelFragment();
                     ((HotelFragment) frag).setBulk(true);
                     ishotelFragmentOpen = true;
@@ -174,15 +247,23 @@ public class MainActivity extends AppCompatActivity {
                 } else if (itemId == R.id.status) {
                     frag = new StatusTrackerFragment();
                     ishotelFragmentOpen = false;
-                } else if (itemId == R.id.invite) {
+                } else /*if (itemId == R.id.profileinfo) {
+                                if(isFirst==true) {
+                        fragment=new MyProfile();
+                        ishotelFragmentOpen = false;
+                        isFirst=false;
+                    }
+                } else*/ if (itemId == R.id.invite) {
                     frag = new ShareAppFragment();
                     ishotelFragmentOpen = false;
                 }
-                if (frag != null) {
+                if (frag != null ) {
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-                    transaction.replace(R.id.frame, frag);
-//                if(itemId != R.id.location) {
+                        transaction.replace(R.id.frame, frag);
+
+//
+//      if(itemId != R.id.location) {
 //                    transaction.addToBackStack(null);
 //                }
                     transaction.commit();
@@ -202,6 +283,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         int itemId = item.getItemId();
         String btnName = null;
 
@@ -217,6 +299,8 @@ public class MainActivity extends AppCompatActivity {
 
                 return true;
             }
+
+
         }
         return true;
     }

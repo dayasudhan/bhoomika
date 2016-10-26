@@ -101,15 +101,28 @@ public class NotificationListener extends Service {
                 String hotelID = msg.substring(msg.indexOf("H"),msg.indexOf("R"));
                 intent.putExtra("hotelId",hotelID);
             }
-            else
+            else if(status.equals("ACCEPTED"))
             {
                 intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.putExtra("notificationFragment", "accepted");
+
+            }else
+            {
+                intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.putExtra("notificationFragment", "rejected");
             }
 
         }
-        else if(intent_type == 3)
+        else if(intent_type==2)
+        {
             intent = new Intent(getApplicationContext(), MainActivity.class);
-        else
+            intent.putExtra("notificationFragment", "notify");
+        }
+        else if(intent_type == 3) {
+            intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.putExtra("notificationFragment", "favoritesMenuItem");
+
+        }else
             intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=khaanavali.customer"));
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);

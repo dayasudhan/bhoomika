@@ -9,9 +9,5 @@
         <!--app:showAsAction="always"-->
         <!--android:icon="@drawable/ic_favorite_white_24dp"-->
         <!--android:title="@string/app_name" />-->
-    <!--<item android:id="@+id/menu_location"-->
-        <!--app:showAsAction="always"-->
-        <!--android:icon="@drawable/ic_action_location_found"-->
-        <!--android:title="@string/app_name" />-->
 
 </menu>

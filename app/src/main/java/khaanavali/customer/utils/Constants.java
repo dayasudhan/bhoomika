@@ -14,7 +14,7 @@ public class Constants {
     public static final String GET_COVERAGE_AREAS = MAIN_URL +"/v1/admin/coverageArea";
     public static final String GET_STATUS_URL= MAIN_URL + "/v1/vendor/order_by_id/";
     public static final String REVIEW_URL = MAIN_URL + "/v1/vendor/review/";
-    public static final String OTP_REGISTER_URL = MAIN_URL + "/v1/vendor/otp/register";
+    public static final String OTP_REGISTER_URL =MAIN_URL + "/v1/vendor/otp/register";
     public static final String OTP_CONFIRM_URL = MAIN_URL + "/v1/vendor/otp/confirm";
     public static final String FIREBASE_APP = "https://project-8598805513533999178.firebaseio.com";
     //To store the firebase id in shared preferences
@@ -38,6 +38,11 @@ public class Constants {
     public static final String CLIENT_VALUE = "bhoomika";
 	
 	//gagan
+
+    public static final String NOTIFICATION_URL= MAIN_URL + "/images/slider/slider1.jpg";
+    public static final String ACCEPTED_URL= MAIN_URL + "/images/slider/slider3.jpg";
+    public static final String REJECTED_URL= MAIN_URL + "/images/slider/slider2.jpg";
+
 
     public static final String SLIDER_URL1= MAIN_URL + "/images/slider/slider1.jpg";
     public static final String SLIDER_URL3=MAIN_URL + "/images/slider/slider2.jpg";

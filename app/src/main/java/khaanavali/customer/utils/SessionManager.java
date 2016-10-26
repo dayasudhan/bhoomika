@@ -1,7 +1,6 @@
 package khaanavali.customer.utils;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
@@ -108,6 +107,12 @@ public class SessionManager {
 		String id = pref.getString(KEY_PHONE, null);
 		return id;
 	}
+//gagan
+	public void setEmail(String orderId)
+	{
+		editor.putString(KEY_EMAIL,orderId);
+		editor.commit();
+	}
 
 	public String getEmail()
 	{
@@ -200,6 +205,26 @@ public class SessionManager {
 			faddresslist = new ArrayList<FavouriteAddress>();
 		}
 		faddresslist.add(favoutrateAddress);
+		Gson gson = new Gson();
+		String json = gson.toJson(faddresslist);
+		editor.putString(KEY_FAVOURITE_ADDRESS,json);
+		editor.commit();
+	}
+
+	public void setFavoutrateAddress(FavouriteAddress favoutrateAddress,int position)
+	{
+		String faddrlist = pref.getString(KEY_FAVOURITE_ADDRESS, null);
+		ArrayList<FavouriteAddress> faddresslist = null;
+		if(faddrlist != null)
+		{
+			Gson gson = new Gson();
+			Type listType = new TypeToken<ArrayList<FavouriteAddress>>() {}.getType();
+			faddresslist =  gson.fromJson(faddrlist, listType);
+		}
+		else {
+			faddresslist = new ArrayList<FavouriteAddress>();
+		}
+		faddresslist.set(position,favoutrateAddress);
 		Gson gson = new Gson();
 		String json = gson.toJson(faddresslist);
 		editor.putString(KEY_FAVOURITE_ADDRESS,json);

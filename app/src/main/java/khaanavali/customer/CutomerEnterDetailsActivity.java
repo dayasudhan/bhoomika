@@ -12,10 +12,12 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -107,20 +109,30 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
                 if (!validatePhoneNumber(editPhone.getText().toString())) {
                     alertMessage(false,"Enter Valid Phone Number");
                 }
-                if(editName.getText().length() == 0){
-                    alertMessage(false,"Enter Name");
+                String name =editName.getText().toString();
+                String house=editHouseNo.getText().toString();
+                String addr =editAddress.getText().toString();
+                String area =editAreaName.getText().toString();
+                String land =editLandmark.getText().toString();
+
+                if(name.trim().length() == 0){
+                    //Toast.makeText(getApplicationContext(), "Enter House No or Flat No ", Toast.LENGTH_LONG).show();
+                    alertMessage("Enter House or Flat No ");
                 }
-                else if(editHouseNo.getText().length() == 0){
-                    alertMessage(false,"Enter House No or Flat No ");
+                else if(house.trim().length() <= 0){
+                    //Toast.makeText(getApplicationContext(), "Enter areaname ", Toast.LENGTH_LONG).show();
+                    alertMessage("Enter house no ");
                 }
-                else if(editAddress.getText().length() == 0){
-                    alertMessage(false,"Enter Address ");
+                else if(addr.trim().length() <= 0){
+                    //Toast.makeText(getApplicationContext(), "Enter Address ", Toast.LENGTH_LONG).show();
+                    alertMessage("Enter address ");
                 }
-                else if(editAreaName.getText().length() == 0){
-                    alertMessage(false,"Enter areaname  ");
+                else if(area.trim().length()<= 0){
+                    //Toast.makeText(getApplicationContext(), "Enter Landmark/locality ", Toast.LENGTH_LONG).show();
+                    alertMessage("Enter area name ");
                 }
-                else if(editLandmark.getText().length() == 0){
-                    alertMessage(false,"Enter Landmark/locality ");
+                else if(land.trim().length()<=0){
+                    alertMessage("enter landmark");
                 }
                 else if(hotelDetail.getMinimumOrder() > order.getTotalCost())
                 {
@@ -166,6 +178,31 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    public void alertMessage(String message) {
+        DialogInterface.OnClickListener dialogClickListeneryesno = new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+
+                    case DialogInterface.BUTTON_NEUTRAL:
+                        break;
+                }
+            }
+        };
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Khaanavali");
+        builder.setMessage(message).setNeutralButton("Ok", dialogClickListeneryesno)
+                .setIcon(R.drawable.ic_action_about);
+
+        final AlertDialog dialog = builder.create();
+        dialog.show(); //show() should be called before dialog.getButton().
+
+
+        final Button neutralButton = dialog.getButton(AlertDialog.BUTTON_NEUTRAL);
+        LinearLayout.LayoutParams positiveButtonLL = (LinearLayout.LayoutParams) neutralButton.getLayoutParams();
+        positiveButtonLL.gravity = Gravity.CENTER;
+        neutralButton.setLayoutParams(positiveButtonLL);
+
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {

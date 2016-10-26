@@ -58,24 +58,29 @@ public class AddAdressActivity  extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(editHouseNo.getText().length() == 0){
+                String house =editHouseNo.getText().toString();
+                String addresss=editAddress.getText().toString();
+                String areaname =editAreaName.getText().toString();
+                String landmark =editLandmark.getText().toString();
+                String tagLabel =editTagLabel.getText().toString();
+                if(house.trim().length() == 0){
                     //Toast.makeText(getApplicationContext(), "Enter House No or Flat No ", Toast.LENGTH_LONG).show();
                     alertMessage("Enter House or Flat No ");
                 }
-                else if(editAddress.getText().length() == 0){
+                else if(addresss.trim().length() <= 0){
                     //Toast.makeText(getApplicationContext(), "Enter areaname ", Toast.LENGTH_LONG).show();
                     alertMessage("Enter adress ");
                 }
-                else if(editAreaName.getText().length() == 0){
+                else if(areaname.trim().length() <= 0){
                     //Toast.makeText(getApplicationContext(), "Enter Address ", Toast.LENGTH_LONG).show();
                     alertMessage("Enter Areaname ");
                 }
-                else if(editLandmark.getText().length() == 0){
+                else if(landmark.trim().length()<= 0){
                     //Toast.makeText(getApplicationContext(), "Enter Landmark/locality ", Toast.LENGTH_LONG).show();
                     alertMessage("Enter Landmark/locality ");
                 }
 
-                else if(editTagLabel.getText().length() == 0){
+                else if(tagLabel.trim().length() <= 0){
                     //Toast.makeText(getApplicationContext(), "Enter City ", Toast.LENGTH_LONG).show();
                     alertMessage("Enter lable for this address");
                 }
@@ -103,6 +108,7 @@ public class AddAdressActivity  extends AppCompatActivity {
                     String locationaddress = gson.toJson(address);
                     intent.putExtra("locationaddress", locationaddress);
                     setResult(RESULT_OK, intent);
+
                     finish();
                 }
             }

@@ -56,6 +56,7 @@ public class OtpVeirificationActivity extends AppCompatActivity {
         phoneNumber = intent.getStringExtra("phoneNumber");
         name = intent.getStringExtra("name");
         email = intent.getStringExtra("email");
+
         session = new SessionManager(getApplicationContext());
 
         otp = (EditText)findViewById(R.id.otpInput);

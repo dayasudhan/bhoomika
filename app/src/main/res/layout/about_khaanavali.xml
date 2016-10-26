@@ -3,106 +3,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1"
-    android:background="@drawable/aboutusbg">
+    android:weightSum="1">
 
 
     <!-- Name Label -->
 
     <!-- Email Label -->
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="WWW.KHAANAVALI.COM"
+        android:id="@+id/textView8" />
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        >
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="F.A.Q"
+        android:id="@+id/faq" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Legal"
+        android:id="@+id/legal" />
 
-        <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/textView8"
-            android:layout_gravity="center_vertical"
-            android:layout_below="@+id/webPage"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="147dp" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Khaanavali brings you the best food to "
-            android:id="@+id/textView9"
-            android:layout_gravity="center_vertical"
-
-            android:layout_below="@+id/textView10"
-            android:layout_alignParentStart="true" />
-
-        <ImageButton
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:id="@+id/facebook"
-            android:background="@drawable/facebook"
-            android:scaleType="fitXY"
-            android:layout_gravity="center_vertical"
-            android:onClick="onClick"
-            android:clickable="true"
-            android:layout_alignParentBottom="true"
-
-            android:layout_toLeftOf="@+id/gmail"
-            android:layout_toStartOf="@+id/gmail" />
-
-        <ImageButton
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:id="@+id/gmail"
-            android:background="@drawable/gmail"
-            android:scaleType="fitXY"
-            android:layout_gravity="center_vertical"
-            android:onClick="onClick"
-            android:clickable="true"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="www.khaanavali.com"
-            android:id="@+id/webPage"
-            android:onClick="onCilck"
-            android:clickable="true"
-            android:layout_marginTop="157dp"
-            android:gravity="center"
-            android:textColor="@color/parrotgreen3"
-            android:layout_alignParentTop="true"
-            android:layout_gravity="center_vertical"
-
-
-            android:layout_centerVertical="true"
-            android:textAlignment="center"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Feel the real taste of KARNATAKA."
-            android:id="@+id/textView10"
-            android:layout_below="@+id/textView8"
-            android:layout_alignEnd="@+id/textView9" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-
-            android:text="your doorstep at cheeper price."
-            android:id="@+id/textView11"
-            android:layout_below="@+id/textView9"
-            android:layout_alignParentStart="true" />
-
-
-    </RelativeLayout>
-
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Feed Back"
+        android:id="@+id/feedback" />
 </LinearLayout>
