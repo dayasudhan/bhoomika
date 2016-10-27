@@ -7,7 +7,7 @@ public class Constants {
 
     public static final String RELEASE_URL = "http://oota.herokuapp.com";
     public static final String DEBUG_URL = "http://kuruva.herokuapp.com";
-    public static final String MAIN_URL = RELEASE_URL;
+    public static final String MAIN_URL = DEBUG_URL;
 
     public static final String ORDER_URL = MAIN_URL + "/v1/vendor/order";
     public static final String GET_HOTEL_BY_DELIVERY_AREAS =  MAIN_URL +"/v1/vendor/delieveryareas?areaName=";
@@ -16,6 +16,7 @@ public class Constants {
     public static final String REVIEW_URL = MAIN_URL + "/v1/vendor/review/";
     public static final String OTP_REGISTER_URL =MAIN_URL + "/v1/vendor/otp/register";
     public static final String OTP_CONFIRM_URL = MAIN_URL + "/v1/vendor/otp/confirm";
+    public static final String CUSTOMER_ADDRESS_URL = MAIN_URL + "/v1/customer/address/";
     public static final String FIREBASE_APP = "https://project-8598805513533999178.firebaseio.com";
     //To store the firebase id in shared preferences
     public static final String UNIQUE_ID = "uniqueid";
