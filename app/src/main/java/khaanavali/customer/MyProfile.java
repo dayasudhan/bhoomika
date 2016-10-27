@@ -1,5 +1,6 @@
 package khaanavali.customer;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -114,15 +115,12 @@ public class MyProfile extends Fragment {
 
         btnAddNewAddress = (Button) rootview.findViewById(R.id.addAddress);
 
-        mFavouriteAddressArrayList = new ArrayList<FavouriteAddress>();
-        if(session.getFavoutrateAddress() !=null) {
-            mFavouriteAddressArrayList = session.getFavoutrateAddress();
-        }
-
-        addressListAdapater = new AddressListAdapater(getActivity(),R.layout.address_list_item,mFavouriteAddressArrayList);
         addresslistview = (ListView) rootview.findViewById(R.id.listViewAddresProfile);
-        addresslistview.setAdapter(addressListAdapater);
+
         addresslistview.setEmptyView(rootview.findViewById(R.id.emptyElement));
+        initaddressListAdapater();
+
+
 
         final Handler handler = new Handler();
         handler.postDelayed( new Runnable() {
@@ -248,11 +246,11 @@ public class MyProfile extends Fragment {
             public void onClick(View v) {
 
                 Intent i = new Intent(getActivity(), MapsActivity.class);
-                //startActivityForResult(i,1);
-                Bundle b = new Bundle();
-                b.putInt("key", 1); //Your id
-                i.putExtras(b); //
-                startActivity(i);
+                startActivityForResult(i,1);
+//                Bundle b = new Bundle();
+//                b.putInt("key", 1); //Your id
+//                i.putExtras(b); //
+//                startActivity(i);
             }
         });
 
@@ -269,6 +267,16 @@ public class MyProfile extends Fragment {
         }
 
         return rootview;
+    }
+
+    private void initaddressListAdapater() {
+        mFavouriteAddressArrayList = new ArrayList<FavouriteAddress>();
+        if(session.getFavoutrateAddress() !=null) {
+            mFavouriteAddressArrayList = session.getFavoutrateAddress();
+        }
+
+        addressListAdapater = new AddressListAdapater(getActivity(),R.layout.address_list_item,mFavouriteAddressArrayList);
+        addresslistview.setAdapter(addressListAdapater);
     }
 
     public void alertMessage1(String message) {
@@ -299,7 +307,11 @@ public class MyProfile extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == GALLERY && resultCode != 0) {
+        if(requestCode == 1 && resultCode == Activity.RESULT_OK) {
+            initaddressListAdapater();
+
+        }
+        else if (requestCode == GALLERY && resultCode != 0) {
             Uri mImageUri = data.getData();
             try {
                 Image = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), mImageUri);
