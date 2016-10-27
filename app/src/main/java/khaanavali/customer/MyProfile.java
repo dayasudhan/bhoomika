@@ -217,7 +217,7 @@ public class MyProfile extends Fragment {
                                    // getActivity().setResult(getActivity().RESULT_OK, intent);
                                    // getActivity().finish();
                                     dialog1.cancel();
-                                    addresslistview.deferNotifyDataSetChanged();
+                                    addressListAdapater.notifyDataSetChanged();
                                 }
                             }
                         });

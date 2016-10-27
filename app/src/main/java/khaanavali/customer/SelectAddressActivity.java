@@ -38,6 +38,8 @@ public class SelectAddressActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         Mint.initAndStartSession(this, "49d903c2");
         setContentView(R.layout.select_address);
+        if(addressListAdapater!=null)
+                addressListAdapater.notifyDataSetChanged();
         btnAddNewAddress = (Button) findViewById(R.id.addnewaddress);
         SessionManager  session = new SessionManager(getApplicationContext());
         mFavouriteAddressArrayList = new ArrayList<FavouriteAddress>();
@@ -52,7 +54,7 @@ public class SelectAddressActivity extends AppCompatActivity{
                 addressListAdapater.notifyDataSetChanged();
                 handler.postDelayed( this, 1 * 1000 );
             }
-        }, 60 * 1000 );
+        }, 1 );
 
         addressListAdapater = new AddressListAdapater(this,R.layout.address_list_item,mFavouriteAddressArrayList);
         addresslistview = (ListView) findViewById(R.id.listView_address);

@@ -200,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
                    isdrawerbackpressed = false;
                     Fragment frag=null;
                     frag = new MyProfile();
-                    ishotelFragmentOpen = true;
+                    ishotelFragmentOpen = false;
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
                     transaction.replace(R.id.frame, frag);
