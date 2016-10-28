@@ -50,6 +50,7 @@ public class AddAdressActivity  extends AppCompatActivity {
     EditText editTagLabel,editCity,editHouseNo,editAreaName,editLandmark,editAddress;
     Button btnSave;
     Address address;
+    String locationaddress;
     List<android.location.Address> mAddresses;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,12 +130,8 @@ public class AddAdressActivity  extends AppCompatActivity {
                     Gson gson = new Gson();
                     String strAddress = gson.toJson(favouriteAddress);
                     postAddressToServer(strAddress,session.getKeyPhone());
+                    locationaddress = gson.toJson(address);
 
-                    Intent intent = new Intent();
-                    String locationaddress = gson.toJson(address);
-                    intent.putExtra("locationaddress", locationaddress);
-                    setResult(RESULT_OK, intent);
-                    finish();
                 }
             }
         });
@@ -144,8 +141,8 @@ public class AddAdressActivity  extends AppCompatActivity {
 
     public void postAddressToServer(String address,String phone)
     {
-        String url = Constants.CUSTOMER_ADDRESS_URL +  "9111111111";
-        new PostJSONAsyncTask().execute(Constants.CUSTOMER_ADDRESS_URL, address);
+        String url = Constants.CUSTOMER_ADDRESS_URL +  phone;
+        new PostJSONAsyncTask().execute(url, address);
     }
     public  class PostJSONAsyncTask extends AsyncTask<String, Void, Boolean> {
         Dialog dialog;
@@ -194,6 +191,10 @@ public class AddAdressActivity  extends AppCompatActivity {
         protected void onPostExecute(Boolean result) {
 
             dialog.cancel();
+            Intent intent = new Intent();
+            intent.putExtra("locationaddress", locationaddress);
+            setResult(RESULT_OK, intent);
+            finish();
             if(result == true){
             }
             else if (result == false)

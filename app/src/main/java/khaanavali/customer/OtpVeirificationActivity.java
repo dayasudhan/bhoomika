@@ -146,7 +146,8 @@ public class OtpVeirificationActivity extends AppCompatActivity {
                 ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
                 postParameters.add(new BasicNameValuePair("phoneNumber", urls[1]));
                 postParameters.add(new BasicNameValuePair("otpText", urls[2]));
-
+                postParameters.add(new BasicNameValuePair("name", name));
+                postParameters.add(new BasicNameValuePair("email", email));
                 HttpPost request = new HttpPost(urls[0]);
                 request.addHeader(Constants.SECUREKEY_KEY, Constants.SECUREKEY_VALUE);
                 request.addHeader(Constants.VERSION_KEY, Constants.VERSION_VALUE);
