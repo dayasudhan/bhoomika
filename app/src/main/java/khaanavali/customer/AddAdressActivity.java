@@ -1,7 +1,11 @@
 package khaanavali.customer;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import android.net.ParseException;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -9,19 +13,34 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.splunk.mint.Mint;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+
+import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import khaanavali.customer.model.Address;
 import khaanavali.customer.model.FavouriteAddress;
+import khaanavali.customer.utils.Constants;
 import khaanavali.customer.utils.SessionManager;
 
 /**
@@ -31,6 +50,7 @@ public class AddAdressActivity  extends AppCompatActivity {
     EditText editTagLabel,editCity,editHouseNo,editAreaName,editLandmark,editAddress;
     Button btnSave;
     Address address;
+    String locationaddress;
     List<android.location.Address> mAddresses;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,20 +120,86 @@ public class AddAdressActivity  extends AppCompatActivity {
                     FavouriteAddress favouriteAddress = new FavouriteAddress();
                     favouriteAddress.setLabel(editTagLabel.getText().toString());
                     favouriteAddress.setAddress(address);
+
+
+
+
                     SessionManager session = new SessionManager(getApplicationContext());
                     session.setFavoutrateAddress(favouriteAddress);
 
-                    Intent intent = new Intent();
                     Gson gson = new Gson();
-                    String locationaddress = gson.toJson(address);
-                    intent.putExtra("locationaddress", locationaddress);
-                    setResult(RESULT_OK, intent);
+                    String strAddress = gson.toJson(favouriteAddress);
+                    postAddressToServer(strAddress,session.getKeyPhone());
+                    locationaddress = gson.toJson(address);
 
-                    finish();
                 }
             }
         });
         setToolBar("Add Address");
+    }
+
+
+    public void postAddressToServer(String address,String phone)
+    {
+        String url = Constants.CUSTOMER_ADDRESS_URL +  phone;
+        new PostJSONAsyncTask().execute(url, address);
+    }
+    public  class PostJSONAsyncTask extends AsyncTask<String, Void, Boolean> {
+        Dialog dialog;
+        public  PostJSONAsyncTask()
+        {
+        }
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog = new Dialog(AddAdressActivity.this,android.R.style.Theme_Translucent);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.custom_progress_dialog);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            dialog.show();
+            dialog.setCancelable(true);
+        }
+
+        @Override
+        protected Boolean doInBackground(String... urls) {
+            try {
+                ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
+                HttpPost request = new HttpPost(urls[0]);
+                HttpClient httpclient = new DefaultHttpClient();
+                UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(postParameters);
+                StringEntity se = new StringEntity(urls[1]);
+                request.setEntity(se);
+                request.setHeader("Accept", "application/json");
+                request.setHeader("Content-type", "application/json");
+                request.setHeader(Constants.SECUREKEY_KEY, Constants.SECUREKEY_VALUE);
+                request.setHeader(Constants.VERSION_KEY, Constants.VERSION_VALUE);
+                request.setHeader(Constants.CLIENT_KEY, Constants.CLIENT_VALUE);
+                HttpResponse response = httpclient.execute(request);
+
+                int status = response.getStatusLine().getStatusCode();
+                if (status == 200) {
+                    HttpEntity entity = response.getEntity();
+                    return true;
+                }
+            } catch (ParseException e1) {
+                e1.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+        protected void onPostExecute(Boolean result) {
+
+            dialog.cancel();
+            Intent intent = new Intent();
+            intent.putExtra("locationaddress", locationaddress);
+            setResult(RESULT_OK, intent);
+            finish();
+            if(result == true){
+            }
+            else if (result == false)
+                Toast.makeText(getApplicationContext(), "Unable to fetch data from server", Toast.LENGTH_LONG).show();
+        }
     }
 
 
