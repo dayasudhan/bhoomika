@@ -73,11 +73,11 @@ public class SelectAddressActivity extends AppCompatActivity{
             public void onClick(View v) {
 
                 Intent i = new Intent(SelectAddressActivity.this, MapsActivity.class);
-                //startActivityForResult(i,1);
-                Bundle b = new Bundle();
-                b.putInt("key", 1); //Your id
-                i.putExtras(b); //
-                startActivity(i);
+                startActivityForResult(i,1);
+//                Bundle b = new Bundle();
+//                b.putInt("key", 1); //Your id
+//                i.putExtras(b); //
+//                startActivity(i);
             }
         });
         setToolBar("Select address");
