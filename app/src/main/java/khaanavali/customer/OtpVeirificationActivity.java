@@ -28,6 +28,9 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -161,7 +164,43 @@ public class OtpVeirificationActivity extends AppCompatActivity {
                 if (status == 200) {
                     HttpEntity entity = response.getEntity();
                     apiReponse = EntityUtils.toString(entity);
-                    return true;
+//gagan
+                    JSONArray jarray = null;
+                    try {
+                        jarray = new JSONArray(apiReponse);
+
+                        for (int i = 0; i < jarray.length(); i++) {
+
+                            JSONObject jObject=jarray.getJSONObject(i);
+                            String phno = jObject.getString("phone");
+                            if(phno.equals(phoneNumber)){
+                                if(jObject.has("addresses")){
+                                    JSONArray address =jObject.getJSONArray("addresses");
+                                    for (int j=0;j<address.length();j++){
+                                        JSONObject addressObject=address.getJSONObject(i);
+
+                                        String areaName,landMark,addressLine1,addressLine2,city;
+
+                                        areaName= addressObject.getString("label");
+                                        landMark= addressObject.getString("LandMark");
+                                        addressLine1= addressObject.getString("addressLine1");
+                                        addressLine2=addressObject.getString("addressLine2");
+                                        city=addressObject.getString("city");
+
+                                        session.setAddress(areaName,landMark,addressLine1,addressLine2,city);
+                                    }
+                                }
+                            }
+
+
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+//gagan
+
+                        return true;
                 }
             } catch (ParseException e1) {
                 e1.printStackTrace();
@@ -174,7 +213,7 @@ public class OtpVeirificationActivity extends AppCompatActivity {
 
             dialog.cancel();
             if(result == true){
-                if(apiReponse.equals("Success"))
+                if(apiReponse.length()>0)
                 {
                     session.createLoginSession(name,phoneNumber,email);
                     Intent i = new Intent(OtpVeirificationActivity.this, CutomerEnterDetailsActivity.class);
