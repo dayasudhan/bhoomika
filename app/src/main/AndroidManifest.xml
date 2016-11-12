@@ -80,10 +80,6 @@
                 android:value=".MainActivity" />
         </activity>
         <activity
-            android:name=".Faq"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:windowSoftInputMode="adjustPan|adjustResize" />
-        <activity
             android:name=".CutomerEnterDetailsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="adjustPan|adjustResize" />

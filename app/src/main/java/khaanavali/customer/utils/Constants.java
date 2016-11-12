@@ -7,7 +7,7 @@ public class Constants {
 
     public static final String RELEASE_URL = "http://oota.herokuapp.com";
     public static final String DEBUG_URL = "http://kuruva.herokuapp.com";
-    public static final String MAIN_URL = DEBUG_URL;
+    public static final String MAIN_URL = RELEASE_URL;
 
     public static final String ORDER_URL = MAIN_URL + "/v1/vendor/order";
     public static final String GET_HOTEL_BY_DELIVERY_AREAS =  MAIN_URL +"/v1/vendor/delieveryareas?areaName=";
@@ -43,6 +43,12 @@ public class Constants {
     public static final String NOTIFICATION_URL= MAIN_URL + "/images/slider/slider1.jpg";
     public static final String ACCEPTED_URL= MAIN_URL + "/images/slider/slider3.jpg";
     public static final String REJECTED_URL= MAIN_URL + "/images/slider/slider2.jpg";
+
+
+    public static final String ABOUT_US_URL= "http://khaanavali.com/extra/aboutus.html";
+    public static final String FAQ_URL= "http://khaanavali.com/extra/faq.html";
+    public static final String CONTACT_US_URL= "http://khaanavali.com/extra/contact.html";
+    public static final String TERMS_AND_CONDITION_URL= "http://khaanavali.com/extra/termsandcondition.html";
 
 
     public static final String SLIDER_URL1= MAIN_URL + "/images/slider/slider1.jpg";

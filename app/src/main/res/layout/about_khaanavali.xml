@@ -10,28 +10,27 @@
 
     <!-- Email Label -->
 
-    <TextView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="WWW.KHAANAVALI.COM"
-        android:id="@+id/textView8" />
+        android:text="aboutus"
+        android:id="@+id/aboutus" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="F.A.Q"
+        android:text="faq"
         android:id="@+id/faq" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Legal"
-        android:id="@+id/legal" />
+        android:id="@+id/contactus"
+        android:text="contactus" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Feed Back"
-        android:id="@+id/feedback" />
+        android:id="@+id/tandc"
+        android:text="tandc" />
 </LinearLayout>

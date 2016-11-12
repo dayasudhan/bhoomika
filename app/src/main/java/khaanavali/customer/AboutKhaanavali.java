@@ -1,16 +1,16 @@
 package khaanavali.customer;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
+import android.webkit.WebView;
 import android.widget.Button;
+
+import khaanavali.customer.utils.Constants;
 
 
 /**
@@ -20,7 +20,8 @@ import android.widget.Button;
 public class AboutKhaanavali extends Fragment {
 
     View rootview;
-    Button faq,legal,feedback;
+    Button faq,aboutus,contactUs,tandC;
+    WebView popUpFaq;
     // Session Manager Class
 
 
@@ -31,48 +32,55 @@ public class AboutKhaanavali extends Fragment {
         ((MainActivity) getActivity())
                 .setActionBarTitle("About Khaanavali");
         faq=(Button) rootview.findViewById(R.id.faq);
-        legal=(Button) rootview.findViewById(R.id.legal);
-        feedback=(Button) rootview.findViewById(R.id.feedback);
-        faq.setOnClickListener(new View.OnClickListener() {
+        aboutus=(Button) rootview.findViewById(R.id.aboutus);
+        tandC=(Button) rootview.findViewById(R.id.tandc);
+        contactUs=(Button) rootview.findViewById(R.id.contactus);
+        aboutus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final Dialog dialog1 =new Dialog(getContext());
+                dialog1.setContentView(R.layout.aboutuspopup);
+                popUpFaq =(WebView) dialog1.findViewById(R.id.popup);
+                popUpFaq.loadUrl(Constants.ABOUT_US_URL);
 
-                Intent i= new Intent(getActivity(),Faq.class);
-                startActivity(i);
+                dialog1.show();
+
             }
 
             });
-        legal.setOnClickListener(new View.OnClickListener() {
+        faq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Dialog dialog = new Dialog(getActivity());
-                dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-                dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                        WindowManager.LayoutParams.FLAG_FULLSCREEN);
-                dialog.setContentView(R.layout.help_legal);
-                Window window = dialog.getWindow();
-                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT);
-                // dialog.getWindow().setBackgroundDrawable(
-                //       new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
+                final Dialog dialog1 =new Dialog(getContext());
+
+                popUpFaq =(WebView) dialog1.findViewById(R.id.popup);
+                popUpFaq.loadUrl(Constants.FAQ_URL);
+
+                dialog1.show();
             }
 
         });
-        feedback.setOnClickListener(new View.OnClickListener() {
+        contactUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Dialog dialog = new Dialog(getActivity());
-                dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-                dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                        WindowManager.LayoutParams.FLAG_FULLSCREEN);
-                dialog.setContentView(R.layout.help_feedback);
-                Window window = dialog.getWindow();
-                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT);
-                // dialog.getWindow().setBackgroundDrawable(
-                //       new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
+                final Dialog dialog1 =new Dialog(getContext());
+
+                popUpFaq =(WebView) dialog1.findViewById(R.id.popup);
+                popUpFaq.loadUrl(Constants.CONTACT_US_URL);
+
+                dialog1.show();
+            }
+
+        });
+        tandC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog dialog1 =new Dialog(getContext());
+
+                popUpFaq =(WebView) dialog1.findViewById(R.id.popup);
+                popUpFaq.loadUrl(Constants.TERMS_AND_CONDITION_URL);
+
+                dialog1.show();
             }
 
         });
