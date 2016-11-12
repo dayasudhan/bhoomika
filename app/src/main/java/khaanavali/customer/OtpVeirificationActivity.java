@@ -164,44 +164,56 @@ public class OtpVeirificationActivity extends AppCompatActivity {
                 if (status == 200) {
                     HttpEntity entity = response.getEntity();
                     apiReponse = EntityUtils.toString(entity);
+//gagan
 
-                    JSONArray jarray = null;
-                                        try {
-                                                jarray = new JSONArray(apiReponse);
-
-                                                        for (int i = 0; i < jarray.length(); i++) {
-
-                                                                JSONObject jObject=jarray.getJSONObject(i);
-                                                        String phno = jObject.getString("phone");
-                                                        if(phno.equals(phoneNumber)){
-                                                                if(jObject.has("addresses")){
-                                                                        JSONArray address =jObject.getJSONArray("addresses");
-                                                                        for (int j=0;j<address.length();j++){
-                                                                                JSONObject addressObject=address.getJSONObject(i);
-
-                                                                                        String areaName,landMark,addressLine1,addressLine2,city;
-
-                                                                                        areaName= addressObject.getString("label");
-                                                                                landMark= addressObject.getString("LandMark");
-                                                                                addressLine1= addressObject.getString("addressLine1");
-                                                                                addressLine2=addressObject.getString("addressLine2");
-                                                                                city=addressObject.getString("city");
-
-                                                                                       session.setAddress(areaName,landMark,addressLine1,addressLine2,city);
-                                                                           }
-                                                                    }
-                                                            }
-                                                        }
-                                            } catch (JSONException e) {
-                                                e.printStackTrace();
-                                            }
+                    try {
 
 
-                    return true;
+                        JSONObject jObject  = new JSONObject(apiReponse);
+
+
+                                if(jObject.has("addresses")){
+                                    JSONArray address =jObject.getJSONArray("addresses");
+                                    if(address != null) {
+                                        int length = address.length();
+                                        for (int j = 0; j < address.length(); j++) {
+                                            JSONObject addressObject = address.getJSONObject(j);
+
+                                            String areaName, landMark, addressLine1, addressLine2, city;
+
+                                            areaName = addressObject.getString("label");
+                                            landMark = addressObject.getString("LandMark");
+                                            addressLine1 = addressObject.getString("addressLine1");
+                                            addressLine2 = addressObject.getString("addressLine2");
+                                            city = addressObject.getString("city");
+
+                                            session.setAddress(areaName, landMark, addressLine1, addressLine2, city);
+                                        }
+                                    }
+
+                            }
+
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+
+//gagan
+
+                        return true;
                 }
             } catch (ParseException e1) {
                 e1.printStackTrace();
             } catch (IOException e) {
+                e.printStackTrace();
+            }
+            catch (Exception e)
+            {
                 e.printStackTrace();
             }
             return false;
