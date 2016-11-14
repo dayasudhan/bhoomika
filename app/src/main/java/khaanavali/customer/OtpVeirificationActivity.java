@@ -35,6 +35,8 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import khaanavali.customer.model.Address;
+import khaanavali.customer.model.FavouriteAddress;
 import khaanavali.customer.utils.Constants;
 import khaanavali.customer.utils.SessionManager;
 
@@ -48,6 +50,8 @@ public class OtpVeirificationActivity extends AppCompatActivity {
     String apiReponse;
     private String order ,hotelDetail,phoneNumber,name,email;
     SessionManager session;
+    FavouriteAddress favadd;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +63,7 @@ public class OtpVeirificationActivity extends AppCompatActivity {
         phoneNumber = intent.getStringExtra("phoneNumber");
         name = intent.getStringExtra("name");
         email = intent.getStringExtra("email");
+
 
         session = new SessionManager(getApplicationContext());
 
@@ -164,7 +169,6 @@ public class OtpVeirificationActivity extends AppCompatActivity {
                 if (status == 200) {
                     HttpEntity entity = response.getEntity();
                     apiReponse = EntityUtils.toString(entity);
-//gagan
 
                     try {
 
@@ -172,26 +176,45 @@ public class OtpVeirificationActivity extends AppCompatActivity {
                         JSONObject jObject  = new JSONObject(apiReponse);
 
 
-                                if(jObject.has("addresses")){
-                                    JSONArray address =jObject.getJSONArray("addresses");
+
+                                    JSONArray address =jObject.getJSONArray("addesses");
                                     if(address != null) {
                                         int length = address.length();
                                         for (int j = 0; j < address.length(); j++) {
                                             JSONObject addressObject = address.getJSONObject(j);
 
-                                            String areaName, landMark, addressLine1, addressLine2, city;
+                                            String areaName, landMark, addressLine1, addressLine2, city,zip,lon,lat;
 
                                             areaName = addressObject.getString("label");
                                             landMark = addressObject.getString("LandMark");
                                             addressLine1 = addressObject.getString("addressLine1");
                                             addressLine2 = addressObject.getString("addressLine2");
                                             city = addressObject.getString("city");
+                                            zip=addressObject.getString("zip");
+                                            lon=addressObject.getString("latitude");
+                                            lat=addressObject.getString("longitude");
 
-                                            session.setAddress(areaName, landMark, addressLine1, addressLine2, city);
+
+
+                                            favadd =new FavouriteAddress();
+                                            Address addr1=new Address();
+                                            addr1.setAddressLine1(addressLine1);
+                                            addr1.setAddressLine2(addressLine2);
+                                            addr1.setAreaName(areaName);
+                                            addr1.setCity(city);
+                                            addr1.setZip(zip);
+                                            addr1.setLongitude(lon);
+                                            addr1.setLatitude(lat);
+                                            addr1.setLandMark(landMark);
+
+                                            favadd.setLabel(areaName);
+                                            favadd.setAddress(addr1);
+                                            session.setFavoutrateAddress(favadd);
+
                                         }
                                     }
 
-                            }
+
 
 
 
@@ -224,11 +247,15 @@ public class OtpVeirificationActivity extends AppCompatActivity {
             if(result == true){
                 if(apiReponse.length()>0)
                 {
+                    Toast.makeText(getApplicationContext(), apiReponse, Toast.LENGTH_LONG).show();
+
                     session.createLoginSession(name,phoneNumber,email);
                     Intent i = new Intent(OtpVeirificationActivity.this, CutomerEnterDetailsActivity.class);
                     i.putExtra("order", order);
                     i.putExtra("HotelDetail",hotelDetail);
+
                     startActivity(i);
+
                 }
                 else
                 {

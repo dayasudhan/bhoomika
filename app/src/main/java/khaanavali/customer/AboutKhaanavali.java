@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
-import android.widget.ImageView;
+import android.widget.Button;
 
 import khaanavali.customer.utils.Constants;
 
@@ -20,9 +20,8 @@ import khaanavali.customer.utils.Constants;
 public class AboutKhaanavali extends Fragment {
 
     View rootview;
-    ImageView aboutUsWeb,faq,contactUs,tAndC;
-    WebView popUpAboutUs,popUpFaq,popUpContactUs,popUpTandC;
-
+    Button faq,aboutus,contactUs,tandC;
+    WebView popUpFaq;
     // Session Manager Class
 
 
@@ -32,19 +31,20 @@ public class AboutKhaanavali extends Fragment {
         rootview = inflater.inflate(R.layout.about_khaanavali, container, false);
         ((MainActivity) getActivity())
                 .setActionBarTitle("About Khaanavali");
-        aboutUsWeb=(ImageView) rootview.findViewById(R.id.aboutus);
-        faq=(ImageView) rootview.findViewById(R.id.faq);
-        contactUs=(ImageView) rootview.findViewById(R.id.contactus);
-        tAndC=(ImageView) rootview.findViewById(R.id.tandc);
-
-         aboutUsWeb.setOnClickListener(new View.OnClickListener() {
+        faq=(Button) rootview.findViewById(R.id.faq);
+        aboutus=(Button) rootview.findViewById(R.id.aboutus);
+        tandC=(Button) rootview.findViewById(R.id.tandc);
+        contactUs=(Button) rootview.findViewById(R.id.contactus);
+        aboutus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Dialog dialog1 =new Dialog(getContext());
+                dialog1.setContentView(R.layout.aboutuspopup);
+                popUpFaq =(WebView) dialog1.findViewById(R.id.popup);
+                popUpFaq.loadUrl(Constants.ABOUT_US_URL);
 
-                popUpAboutUs =(WebView) dialog1.findViewById(R.id.popup);
-                popUpAboutUs.loadUrl(Constants.ABOUT_US_URL);
                 dialog1.show();
+
             }
 
             });
@@ -65,25 +65,25 @@ public class AboutKhaanavali extends Fragment {
             public void onClick(View v) {
                 final Dialog dialog1 =new Dialog(getContext());
 
-                popUpContactUs =(WebView) dialog1.findViewById(R.id.popup);
-                popUpContactUs.loadUrl(Constants.CONTACT_US_URL);
+                popUpFaq =(WebView) dialog1.findViewById(R.id.popup);
+                popUpFaq.loadUrl(Constants.CONTACT_US_URL);
 
                 dialog1.show();
             }
 
         });
-        tAndC.setOnClickListener(new View.OnClickListener() {
+        tandC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Dialog dialog1 =new Dialog(getContext());
 
-                popUpTandC =(WebView) dialog1.findViewById(R.id.popup);
-                popUpTandC.loadUrl(Constants.TERMS_AND_CONDITION_URL);
+                popUpFaq =(WebView) dialog1.findViewById(R.id.popup);
+                popUpFaq.loadUrl(Constants.TERMS_AND_CONDITION_URL);
+
                 dialog1.show();
             }
 
         });
-
 
 
 

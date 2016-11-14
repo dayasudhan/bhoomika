@@ -96,9 +96,9 @@ public class RegisterActivity extends AppCompatActivity {
     {
         if(email.trim().length() <= 0)
         {
-            return false;
+            return true;
         }
-        if(email.matches("[a-z A-Z 0-9]+@[a-z]+\\.+[a-z]+"))
+        if(email.matches("[a-zA-Z0-9]+@[a-z]+\\.+[a-z]+"))
         {
             return true;
         }
