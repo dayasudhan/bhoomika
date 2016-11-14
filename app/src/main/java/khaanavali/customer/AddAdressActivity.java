@@ -31,7 +31,6 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -169,7 +168,7 @@ public class AddAdressActivity  extends AppCompatActivity {
                 UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(postParameters);
                 StringEntity se = new StringEntity(urls[1]);
                 request.setEntity(se);
-                request.setHeader("Accept", "application/json");
+                request.setHeader("Accept", "pplication/json");
                 request.setHeader("Content-type", "application/json");
                 request.setHeader(Constants.SECUREKEY_KEY, Constants.SECUREKEY_VALUE);
                 request.setHeader(Constants.VERSION_KEY, Constants.VERSION_VALUE);

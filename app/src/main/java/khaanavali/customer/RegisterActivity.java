@@ -96,13 +96,13 @@ public class RegisterActivity extends AppCompatActivity {
     {
         if(email.trim().length() <= 0)
         {
-            return false;
+            return true;
         }
         if(email.matches("[a-zA-Z0-9]+@[a-z]+\\.+[a-z]+"))
         {
             return true;
         }
-        return false;
+        return true;
     }
     private void setToolBar(String title) {
         Toolbar tb = (Toolbar) findViewById(R.id.toolbar2);
