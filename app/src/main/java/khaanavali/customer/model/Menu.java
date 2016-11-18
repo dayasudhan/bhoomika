@@ -7,12 +7,34 @@ public class Menu {
     String name;
     int  no_of_order;
     int  price;
+    String itemDescription;
+    String logo;
+
     public Menu()
     {
         name = new String();
+        itemDescription=new String();
         no_of_order = 0;
         price  = 0;
+        logo=new String();
     }
+
+    public String getItemDescription() {
+        return itemDescription;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
+    public void setItemDescription(String itemDescription) {
+        this.itemDescription = itemDescription;
+    }
+
     public String getName() {
         return name;
     }

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.splunk.mint.Mint;
@@ -40,8 +41,9 @@ public class SelectAddressActivity extends AppCompatActivity{
         setContentView(R.layout.select_address);
         if(addressListAdapater!=null)
                 addressListAdapater.notifyDataSetChanged();
+
         btnAddNewAddress = (Button) findViewById(R.id.addnewaddress);
-        SessionManager  session = new SessionManager(getApplicationContext());
+        final SessionManager  session = new SessionManager(getApplicationContext());
         mFavouriteAddressArrayList = new ArrayList<FavouriteAddress>();
         if(session.getFavoutrateAddress() !=null) {
             mFavouriteAddressArrayList = session.getFavoutrateAddress();
@@ -69,16 +71,24 @@ public class SelectAddressActivity extends AppCompatActivity{
             }
         });
         btnAddNewAddress.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    if(session.isHasAddress()) {
+                                                        if (session.getFavoutrateAddress().size() < 5) {
+                                                            Intent i = new Intent(SelectAddressActivity.this, MapsActivity.class);
+                                                            startActivityForResult(i, 1);
 
-                Intent i = new Intent(SelectAddressActivity.this, MapsActivity.class);
-                startActivityForResult(i,1);
-//                Bundle b = new Bundle();
-//                b.putInt("key", 1); //Your id
-//                i.putExtras(b); //
-//                startActivity(i);
-            }
+
+                                                        }else{
+                                                            Toast.makeText(getApplicationContext(), "cant add more than 5", Toast.LENGTH_LONG).show();
+                                                        }
+                                                    }
+                                                    else{
+                                                        Intent i = new Intent(SelectAddressActivity.this, MapsActivity.class);
+                                                        startActivityForResult(i, 1);
+
+                                                    }
+                                                }
         });
         setToolBar("Select address");
     }

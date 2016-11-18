@@ -1,5 +1,7 @@
 package khaanavali.customer.model;
 
+import khaanavali.customer.utils.Constants;
+
 /**
  * Created by dganeshappa on 5/18/2016.
  */
@@ -30,9 +32,27 @@ public class MenuItem {
 
     int price;
     String name;
-    String id;
+    String id,itemDescription;
     int availability;
     int  no_of_order;
+    String logo;
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
+
+
+    public String getItemDescription() {
+        return itemDescription;
+    }
+
+    public void setItemDescription(String itemDescription) {
+        this.itemDescription = itemDescription;
+    }
 
     public int isAvailable() {
         return availability;
@@ -52,6 +72,7 @@ public class MenuItem {
         name = new String();
         id = new String();
        // available = ;
+        logo = Constants.SLIDER_URL1;
         no_of_order = 0;
 
     }

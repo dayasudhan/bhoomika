@@ -59,6 +59,15 @@ public class SessionManager {
 	//To store the firebase id in shared preferences
 	public static final String KEY_LAST_AREA_SERCHED = "lastareasearched";
 	// Constructor
+	public  boolean hasAddress=false;
+
+	public boolean isHasAddress() {
+		return hasAddress;
+	}
+	public void setHasAddress(Boolean hasAddress){
+		this.hasAddress=hasAddress;
+	}
+
 	public SessionManager(Context context){
 		this._context = context;
 		pref = _context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
@@ -235,6 +244,7 @@ public class SessionManager {
 		editor.putString(KEY_FAVOURITE_ADDRESS, null);
 		editor.commit();
 	}
+
 	public ArrayList<FavouriteAddress> getFavoutrateAddress()
 	{
 		String faddrlist = pref.getString(KEY_FAVOURITE_ADDRESS, null);

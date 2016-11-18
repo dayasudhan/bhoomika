@@ -52,6 +52,7 @@ public class AboutKhaanavali extends Fragment {
             @Override
             public void onClick(View v) {
                 final Dialog dialog1 =new Dialog(getContext());
+                dialog1.setContentView(R.layout.aboutuspopup);
 
                 popUpFaq =(WebView) dialog1.findViewById(R.id.popup);
                 popUpFaq.loadUrl(Constants.FAQ_URL);
@@ -64,6 +65,7 @@ public class AboutKhaanavali extends Fragment {
             @Override
             public void onClick(View v) {
                 final Dialog dialog1 =new Dialog(getContext());
+                dialog1.setContentView(R.layout.aboutuspopup);
 
                 popUpFaq =(WebView) dialog1.findViewById(R.id.popup);
                 popUpFaq.loadUrl(Constants.CONTACT_US_URL);
@@ -76,6 +78,7 @@ public class AboutKhaanavali extends Fragment {
             @Override
             public void onClick(View v) {
                 final Dialog dialog1 =new Dialog(getContext());
+                dialog1.setContentView(R.layout.aboutuspopup);
 
                 popUpFaq =(WebView) dialog1.findViewById(R.id.popup);
                 popUpFaq.loadUrl(Constants.TERMS_AND_CONDITION_URL);
