@@ -220,6 +220,28 @@ public class SessionManager {
 		editor.commit();
 	}
 
+	public void commiting(){
+		editor.commit();
+	}
+
+	public void removeFavourateAddressList(int pos){
+		String faddrlist=pref.getString(KEY_FAVOURITE_ADDRESS,null);
+		ArrayList<FavouriteAddress> faddresslist = null;
+		if(faddrlist != null)
+		{
+			Gson gson = new Gson();
+			Type listType = new TypeToken<ArrayList<FavouriteAddress>>() {}.getType();
+			faddresslist =  gson.fromJson(faddrlist, listType);
+		}
+		else {
+			faddresslist = new ArrayList<FavouriteAddress>();
+		}
+		faddresslist.remove(pos);
+		Gson gson = new Gson();
+		String json = gson.toJson(faddresslist);
+		editor.putString(KEY_FAVOURITE_ADDRESS,json);
+		editor.commit();
+	}
 	public void setFavoutrateAddress(FavouriteAddress favoutrateAddress,int position)
 	{
 		String faddrlist = pref.getString(KEY_FAVOURITE_ADDRESS, null);

@@ -1,6 +1,8 @@
 package khaanavali.customer;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -8,6 +10,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
@@ -21,18 +24,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import khaanavali.customer.adapter.AddressListAdapater;
+import khaanavali.customer.model.Address;
 import khaanavali.customer.model.FavouriteAddress;
+import khaanavali.customer.utils.Constants;
 import khaanavali.customer.utils.SessionManager;
 
 /**
@@ -41,7 +53,12 @@ import khaanavali.customer.utils.SessionManager;
 public class MyProfile extends Fragment {
     SessionManager session;
     boolean isTrue=true;
+    int position1;
     Button del;
+    List<android.location.Address> mAddresses;
+
+    Button save;
+    EditText editTagLabel,editCity,editHouseNo,editAreaName,editLandmark,editAddress;
 
     // ImageView headerCoverImage;
    ListView addresslistview;
@@ -136,7 +153,96 @@ public class MyProfile extends Fragment {
 
         addresslistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+            public void onItemClick(final AdapterView<?> parent, View view, final int position, long id) {
+
+
+                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getContext());
+                builder.setTitle("Khaanavali");
+                builder.setMessage("delte or edit address");
+                builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int whch) {
+                        position1=position;
+                        String order_url =  Constants.DELETE_ADDRESS;
+                        order_url= order_url+session.getKeyPhone()+"/"+mFavouriteAddressArrayList.get(position).getLabel();
+
+                        new DeleteJSONAsyncTask().execute(order_url);
+
+                    }
+                });
+                builder.setNeutralButton("Edit", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog,int whch) {
+
+                        final Dialog dialog1 =new Dialog(getContext());
+                        dialog1.setContentView(R.layout.add_address_layout);
+                        save=(Button) dialog1.findViewById(R.id.saveAddressbutton);
+                        editCity=(EditText)dialog1.findViewById(R.id.orderDetailEmail);
+                        editHouseNo=(EditText)dialog1.findViewById(R.id.orderDetailAddress_house_no);
+                        editAreaName=(EditText)dialog1.findViewById(R.id.orderDetailAddress_areaname);
+                        editLandmark=(EditText)dialog1.findViewById(R.id.orderDetailAddress_landmark);
+                        editAddress=(EditText)dialog1.findViewById(R.id.orderDetailAddress_address);
+                        editTagLabel=(EditText)dialog1.findViewById(R.id.tag_address_label);
+                        dialog1.show();
+                        save.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                String house = editHouseNo.getText().toString();
+                                String addresss = editAddress.getText().toString();
+                                String areaname = editAreaName.getText().toString();
+                                String landmark = editLandmark.getText().toString();
+                                String tagLabel = editTagLabel.getText().toString();
+                                if (house.trim().length() == 0) {
+                                    //Toast.makeText(getApplicationContext(), "Enter House No or Flat No ", Toast.LENGTH_LONG).show();
+                                    alertMessage("Enter House or Flat No ");
+                                } else if (addresss.trim().length() <= 0) {
+                                    //Toast.makeText(getApplicationContext(), "Enter areaname ", Toast.LENGTH_LONG).show();
+                                    alertMessage("Enter adress ");
+                                } else if (areaname.trim().length() <= 0) {
+                                    //Toast.makeText(getApplicationContext(), "Enter Address ", Toast.LENGTH_LONG).show();
+                                    alertMessage("Enter Areaname ");
+                                } else if (landmark.trim().length() <= 0) {
+                                    //Toast.makeText(getApplicationContext(), "Enter Landmark/locality ", Toast.LENGTH_LONG).show();
+                                    alertMessage("Enter Landmark/locality ");
+                                } else if (tagLabel.trim().length() <= 0) {
+                                    //Toast.makeText(getApplicationContext(), "Enter City ", Toast.LENGTH_LONG).show();
+                                    alertMessage("Enter lable for this address");
+                                } else {
+                                    Address address;
+                                    address = mFavouriteAddressArrayList.get(position).getAddress();
+                                    address.setAreaName(editAreaName.getText().toString());
+                                    address.setLandMark(editLandmark.getText().toString());
+                                    address.setAddressLine1(editHouseNo.getText().toString());
+                                    address.setAddressLine2(editAddress.getText().toString());
+                                    address.setCity(editCity.getText().toString());
+                                    if (mAddresses != null) {
+                                        address.setZip(mAddresses.get(0).getPostalCode());
+                                        address.setLatitude(String.valueOf(mAddresses.get(0).getLatitude()));
+                                        address.setLongitude(String.valueOf(mAddresses.get(0).getLongitude()));
+                                    }
+
+                                    mFavouriteAddressArrayList.get(position).setLabel(editTagLabel.getText().toString());
+                                    mFavouriteAddressArrayList.get(position).setAddress(address);
+                                    SessionManager session = new SessionManager(getContext());
+                                    session.setFavoutrateAddress(mFavouriteAddressArrayList.get(position), position);
+
+                                    dialog1.cancel();
+
+                                }
+                            }
+                        });
+
+                    }
+                });
+                builder.setNegativeButton("cancel",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int whch) {
+
+                    }
+                });
+
+                builder.show();
 
                 //edit
                // Address locaddress =  mFavouriteAddressArrayList.get(position).getAddress();
@@ -258,6 +364,71 @@ public class MyProfile extends Fragment {
         }
         cursor.moveToFirst();
         return cursor.getInt(0);
+    }
+    public  class DeleteJSONAsyncTask extends AsyncTask<String, Void, Boolean> {
+
+        ProgressDialog dialog;
+
+        //        ListView mListView;
+//        Activity mContex;
+        public  DeleteJSONAsyncTask()
+        {
+//            this.mListView=gview;
+//            this.mContex=contex;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog = new ProgressDialog(getContext());
+            dialog.setMessage("Loading, please wait");
+            dialog.setTitle("Connecting server");
+            dialog.show();
+            dialog.setCancelable(false);
+        }
+
+        @Override
+        protected Boolean doInBackground(String... urls) {
+            try {
+
+                //------------------>>
+                HttpDelete request = new HttpDelete(urls[0]);
+                request.addHeader(Constants.SECUREKEY_KEY, Constants.SECUREKEY_VALUE);
+                request.addHeader(Constants.VERSION_KEY, Constants.VERSION_VALUE);
+                request.addHeader(Constants.CLIENT_KEY, Constants.CLIENT_VALUE);
+                HttpClient httpclient = new DefaultHttpClient();
+                HttpResponse response = httpclient.execute(request);
+
+                // StatusLine stat = response.getStatusLine();
+                int status = response.getStatusLine().getStatusCode();
+
+                if (status == 200) {
+
+
+                    return true;
+                }
+
+                //------------------>>
+
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+
+        protected void onPostExecute(Boolean result) {
+            dialog.cancel();
+
+            if(result == true){
+
+                session.removeFavourateAddressList(position1);
+                addressListAdapater.notifyDataSetChanged();
+            }
+            if (result == false)
+                Toast.makeText(getContext(), "Unable to fetch data from server", Toast.LENGTH_LONG).show();
+
+        }
     }
 }
 
