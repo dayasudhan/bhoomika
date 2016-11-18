@@ -177,7 +177,7 @@ public class OtpVeirificationActivity extends AppCompatActivity {
 
 
 
-                                    JSONArray address =jObject.getJSONArray("addesses");
+                                    JSONArray address =jObject.getJSONArray("addresses");
                                     if(address != null) {
                                         int length = address.length();
                                         for (int j = 0; j < address.length(); j++) {
@@ -247,7 +247,7 @@ public class OtpVeirificationActivity extends AppCompatActivity {
             if(result == true){
                 if(apiReponse.length()>0)
                 {
-                    Toast.makeText(getApplicationContext(), apiReponse, Toast.LENGTH_LONG).show();
+                    Toast.makeText(OtpVeirificationActivity.this , apiReponse, Toast.LENGTH_LONG).show();
 
                     session.createLoginSession(name,phoneNumber,email);
                     Intent i = new Intent(OtpVeirificationActivity.this, CutomerEnterDetailsActivity.class);
@@ -263,7 +263,7 @@ public class OtpVeirificationActivity extends AppCompatActivity {
                 }
             }
             else if (result == false)
-                Toast.makeText(getApplicationContext(), "Unable to push data to server", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "welcome to khaanvali", Toast.LENGTH_LONG).show();
         }
     }
 

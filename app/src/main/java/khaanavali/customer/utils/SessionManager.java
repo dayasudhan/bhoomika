@@ -59,6 +59,15 @@ public class SessionManager {
 	//To store the firebase id in shared preferences
 	public static final String KEY_LAST_AREA_SERCHED = "lastareasearched";
 	// Constructor
+	public  boolean hasAddress=false;
+
+	public boolean isHasAddress() {
+		return hasAddress;
+	}
+	public void setHasAddress(Boolean hasAddress){
+		this.hasAddress=hasAddress;
+	}
+
 	public SessionManager(Context context){
 		this._context = context;
 		pref = _context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
@@ -211,6 +220,28 @@ public class SessionManager {
 		editor.commit();
 	}
 
+	public void commiting(){
+		editor.commit();
+	}
+
+	public void removeFavourateAddressList(int pos){
+		String faddrlist=pref.getString(KEY_FAVOURITE_ADDRESS,null);
+		ArrayList<FavouriteAddress> faddresslist = null;
+		if(faddrlist != null)
+		{
+			Gson gson = new Gson();
+			Type listType = new TypeToken<ArrayList<FavouriteAddress>>() {}.getType();
+			faddresslist =  gson.fromJson(faddrlist, listType);
+		}
+		else {
+			faddresslist = new ArrayList<FavouriteAddress>();
+		}
+		faddresslist.remove(pos);
+		Gson gson = new Gson();
+		String json = gson.toJson(faddresslist);
+		editor.putString(KEY_FAVOURITE_ADDRESS,json);
+		editor.commit();
+	}
 	public void setFavoutrateAddress(FavouriteAddress favoutrateAddress,int position)
 	{
 		String faddrlist = pref.getString(KEY_FAVOURITE_ADDRESS, null);
@@ -235,6 +266,7 @@ public class SessionManager {
 		editor.putString(KEY_FAVOURITE_ADDRESS, null);
 		editor.commit();
 	}
+
 	public ArrayList<FavouriteAddress> getFavoutrateAddress()
 	{
 		String faddrlist = pref.getString(KEY_FAVOURITE_ADDRESS, null);

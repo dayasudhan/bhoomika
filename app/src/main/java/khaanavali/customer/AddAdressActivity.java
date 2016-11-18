@@ -125,7 +125,7 @@ public class AddAdressActivity  extends AppCompatActivity {
 
                     SessionManager session = new SessionManager(getApplicationContext());
                     session.setFavoutrateAddress(favouriteAddress);
-
+                    session.setHasAddress(true);
                     Gson gson = new Gson();
                     String strAddress = gson.toJson(favouriteAddress);
                     postAddressToServer(strAddress,session.getKeyPhone());

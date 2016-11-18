@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -34,6 +35,7 @@ public class CartActivity extends AppCompatActivity implements PlusMinusButtonLi
     ProductAdapter dataAdapter;
     TextView orderTotalCharge,billvalue;
     SessionManager session;
+    ImageView itemImage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +62,7 @@ public class CartActivity extends AppCompatActivity implements PlusMinusButtonLi
                 R.layout.product_detail_list_layout,mMenulist);
         dataAdapter.setListener(this);
         ListView listView = (ListView) findViewById(R.id.listView_cart);
+
 
         TextView deliveryCharge = (TextView) findViewById(R.id.orderDetailDeliveryRupees);
         orderTotalCharge = (TextView) findViewById(R.id.order_total_charge);

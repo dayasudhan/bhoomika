@@ -272,6 +272,10 @@ public class HotelFragment extends Fragment {
 //                                    menuItem.set_id(menu_object.getString(TAG_ID));
                                 if(menu_object.has(TAG_NAME))
                                     menuItem.setName(menu_object.getString(TAG_NAME));
+                                if(menu_object.has("description"))
+                                    menuItem.setItemDescription(menu_object.getString("description"));
+                                if(menu_object.has("logo"))
+                                    menuItem.setLogo(menu_object.getString("logo"));
                                 String dd =menu_object.getString(TAG_PRICE);
                                 if(menu_object.has(TAG_PRICE) ) {
                                     try {

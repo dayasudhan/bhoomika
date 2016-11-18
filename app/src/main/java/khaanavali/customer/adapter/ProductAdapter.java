@@ -11,19 +11,24 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 import khaanavali.customer.R;
 import khaanavali.customer.model.MenuAdapter;
+import khaanavali.customer.utils.Constants;
 
 public class ProductAdapter extends BaseAdapter {
     Activity con;
     Typeface cr;
     int layoutResID;
     int pos;
+    String urlImg;
     private Integer count;
     public int totalCount ;
     public int totalCost;
+    ImageView img;
     PlusMinusButtonListener mListener;
     public ArrayList<MenuAdapter> getmMenulist() {
         return mMenulist;
@@ -44,6 +49,8 @@ public class ProductAdapter extends BaseAdapter {
         mMenulist =menuList;
         totalCount = 0;
         totalCost = 0;
+        urlImg = Constants.ABOUT_US_URL;
+
         // this.cr=cr;
 
     }
@@ -83,7 +90,6 @@ public class ProductAdapter extends BaseAdapter {
             itemHolder = new CityItemHolder();
             itemHolder.city= (TextView) view.findViewById(R.id.product_detail_name);
             itemHolder.itemDescription=(TextView) view.findViewById(R.id.itemdescription);
-
             itemHolder.price_value = (TextView) view.findViewById(R.id.approx_price_val);
 
             view.setTag(itemHolder);
@@ -101,8 +107,13 @@ public class ProductAdapter extends BaseAdapter {
 
         itemHolder.mSubImg.setTag(position);
         itemHolder.city.setText(mMenulist.get(position).getName());
+        itemHolder.logo=mMenulist.get(position).getLogo();
+        Picasso.with(con)
+                .load(mMenulist.get(position).getLogo())
+                .into(itemHolder.mItemImg);
+        itemHolder.itemDescription.setText(mMenulist.get(position).getItemDescription());
 
-        itemHolder.itemDescription.setText("item description comes here mMenulist.get(position).getItemDescription()");
+
 
         itemHolder.price_value.setText(new String("₹ ").concat(String.valueOf(mMenulist.get(position).getPrice())));
 
@@ -224,5 +235,6 @@ public class ProductAdapter extends BaseAdapter {
         TextView city,mValue,price_value,itemDescription;
         ImageView mSubImg,mAddImg;
         ImageView mItemImg;
+        String logo;
    }
 }

@@ -1,5 +1,7 @@
 package khaanavali.customer.model;
 
+import khaanavali.customer.utils.Constants;
+
 /**
  * Created by dganeshappa on 5/19/2016.
  */
@@ -54,31 +56,56 @@ public class MenuAdapter {
         this.itemDescription = itemDescription;
     }*/
 
-    String name;
+    public String getItemDescription() {
+        return itemDescription;
+    }
+
+    public void setItemDescription(String itemDescription) {
+        this.itemDescription = itemDescription;
+    }
+
+    String name,itemDescription;
     int no_of_order;
     int price;
     String id;
+    String logo;
    // String itemDescription;
     boolean available;
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
     public MenuAdapter()
     {
         no_of_order = 0;
+        logo = Constants.SLIDER_URL1;
         price = 0;
         name = new String();
+        itemDescription=new String();
         id = new String();
         available = true;
     }
     public  MenuAdapter(MenuItem item)
     {
         name = item.getName();
+        logo = item.getLogo();
+        itemDescription=item.getItemDescription();
         id = item.getId();
         price = item.getPrice();
+
        // available = item.isAvailable();
         no_of_order = 0;
     }
     public  MenuAdapter(Menu item)
     {
         name = item.getName();
+        itemDescription=item.getItemDescription();
+        logo=item.getLogo();
         no_of_order = item.getNo_of_order();
         price =item.getPrice();
         available = true;
@@ -89,6 +116,7 @@ public class MenuAdapter {
         item.no_of_order = this.no_of_order;
         item.name = this.name;
         item.price = this.price;
+        item.logo=this.logo;
         return item;
     }
 }

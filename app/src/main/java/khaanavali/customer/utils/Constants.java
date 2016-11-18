@@ -50,7 +50,7 @@ public class Constants {
     public static final String CONTACT_US_URL= "http://khaanavali.com/extra/contact.html";
     public static final String TERMS_AND_CONDITION_URL= "http://khaanavali.com/extra/termsandcondition.html";
 
-
+    public static final String DELETE_ADDRESS = MAIN_URL + "/v1/customer/address/";
     public static final String SLIDER_URL1= MAIN_URL + "/images/slider/slider1.jpg";
     public static final String SLIDER_URL3=MAIN_URL + "/images/slider/slider2.jpg";
     public static final String SLIDER_URL2=MAIN_URL + "/images/slider/slider3.jpg";
