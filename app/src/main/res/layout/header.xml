@@ -26,7 +26,10 @@
         android:text="My name"
         android:id="@+id/myNameHeader"
         android:layout_alignTop="@+id/user_profile_photo"
-        android:layout_centerHorizontal="true" />
+        android:layout_toRightOf="@+id/user_profile_photo"
+        android:layout_toEndOf="@+id/user_profile_photo"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -34,7 +37,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="phone  no"
         android:id="@+id/phNoHeader"
-        android:layout_below="@+id/eMailHeader"
+        android:layout_alignBottom="@+id/user_profile_photo"
         android:layout_alignLeft="@+id/eMailHeader"
         android:layout_alignStart="@+id/eMailHeader" />
 
@@ -43,7 +46,7 @@
         android:layout_height="wrap_content"
         android:text="E-mail"
         android:id="@+id/eMailHeader"
-        android:layout_below="@+id/myNameHeader"
+        android:layout_centerVertical="true"
         android:layout_alignLeft="@+id/myNameHeader"
         android:layout_alignStart="@+id/myNameHeader" />
 

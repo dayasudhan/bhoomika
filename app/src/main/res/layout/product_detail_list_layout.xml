@@ -59,9 +59,10 @@
         android:src="@drawable/plus"
         android:gravity="center_horizontal|center_vertical"
         android:id="@+id/add_btn"
-        android:layout_above="@+id/add_sub_val"
-        android:layout_alignLeft="@+id/add_sub_val"
-        android:layout_alignStart="@+id/add_sub_val" />
+        android:layout_below="@+id/approx_price_val"
+        android:layout_alignLeft="@+id/sub_btn"
+        android:layout_alignStart="@+id/sub_btn"
+        android:layout_marginTop="38dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -90,9 +91,9 @@
         android:gravity="center_horizontal|center_vertical"
         android:id="@+id/add_sub_val"
         android:editable="true"
-        android:layout_alignRight="@+id/approx_price_val"
-        android:layout_alignEnd="@+id/approx_price_val"
-        android:layout_above="@+id/product_detail_name" />
+        android:layout_below="@+id/add_btn"
+        android:layout_alignLeft="@+id/sub_btn"
+        android:layout_alignStart="@+id/sub_btn" />
 
     <ImageView
         android:layout_width="37dp"
@@ -101,8 +102,8 @@
         android:gravity="center_horizontal|center_vertical"
         android:id="@+id/sub_btn"
         android:layout_below="@+id/add_sub_val"
-        android:layout_alignLeft="@+id/add_sub_val"
-        android:layout_alignStart="@+id/add_sub_val" />
+        android:layout_alignRight="@+id/approx_price_val"
+        android:layout_alignEnd="@+id/approx_price_val" />
 
 
 </RelativeLayout>

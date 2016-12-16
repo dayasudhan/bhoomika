@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -57,6 +58,7 @@ public class OtpVeirificationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Mint.initAndStartSession(this, "49d903c2");
         setContentView(R.layout.otp_verification_layout);
+
         Intent intent = getIntent();
         order = intent.getStringExtra("order");
         hotelDetail = intent.getStringExtra("HotelDetail");
@@ -64,10 +66,11 @@ public class OtpVeirificationActivity extends AppCompatActivity {
         name = intent.getStringExtra("name");
         email = intent.getStringExtra("email");
 
+        otp = (EditText)findViewById(R.id.otpInput);
 
         session = new SessionManager(getApplicationContext());
 
-        otp = (EditText)findViewById(R.id.otpInput);
+
 
         btnSubmit= (Button) findViewById(R.id.verifyButton);
         if(verifyPressed) {
@@ -79,10 +82,23 @@ public class OtpVeirificationActivity extends AppCompatActivity {
                     } else {
                         confirmOtp(phoneNumber, otp.getText().toString());
                         verifyPressed=false;
+
+
+
                     }
                 }
             });
         }
+
+        SmsReceiver.bindListener(new SmsListener() {
+            @Override
+            public void messageReceived(String messageText) {
+                Log.d("Text", messageText);
+                Toast.makeText(OtpVeirificationActivity.this, "Message: " + messageText, Toast.LENGTH_LONG).show();
+                String numbers = messageText.substring(messageText.length() - 4);
+                otp.setText(numbers.trim());
+            }
+        });
         setToolBar("OTP Verification");
     }
 
@@ -247,9 +263,10 @@ public class OtpVeirificationActivity extends AppCompatActivity {
             if(result == true){
                 if(apiReponse.length()>0)
                 {
-                    Toast.makeText(OtpVeirificationActivity.this , apiReponse, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(OtpVeirificationActivity.this , apiReponse, Toast.LENGTH_LONG).show();
 
                     session.createLoginSession(name,phoneNumber,email);
+                    session.commiting();
                     Intent i = new Intent(OtpVeirificationActivity.this, CutomerEnterDetailsActivity.class);
                     i.putExtra("order", order);
                     i.putExtra("HotelDetail",hotelDetail);

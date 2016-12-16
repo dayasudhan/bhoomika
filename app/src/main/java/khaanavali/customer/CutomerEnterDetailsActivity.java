@@ -334,4 +334,12 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent start = new Intent(CutomerEnterDetailsActivity.this,MainActivity.class);
+        start.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(start);
+        finish();
+    }
 }

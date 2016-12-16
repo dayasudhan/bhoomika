@@ -11,26 +11,26 @@
     <!-- Email Label -->
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="aboutus"
+        android:text="About us"
         android:id="@+id/aboutus" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="faq"
+        android:text="F..A.Q"
         android:id="@+id/faq" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/contactus"
-        android:text="contactus" />
+        android:text="contact us" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tandc"
-        android:text="tandc" />
+        android:text="Terms And Conditions" />
 </LinearLayout>

@@ -84,7 +84,7 @@ public class ScreenSlidePageFragment extends Fragment {
                 }, new ImageLoadingProgressListener() {
                     @Override
                     public void onProgressUpdate(String imageUri, View view, int current, int total) {
-                        progressBar.setProgress(Math.round(100.0f * current / total));
+                        progressBar.setProgress(Math.round(50.0f * current / total));
                     }
                 });
 

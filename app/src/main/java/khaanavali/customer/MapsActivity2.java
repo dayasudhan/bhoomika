@@ -2,11 +2,14 @@ package khaanavali.customer;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -21,6 +24,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -41,12 +45,13 @@ import khaanavali.customer.utils.SessionManager;
 
 public class MapsActivity2 extends AppCompatActivity implements
         OnMapReadyCallback, GoogleMap.OnCameraChangeListener ,GoogleMap.OnMyLocationButtonClickListener,
-        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,LocationListener {
 
     private GoogleMap mMap;
     Button nextButton;
     Marker mCurrLocationMarker;
     int zoomleval = 15;
+    LocationManager locationmanager;
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -74,6 +79,37 @@ public class MapsActivity2 extends AppCompatActivity implements
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                locationmanager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                Criteria cri = new Criteria();
+                String provider = locationmanager.getBestProvider(cri, false);
+
+                if (provider != null & !provider.equals("")) {
+                    if (ActivityCompat.checkSelfPermission(MapsActivity2.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(MapsActivity2.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        // TODO: Consider calling
+                        //    ActivityCompat#requestPermissions
+                        // here to request the missing permissions, and then overriding
+                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                        //                                          int[] grantResults)
+                        // to handle the case where the user grants the permission. See the documentation
+                        // for ActivityCompat#requestPermissions for more details.
+                        return;
+                    }
+                    Location location = locationmanager.getLastKnownLocation(provider);
+                    locationmanager.requestLocationUpdates(provider,2000,1, (android.location.LocationListener) MapsActivity2.this);
+                    if(location!=null)
+                    {
+                        onLocationChanged(location);
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(),"location not found",Toast.LENGTH_LONG ).show();
+                    }
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(),"Provider is null", Toast.LENGTH_LONG).show();
+                }
+
 
                 SessionManager session = new SessionManager(getApplicationContext());
                 session.setlastareasearched(areaName);
@@ -328,4 +364,9 @@ public class MapsActivity2 extends AppCompatActivity implements
             finish();
         }
     }
+    @Override
+    public void onLocationChanged(Location location) {
+        setAddress(location.getLatitude(),location.getLongitude());
+    }
+
 }
