@@ -158,25 +158,33 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
-        HotelFragment fragment = (HotelFragment) getSupportFragmentManager().findFragmentById(R.id.frame);
+
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
             // extract data
             String areaClicked = new String(intent.getStringExtra("area"));
+            HotelFragment fragment = null;
+            try {
+                fragment = (HotelFragment) getSupportFragmentManager().findFragmentById(R.id.frame);
+                if(!areaClicked.equals("knvl")) {
 
-            if(!areaClicked.equals("knvl")) {
+                    fragment.getHotelList(areaClicked);
+                    //getHotelList(areaClicked);
+                }
+                else {
+                    String longitude, latitude;
 
-                fragment.getHotelList(areaClicked);
-                //getHotelList(areaClicked);
+                    longitude = new String(intent.getStringExtra("longitude"));
+
+                    latitude = new String(intent.getStringExtra("latitude"));
+                    Toast.makeText(getApplicationContext(), longitude+" kdb "+latitude, Toast.LENGTH_LONG).show();
+                    fragment.getHotelListByGPS(latitude,longitude);
+                }
+            } catch (ClassCastException e){
+                //don't need to crash at this point,
+                //just let the user know that a wrong file has been passed.
             }
-            else {
-                String longitude, latitude;
 
-                longitude = new String(intent.getStringExtra("longitude"));
 
-                latitude = new String(intent.getStringExtra("latitude"));
-                Toast.makeText(getApplicationContext(), longitude+" kdb "+latitude, Toast.LENGTH_LONG).show();
-                fragment.getHotelListByGPS(latitude,longitude);
-            }
         }
     }
 
