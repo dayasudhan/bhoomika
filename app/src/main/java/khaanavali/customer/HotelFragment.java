@@ -185,13 +185,36 @@ public class HotelFragment extends Fragment {
         setHasOptionsMenu(true);
         return v;
     }
+    public void getHotelListByGPS(String latitude, String longitude)
+    {
+        ((MainActivity) getActivity())
+                .setActionBarTitle("Bengalore");
+        hotellist.clear();
 
+        String order_url = Constants.GET_HOTEL_BY_GPS;
+        order_url = order_url + "latitude=" + latitude + "&longitude=" + longitude;
+        //http://kuruva.herokuapp.com/v1/vendor/deliveryareasbygps?latitude=13.0661&longitude=77.5007&isbulkrequest=1
+
+        if(isBulk)
+        {
+            order_url = order_url + "&isbulkrequest=1";
+        }
+        else
+        {
+            order_url = order_url + "&isbulkrequest=1";
+        }
+        Toast.makeText(getActivity().getApplicationContext(), order_url, Toast.LENGTH_LONG).show();
+
+        new JSONAsyncTask().execute(order_url);
+    }
     public void getHotelList(String areaClicked)
     {
         ((MainActivity) getActivity())
                 .setActionBarTitle(areaClicked);
         hotellist.clear();
+
         String order_url = Constants.GET_HOTEL_BY_DELIVERY_AREAS;
+
         String area = areaClicked.replace(" ", "%20");
         order_url = order_url + area;
         if(isBulk)
@@ -258,6 +281,8 @@ public class HotelFragment extends Fragment {
                 if (status == 200) {
                     HttpEntity entity = response.getEntity();
                     String data = EntityUtils.toString(entity);
+                    Toast.makeText(getActivity().getApplicationContext(), data, Toast.LENGTH_LONG).show();
+
                     JSONArray jarray = new JSONArray(data);
                     for (int i = 0; i < jarray.length(); i++) {
                         JSONObject object = jarray.getJSONObject(i);

@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     String notification;
     SessionManager session;
 
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -157,12 +158,25 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
+        HotelFragment fragment = (HotelFragment) getSupportFragmentManager().findFragmentById(R.id.frame);
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
             // extract data
             String areaClicked = new String(intent.getStringExtra("area"));
-            HotelFragment fragment = (HotelFragment) getSupportFragmentManager().findFragmentById(R.id.frame);
-            fragment.getHotelList(areaClicked);
-            //getHotelList(areaClicked);
+
+            if(!areaClicked.equals("knvl")) {
+
+                fragment.getHotelList(areaClicked);
+                //getHotelList(areaClicked);
+            }
+            else {
+                String longitude, latitude;
+
+                longitude = new String(intent.getStringExtra("longitude"));
+
+                latitude = new String(intent.getStringExtra("latitude"));
+                Toast.makeText(getApplicationContext(), longitude+" kdb "+latitude, Toast.LENGTH_LONG).show();
+                fragment.getHotelListByGPS(latitude,longitude);
+            }
         }
     }
 

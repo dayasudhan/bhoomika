@@ -2,14 +2,11 @@ package khaanavali.customer;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -24,7 +21,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -41,18 +37,15 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-import khaanavali.customer.utils.SessionManager;
-
 public class MapsActivity2 extends AppCompatActivity implements
         OnMapReadyCallback, GoogleMap.OnCameraChangeListener ,GoogleMap.OnMyLocationButtonClickListener,
-        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,LocationListener {
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private GoogleMap mMap;
-    Button nextButton;
+    Button btnpicklocation;
+    Button btnManuallAddress;
     Marker mCurrLocationMarker;
     int zoomleval = 15;
-    LocationManager locationmanager;
-
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -61,13 +54,14 @@ public class MapsActivity2 extends AppCompatActivity implements
     protected Location mLastLocation;
     private LatLng mSelectedLatlang;
     List<android.location.Address> mAddresses;
-    String mAddress,areaName;
+    String mAddress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Mint.initAndStartSession(MapsActivity2.this, "49d903c2");
-        setContentView(R.layout.activity_maps1);
-        nextButton= (Button) findViewById(R.id.nextButton);
+        setContentView(R.layout.activity_maps);
+        btnpicklocation= (Button) findViewById(R.id.pickaddressbtn);
+        btnManuallAddress = (Button)findViewById(R.id.buttonEnterManual);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
         }
@@ -76,53 +70,45 @@ public class MapsActivity2 extends AppCompatActivity implements
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        nextButton.setOnClickListener(new View.OnClickListener() {
+        btnpicklocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                locationmanager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-                Criteria cri = new Criteria();
-                String provider = locationmanager.getBestProvider(cri, false);
-
-                if (provider != null & !provider.equals("")) {
-                    if (ActivityCompat.checkSelfPermission(MapsActivity2.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(MapsActivity2.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                        // TODO: Consider calling
-                        //    ActivityCompat#requestPermissions
-                        // here to request the missing permissions, and then overriding
-                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                        //                                          int[] grantResults)
-                        // to handle the case where the user grants the permission. See the documentation
-                        // for ActivityCompat#requestPermissions for more details.
-                        return;
-                    }
-                    Location location = locationmanager.getLastKnownLocation(provider);
-                    locationmanager.requestLocationUpdates(provider,2000,1, (android.location.LocationListener) MapsActivity2.this);
-                    if(location!=null)
-                    {
-                        onLocationChanged(location);
-                    }
-                    else{
-                        Toast.makeText(getApplicationContext(),"location not found",Toast.LENGTH_LONG ).show();
-                    }
+                if(mSelectedLatlang != null)
+                    setAddress(mSelectedLatlang.latitude,mSelectedLatlang.longitude);
+                else {
+                    LatLng bangalore = new LatLng(12.9716, 77.5946);
+                    setAddress(bangalore.latitude, bangalore.longitude);
                 }
-                else
-                {
-                    Toast.makeText(getApplicationContext(),"Provider is null", Toast.LENGTH_LONG).show();
-                }
-
-
-                SessionManager session = new SessionManager(getApplicationContext());
-                session.setlastareasearched(areaName);
+//                Intent i = new Intent(MapsActivity2.this, MainActivity.class);
+//                Gson gson = new Gson();
+                String locationLatitude=String.valueOf(mSelectedLatlang.latitude);
+                String locationLongitude=String.valueOf(mSelectedLatlang.longitude);
+//                i.putExtra("locationLatitude", locationLatitude);
+//                i.putExtra("locationLongitude", locationLongitude);
                 Intent intent = new Intent();
-                intent.putExtra("area", areaName);
+                //intent.putExtra("latitude", locationLatitude);
+                //intent.putExtra("longitude", locationLongitude);
+                intent.putExtra("latitude", "13.0661");
+                intent.putExtra("longitude", "77.5007");
+
                 setResult(RESULT_OK, intent);
                 finish();
-
+//                startActivityForResult(i,2);
+                // finish();
             }
         });
 
-    setToolBar("Add Address");
-}
+        /*btnManuallAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(MapsActivity2.this, PlacesActivity.class);
+                startActivityForResult(i,1);
+            }
+        });*/
+        btnManuallAddress.setVisibility(View.GONE);
+        setToolBar("Add Address");
+    }
 
 
     /**
@@ -206,8 +192,12 @@ public class MapsActivity2 extends AppCompatActivity implements
             mAddresses = geoCoder.getFromLocation(
                     latitude,
                     longitude, 1);
-            areaName=mAddresses.get(0).getAddressLine(0);
 
+            if (mAddresses.size() > 0) {
+                for (int index = 0;
+                     index < mAddresses.get(0).getMaxAddressLineIndex(); index++)
+                    mAddress += mAddresses.get(0).getAddressLine(index) + " ";
+            }
         } catch (IOException ex) {
             ex.printStackTrace();
         } catch (Exception e2) {
@@ -364,9 +354,4 @@ public class MapsActivity2 extends AppCompatActivity implements
             finish();
         }
     }
-    @Override
-    public void onLocationChanged(Location location) {
-        setAddress(location.getLatitude(),location.getLongitude());
-    }
-
 }

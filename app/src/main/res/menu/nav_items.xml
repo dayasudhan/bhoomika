@@ -7,31 +7,32 @@
               <!--android:icon="@drawable/ic_action_fab" />-->
         <item android:id="@+id/hotel"
             android:title="Hotels"
-            android:icon="@drawable/home" />
+            android:icon="@drawable/phome" />
         <item android:id="@+id/bulk_activity"
+
             android:title="Bulk"
-            android:icon="@drawable/bulk_order" />
+            android:icon="@drawable/pbulk" />
        <!-- <item android:id="@+id/myprofile"
             android:title="My Profile"
             android:icon="@drawable/profilepng" />-->
 
         <item android:id="@+id/status"
             android:title="My Orders"
-            android:icon="@drawable/order_status" />
+            android:icon="@drawable/porderdetails" />
 
         <item android:id="@+id/notification"
             android:title="Notifications"
-            android:icon="@drawable/order_status" />
+            android:icon="@drawable/pnotification" />
 
 
 
         <item android:id="@+id/invite"
             android:title="Invite"
-            android:icon="@drawable/ic_action_share" />
+            android:icon="@drawable/pinvitation" />
 
         <item android:id="@+id/about_knvl"
             android:title="Help"
-            android:icon="@drawable/ic_action_upload" />
+            android:icon="@drawable/phelp" />
 
     </group>
 </menu>

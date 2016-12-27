@@ -1,5 +1,6 @@
 package khaanavali.customer;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.Context;
@@ -141,7 +142,9 @@ public class PlacesActivity extends AppCompatActivity{
             public void onClick(View v)
             {
                 Intent i = new Intent(PlacesActivity.this, MapsActivity2.class);
-                startActivity(i);
+                startActivityForResult(i,1);
+
+
             }
         });
     }
@@ -159,6 +162,17 @@ public class PlacesActivity extends AppCompatActivity{
             }
         });
 
+    }
+    public void goBackwithLatitudeLongitude(String latitude, String longitude)
+    {
+
+        Intent intent = new Intent();
+        intent.putExtra("latitude", latitude);
+        intent.putExtra("longitude", longitude);
+        intent.putExtra("area", "knvl");
+       // Toast.makeText(getApplicationContext(), longitude+" kdb "+latitude, Toast.LENGTH_LONG).show();
+        setResult(RESULT_OK, intent);
+        finish();
     }
     public void goBackwithAreaName(String areaname)
     {
@@ -279,6 +293,18 @@ public class PlacesActivity extends AppCompatActivity{
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+
+        if(requestCode == 1 && resultCode == Activity.RESULT_OK){
+            String longitude=new String(intent.getStringExtra("longitude"));
+            String latitude=new String(intent.getStringExtra("latitude"));
+            goBackwithLatitudeLongitude(latitude,longitude);
+
+        }
     }
 
 }
