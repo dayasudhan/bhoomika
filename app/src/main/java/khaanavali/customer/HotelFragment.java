@@ -203,7 +203,7 @@ public class HotelFragment extends Fragment {
         {
             order_url = order_url + "&isbulkrequest=1";
         }
-        Toast.makeText(getActivity().getApplicationContext(), order_url, Toast.LENGTH_LONG).show();
+       // Toast.makeText(getActivity().getApplicationContext(), order_url, Toast.LENGTH_LONG).show();
 
         new JSONAsyncTask().execute(order_url);
     }
