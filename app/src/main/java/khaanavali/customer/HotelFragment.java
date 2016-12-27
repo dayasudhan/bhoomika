@@ -281,7 +281,7 @@ public class HotelFragment extends Fragment {
                 if (status == 200) {
                     HttpEntity entity = response.getEntity();
                     String data = EntityUtils.toString(entity);
-                    Toast.makeText(getActivity().getApplicationContext(), data, Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getActivity().getApplicationContext(), data, Toast.LENGTH_LONG).show();
 
                     JSONArray jarray = new JSONArray(data);
                     for (int i = 0; i < jarray.length(); i++) {
