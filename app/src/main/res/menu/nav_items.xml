@@ -11,7 +11,7 @@
         <item android:id="@+id/bulk_activity"
 
             android:title="Bulk"
-            android:icon="@drawable/pbulk" />
+            android:icon="@drawable/bulk_order" />
        <!-- <item android:id="@+id/myprofile"
             android:title="My Profile"
             android:icon="@drawable/profilepng" />-->
