@@ -95,13 +95,13 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
 
         String strorderTimings = new String();
         if(hotelDetail.getOrderAcceptTimings()!=null) {
-            if (hotelDetail.getOrderAcceptTimings().getMorning().getAvailable().equals("Yes")) {
+            if (hotelDetail.getOrderAcceptTimings().getMorning()!=null && hotelDetail.getOrderAcceptTimings().getMorning().getAvailable() !=null&& hotelDetail.getOrderAcceptTimings().getMorning().getAvailable().equals("Yes")) {
                 strorderTimings = "Breakfast: " + hotelDetail.getOrderAcceptTimings().getMorning().getStartTime() + "-" + hotelDetail.getOrderAcceptTimings().getMorning().getEndTime();
             }
-            if (hotelDetail.getOrderAcceptTimings().getLunch().getAvailable().equals("Yes")) {
+            if (hotelDetail.getOrderAcceptTimings().getLunch()!=null && hotelDetail.getOrderAcceptTimings().getLunch().getAvailable() !=null &&hotelDetail.getOrderAcceptTimings().getLunch().getAvailable().equals("Yes")) {
                 strorderTimings = strorderTimings + "\n" + "Lunch   : " + hotelDetail.getOrderAcceptTimings().getLunch().getStartTime() + "-" + hotelDetail.getOrderAcceptTimings().getLunch().getEndTime();
             }
-            if (hotelDetail.getOrderAcceptTimings().getDinner().getAvailable().equals("Yes")) {
+            if (hotelDetail.getOrderAcceptTimings().getDinner()!=null &&  hotelDetail.getOrderAcceptTimings().getDinner().getAvailable() !=null && hotelDetail.getOrderAcceptTimings().getDinner().getAvailable().equals("Yes")) {
                 strorderTimings = strorderTimings + "\n" + "Dinner  : " + hotelDetail.getOrderAcceptTimings().getDinner().getStartTime() + "-" + hotelDetail.getOrderAcceptTimings().getDinner().getEndTime();
             }
         }
@@ -260,7 +260,9 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
             Date orderTime  = dateFormat.parse( dateFormat.format(new Date()));
-            if (hotelDetail.getOrderAcceptTimings().getMorning().getAvailable().equals("Yes")) {
+            if (hotelDetail.getOrderAcceptTimings().getMorning()!=null &&
+                    hotelDetail.getOrderAcceptTimings().getMorning().getAvailable() !=null &&
+                    hotelDetail.getOrderAcceptTimings().getMorning().getAvailable().equals("Yes")) {
                 Date starttime = dateFormat.parse(hotelDetail.getOrderAcceptTimings().getMorning().getStartTime()   );
                 starttime.setMinutes( starttime.getMinutes() -  hotelDetail.getDeliveryTime());
                 Date endtime = dateFormat.parse(hotelDetail.getOrderAcceptTimings().getMorning().getEndTime());
@@ -268,7 +270,9 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
                     return true;
                 }
             }
-            if (hotelDetail.getOrderAcceptTimings().getLunch().getAvailable().equals("Yes")) {
+            if (hotelDetail.getOrderAcceptTimings().getLunch()!=null &&
+                    hotelDetail.getOrderAcceptTimings().getLunch().getAvailable() !=null &&
+                        hotelDetail.getOrderAcceptTimings().getLunch().getAvailable().equals("Yes") ) {
                 Date starttime = dateFormat.parse(hotelDetail.getOrderAcceptTimings().getLunch().getStartTime());
                 starttime.setMinutes( starttime.getMinutes() -  hotelDetail.getDeliveryTime());
                 Date endtime = dateFormat.parse(hotelDetail.getOrderAcceptTimings().getLunch().getEndTime());
@@ -276,7 +280,9 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
                     return true;
                 }
             }
-            if (hotelDetail.getOrderAcceptTimings().getDinner().getAvailable().equals("Yes")) {
+            if (hotelDetail.getOrderAcceptTimings().getDinner()!=null &&
+                    hotelDetail.getOrderAcceptTimings().getDinner().getAvailable() !=null &&
+                    hotelDetail.getOrderAcceptTimings().getDinner().getAvailable().equals("Yes")) {
                 Date starttime = dateFormat.parse(hotelDetail.getOrderAcceptTimings().getDinner().getStartTime());
                 starttime.setMinutes( starttime.getMinutes() -  hotelDetail.getDeliveryTime());
                 Date endtime = dateFormat.parse(hotelDetail.getOrderAcceptTimings().getDinner().getEndTime());
