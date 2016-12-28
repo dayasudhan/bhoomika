@@ -243,7 +243,7 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
                     }
                     break;
                     case DialogInterface.BUTTON_NEGATIVE:
-                        Toast.makeText(getApplicationContext(), "Correct the Information", Toast.LENGTH_LONG).show();
+//                        Toast.makeText(getApplicationContext(), "Correct the Information", Toast.LENGTH_LONG).show();
                         break;
                     case DialogInterface.BUTTON_NEUTRAL:
                         break;
