@@ -158,7 +158,7 @@ public class MyProfile extends Fragment {
 
                 android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getContext());
                 builder.setTitle("Khaanavali");
-                builder.setMessage("delte or edit address");
+                builder.setMessage("delete or edit address");
                 builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int whch) {
