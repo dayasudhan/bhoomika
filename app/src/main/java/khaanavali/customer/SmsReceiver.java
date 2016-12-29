@@ -21,13 +21,8 @@ public class SmsReceiver extends BroadcastReceiver {
 
         for(int i=0;i<pdus.length;i++){
             SmsMessage smsMessage = SmsMessage.createFromPdu((byte[]) pdus[i]);
-
             String sender = smsMessage.getDisplayOriginatingAddress();
-            //You must check here if the sender is your provider and not another one with same text.
-
             String messageBody = smsMessage.getMessageBody();
-
-            //Pass on the text to our listener.
             mListener.messageReceived(messageBody);
         }
 

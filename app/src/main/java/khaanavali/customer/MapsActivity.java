@@ -256,7 +256,7 @@ public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
                 // sees the explanation, try again to request the permission.
                 new AlertDialog.Builder(MapsActivity.this)
                         .setTitle("Permission Required")
-                        .setMessage("This permission was denied earlier by you. This permission is required to get your locatin .So, in order to use this feature please allow this permission by clicking ok.")
+                        .setMessage("This permission was denied earlier by you. This permission is required to get your location. So, in order to use this feature please allow this permission by clicking ok.")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
@@ -272,10 +272,6 @@ public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
                         })
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .show();
-                //Prompt the user once explanation has been shown
-//                ActivityCompat.requestPermissions(this,
-//                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-//                        MY_PERMISSIONS_REQUEST_LOCATION);
 
 
             } else {
