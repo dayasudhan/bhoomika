@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,6 +25,10 @@ public class ProductAdapter extends BaseAdapter {
     Typeface cr;
     int layoutResID;
     int pos;
+    int increment=0;
+
+    int j=0;
+    int i=0;
     String urlImg;
     private Integer count;
     public int totalCount ;
@@ -40,7 +45,19 @@ public class ProductAdapter extends BaseAdapter {
 
     ArrayList<MenuAdapter> mMenulist;
     // PreferenceManager mpref;
+    public ProductAdapter(Activity context, int layoutResourceID,
+                          ArrayList<MenuAdapter> menuList,int i) {
 
+        con = context;
+        layoutResID = layoutResourceID;
+        mMenulist =menuList;
+        totalCount = 0;
+        totalCost = 0;
+        urlImg = Constants.ABOUT_US_URL;
+        this.i=i;
+
+
+    }
     public ProductAdapter(Activity context, int layoutResourceID,
                           ArrayList<MenuAdapter> menuList) {
 
@@ -122,32 +139,38 @@ public class ProductAdapter extends BaseAdapter {
 
 
         final CityItemHolder finalItemHolder1 = itemHolder;
+        if (i == 1) {
+            increment=100;
+              }else {
+            increment=1;
+        }
         itemHolder.mAddImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                totalCount =  totalCount + 1;
+                @Override
+                public void onClick(View v) {
 
-                v.getTag();
-                int posi = (Integer) v.getTag();
-                View parentRow = (View) v.getParent();
-                ListView listView = (ListView) parentRow.getParent();
+                    totalCount = totalCount + increment;
 
-                final int posforadd = listView.getPositionForView(parentRow);
-                // Toast.makeText(getApplicationContext(),posi+""+posforadd,Toast.LENGTH_LONG).show();
-                TextView textName = (TextView) parentRow.findViewById(R.id.product_detail_name);
-                TextView tiew = (TextView) parentRow.findViewById(R.id.add_sub_val);
-                tiew.setVisibility(View.VISIBLE);
-                String quantity = tiew.getText().toString();
-                count = new Integer(quantity);
-                Log.e("add" + count, "^^^^^^^");
-                int val = count + 1;
-                String sVal = "" + val;
-                tiew.setText(sVal);
-                ImageView btn = (ImageView) parentRow.findViewById(R.id.add_btn);
-             //   btn.setTextColor(Color.parseColor("#07c2b1"));
-                mMenulist.get(posi).setNo_of_order(val);
-                totalCost = totalCost +mMenulist.get(posi).getPrice();
-                mListener.buttonClicked(pos,val);
+                    v.getTag();
+                    int posi = (Integer) v.getTag();
+                    View parentRow = (View) v.getParent();
+                    ListView listView = (ListView) parentRow.getParent();
+
+                    final int posforadd = listView.getPositionForView(parentRow);
+                    // Toast.makeText(getApplicationContext(),posi+""+posforadd,Toast.LENGTH_LONG).show();
+                    TextView textName = (TextView) parentRow.findViewById(R.id.product_detail_name);
+                    TextView tiew = (TextView) parentRow.findViewById(R.id.add_sub_val);
+                    tiew.setVisibility(View.VISIBLE);
+                    String quantity = tiew.getText().toString();
+                    count = new Integer(quantity);
+                    Log.e("add" + count, "^^^^^^^");
+                    int val = count + increment;
+                    String sVal = "" + val;
+                    tiew.setText(sVal);
+                    ImageView btn = (ImageView) parentRow.findViewById(R.id.add_btn);
+                    //   btn.setTextColor(Color.parseColor("#07c2b1"));
+                    mMenulist.get(posi).setNo_of_order(val);
+                    totalCost = totalCost + mMenulist.get(posi).getPrice();
+                    mListener.buttonClicked(pos, val);
                 /*String productname = textName.getText().toString();
                 int productID=  productList.get(posforadd).getVendorProduct().getId();
                 for(int j=0;j<=mProductModel.getSuccess().size();j++){
@@ -168,13 +191,8 @@ public class ProductAdapter extends BaseAdapter {
                 }*/
 
 
-
-
-
-
-
-            }
-        });
+                }
+            });
 
 
         final CityItemHolder finalItemHolder = itemHolder;
@@ -195,8 +213,8 @@ public class ProductAdapter extends BaseAdapter {
                 count = new Integer(quantity);
                 Log.e("sub" + count, "^^^^^^^");
                 if (count > 0) {
-                    totalCount =  totalCount - 1;
-                    int val = count - 1;
+                    totalCount =  totalCount - increment;
+                    int val = count - increment;
                     // Toast.makeText(getApplicationContext(),""+val,Toast.LENGTH_LONG).show();
                     String sVal = "" + val;
                     tiew.setText(sVal);
@@ -233,6 +251,7 @@ public class ProductAdapter extends BaseAdapter {
     }*/
     private static class CityItemHolder {
         TextView city,mValue,price_value,itemDescription;
+        EditText editmValue;
         ImageView mSubImg,mAddImg;
         ImageView mItemImg;
         String logo;

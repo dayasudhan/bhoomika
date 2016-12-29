@@ -66,9 +66,14 @@ public class ProductDetailViewActivity extends AppCompatActivity implements Plus
             MenuAdapter menuAdapter = new MenuAdapter( hotelDetail.getMenu().get(i));
             mMenulist.add(menuAdapter);
         }
-        mDataAdapter = new ProductAdapter(ProductDetailViewActivity.this,
-                R.layout.product_detail_list_layout,mMenulist);
-        mDataAdapter.setListener(this);
+        if(order.getOrdertype()==1){
+            mDataAdapter = new ProductAdapter(ProductDetailViewActivity.this,
+                    R.layout.product_detail_list_layout,mMenulist,1);
+
+        }else {
+            mDataAdapter = new ProductAdapter(ProductDetailViewActivity.this,
+                    R.layout.product_detail_list_layout, mMenulist);
+        }mDataAdapter.setListener(this);
         ListView listView = (ListView) findViewById(R.id.listView_product_detail);
         listView.setAdapter(mDataAdapter);
         vendorRating  = (TextView)findViewById(R.id.vendor_name_info);

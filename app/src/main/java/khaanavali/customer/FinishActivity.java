@@ -73,7 +73,7 @@ public class FinishActivity extends AppCompatActivity {
                 order.getCustomer().getAddress().getAddressLine1(),
                 order.getCustomer().getAddress().getAddressLine2(),
                 order.getCustomer().getAddress().getCity());
-        session.setName(order.getCustomer().getName());
+        //session.setName(order.getCustomer().getName());
     }
 
 //    public void alertMessage()
