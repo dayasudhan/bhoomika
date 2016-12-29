@@ -30,17 +30,17 @@ public class Address {
     public String toString()
     {
         String CustomerAddress = new String();
-        if(!addressLine1.isEmpty())
+        if(addressLine1 != null && !addressLine1.isEmpty())
             CustomerAddress =  CustomerAddress.concat(addressLine1).concat("\n");
-        if(!addressLine2.isEmpty())
+        if(addressLine2 != null &&!addressLine2.isEmpty())
             CustomerAddress =   CustomerAddress.concat(addressLine2).concat("\n");
-        if(!areaName.isEmpty())
+        if(areaName != null &&!areaName.isEmpty())
             CustomerAddress =   CustomerAddress.concat(areaName).concat("\n");
-        if(!LandMark.isEmpty())
+        if(LandMark != null &&!LandMark.isEmpty())
             CustomerAddress =   CustomerAddress.concat(LandMark).concat("\n");
-        if(!street.isEmpty())
+        if(street != null &&!street.isEmpty())
             CustomerAddress =   CustomerAddress.concat(street).concat("\n");
-        if(!city.isEmpty())
+        if(city != null &&!city.isEmpty())
             CustomerAddress =   CustomerAddress.concat(city);
         return CustomerAddress;
     }

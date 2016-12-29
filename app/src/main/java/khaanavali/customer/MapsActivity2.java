@@ -37,6 +37,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+import khaanavali.customer.utils.SessionManager;
+
 public class MapsActivity2 extends AppCompatActivity implements
         OnMapReadyCallback, GoogleMap.OnCameraChangeListener ,GoogleMap.OnMyLocationButtonClickListener,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
@@ -55,11 +57,13 @@ public class MapsActivity2 extends AppCompatActivity implements
     private LatLng mSelectedLatlang;
     List<android.location.Address> mAddresses;
     String mAddress;
+    SessionManager session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Mint.initAndStartSession(MapsActivity2.this, "49d903c2");
         setContentView(R.layout.activity_maps);
+        session = new SessionManager(getApplicationContext());
         btnpicklocation= (Button) findViewById(R.id.pickaddressbtn);
         btnManuallAddress = (Button)findViewById(R.id.buttonEnterManual);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -73,6 +77,7 @@ public class MapsActivity2 extends AppCompatActivity implements
         btnpicklocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if(mSelectedLatlang != null)
                     setAddress(mSelectedLatlang.latitude,mSelectedLatlang.longitude);
                 else {
@@ -85,16 +90,22 @@ public class MapsActivity2 extends AppCompatActivity implements
                 String locationLongitude=String.valueOf(mSelectedLatlang.longitude);
 //                i.putExtra("locationLatitude", locationLatitude);
 //                i.putExtra("locationLongitude", locationLongitude);
+                if(mAddresses != null) {
+                    session.setAddress(mAddresses.get(0).getSubLocality(),
+                            "",
+                            mAddresses.get(0).getAddressLine(1),
+                            mAddresses.get(0).getAddressLine(2),
+                            mAddresses.get(0).getLocality());
+                }
                 Intent intent = new Intent();
-                //intent.putExtra("latitude", locationLatitude);
-                //intent.putExtra("longitude", locationLongitude);
-                intent.putExtra("latitude", "13.0661");
-                intent.putExtra("longitude", "77.5007");
+                intent.putExtra("latitude", locationLatitude);
+                intent.putExtra("longitude", locationLongitude);
+//                intent.putExtra("latitude", "13.0661");
+//                intent.putExtra("longitude", "77.5007");
 
                 setResult(RESULT_OK, intent);
                 finish();
-//                startActivityForResult(i,2);
-                // finish();
+
             }
         });
 

@@ -91,6 +91,7 @@ public class HotelFragment extends Fragment {
             Constants.SLIDER_URL4
     };
     private ViewPager pager;
+    SessionManager session;
     //gagan
     private boolean isBulk;
 
@@ -114,7 +115,7 @@ public class HotelFragment extends Fragment {
 
 
         hotellist =  new ArrayList<HotelDetail>();
-        SessionManager session = new SessionManager(getActivity().getApplicationContext());
+        session = new SessionManager(getActivity().getApplicationContext());
 
 
         final String areaClicked = session.getlastareasearched();
@@ -127,7 +128,7 @@ public class HotelFragment extends Fragment {
                 if (!areaClicked.isEmpty())
                     getHotelList(areaClicked);
                 else
-                    getHotelList("VijayaNagara");
+                    getHotelList("Vijayanagara");
             }
 
         });
@@ -140,7 +141,7 @@ public class HotelFragment extends Fragment {
         if(!areaClicked.isEmpty())
             getHotelList(areaClicked);
         else
-            getHotelList("VijayaNagara");
+            getHotelList("Vijayanagara");
 
         //gagan
 
@@ -188,7 +189,7 @@ public class HotelFragment extends Fragment {
     public void getHotelListByGPS(String latitude, String longitude)
     {
         ((MainActivity) getActivity())
-                .setActionBarTitle("Bengalore");
+                .setActionBarTitle(session.getAddress().toString());
         hotellist.clear();
 
         String order_url = Constants.GET_HOTEL_BY_GPS;

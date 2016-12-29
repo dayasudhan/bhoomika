@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
                     longitude = new String(intent.getStringExtra("longitude"));
 
                     latitude = new String(intent.getStringExtra("latitude"));
-                    Toast.makeText(getApplicationContext(), longitude+" kdb "+latitude, Toast.LENGTH_LONG).show();
+                 //   Toast.makeText(getApplicationContext(), longitude+" kdb "+latitude, Toast.LENGTH_LONG).show();
                     fragment.getHotelListByGPS(latitude,longitude);
                 }
             } catch (ClassCastException e){
