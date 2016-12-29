@@ -81,10 +81,10 @@ public class RegisterActivity extends AppCompatActivity {
                     editemail.requestFocus();
                     alertMessage("Enter email");
                 }
-//                else
-//                {
-//                    registerUser(phoneNumber.getText().toString(),editName.getText().toString(),editemail.getText().toString(),"deviceid");
-//                }
+                else
+                {
+                    registerUser(phoneNumber.getText().toString(),editName.getText().toString(),editemail.getText().toString(),"deviceid");
+                }
                // postReview(hotelid,comment.getText().toString(),rating.getRating());
             }
         });
