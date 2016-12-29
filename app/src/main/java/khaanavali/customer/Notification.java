@@ -26,7 +26,7 @@ public class Notification extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootview = inflater.inflate(R.layout.notification, container, false);
         ((MainActivity) getActivity())
-                .setActionBarTitle("Offers");
+                .setActionBarTitle("Notifications");
         final Dialog dialog1 =new Dialog(getContext());
         dialog1.setContentView(R.layout.notification);
         notifImage=(ImageView)dialog1.findViewById(R.id.notifimg);

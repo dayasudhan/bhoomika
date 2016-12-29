@@ -128,7 +128,7 @@
                     android:id="@+id/orderDetailAddress_areaname"
                     android:textSize="15sp"
                     android:inputType="textPostalAddress"
-                    android:hint="Enter AreaName Here"
+                    android:hint="Enter Areaname"
                     android:textColorHint="@color/third_text_color"
                     android:background="#ffffff"
                     android:layout_below="@+id/orderDetailAddress_address"
@@ -155,7 +155,7 @@
                     android:id="@+id/orderDetailAddress_landmark"
                     android:textSize="15sp"
                     android:inputType="textPostalAddress"
-                    android:hint="Enter Locality/Landmark Here"
+                    android:hint="Enter Locality/Landmark"
                     android:textColorHint="@color/third_text_color"
                     android:background="#ffffff"
                     android:layout_below="@+id/orderDetailAddress_areaname"
@@ -180,7 +180,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/orderDetailEmail"
-                    android:inputType="textEmailAddress"
+                    android:inputType="textPostalAddress"
                     android:textSize="15sp"
                     android:hint="Enter City"
                     android:textColor="@color/title_text_color"
@@ -222,11 +222,8 @@
                     android:textColorHint="@color/third_text_color"
                     android:background="#ffffff"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="18dp"
-                    android:layout_below="@+id/view11"
-
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentEnd="true" />
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"  />>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
@@ -237,27 +234,27 @@
                     android:layout_marginTop="7dp"
                     android:id="@+id/view5" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Tag name"
-                    android:id="@+id/textTagName"
-                    android:textSize="15sp"
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                    <!--android:text="Tag name"-->
+                    <!--android:id="@+id/textTagName"-->
+                    <!--android:textSize="15sp"-->
 
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"  />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/view_color"
-                    android:layout_below="@+id/textTagName"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginTop="7dp"
-                    android:id="@+id/view11" />
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:layout_marginBottom="10dp"-->
+                    <!--android:layout_marginTop="10dp"  />-->
+                <!--<View-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="0.5dp"-->
+                    <!--android:background="@color/view_color"-->
+                    <!--android:layout_below="@+id/textTagName"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:layout_marginRight="10dp"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:layout_marginTop="7dp"-->
+                    <!--android:id="@+id/view11" />-->
             </RelativeLayout>
 
             </RelativeLayout>

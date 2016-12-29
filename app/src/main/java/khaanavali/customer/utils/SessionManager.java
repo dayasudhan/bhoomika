@@ -236,7 +236,9 @@ public class SessionManager {
 		else {
 			faddresslist = new ArrayList<FavouriteAddress>();
 		}
-		faddresslist.remove(pos);
+		if(faddresslist.size() > pos) {
+			faddresslist.remove(pos);
+		}
 		Gson gson = new Gson();
 		String json = gson.toJson(faddresslist);
 		editor.putString(KEY_FAVOURITE_ADDRESS,json);
@@ -255,7 +257,9 @@ public class SessionManager {
 		else {
 			faddresslist = new ArrayList<FavouriteAddress>();
 		}
-		faddresslist.set(position,favoutrateAddress);
+		if(faddresslist.size() > position) {
+			faddresslist.set(position, favoutrateAddress);
+		}
 		Gson gson = new Gson();
 		String json = gson.toJson(faddresslist);
 		editor.putString(KEY_FAVOURITE_ADDRESS,json);
