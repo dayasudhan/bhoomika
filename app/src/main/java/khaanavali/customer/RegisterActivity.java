@@ -66,19 +66,25 @@ public class RegisterActivity extends AppCompatActivity {
 
 
                 if (!validatePhoneNumber(phoneNumber.getText().toString())) {
+                    phoneNumber.setFocusableInTouchMode(true);
+                    phoneNumber.requestFocus();
                     alertMessage("Enter Valid Phone Number");
                 }
                 else if(name.trim().length() == 0){
+                    editName.setFocusableInTouchMode(true);
+                    editName.requestFocus();
                     alertMessage("Enter Name");
                 }
                 else if(!validateEmail(editemail.getText().toString()))
                 {
+                    editemail.setFocusableInTouchMode(true);
+                    editemail.requestFocus();
                     alertMessage("Enter email");
                 }
-                else
-                {
-                    registerUser(phoneNumber.getText().toString(),editName.getText().toString(),editemail.getText().toString(),"deviceid");
-                }
+//                else
+//                {
+//                    registerUser(phoneNumber.getText().toString(),editName.getText().toString(),editemail.getText().toString(),"deviceid");
+//                }
                // postReview(hotelid,comment.getText().toString(),rating.getRating());
             }
         });

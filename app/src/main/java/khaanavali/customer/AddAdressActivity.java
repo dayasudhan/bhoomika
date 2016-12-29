@@ -84,23 +84,29 @@ public class AddAdressActivity  extends AppCompatActivity {
                 String tagLabel =editTagLabel.getText().toString();
                 if(house.trim().length() == 0){
                     //Toast.makeText(getApplicationContext(), "Enter House No or Flat No ", Toast.LENGTH_LONG).show();
+                    editHouseNo.setFocusableInTouchMode(true);
+                    editHouseNo.requestFocus();
                     alertMessage("Enter House or Flat No ");
                 }
                 else if(addresss.trim().length() <= 0){
-                    //Toast.makeText(getApplicationContext(), "Enter areaname ", Toast.LENGTH_LONG).show();
+                    editAddress.setFocusableInTouchMode(true);
+                    editAddress.requestFocus();
                     alertMessage("Enter adress ");
                 }
                 else if(areaname.trim().length() <= 0){
-                    //Toast.makeText(getApplicationContext(), "Enter Address ", Toast.LENGTH_LONG).show();
+                    editAreaName.setFocusableInTouchMode(true);
+                    editAreaName.requestFocus();
                     alertMessage("Enter Areaname ");
                 }
                 else if(landmark.trim().length()<= 0){
-                    //Toast.makeText(getApplicationContext(), "Enter Landmark/locality ", Toast.LENGTH_LONG).show();
+                    editLandmark.setFocusableInTouchMode(true);
+                    editLandmark.requestFocus();
                     alertMessage("Enter Landmark/locality ");
                 }
 
                 else if(tagLabel.trim().length() <= 0){
-                    //Toast.makeText(getApplicationContext(), "Enter City ", Toast.LENGTH_LONG).show();
+                    editTagLabel.setFocusableInTouchMode(true);
+                    editTagLabel.requestFocus();
                     alertMessage("Enter lable for this address");
                 }
                 else

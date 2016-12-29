@@ -116,22 +116,28 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
                 String land =editLandmark.getText().toString();
 
                 if(name.trim().length() == 0){
-                    //Toast.makeText(getApplicationContext(), "Enter House No or Flat No ", Toast.LENGTH_LONG).show();
-                    alertMessage("Enter House or Flat No ");
+                     editName.setFocusableInTouchMode(true);
+                    editName.requestFocus();
+                    alertMessage("Enter Name");
                 }
                 else if(house.trim().length() <= 0){
-                    //Toast.makeText(getApplicationContext(), "Enter areaname ", Toast.LENGTH_LONG).show();
+                    editHouseNo.setFocusableInTouchMode(true);
+                    editHouseNo.requestFocus();
                     alertMessage("Enter house no ");
                 }
                 else if(addr.trim().length() <= 0){
-                    //Toast.makeText(getApplicationContext(), "Enter Address ", Toast.LENGTH_LONG).show();
+                    editAddress.setFocusableInTouchMode(true);
+                    editAddress.requestFocus();
                     alertMessage("Enter address ");
                 }
                 else if(area.trim().length()<= 0){
-                    //Toast.makeText(getApplicationContext(), "Enter Landmark/locality ", Toast.LENGTH_LONG).show();
+                    editAreaName.setFocusableInTouchMode(true);
+                    editAreaName.requestFocus();
                     alertMessage("Enter area name ");
                 }
                 else if(land.trim().length()<=0){
+                    editLandmark.setFocusableInTouchMode(true);
+                    editLandmark.requestFocus();
                     alertMessage("enter landmark");
                 }
                 else if(hotelDetail.getMinimumOrder() > order.getTotalCost())
