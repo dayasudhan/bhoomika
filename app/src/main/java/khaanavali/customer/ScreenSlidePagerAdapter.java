@@ -2,13 +2,13 @@ package khaanavali.customer;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
-    private List<String> picList = new ArrayList<>();
+public class ScreenSlidePagerAdapter extends FragmentPagerAdapter {
+        private List<String> picList = new ArrayList<>();
 
     public ScreenSlidePagerAdapter(FragmentManager fm) {
         super(fm);

@@ -27,7 +27,7 @@
                 android:scaleType="fitXY"
                 >
 
-                <android.support.v4.view.ViewPager
+                <khaanavali.customer.utils.MyViewPager
                     android:id="@+id/pager"
                     android:layout_height="fill_parent"
                     android:layout_width="fill_parent"

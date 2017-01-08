@@ -5,9 +5,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -40,7 +40,9 @@ import khaanavali.customer.model.HotelDetail;
 import khaanavali.customer.model.MenuItem;
 import khaanavali.customer.model.OrderAcceptTimings;
 import khaanavali.customer.utils.Constants;
+import khaanavali.customer.utils.MyViewPager;
 import khaanavali.customer.utils.SessionManager;
+import khaanavali.customer.utils.ZoomOutPageTransformer;
 
 
 /**
@@ -90,9 +92,11 @@ public class HotelFragment extends Fragment {
             Constants.SLIDER_URL3,
             Constants.SLIDER_URL4
     };
-    private ViewPager pager;
+    private MyViewPager pager;
+    int sliderIndex=0,sliderMaxImages = 4;
+    int delayMiliSec = 8000;
     SessionManager session;
-    //gagan
+    private Handler handler;
     private boolean isBulk;
 
     public boolean isBulk() {
@@ -102,6 +106,7 @@ public class HotelFragment extends Fragment {
     public void setBulk(boolean bulk) {
         isBulk = bulk;
     }
+
 
     @Nullable
     @Override
@@ -113,7 +118,7 @@ public class HotelFragment extends Fragment {
         swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh_layout);
 
 
-
+        handler = new Handler();
         hotellist =  new ArrayList<HotelDetail>();
         session = new SessionManager(getActivity().getApplicationContext());
 
@@ -146,14 +151,16 @@ public class HotelFragment extends Fragment {
         //gagan
 
 
-        pager = (ViewPager) v.findViewById(R.id.pager);
+        pager = (MyViewPager) v.findViewById(R.id.pager);
         ScreenSlidePagerAdapter pagerAdapter =new ScreenSlidePagerAdapter(getActivity().getSupportFragmentManager());
+        pager.setPageTransformer(true, new ZoomOutPageTransformer());
 
         pagerAdapter.addAll(Arrays.asList(IMAGES));
         pager.setAdapter(pagerAdapter);
         CirclePageIndicator indicator = (CirclePageIndicator) v.findViewById(R.id.indicator);
         indicator.setViewPager(pager);
 
+    //    handler.postDelayed(runnable, delayMiliSec);
         //gagan end
 
         textview = (TextView) v.findViewById(R.id.textView_no_vendors);
@@ -544,4 +551,27 @@ public class HotelFragment extends Fragment {
                     .setIcon(R.drawable.ic_action_about).show();
 
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        handler.postDelayed(runnable, delayMiliSec);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        handler.removeCallbacks(runnable);
+    }
+
+    Runnable runnable = new Runnable() {
+        public void run() {
+            if (sliderMaxImages == sliderIndex) {
+                sliderIndex = 0;
+            } else {
+                sliderIndex++;
+            }
+            pager.setCurrentItem(sliderIndex, true);
+            handler.postDelayed(this, delayMiliSec);
+        }
+    };
 }
