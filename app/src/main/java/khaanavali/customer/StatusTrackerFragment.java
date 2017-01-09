@@ -22,6 +22,7 @@ package khaanavali.customer;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ParseException;
 import android.os.AsyncTask;
@@ -64,13 +65,27 @@ import khaanavali.customer.utils.SessionManager;
 
 public class StatusTrackerFragment extends Fragment {
 
-    Button btnStatus;
+    Button btnStatus,btnOrderDetail;
     TextView txtViewTracker;
     EditText ed;
     private static final String TAG_TRACKER = "tracker";
+    private static final String TAG_CUSTOMER = "customer";
+    private static final String TAG_ID = "id";
+    private static final String TAG_ID2 = "_id";
+    private static final String TAG_NAME = "name";
+    private static final String TAG_EMAIL = "email";
+    private static final String TAG_ADDRESS = "address";
+    private static final String TAG_PHONE = "phone";
+    private static final String TAG_CURRENT_STATUS = "current_status";
+    private static final String TAG_MENU = "menu";
+    private static final String TAG_BILL_VALUE = "bill_value";
+    private static final String TAG_DELIVERY_CHARGE = "deliveryCharge";
+    private static final String TAG_TOTAL_COST = "totalCost";
     ArrayList<Tracker> trackerDetails;
     SessionManager session;
     ListView listView ;
+    String responseOrder;
+    boolean isHistoryClicked;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -81,9 +96,11 @@ public class StatusTrackerFragment extends Fragment {
         ed = (EditText)v.findViewById(R.id.editText);
         txtViewTracker = (TextView) v.findViewById(R.id.statusText);
 
+        isHistoryClicked = false;
         session = new SessionManager(getActivity().getApplicationContext());
         ed.setText(session.getCurrentOrderId());
         btnStatus = (Button)v.findViewById(R.id.status_button);
+        btnOrderDetail = (Button)v.findViewById(R.id.order_detail);
         trackerDetails = new ArrayList<Tracker>();
         ((MainActivity) getActivity())
                 .setActionBarTitle("Status Tracker");
@@ -91,8 +108,25 @@ public class StatusTrackerFragment extends Fragment {
             @Override
             public void onClick(View arg0) {
 
+                isHistoryClicked = false;
                 if(ed.getText().length() > 0 )
                 {
+                    getStatus(ed.getText().toString());
+                }
+                else
+                {
+                    alertMessage("Please enter valid Order id");
+                }
+            }
+        });
+        btnOrderDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+
+
+                if(ed.getText().length() > 0 )
+                {
+                    isHistoryClicked = true;
                     getStatus(ed.getText().toString());
                 }
                 else
@@ -119,7 +153,7 @@ public class StatusTrackerFragment extends Fragment {
         return v;
     }
 
-    public void getStatus(String orderId)
+    public void getStatus(String orderId )
     {
        String order_url = Constants.GET_STATUS_URL;
        order_url= order_url.concat(orderId);
@@ -144,6 +178,16 @@ public void updateStatus()
             trackerItemStr += trackerDetails.get(j).getStatus() + " (" + newTime + ")" + '\n';
         }
         txtViewTracker.setText(trackerItemStr);
+        if(isHistoryClicked ==  true)
+        {
+
+                Intent i = new Intent(getActivity(), OrderHistory.class);
+                i.putExtra("order", responseOrder);
+              //  i.putExtra("HotelDetail",strHotelDetail);
+                startActivity(i);
+            //    finish();
+
+        }
     }
 }
     public  class JSONAsyncTask extends AsyncTask<String, Void, Boolean> {
@@ -183,10 +227,65 @@ public void updateStatus()
                     HttpEntity entity = response.getEntity();
 
                     String data = EntityUtils.toString(entity);
+                    responseOrder = data;
                     JSONArray jarray = new JSONArray(data);
 
                     for (int i = 0; i < jarray.length(); i++) {
                         JSONObject object = jarray.getJSONObject(i);
+                        responseOrder = object.toString();
+//                        if(object.has(TAG_CUSTOMER)) {
+//
+//                            JSONObject custObj = object.getJSONObject(TAG_CUSTOMER);
+//
+//                            if (custObj.has(TAG_ADDRESS)) {
+//                                JSONObject addrObj = custObj.getJSONObject(TAG_ADDRESS);
+//                                Address address = new Address();
+//                                if(addrObj.has("addressLine1"))
+//                                    address.setAddressLine1(addrObj.getString("addressLine1"));
+//                                if(addrObj.has("addressLine2"))
+//                                    address.setAddressLine2(addrObj.getString("addressLine2"));
+//                                if(addrObj.has("areaName"))
+//                                    address.setAreaName(addrObj.getString("areaName"));
+//                                if(addrObj.has("city"))
+//                                    address.setCity(addrObj.getString("city"));
+//                                if(addrObj.has("LandMark"))
+//                                    address.setLandMark(addrObj.getString("LandMark"));
+//                                if(addrObj.has("street"))
+//                                    address.setStreet(addrObj.getString("street"));
+//                                if(addrObj.has("zip"))
+//                                    address.setZip(addrObj.getString("zip"));
+//                                cus.setAddress(address);
+//                            }
+//                            ordr.setCustomer(cus);
+//                        }
+//
+//
+//                        if(object.has(TAG_ID))
+//                        {
+//                            ordr.setId(object.getString(TAG_ID));
+//                        }
+//                        if(object.has(TAG_ID2))
+//                        {
+//                            ordr.set_id(object.getString(TAG_ID2));
+//                        }
+//                        if(object.has(TAG_CURRENT_STATUS))
+//                        {
+//                            ordr.setCurrent_status(object.getString(TAG_CURRENT_STATUS));
+//                        }
+//
+//                        if(object.has(TAG_MENU))
+//                        {
+//                            ArrayList<HotelMenuItem> hotelMenuItemList = new ArrayList<HotelMenuItem>();
+//                            JSONArray menuarr =  object.getJSONArray(TAG_MENU);
+//                            for (int j = 0; j < menuarr.length(); j++) {
+//                                JSONObject menuobject = menuarr.getJSONObject(j);
+//                                HotelMenuItem menu = new HotelMenuItem();
+//                                menu.setName(menuobject.getString("name"));
+//                                menu.setNo_of_order(menuobject.getString("no_of_order"));
+//                                hotelMenuItemList.add(menu);
+//                            }
+//                            ordr.setHotelMenuItems(hotelMenuItemList);
+//                        }
 
                         if(object.has(TAG_TRACKER))
                         {

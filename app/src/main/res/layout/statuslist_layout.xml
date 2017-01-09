@@ -30,21 +30,42 @@
                 android:padding="10dp"
                 android:layout_gravity="center_vertical|right" />
 
-            <Button
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Track status"
-                android:id="@+id/status_button"
-                android:textColor="#ffffff"
-                android:background="@drawable/locationbuttonselector"
-                android:clickable="true"
+                android:layout_gravity="center_horizontal">
 
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center_horizontal" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Track status"
+                    android:id="@+id/status_button"
+                    android:textColor="#ffffff"
+                    android:background="@drawable/locationbuttonselector"
+                    android:clickable="true"
+
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Order Detail"
+                    android:id="@+id/order_detail"
+                    android:textColor="#ffffff"
+                    android:background="@drawable/locationbuttonselector"
+                    android:clickable="true"
+                    android:layout_alignParentBottom="true"
+
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true" />
+            </LinearLayout>
+
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
