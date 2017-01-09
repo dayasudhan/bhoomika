@@ -169,13 +169,40 @@
             android:layout_toRightOf="@+id/bill_value_text"
             android:layout_toEndOf="@+id/bill_value_text" />
 
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/title_text_color"
+            android:text="Order Status -"
+            android:id="@+id/order_status_txt"
+
+            android:layout_below="@+id/bill_value_text"
+            android:layout_alignLeft="@+id/items_text"
+            android:layout_alignStart="@+id/items_text"
+            android:layout_marginTop="20dp" />
+        />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/secondary_text_color"
+            android:text="Rs.10000"
+            android:id="@+id/order_status_value"
+            android:layout_marginLeft="3dp"
+            android:layout_alignBottom="@+id/order_status_txt"
+            android:layout_toRightOf="@+id/order_status_txt"
+            android:layout_toEndOf="@+id/order_status_txt" />
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/list_background"
         android:id="@+id/order_address_lay"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="15dp"
         android:padding="5dp"
         android:layout_below="@+id/order_details_lay"
         android:layout_alignLeft="@+id/order_details_lay"
@@ -294,39 +321,6 @@
             android:layout_toRightOf="@+id/vendor_delivery_time_text"
             android:layout_toEndOf="@+id/vendor_delivery_time_text" />
 
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:background="@drawable/list_background"
-        android:layout_below="@+id/relativeLayout"
-        android:padding="5dp"
-        android:layout_marginTop="5dp"
-        android:id="@+id/rate_lay"
-        android:visibility="gone"
-
-        android:layout_alignRight="@+id/relativeLayout"
-        android:layout_alignEnd="@+id/relativeLayout"
-        android:layout_alignLeft="@+id/relativeLayout"
-        android:layout_alignStart="@+id/relativeLayout">
-        <RatingBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/rate_vendor_ratingBar"
-            android:layout_below="@+id/rate_vendor_text"
-            android:layout_marginTop="5dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="@color/text_view_grey"
-            android:text="Rate Vendor"
-            android:id="@+id/rate_vendor_text"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
     </RelativeLayout>
 
         </RelativeLayout>

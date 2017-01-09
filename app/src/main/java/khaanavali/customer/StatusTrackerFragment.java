@@ -183,7 +183,7 @@ public void updateStatus()
 
                 Intent i = new Intent(getActivity(), OrderHistory.class);
                 i.putExtra("order", responseOrder);
-              //  i.putExtra("HotelDetail",strHotelDetail);
+                i.putExtra("txtViewTracker",trackerItemStr);
                 startActivity(i);
             //    finish();
 

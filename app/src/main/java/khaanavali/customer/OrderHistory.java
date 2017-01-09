@@ -30,9 +30,9 @@ public class OrderHistory extends AppCompatActivity {
 
         Gson gson = new Gson();
         order = gson.fromJson(intent.getStringExtra("order"), Order.class);
-       // HotelDetail hotelDetail = gson.fromJson(intent.getStringExtra("HotelDetail"), HotelDetail.class);
+        String trackerStatus = intent.getStringExtra("txtViewTracker");
         TextView txtViewName = (TextView) findViewById(R.id.vendor_name_value);
-       // TextView txtViewPhone = (TextView) findViewById(R.id.vendor_contact_value);
+        TextView txtorderStatus = (TextView) findViewById(R.id.order_status_value);
         TextView txtViewAddress = (TextView) findViewById(R.id.address_value);
         TextView txtViewMenu = (TextView) findViewById(R.id.items_value);
         TextView txtViewOrderId = (TextView) findViewById(R.id.order_id_value);
@@ -41,8 +41,9 @@ public class OrderHistory extends AppCompatActivity {
       // TextView txtVieworderTime = (TextView) findViewById(R.id.order_time_value);
 
         txtViewName.setText(order.getHotel().getName());
-        //txtViewPhone.setText(String.valueOf(order.getHotel().getPhone()));
+        txtorderStatus.setText(trackerStatus);
         txtViewOrderId.setText(order.getId());
+
      //   txtViewdeliveryTime.setText(Integer.toString(hotelDetail.getDeliveryTime()) + " mins");
         txtViewBillValue.setText(String.valueOf(order.getTotalCost()));
         ArrayList<Menu> items = order.getMenuItems();
