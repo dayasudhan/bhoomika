@@ -100,7 +100,7 @@ public class PlacesActivity extends AppCompatActivity{
         search.setQueryHint("Search Location");
 
         search.setIconified(false);
-        setToolBar("Select delivery location");
+        setToolBar("Select Delivery Location");
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override

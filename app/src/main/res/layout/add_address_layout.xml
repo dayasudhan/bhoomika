@@ -36,26 +36,26 @@
                 android:padding="1dip"
                 android:id="@+id/address_details_layout"
                 >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Address Details"
-                    android:id="@+id/address_detail"
-                    android:textSize="15sp"
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                    <!--android:text="Address Details"-->
+                    <!--android:id="@+id/address_detail"-->
+                    <!--android:textSize="15sp"-->
 
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp" />
-                <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="0.5dp"-->
-                    <!--android:background="@color/view_color"-->
-                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:layout_marginBottom="10dp"-->
+                    <!--android:layout_marginTop="10dp" />-->
+                <!--&lt;!&ndash;<View&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="0.5dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:background="@color/view_color"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_alignParentLeft="true"&ndash;&gt;-->
 
 
-                    <!--android:layout_below="@+id/address_detail"-->
-                    <!--android:id="@+id/view1" />-->
+                    <!--&lt;!&ndash;android:layout_below="@+id/address_detail"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:id="@+id/view1" />&ndash;&gt;-->
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
@@ -82,7 +82,9 @@
                     android:layout_marginTop="18dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignEnd="@+id/view10"
+                    android:layout_alignRight="@+id/view10"
                     android:layout_alignParentEnd="false"
+                    android:layout_alignParentRight="false"
                     android:layout_alignParentStart="false"
                     />
                 <View
@@ -91,7 +93,7 @@
                     android:background="@color/view_color"
                     android:layout_below="@+id/orderDetailAddress_house_no"
                     android:layout_marginLeft="10dp"
-
+                    android:layout_alignRight="@+id/view10"
                     android:layout_alignEnd="@+id/view10"
                     android:layout_marginTop="7dp"
                     android:id="@+id/view9" />
@@ -108,7 +110,7 @@
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/title_text_color"
                     android:layout_marginTop="18dp"
-
+                    android:layout_alignRight="@+id/view9"
                     android:layout_alignParentLeft="true"
                     android:layout_alignEnd="@+id/view9" />
 
@@ -119,7 +121,7 @@
                     android:layout_below="@+id/orderDetailAddress_address"
                     android:layout_marginLeft="10dp"
                     android:layout_alignEnd="@+id/view10"
-
+                    android:layout_alignRight="@+id/view10"
                     android:layout_marginTop="7dp"
                     android:id="@+id/view8" />
                 <EditText
@@ -136,6 +138,7 @@
                     android:layout_marginTop="18dp"
                     android:textColor="@color/title_text_color"
                     android:layout_alignParentLeft="true"
+                    android:layout_alignRight="@+id/view8"
                     android:layout_alignEnd="@+id/view8" />
 
                 <View
@@ -145,7 +148,7 @@
                     android:layout_below="@+id/orderDetailAddress_areaname"
                     android:layout_marginLeft="10dp"
                     android:layout_alignEnd="@+id/view10"
-
+                    android:layout_alignRight="@+id/view10"
                     android:layout_marginTop="7dp"
                     android:id="@+id/view6" />
 
@@ -163,6 +166,7 @@
                     android:layout_marginTop="18dp"
                     android:textColor="@color/title_text_color"
                     android:layout_alignParentLeft="true"
+                    android:layout_alignRight="@+id/view6"
                     android:layout_alignEnd="@+id/view6" />
 
                 <View
@@ -171,7 +175,7 @@
                     android:background="@color/view_color"
                     android:layout_below="@+id/orderDetailAddress_landmark"
                     android:layout_marginLeft="10dp"
-
+                    android:layout_alignRight="@+id/view10"
                     android:layout_alignEnd="@+id/view10"
                     android:layout_marginTop="7dp"
                     />

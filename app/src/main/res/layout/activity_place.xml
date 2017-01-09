@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:orientation="vertical"
+
         android:id="@+id/layout1">
 
         <include
@@ -32,7 +33,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/my_custom_background"
+            android:background="@drawable/linearlayoutborder"
             android:padding="1dip"
             android:id="@+id/firstLayout"
 
@@ -43,10 +44,10 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/searchbackground"
                 android:layout_alignParentTop="true"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="3dp"
                 android:showAsAction="collapseActionView|ifRoom"
                 android:visibility="visible"
-                android:layout_marginRight="4dp"
+                android:layout_marginRight="3dp"
                 android:clickable="true"
 
                                 />
@@ -54,6 +55,9 @@
                 android:layout_height="200dp"
                 android:background="@color/background_color"
                 android:fillViewport="true"
+
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
                 android:layout_below="@+id/searchView1">
             <ListView
 
@@ -139,6 +143,8 @@
         android:id="@+id/location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/linearlayoutborder"
+
         android:layout_below="@id/layout1">
 
         <ImageView
@@ -151,7 +157,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Use My Location"
+            android:text="Use my location"
             android:id="@+id/textView13"
             android:layout_gravity="center_vertical" />
 
