@@ -1,0 +1,164 @@
+[1mdiff --git a/app/src/main/java/khaanavali/customer/HotelFragment.java b/app/src/main/java/khaanavali/customer/HotelFragment.java[m
+[1mindex 412b34c..e135fe6 100644[m
+[1m--- a/app/src/main/java/khaanavali/customer/HotelFragment.java[m
+[1m+++ b/app/src/main/java/khaanavali/customer/HotelFragment.java[m
+[36m@@ -152,10 +152,10 @@[m [mpublic class HotelFragment extends Fragment {[m
+ [m
+ [m
+         pager = (MyViewPager) v.findViewById(R.id.pager);[m
+[31m-        ScreenSlidePagerAdapter pagerAdapter =new ScreenSlidePagerAdapter(getActivity().getSupportFragmentManager());[m
+[32m+[m[32m        ScreenSlidePagerAdapter pagerAdapter =new ScreenSlidePagerAdapter(getActivity().getSupportFragmentManager(),getActivity().getApplicationContext());[m
+         pager.setPageTransformer(true, new ZoomOutPageTransformer());[m
+ [m
+[31m-        pagerAdapter.addAll(Arrays.asList(IMAGES));[m
+[32m+[m[32m        pagerAdapter.addAll(session.getSlider());[m
+         pager.setAdapter(pagerAdapter);[m
+         CirclePageIndicator indicator = (CirclePageIndicator) v.findViewById(R.id.indicator);[m
+         indicator.setViewPager(pager);[m
+[1mdiff --git a/app/src/main/java/khaanavali/customer/PlacesActivity.java b/app/src/main/java/khaanavali/customer/PlacesActivity.java[m
+[1mindex 48728ea..e58627c 100644[m
+[1m--- a/app/src/main/java/khaanavali/customer/PlacesActivity.java[m
+[1m+++ b/app/src/main/java/khaanavali/customer/PlacesActivity.java[m
+[36m@@ -33,6 +33,7 @@[m [mimport org.json.JSONObject;[m
+ [m
+ import java.io.IOException;[m
+ import java.util.ArrayList;[m
+[32m+[m[32mimport java.util.List;[m
+ [m
+ import khaanavali.customer.adapter.LocationAdapter;[m
+ import khaanavali.customer.utils.Constants;[m
+[36m@@ -43,6 +44,11 @@[m [mimport khaanavali.customer.utils.SessionManager;[m
+ public class PlacesActivity extends AppCompatActivity{[m
+ [m
+     private static final String TAG_SUBAREAS = "subAreas";[m
+[32m+[m[32m    private static final String TAG_SLIDERS = "sliders";[m
+[32m+[m[32m    private static final String TAG_LOGO1 = "logo1";[m
+[32m+[m[32m    private static final String TAG_LOGO2 = "logo2";[m
+[32m+[m[32m    private static final String TAG_LOGO3 = "logo3";[m
+[32m+[m[32m    private static final String TAG_LOGO4 = "logo4";[m
+     private static final String TAG_NAME = "name";[m
+ [m
+ [m
+[36m@@ -66,7 +72,7 @@[m [mpublic class PlacesActivity extends AppCompatActivity{[m
+         listView.setTextFilterEnabled(true);[m
+ [m
+ [m
+[31m-//        SessionManager  session = new SessionManager(getApplicationContext());[m
+[32m+[m
+ //        mFavouriteAddressArrayList = new ArrayList<FavouriteAddress>();[m
+ //        if(session.getFavoutrateAddress() !=null) {[m
+ //            mFavouriteAddressArrayList = session.getFavoutrateAddress();[m
+[36m@@ -242,6 +248,18 @@[m [mpublic class PlacesActivity extends AppCompatActivity{[m
+                                 }[m
+                             }[m
+                         }[m
+[32m+[m[32m                        if(object.has(TAG_SLIDERS)) {[m
+[32m+[m[32m                            JSONObject slider_object = object.getJSONObject(TAG_SLIDERS);[m
+[32m+[m[32m                            SessionManager  session = new SessionManager(getApplicationContext());[m
+[32m+[m[32m                            List<String> logos = new ArrayList<String>();[m
+[32m+[m[32m                            logos.clear();[m
+[32m+[m[32m                            logos.add(slider_object.getString("logo1"));[m
+[32m+[m[32m                            logos.add(slider_object.getString("logo2"));[m
+[32m+[m[32m                            logos.add(slider_object.getString("logo3"));[m
+[32m+[m[32m                            logos.add(slider_object.getString("logo4"));[m
+[32m+[m[32m                            session.setSlider(logos);[m
+[32m+[m
+[32m+[m[32m                        }[m
+                     }[m
+                     return true;[m
+                 }[m
+[1mdiff --git a/app/src/main/java/khaanavali/customer/ScreenSlidePagerAdapter.java b/app/src/main/java/khaanavali/customer/ScreenSlidePagerAdapter.java[m
+[1mindex 757567c..d9e0b7c 100644[m
+[1m--- a/app/src/main/java/khaanavali/customer/ScreenSlidePagerAdapter.java[m
+[1m+++ b/app/src/main/java/khaanavali/customer/ScreenSlidePagerAdapter.java[m
+[36m@@ -1,5 +1,6 @@[m
+ package khaanavali.customer;[m
+ [m
+[32m+[m[32mimport android.content.Context;[m
+ import android.support.v4.app.Fragment;[m
+ import android.support.v4.app.FragmentManager;[m
+ import android.support.v4.app.FragmentPagerAdapter;[m
+[36m@@ -7,16 +8,21 @@[m [mimport android.support.v4.app.FragmentPagerAdapter;[m
+ import java.util.ArrayList;[m
+ import java.util.List;[m
+ [m
+[32m+[m[32mimport khaanavali.customer.utils.SessionManager;[m
+[32m+[m
+ public class ScreenSlidePagerAdapter extends FragmentPagerAdapter {[m
+         private List<String> picList = new ArrayList<>();[m
+[32m+[m[32m    Context mContext;[m
+[32m+[m[32m    public ScreenSlidePagerAdapter(FragmentManager fm , Context context) {[m
+ [m
+[31m-    public ScreenSlidePagerAdapter(FragmentManager fm) {[m
+         super(fm);[m
+[32m+[m[32m        mContext = context;[m
+     }[m
+ [m
+     @Override[m
+     public Fragment getItem(int i) {[m
+[31m-        return ScreenSlidePageFragment.newInstance(picList.get(i));[m
+[32m+[m[32m        SessionManager session = new SessionManager(mContext);[m
+[32m+[m[32m        return ScreenSlidePageFragment.newInstance(session.getSlider().get(i));[m
+     }[m
+ [m
+     @Override[m
+[1mdiff --git a/app/src/main/java/khaanavali/customer/utils/SessionManager.java b/app/src/main/java/khaanavali/customer/utils/SessionManager.java[m
+[1mindex 671350c..c45ebe3 100644[m
+[1m--- a/app/src/main/java/khaanavali/customer/utils/SessionManager.java[m
+[1m+++ b/app/src/main/java/khaanavali/customer/utils/SessionManager.java[m
+[36m@@ -58,6 +58,9 @@[m [mpublic class SessionManager {[m
+ [m
+ 	//To store the firebase id in shared preferences[m
+ 	public static final String KEY_LAST_AREA_SERCHED = "lastareasearched";[m
+[32m+[m
+[32m+[m	[32mpublic static final String KEY_SLIDER_LOGO = "slider";[m
+[32m+[m
+ 	// Constructor[m
+ 	public  boolean hasAddress=false;[m
+ [m
+[36m@@ -199,7 +202,31 @@[m [mpublic class SessionManager {[m
+ 		}[m
+ 		return list;[m
+ 	}[m
+[31m-[m
+[32m+[m	[32mpublic void setSlider(List<String> list)[m
+[32m+[m	[32m{[m
+[32m+[m		[32mGson gson = new Gson();[m
+[32m+[m		[32mString json = gson.toJson(list);[m
+[32m+[m		[32meditor.putString(KEY_SLIDER_LOGO,json);[m
+[32m+[m		[32meditor.commit();[m
+[32m+[m	[32m}[m
+[32m+[m	[32mpublic List<String> getSlider()[m
+[32m+[m	[32m{[m
+[32m+[m		[32mString orders = pref.getString(KEY_SLIDER_LOGO, null);[m
+[32m+[m		[32mList<String> list = null;[m
+[32m+[m		[32mif(orders != null) {[m
+[32m+[m			[32mGson gson = new Gson();[m
+[32m+[m			[32mlist = (List<String>) gson.fromJson(orders, Object.class);[m
+[32m+[m		[32m}[m
+[32m+[m		[32melse[m
+[32m+[m		[32m{[m
+[32m+[m			[32mlist = new ArrayList<String>();[m
+[32m+[m			[32mlist.add(Constants.SLIDER_URL1);[m
+[32m+[m			[32mlist.add(Constants.SLIDER_URL2);[m
+[32m+[m			[32mlist.add(Constants.SLIDER_URL3);[m
+[32m+[m			[32mlist.add(Constants.SLIDER_URL4);[m
+[32m+[m		[32m}[m
+[32m+[m		[32mreturn list;[m
+[32m+[m	[32m}[m
+ 	public void setFavoutrateAddress(FavouriteAddress favoutrateAddress)[m
+ 	{[m
+ 		String faddrlist = pref.getString(KEY_FAVOURITE_ADDRESS, null);[m
+[1mdiff --git a/app/src/main/res/layout/activity_order_history.xml b/app/src/main/res/layout/activity_order_history.xml[m
+[1mindex b08f36f..8d8676f 100644[m
+[1m--- a/app/src/main/res/layout/activity_order_history.xml[m
+[1m+++ b/app/src/main/res/layout/activity_order_history.xml[m
+[36m@@ -193,7 +193,7 @@[m
+             android:text="Rs.10000"[m
+             android:id="@+id/order_status_value"[m
+             android:layout_marginLeft="3dp"[m
+[31m-            android:layout_alignBottom="@+id/order_status_txt"[m
+[32m+[m[32m            android:layout_alignTop="@+id/order_status_txt"[m
+             android:layout_toRightOf="@+id/order_status_txt"[m
+             android:layout_toEndOf="@+id/order_status_txt" />[m
+     </RelativeLayout>[m

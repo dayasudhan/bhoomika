@@ -152,10 +152,10 @@ public class HotelFragment extends Fragment {
 
 
         pager = (MyViewPager) v.findViewById(R.id.pager);
-        ScreenSlidePagerAdapter pagerAdapter =new ScreenSlidePagerAdapter(getActivity().getSupportFragmentManager());
+        ScreenSlidePagerAdapter pagerAdapter =new ScreenSlidePagerAdapter(getActivity().getSupportFragmentManager(),getActivity().getApplicationContext());
         pager.setPageTransformer(true, new ZoomOutPageTransformer());
 
-        pagerAdapter.addAll(Arrays.asList(IMAGES));
+        pagerAdapter.addAll(session.getSlider());
         pager.setAdapter(pagerAdapter);
         CirclePageIndicator indicator = (CirclePageIndicator) v.findViewById(R.id.indicator);
         indicator.setViewPager(pager);

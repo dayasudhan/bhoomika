@@ -33,6 +33,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import khaanavali.customer.adapter.LocationAdapter;
 import khaanavali.customer.utils.Constants;
@@ -43,6 +44,11 @@ import khaanavali.customer.utils.SessionManager;
 public class PlacesActivity extends AppCompatActivity{
 
     private static final String TAG_SUBAREAS = "subAreas";
+    private static final String TAG_SLIDERS = "sliders";
+    private static final String TAG_LOGO1 = "logo1";
+    private static final String TAG_LOGO2 = "logo2";
+    private static final String TAG_LOGO3 = "logo3";
+    private static final String TAG_LOGO4 = "logo4";
     private static final String TAG_NAME = "name";
 
 
@@ -66,7 +72,7 @@ public class PlacesActivity extends AppCompatActivity{
         listView.setTextFilterEnabled(true);
 
 
-//        SessionManager  session = new SessionManager(getApplicationContext());
+
 //        mFavouriteAddressArrayList = new ArrayList<FavouriteAddress>();
 //        if(session.getFavoutrateAddress() !=null) {
 //            mFavouriteAddressArrayList = session.getFavoutrateAddress();
@@ -241,6 +247,18 @@ public class PlacesActivity extends AppCompatActivity{
                                     mCityCoverage.add(city_object.get(TAG_NAME).toString());
                                 }
                             }
+                        }
+                        if(object.has(TAG_SLIDERS)) {
+                            JSONObject slider_object = object.getJSONObject(TAG_SLIDERS);
+                            SessionManager  session = new SessionManager(getApplicationContext());
+                            List<String> logos = new ArrayList<String>();
+                            logos.clear();
+                            logos.add(slider_object.getString("logo1"));
+                            logos.add(slider_object.getString("logo2"));
+                            logos.add(slider_object.getString("logo3"));
+                            logos.add(slider_object.getString("logo4"));
+                            session.setSlider(logos);
+
                         }
                     }
                     return true;

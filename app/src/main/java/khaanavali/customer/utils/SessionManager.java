@@ -58,6 +58,9 @@ public class SessionManager {
 
 	//To store the firebase id in shared preferences
 	public static final String KEY_LAST_AREA_SERCHED = "lastareasearched";
+
+	public static final String KEY_SLIDER_LOGO = "slider";
+
 	// Constructor
 	public  boolean hasAddress=false;
 
@@ -199,7 +202,31 @@ public class SessionManager {
 		}
 		return list;
 	}
-
+	public void setSlider(List<String> list)
+	{
+		Gson gson = new Gson();
+		String json = gson.toJson(list);
+		editor.putString(KEY_SLIDER_LOGO,json);
+		editor.commit();
+	}
+	public List<String> getSlider()
+	{
+		String orders = pref.getString(KEY_SLIDER_LOGO, null);
+		List<String> list = null;
+		if(orders != null) {
+			Gson gson = new Gson();
+			list = (List<String>) gson.fromJson(orders, Object.class);
+		}
+		else
+		{
+			list = new ArrayList<String>();
+			list.add(Constants.SLIDER_URL1);
+			list.add(Constants.SLIDER_URL2);
+			list.add(Constants.SLIDER_URL3);
+			list.add(Constants.SLIDER_URL4);
+		}
+		return list;
+	}
 	public void setFavoutrateAddress(FavouriteAddress favoutrateAddress)
 	{
 		String faddrlist = pref.getString(KEY_FAVOURITE_ADDRESS, null);
