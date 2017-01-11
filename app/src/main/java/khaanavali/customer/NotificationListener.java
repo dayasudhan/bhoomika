@@ -113,16 +113,17 @@ public class NotificationListener extends Service {
             }
 
         }
-        else if(intent_type==2)
+        else if(intent_type==3)
         {
             intent = new Intent(getApplicationContext(), MainActivity.class);
             intent.putExtra("notificationFragment", "notify");
         }
-        else if(intent_type == 3) {
-            intent = new Intent(getApplicationContext(), MainActivity.class);
-            intent.putExtra("notificationFragment", "favoritesMenuItem");
-
-        }else
+//        else if(intent_type == 3) {
+//            intent = new Intent(getApplicationContext(), MainActivity.class);
+//            intent.putExtra("notificationFragment", "favoritesMenuItem");
+//
+//        }
+        else
             intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=khaanavali.customer"));
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);

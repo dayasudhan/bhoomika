@@ -205,16 +205,27 @@ public class OtpVeirificationActivity extends AppCompatActivity {
                                         for (int j = 0; j < address.length(); j++) {
                                             JSONObject addressObject = address.getJSONObject(j);
 
-                                            String areaName, landMark, addressLine1, addressLine2, city,zip,lon,lat;
+                                            String label=new String(""), landMark=new String(""), addressLine1=new String(""), areaname=new String(""),
+                                                    addressLine2 = new String(""), city = new String(""),zip = new String(""),lon = new String(""),lat = new String("");
 
-                                            areaName = addressObject.getString("label");
-                                            landMark = addressObject.getString("LandMark");
-                                            addressLine1 = addressObject.getString("addressLine1");
-                                            addressLine2 = addressObject.getString("addressLine2");
-                                            city = addressObject.getString("city");
-                                            zip=addressObject.getString("zip");
-                                            lon=addressObject.getString("latitude");
-                                            lat=addressObject.getString("longitude");
+                                            if(addressObject.has("label"))
+                                                label = addressObject.getString("label");
+                                            if(addressObject.has("areaName"))
+                                                areaname = addressObject.getString("areaName");
+                                            if(addressObject.has("LandMark"))
+                                                landMark = addressObject.getString("LandMark");
+                                            if(addressObject.has("addressLine1"))
+                                                addressLine1 = addressObject.getString("addressLine1");
+                                            if(addressObject.has("addressLine2"))
+                                                addressLine2 = addressObject.getString("addressLine2");
+                                            if(addressObject.has("city"))
+                                                city = addressObject.getString("city");
+                                            if(addressObject.has("zip"))
+                                                zip=addressObject.getString("zip");
+                                            if(addressObject.has("latitude"))
+                                                lon=addressObject.getString("latitude");
+                                            if(addressObject.has("longitude"))
+                                                lat=addressObject.getString("longitude");
 
 
 
@@ -222,14 +233,13 @@ public class OtpVeirificationActivity extends AppCompatActivity {
                                             Address addr1=new Address();
                                             addr1.setAddressLine1(addressLine1);
                                             addr1.setAddressLine2(addressLine2);
-                                            addr1.setAreaName(areaName);
                                             addr1.setCity(city);
                                             addr1.setZip(zip);
                                             addr1.setLongitude(lon);
                                             addr1.setLatitude(lat);
                                             addr1.setLandMark(landMark);
-
-                                            favadd.setLabel(areaName);
+                                            addr1.setAreaName(areaname);
+                                            favadd.setLabel(label);
                                             favadd.setAddress(addr1);
                                             session.setFavoutrateAddress(favadd);
 

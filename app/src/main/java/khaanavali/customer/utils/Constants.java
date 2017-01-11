@@ -44,6 +44,7 @@ public class Constants {
     public static final String NOTIFICATION_URL= MAIN_URL + "/images/slider/slider1.jpg";
     public static final String ACCEPTED_URL= MAIN_URL + "/images/slider/slider3.jpg";
     public static final String REJECTED_URL= MAIN_URL + "/images/slider/slider2.jpg";
+   // public static final String FAVOURITE_MENU_ITEM_URL = MAIN_URL + "/images/slider/slider4.jpg";
 
 
     public static final String ABOUT_US_URL= MAIN_URL+"/aboutus.html";
