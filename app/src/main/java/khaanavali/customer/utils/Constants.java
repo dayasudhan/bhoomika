@@ -23,7 +23,7 @@ public class Constants {
     public static final String UNIQUE_ID = "uniqueid";
     public static final String INVITE_TEXT = "Karnataka's local food speciality at your door step\n" +
             " \n" +
-            " Joladha Rotti, Akki rotti, Jawari rotti , Benne dose and Native Kannada food\n" +
+            " Joladha Rotti, Akki rotti, Jawari rotti and Native Kannada food\n" +
             " \n" +
             " To order online visit: http://Khaanavali.com\n" +
             "\t\n" +
@@ -41,7 +41,7 @@ public class Constants {
 	
 	//gagan
 
-    public static final String NOTIFICATION_URL= MAIN_URL + "/images/slider/slider1.jpg";
+    public static final String NOTIFICATION_URL= MAIN_URL + "/images/logo/notification.png";
     public static final String ACCEPTED_URL= MAIN_URL + "/images/logo/accepted.png";
     public static final String REJECTED_URL= MAIN_URL + "/images/logo/rejected.png";
    // public static final String FAVOURITE_MENU_ITEM_URL = MAIN_URL + "/images/slider/slider4.jpg";
