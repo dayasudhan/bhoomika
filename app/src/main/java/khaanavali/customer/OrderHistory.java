@@ -66,8 +66,8 @@ public class OrderHistory extends AppCompatActivity {
         setSupportActionBar(tb);
 
         ActionBar ab = getSupportActionBar();
-      //  ab.setHomeAsUpIndicator(R.drawable.ic_action_back);
-      //  ab.setDisplayHomeAsUpEnabled(true);
+        ab.setHomeAsUpIndicator(R.drawable.ic_action_back);
+        ab.setDisplayHomeAsUpEnabled(true);
         ab.setTitle("Order Summary");
     }
 
@@ -75,17 +75,10 @@ public class OrderHistory extends AppCompatActivity {
     public boolean onOptionsItemSelected(android.view.MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                return super.onOptionsItemSelected(item);
-
+                onBackPressed();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-//    public void onBackPressed() {
-//
-//        Intent start = new Intent(OrderHistory.this,MainActivity.class);
-//        start.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//        startActivity(start);
-//        finish();
-//    }
 }

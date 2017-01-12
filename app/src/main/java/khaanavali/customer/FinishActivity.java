@@ -76,29 +76,7 @@ public class FinishActivity extends AppCompatActivity {
         //session.setName(order.getCustomer().getName());
     }
 
-//    public void alertMessage()
-//    {
-//        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener()
-//        {
-//            public void onClick(DialogInterface dialog, int which)
-//            {
-//                switch (which){
-//                    case DialogInterface.BUTTON_POSITIVE: // Yes button clicked
-//                    {
-//                        session.createLoginSession();
-//                        saveAddress();
-//                    }
-//                    break;
-//                    case DialogInterface.BUTTON_NEGATIVE:
-//                        //Toast.makeText(getApplicationContext(), "Correct the Information", Toast.LENGTH_LONG).show();
-//                        break;
-//                }
-//            }
-//        };
-//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        builder.setMessage("Do you want to save  Address, Phone Number for Future transaction? " ) .setPositiveButton("Yes", dialogClickListener)
-//                .setNegativeButton("No", dialogClickListener).show();
-//    }
+
     private void setToolBar() {
         Toolbar tb = (Toolbar) findViewById(R.id.toolbar2);
         setSupportActionBar(tb);

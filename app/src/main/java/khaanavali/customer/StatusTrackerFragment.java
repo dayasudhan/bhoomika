@@ -109,7 +109,7 @@ public class StatusTrackerFragment extends Fragment {
             public void onClick(View arg0) {
 
                 isHistoryClicked = false;
-                if(ed.getText().length() > 0 )
+                if(ed.getText().length() > 0 && !(ed.getText().toString().contains(" ")))
                 {
                     getStatus(ed.getText().toString());
                 }
@@ -124,14 +124,14 @@ public class StatusTrackerFragment extends Fragment {
             public void onClick(View arg0) {
 
 
-                if(ed.getText().length() > 0 )
+                if(ed.getText().length() > 0 && !(ed.getText().toString().contains(" ")))
                 {
                     isHistoryClicked = true;
-                    getStatus(ed.getText().toString());
+                    getStatus(ed.getText().toString().trim());
                 }
                 else
                 {
-                    alertMessage("Please enter valid Order id");
+                    alertMessage("Please enter valid Order Id");
                 }
             }
         });
@@ -161,7 +161,7 @@ public class StatusTrackerFragment extends Fragment {
     }
 public void updateStatus()
 {
-    if(!trackerDetails.isEmpty()) {
+     if(!trackerDetails.isEmpty()) {
         String trackerItemStr = "";
         for (int j = 0; j < trackerDetails.size(); j++) {
             SimpleDateFormat existingUTCFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
@@ -189,6 +189,11 @@ public void updateStatus()
 
         }
     }
+    else
+     {
+         alertMessage("Order empty for this OrderId");
+     }
+
 }
     public  class JSONAsyncTask extends AsyncTask<String, Void, Boolean> {
 
@@ -229,64 +234,10 @@ public void updateStatus()
                     String data = EntityUtils.toString(entity);
                     responseOrder = data;
                     JSONArray jarray = new JSONArray(data);
-
+                    trackerDetails.clear();
                     for (int i = 0; i < jarray.length(); i++) {
                         JSONObject object = jarray.getJSONObject(i);
                         responseOrder = object.toString();
-//                        if(object.has(TAG_CUSTOMER)) {
-//
-//                            JSONObject custObj = object.getJSONObject(TAG_CUSTOMER);
-//
-//                            if (custObj.has(TAG_ADDRESS)) {
-//                                JSONObject addrObj = custObj.getJSONObject(TAG_ADDRESS);
-//                                Address address = new Address();
-//                                if(addrObj.has("addressLine1"))
-//                                    address.setAddressLine1(addrObj.getString("addressLine1"));
-//                                if(addrObj.has("addressLine2"))
-//                                    address.setAddressLine2(addrObj.getString("addressLine2"));
-//                                if(addrObj.has("areaName"))
-//                                    address.setAreaName(addrObj.getString("areaName"));
-//                                if(addrObj.has("city"))
-//                                    address.setCity(addrObj.getString("city"));
-//                                if(addrObj.has("LandMark"))
-//                                    address.setLandMark(addrObj.getString("LandMark"));
-//                                if(addrObj.has("street"))
-//                                    address.setStreet(addrObj.getString("street"));
-//                                if(addrObj.has("zip"))
-//                                    address.setZip(addrObj.getString("zip"));
-//                                cus.setAddress(address);
-//                            }
-//                            ordr.setCustomer(cus);
-//                        }
-//
-//
-//                        if(object.has(TAG_ID))
-//                        {
-//                            ordr.setId(object.getString(TAG_ID));
-//                        }
-//                        if(object.has(TAG_ID2))
-//                        {
-//                            ordr.set_id(object.getString(TAG_ID2));
-//                        }
-//                        if(object.has(TAG_CURRENT_STATUS))
-//                        {
-//                            ordr.setCurrent_status(object.getString(TAG_CURRENT_STATUS));
-//                        }
-//
-//                        if(object.has(TAG_MENU))
-//                        {
-//                            ArrayList<HotelMenuItem> hotelMenuItemList = new ArrayList<HotelMenuItem>();
-//                            JSONArray menuarr =  object.getJSONArray(TAG_MENU);
-//                            for (int j = 0; j < menuarr.length(); j++) {
-//                                JSONObject menuobject = menuarr.getJSONObject(j);
-//                                HotelMenuItem menu = new HotelMenuItem();
-//                                menu.setName(menuobject.getString("name"));
-//                                menu.setNo_of_order(menuobject.getString("no_of_order"));
-//                                hotelMenuItemList.add(menu);
-//                            }
-//                            ordr.setHotelMenuItems(hotelMenuItemList);
-//                        }
-
                         if(object.has(TAG_TRACKER))
                         {
                             trackerDetails.clear();
@@ -310,8 +261,7 @@ public void updateStatus()
                                     } catch (java.text.ParseException e) {
                                         e.printStackTrace();
                                     }
-                                    //   isTodayOrder = DateUtils.isToday(getDate.getTime());
-                                }
+                                  }
                                 trackerDetails.add(tracker);
                             }
 
@@ -349,6 +299,7 @@ public void updateStatus()
             }
         };
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Khaanavali");
         builder.setMessage(message).setNeutralButton("Ok", dialogClickListeneryesno)
                 .setIcon(R.drawable.ic_action_about).show();
 
