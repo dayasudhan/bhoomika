@@ -44,6 +44,7 @@ public class AddressListAdapater extends BaseAdapter {
     int del_pos;
     Button save;
     EditText editTagLabel,editCity,editHouseNo,editAreaName,editLandmark,editAddress;
+    ArrayList<FavouriteAddress> mFavouriteAddressArrayList;
    public void alertMessage(String message) {
         DialogInterface.OnClickListener dialogClickListeneryesno = new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
@@ -67,7 +68,7 @@ public class AddressListAdapater extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    ArrayList<FavouriteAddress> mFavouriteAddressArrayList;
+
     public AddressListAdapater(Activity context, int layoutResourceID,
                                ArrayList<FavouriteAddress> favouriteAddressArrayList) {
         mContext = context;
@@ -129,7 +130,7 @@ public class AddressListAdapater extends BaseAdapter {
                                                  public void onClick(DialogInterface dialog, int whch) {
                                                      del_pos=position;
                                                      String order_url =  Constants.DELETE_ADDRESS;
-                                                     order_url= order_url+session.getKeyPhone()+"/"+mFavouriteAddressArrayList.get(position).getLabel();
+                                                     order_url= order_url+session.getKeyPhone()+"/"+mFavouriteAddressArrayList.get(position).getLabel().trim();
 
                                                      new DeleteJSONAsyncTask().execute(order_url);
 
@@ -311,7 +312,7 @@ public class AddressListAdapater extends BaseAdapter {
             dialog.cancel();
 
             if(result == true){
-
+                mFavouriteAddressArrayList.remove(del_pos);
                 session.removeFavourateAddressList(del_pos);
                 notifyDataSetChanged();
             }

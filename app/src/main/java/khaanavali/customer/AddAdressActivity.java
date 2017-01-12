@@ -112,18 +112,18 @@ public class AddAdressActivity  extends AppCompatActivity {
                 else
                 {
                     address = new Address();
-                    address.setAreaName(editAreaName.getText().toString());
-                    address.setLandMark(editLandmark.getText().toString());
-                    address.setAddressLine1(editHouseNo.getText().toString());
-                    address.setAddressLine2(editAddress.getText().toString());
-                    address.setCity(editCity.getText().toString());
+                    address.setAreaName(editAreaName.getText().toString().trim());
+                    address.setLandMark(editLandmark.getText().toString().trim());
+                    address.setAddressLine1(editHouseNo.getText().toString().trim());
+                    address.setAddressLine2(editAddress.getText().toString().trim());
+                    address.setCity(editCity.getText().toString().trim());
                     if(mAddresses != null) {
                         address.setZip(mAddresses.get(0).getPostalCode());
                         address.setLatitude(String.valueOf(mAddresses.get(0).getLatitude()));
                         address.setLongitude(String.valueOf(mAddresses.get(0).getLongitude()));
                     }
                     FavouriteAddress favouriteAddress = new FavouriteAddress();
-                    favouriteAddress.setLabel(editTagLabel.getText().toString());
+                    favouriteAddress.setLabel(editTagLabel.getText().toString().trim());
                     favouriteAddress.setAddress(address);
 
 
