@@ -148,21 +148,20 @@ public class MyProfile extends Fragment {
                 @Override
                 public void onClick(View v) {
                     if(session.isHasAddress()){
-                    if(session.getFavoutrateAddress().size()<5)
-                    {
-                    Intent i = new Intent(getActivity(), MapsActivity.class);
-                    startActivityForResult(i, 1);
-              }else {
-                        Toast.makeText(getActivity(),"cant add more than 5 address kindly edit or delete",Toast.LENGTH_LONG).show();
-                    }
+                        if(session.getFavoutrateAddress().size()<5)
+                        {
+                            Intent i = new Intent(getActivity(), MapsActivity.class);
+                            i.putExtra("Uniqid","From_MyProfile");
+                            startActivityForResult(i, 1);
+                        }
+                        else {
+                            Toast.makeText(getActivity(),"cant add more than 5 address kindly edit or delete",Toast.LENGTH_LONG).show();
+                        }
                     }else{
                         Intent i = new Intent(getActivity(), MapsActivity.class);
+                        i.putExtra("Uniqid","From_MyProfile");
                         startActivityForResult(i, 1);
                     }
-// Bundle b = new Bundle();
-//                b.putInt("key", 1); //Your id
-//                i.putExtras(b); //
-//                startActivity(i);
                 }
             });
 

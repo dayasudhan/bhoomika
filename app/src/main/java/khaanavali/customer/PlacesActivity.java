@@ -147,7 +147,8 @@ public class PlacesActivity extends AppCompatActivity{
             @Override
             public void onClick(View v)
             {
-                Intent i = new Intent(PlacesActivity.this, MapsActivity2.class);
+                Intent i = new Intent(PlacesActivity.this, MapsActivity.class);
+                i.putExtra("Uniqid","From_PlacesActivity");
                 startActivityForResult(i,1);
 
 

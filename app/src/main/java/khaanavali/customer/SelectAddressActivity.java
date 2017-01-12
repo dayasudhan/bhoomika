@@ -76,6 +76,7 @@ public class SelectAddressActivity extends AppCompatActivity{
                                                     if(session.isHasAddress()) {
                                                         if (session.getFavoutrateAddress().size() < 5) {
                                                             Intent i = new Intent(SelectAddressActivity.this, MapsActivity.class);
+                                                            i.putExtra("Uniqid","From_SelectAddressActivity");
                                                             startActivityForResult(i, 1);
 
 
@@ -85,6 +86,7 @@ public class SelectAddressActivity extends AppCompatActivity{
                                                     }
                                                     else{
                                                         Intent i = new Intent(SelectAddressActivity.this, MapsActivity.class);
+                                                        i.putExtra("Uniqid","From_SelectAddressActivity");
                                                         startActivityForResult(i, 1);
 
                                                     }

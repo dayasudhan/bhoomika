@@ -87,10 +87,6 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
-            android:name=".MapsActivity2"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:windowSoftInputMode="adjustPan|adjustResize" />
-        <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
 
