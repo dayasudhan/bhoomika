@@ -95,7 +95,7 @@ public class HotelListAdapter extends BaseAdapter{
             itemHolder.hotelIsClosed.setText("");
         }
 
-        String image_url = Constants.MAIN_URL + '/' + mhotelList.get(position).getHotel().getLogo();
+        String image_url = Constants.MAIN_URL + "/images/hotels/" + mhotelList.get(position).getHotel().getLogo();
         imageLoader.DisplayImage(image_url,  itemHolder.hotellogo);
         return view;
 

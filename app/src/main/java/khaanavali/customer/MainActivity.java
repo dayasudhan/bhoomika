@@ -252,8 +252,7 @@ public class MainActivity extends AppCompatActivity {
                     ((HotelFragment) frag).setBulk(false);
                     ishotelFragmentOpen = true;
 
-                }else
-                if (itemId == R.id.notification) {
+                }else  if (itemId == R.id.notification) {
                     frag = new Notification();
                     ishotelFragmentOpen = false;
                 }

@@ -140,7 +140,7 @@ public class ProductAdapter extends BaseAdapter {
 
         final CityItemHolder finalItemHolder1 = itemHolder;
         if (i == 1) {
-            increment=100;
+            increment=5;
               }else {
             increment=1;
         }
