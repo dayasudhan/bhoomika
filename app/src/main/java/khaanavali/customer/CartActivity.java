@@ -105,6 +105,7 @@ public class CartActivity extends AppCompatActivity implements PlusMinusButtonLi
                         Intent i = new Intent(CartActivity.this, CutomerEnterDetailsActivity.class);
                         i.putExtra("order", strOrder);
                         i.putExtra("HotelDetail",strHotelDetail);
+                        i.putExtra("Uniqid","From_CartActivity");
                         startActivity(i);
                     }
                     else

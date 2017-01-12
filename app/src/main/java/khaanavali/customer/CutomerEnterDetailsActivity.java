@@ -55,6 +55,7 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
     HotelDetail hotelDetail;
     String strHotelDetail;
     SessionManager session;
+    boolean isCartActivityStarted;
     TextView orderTotalCharge,billvalue,deliveryCharge;
 
     @Override
@@ -67,7 +68,14 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
         order = gson.fromJson(intent.getStringExtra("order"), Order.class);
         strHotelDetail = intent.getStringExtra("HotelDetail");
         hotelDetail = gson.fromJson(intent.getStringExtra("HotelDetail"), HotelDetail.class);
-
+        if(intent.getExtras().getString("Uniqid").equals("From_CartActivity") )
+        {
+            isCartActivityStarted = true;
+        }
+        else
+        {
+            isCartActivityStarted = false;
+        }
         responseOrder = new String();
         session = new SessionManager(getApplicationContext());
         Button btn= (Button) findViewById(R.id.placeOrderButton);
@@ -343,9 +351,11 @@ public class CutomerEnterDetailsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent start = new Intent(CutomerEnterDetailsActivity.this,MainActivity.class);
-        start.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(start);
-        finish();
+        if(isCartActivityStarted == false) {
+            Intent start = new Intent(CutomerEnterDetailsActivity.this, MainActivity.class);
+            start.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(start);
+            finish();
+        }
     }
 }

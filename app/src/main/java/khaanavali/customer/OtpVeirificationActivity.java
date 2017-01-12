@@ -286,7 +286,7 @@ public class OtpVeirificationActivity extends AppCompatActivity {
                     Intent i = new Intent(OtpVeirificationActivity.this, CutomerEnterDetailsActivity.class);
                     i.putExtra("order", order);
                     i.putExtra("HotelDetail",hotelDetail);
-
+                    i.putExtra("Uniqid","From_OtpVeirificationActivity");
                     startActivity(i);
 
                 }
