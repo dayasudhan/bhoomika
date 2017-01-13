@@ -9,6 +9,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -325,9 +326,16 @@ public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
                     if (ContextCompat.checkSelfPermission(this,
                             Manifest.permission.ACCESS_FINE_LOCATION)
                             == PackageManager.PERMISSION_GRANTED) {
-//                        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-//                                .findFragmentById(R.id.map);
-//                        mapFragment.getMapAsync(this);
+                        int off = 0;
+                        try {
+                            off = Settings.Secure.getInt(getContentResolver(), Settings.Secure.LOCATION_MODE);
+                        } catch (Settings.SettingNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        if(off==0){
+                            Intent onGPS = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                            startActivity(onGPS);
+                        }
                         if (mGoogleApiClient == null) {
                             buildGoogleApiClient();
                         }

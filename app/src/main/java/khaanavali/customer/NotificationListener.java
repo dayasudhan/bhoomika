@@ -76,7 +76,7 @@ public class NotificationListener extends Service {
         //Creating a notification
         final String GROUP_KEY_ORDER_IDS = "group_order_ids";
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
-        builder.setSmallIcon(R.mipmap.ic_launcher);
+        builder.setSmallIcon(R.mipmap.ic_push_notification);
 
         //Vibration
         builder.setVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 });

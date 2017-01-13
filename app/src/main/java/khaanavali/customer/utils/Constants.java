@@ -41,7 +41,7 @@ public class Constants {
 	
 	//gagan
 
-    public static final String NOTIFICATION_URL= MAIN_URL + "/images/logo/notification.png";
+    public static final String NOTIFICATION_URL= MAIN_URL + "/images/logo/notification.jpg";
     public static final String ACCEPTED_URL= MAIN_URL + "/images/logo/accepted.png";
     public static final String REJECTED_URL= MAIN_URL + "/images/logo/rejected.png";
    // public static final String FAVOURITE_MENU_ITEM_URL = MAIN_URL + "/images/slider/slider4.jpg";

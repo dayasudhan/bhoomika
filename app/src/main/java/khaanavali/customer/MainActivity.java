@@ -83,9 +83,9 @@ public class MainActivity extends AppCompatActivity {
         ImageView notif = (ImageView) dialog1.findViewById(R.id.notifimg);
         if(dialog1!=null) {
                 if (notification!=null &&notification.equals("accepted")) {
-                    Picasso.with(getApplicationContext()).load(Constants.ACCEPTED_URL).into(notif);
+                    Picasso.with(getApplicationContext()).load(Constants.ACCEPTED_URL).centerInside().into(notif);
                 }else if (notification!=null &&notification.equals("rejected")){
-                    Picasso.with(getApplicationContext()).load(Constants.REJECTED_URL).into(notif);
+                    Picasso.with(getApplicationContext()).load(Constants.REJECTED_URL).centerCrop().into(notif);
                 }else if(notification!=null && notification.equals("notify")){
                     Picasso.with(getApplicationContext()).load(Constants.NOTIFICATION_URL).into(notif);
                 }

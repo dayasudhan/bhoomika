@@ -30,7 +30,7 @@
             >
     <!-- Delivery Details View-->
     <View
-        android:layout_width="375dp"
+        android:layout_width="match_parent"
         android:layout_height="0.0dp"
         android:background="@color/view_color"
         android:layout_marginTop="7dp"

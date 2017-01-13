@@ -193,12 +193,7 @@ public class OtpVeirificationActivity extends AppCompatActivity {
                     apiReponse = EntityUtils.toString(entity);
 
                     try {
-
-
                         JSONObject jObject  = new JSONObject(apiReponse);
-
-
-
                                     JSONArray address =jObject.getJSONArray("addresses");
                                     if(address != null) {
                                         int length = address.length();
@@ -277,7 +272,7 @@ public class OtpVeirificationActivity extends AppCompatActivity {
 
             dialog.cancel();
             if(result == true){
-                if(apiReponse.length()>0)
+                if(apiReponse.length()>0 && !apiReponse.equals("Error") && !apiReponse.equals("ERROR"))
                 {
                     //Toast.makeText(OtpVeirificationActivity.this , apiReponse, Toast.LENGTH_LONG).show();
 
