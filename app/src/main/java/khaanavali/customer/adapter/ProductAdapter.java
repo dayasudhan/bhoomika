@@ -125,9 +125,14 @@ public class ProductAdapter extends BaseAdapter {
         itemHolder.mSubImg.setTag(position);
         itemHolder.city.setText(mMenulist.get(position).getName());
         itemHolder.logo=mMenulist.get(position).getLogo();
-        Picasso.with(con)
-                .load(mMenulist.get(position).getLogo())
-                .into(itemHolder.mItemImg);
+     try {
+         Picasso.with(con)
+                 .load(mMenulist.get(position).getLogo())
+                 .into(itemHolder.mItemImg);
+     }catch(IllegalArgumentException e)
+     {
+         e.printStackTrace();
+     }
         itemHolder.itemDescription.setText(mMenulist.get(position).getItemDescription());
 
 

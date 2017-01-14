@@ -55,7 +55,7 @@ public class CirclePageIndicator extends LinearLayout implements ViewPager.OnPag
     }
 
     public void setViewPager(ViewPager pager) {
-        userDefinedPageChangeListener = getOnPageChangeListener(pager);
+      //  userDefinedPageChangeListener = getOnPageChangeListener(pager);
         pager.setOnPageChangeListener(this);
         addIndicator(pager.getAdapter().getCount());
     }
@@ -86,7 +86,7 @@ public class CirclePageIndicator extends LinearLayout implements ViewPager.OnPag
 
     private ViewPager.OnPageChangeListener getOnPageChangeListener(ViewPager pager) {
         try {
-            Field f = pager.getClass().getDeclaredField("mOnPageChangeListener");
+            Field f = pager.getClass().getSuperclass().getDeclaredField("mOnPageChangeListener");
             f.setAccessible(true);
             return (ViewPager.OnPageChangeListener) f.get(pager);
         } catch (NoSuchFieldException e) {

@@ -146,7 +146,7 @@ public class ImageLoader {
         Bitmap b = decodeFile(f);
         if(b!=null)
             return b;
-
+        String emptyUrlstr = "";
         // Download image file from web
         try {
 

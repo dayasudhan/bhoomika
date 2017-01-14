@@ -57,7 +57,8 @@ public class Constants {
     public static final String SLIDER_URL3=MAIN_URL + "/images/slider/slider2.jpg";
     public static final String SLIDER_URL2=MAIN_URL + "/images/slider/slider3.jpg";
     public static final String SLIDER_URL4=MAIN_URL + "/images/slider/slider4.jpg";
-
+    public static final String DEFAULT_MENU_LOGO =MAIN_URL + "/images/menu/default.png";
+    public static final String DEFAULT_HOTEL_LOGO =MAIN_URL + "/images/hotel/default.png";
     public static final int TITLE_TEXT_COLOR_RED = 00;
     public static final int TITLE_TEXT_COLOR_GREEN = 177;
     public static final int TITLE_TEXT_COLOR_BLUE = 106;

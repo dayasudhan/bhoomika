@@ -72,7 +72,7 @@ public class MenuItem {
         name = new String();
         id = new String();
        // available = ;
-        logo = Constants.SLIDER_URL1;
+        logo = Constants.DEFAULT_MENU_LOGO;
         no_of_order = 0;
 
     }
