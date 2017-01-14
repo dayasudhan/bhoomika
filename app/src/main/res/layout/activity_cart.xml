@@ -126,7 +126,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="NEXT"
-        android:textColor="#ffffff"
+        android:textColor="@color/titleTextColor"
         android:id="@+id/orderDetailButton_next"
         android:background="@drawable/buttonselector"
         android:layout_marginTop="5dp"

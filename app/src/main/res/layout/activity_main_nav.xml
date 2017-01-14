@@ -42,6 +42,7 @@
         android:layout_gravity="start"
         app:menu="@menu/nav_items"
         android:clickable="true"
+        app:itemIconTint="@color/titleTextColor"
         />
 
 

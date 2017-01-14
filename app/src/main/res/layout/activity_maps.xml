@@ -14,8 +14,7 @@
             android:layout_height="wrap_content"
 
             android:layout_marginTop="5dp"
-            android:id="@+id/order_details_lay"
-            >
+            android:id="@+id/order_details_lay">
     <fragment
         android:id="@+id/map"
         android:layout_width="match_parent"
@@ -60,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="PICK LOCATION"
-            android:textColor="#ffffff"
+            android:textColor="@color/titleTextColor"
             android:id="@+id/pickaddressbtn"
             android:background="@drawable/buttonselector"
             android:layout_alignParentBottom="true"

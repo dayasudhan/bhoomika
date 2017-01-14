@@ -269,7 +269,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Save"
-            android:textColor="#ffffff"
+            android:textColor="@color/titleTextColor"
             android:id="@+id/saveAddressbutton"
             android:background="@drawable/buttonselector"
             android:clickable="true"

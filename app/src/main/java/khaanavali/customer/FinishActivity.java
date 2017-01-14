@@ -1,6 +1,7 @@
 package khaanavali.customer;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import khaanavali.customer.model.HotelDetail;
 import khaanavali.customer.model.Menu;
 import khaanavali.customer.model.Order;
+import khaanavali.customer.utils.Constants;
 import khaanavali.customer.utils.SessionManager;
 
 public class FinishActivity extends AppCompatActivity {
@@ -80,7 +82,8 @@ public class FinishActivity extends AppCompatActivity {
     private void setToolBar() {
         Toolbar tb = (Toolbar) findViewById(R.id.toolbar2);
         setSupportActionBar(tb);
-
+        tb.setTitleTextColor(Color.rgb(Constants.TITLE_TEXT_COLOR_RED,
+                Constants.TITLE_TEXT_COLOR_GREEN, Constants.TITLE_TEXT_COLOR_BLUE));;
         ActionBar ab = getSupportActionBar();
         ab.setHomeAsUpIndicator(R.drawable.ic_action_back);
         ab.setDisplayHomeAsUpEnabled(true);

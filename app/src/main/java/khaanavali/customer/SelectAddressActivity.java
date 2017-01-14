@@ -1,6 +1,7 @@
 package khaanavali.customer;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import khaanavali.customer.adapter.AddressListAdapater;
 import khaanavali.customer.model.Address;
 import khaanavali.customer.model.FavouriteAddress;
+import khaanavali.customer.utils.Constants;
 import khaanavali.customer.utils.SessionManager;
 
 
@@ -108,7 +110,8 @@ public class SelectAddressActivity extends AppCompatActivity{
     private void setToolBar(String title) {
         Toolbar tb = (Toolbar) findViewById(R.id.toolbar2);
         setSupportActionBar(tb);
-
+        tb.setTitleTextColor(Color.rgb(Constants.TITLE_TEXT_COLOR_RED,
+                Constants.TITLE_TEXT_COLOR_GREEN, Constants.TITLE_TEXT_COLOR_BLUE));;
         ActionBar ab = getSupportActionBar();
         ab.setHomeAsUpIndicator(R.drawable.ic_action_back);
         ab.setDisplayHomeAsUpEnabled(true);

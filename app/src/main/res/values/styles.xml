@@ -2,35 +2,17 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/parrotgreen3</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="colorAccent">@color/accent</item>
+
     </style>
 
     <style name="MyAppTheme" parent="@style/AppTheme" />
-    <style name="AppTheme2" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/parrotgreen6</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="colorAccent">@color/parrotgreen3</item>
 
-
-    </style>
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">true</item>
         <item name="windowNoTitle">true</item>
 
     </style>
-    <style name="AppTheme.ActionBar" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/gaganprimary</item>
-        <item name="colorPrimaryDark">@color/gaganparrotgreen6</item>
-        <item name="colorAccent">@color/gaganparrotgreen6</item>
-    </style>
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
     <!--gagan-->
     <declare-styleable name="CirclePageIndicator">
         <attr name="indicator_spacing" format="dimension" />

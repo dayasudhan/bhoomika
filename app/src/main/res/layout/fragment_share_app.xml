@@ -14,6 +14,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Invite your friend to Khaanavali(ಖಾನಾವಳಿ)"
             android:id="@+id/textView2"
+
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="46dp" />
@@ -23,7 +24,7 @@
             android:layout_height="wrap_content"
             android:text="tell a friend"
             android:id="@+id/invite_button"
-            android:textColor="#ffffff"
+            android:textColor="@color/titleTextColor"
             android:background="@drawable/buttonselector"
             android:clickable="true"
 

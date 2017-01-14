@@ -2,6 +2,7 @@ package khaanavali.customer;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -24,6 +25,7 @@ import khaanavali.customer.model.HotelDetail;
 import khaanavali.customer.model.Menu;
 import khaanavali.customer.model.MenuAdapter;
 import khaanavali.customer.model.Order;
+import khaanavali.customer.utils.Constants;
 import khaanavali.customer.utils.SessionManager;
 
 public class CartActivity extends AppCompatActivity implements PlusMinusButtonListener {
@@ -130,6 +132,8 @@ public class CartActivity extends AppCompatActivity implements PlusMinusButtonLi
         ab.setHomeAsUpIndicator(R.drawable.ic_action_back);
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setTitle(title);
+        tb.setTitleTextColor(Color.rgb(Constants.TITLE_TEXT_COLOR_RED,
+                        Constants.TITLE_TEXT_COLOR_GREEN, Constants.TITLE_TEXT_COLOR_BLUE));
     }
 
     @Override

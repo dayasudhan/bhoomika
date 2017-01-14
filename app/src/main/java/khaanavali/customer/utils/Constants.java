@@ -58,4 +58,8 @@ public class Constants {
     public static final String SLIDER_URL2=MAIN_URL + "/images/slider/slider3.jpg";
     public static final String SLIDER_URL4=MAIN_URL + "/images/slider/slider4.jpg";
 
+    public static final int TITLE_TEXT_COLOR_RED = 00;
+    public static final int TITLE_TEXT_COLOR_GREEN = 177;
+    public static final int TITLE_TEXT_COLOR_BLUE = 106;
+
 }

@@ -35,6 +35,8 @@ import com.splunk.mint.Mint;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+
+import khaanavali.customer.utils.Constants;
 import khaanavali.customer.utils.SessionManager;
 
 public class MapsActivity extends AppCompatActivity implements
@@ -362,7 +364,7 @@ public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private void setToolBar(String title) {
 //        Toolbar tb = (Toolbar) findViewById(R.id.toolbar2);
 //        setSupportActionBar(tb);
-//
+//        tb.setTitleTextColor(Color.rgb(Constants.TITLE_TEXT_COLOR_RED,Constants.TITLE_TEXT_COLOR_GREEN, Constants.TITLE_TEXT_COLOR_BLUE));;
 //        ActionBar ab = getSupportActionBar();
 //        ab.setHomeAsUpIndicator(R.drawable.ic_action_back);
 //        ab.setDisplayHomeAsUpEnabled(true);

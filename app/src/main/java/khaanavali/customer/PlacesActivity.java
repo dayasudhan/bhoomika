@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -286,6 +287,8 @@ public class PlacesActivity extends AppCompatActivity{
     private void setToolBar(String title) {
         Toolbar tb = (Toolbar) findViewById(R.id.toolbar2);
         setSupportActionBar(tb);
+        tb.setTitleTextColor(Color.rgb(Constants.TITLE_TEXT_COLOR_RED,
+                Constants.TITLE_TEXT_COLOR_GREEN, Constants.TITLE_TEXT_COLOR_BLUE));;
         ActionBar ab = getSupportActionBar();
         ab.setHomeAsUpIndicator(R.drawable.ic_action_back);
         ab.setDisplayHomeAsUpEnabled(true);

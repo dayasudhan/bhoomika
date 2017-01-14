@@ -9,7 +9,6 @@
         android:layout_height="250dp"
         android:id="@+id/product_detail_image_view"
         android:layout_marginLeft="5dip"
-
         android:src="@drawable/rottioota"
         android:layout_marginTop="5dip"
         android:scaleType="fitCenter"
