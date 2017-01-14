@@ -97,14 +97,7 @@ public class OtpVeirificationActivity extends AppCompatActivity {
         {
             checkSMSReceivePermission();
         }
-        SmsReceiver.bindListener(new SmsListener() {
-            @Override
-            public void messageReceived(String messageText) {
-                 String numbers = messageText.substring( messageText.indexOf(':') + 1,messageText.length());
-                 otp.setText(numbers.trim());
-                 confirmOtp(otp.getText().toString());
-            }
-        });
+
 
         setToolBar("OTP Verification");
     }
@@ -358,13 +351,17 @@ public class OtpVeirificationActivity extends AppCompatActivity {
                     if (ContextCompat.checkSelfPermission(this,
                             Manifest.permission.RECEIVE_SMS)
                             == PackageManager.PERMISSION_GRANTED) {
-
+                        SmsReceiver.bindListener(new SmsListener() {
+                            @Override
+                            public void messageReceived(String messageText) {
+                                String numbers = messageText.substring( messageText.indexOf(':') + 1,messageText.length());
+                                otp.setText(numbers.trim());
+                                confirmOtp(otp.getText().toString());
+                            }
+                        });
                     }
 
                 } else {
-
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
                     Toast.makeText(this, "permission denied", Toast.LENGTH_LONG).show();
                 }
                 return;
