@@ -86,16 +86,23 @@ public class OtpVeirificationActivity extends AppCompatActivity {
                         alertMessage("Enter valid OTP");
                     } else {
                         confirmOtp(otp.getText().toString());
-                        verifyPressed = false;
-
-
-                    }
+                }
                 }
             });
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
         {
-            checkSMSReceivePermission();
+            if(checkSMSReceivePermission())
+            {
+                SmsReceiver.bindListener(new SmsListener() {
+                    @Override
+                    public void messageReceived(String messageText) {
+                        String numbers = messageText.substring( messageText.indexOf(':') + 1,messageText.length());
+                        otp.setText(numbers.trim());
+                        confirmOtp(otp.getText().toString());
+                    }
+                });
+            }
         }
 
 
@@ -278,7 +285,7 @@ public class OtpVeirificationActivity extends AppCompatActivity {
                     i.putExtra("HotelDetail",hotelDetail);
                     i.putExtra("Uniqid","From_OtpVeirificationActivity");
                     startActivity(i);
-
+                    verifyPressed = false;
                 }
                 else
                 {

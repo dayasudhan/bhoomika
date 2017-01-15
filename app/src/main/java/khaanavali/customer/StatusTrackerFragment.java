@@ -99,11 +99,12 @@ public class StatusTrackerFragment extends Fragment {
         isHistoryClicked = false;
         session = new SessionManager(getActivity().getApplicationContext());
         ed.setText(session.getCurrentOrderId());
+        ed.setKeyListener(null);
         btnStatus = (Button)v.findViewById(R.id.status_button);
         btnOrderDetail = (Button)v.findViewById(R.id.order_detail);
         trackerDetails = new ArrayList<Tracker>();
         ((MainActivity) getActivity())
-                .setActionBarTitle("Status Tracker");
+                .setActionBarTitle("Order Tracker");
         btnStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
