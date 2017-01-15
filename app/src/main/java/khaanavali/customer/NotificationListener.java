@@ -51,10 +51,16 @@ public class NotificationListener extends Service {
 
                 if (snapshot.child("update").exists()) {
                     String msg = snapshot.child("update").getValue().toString();
-                    showNotification(Calendar.getInstance().getTimeInMillis(), msg, 2);
+                    if(msg.compareTo(session.getlastpn()) != 0) {
+                        session.setlastpn(msg);
+                        showNotification(Calendar.getInstance().getTimeInMillis(), msg, 2);
+                    }
                 } else if (snapshot.child("info").exists()) {
                     String msg = snapshot.child("info").getValue().toString();
-                    showNotification(Calendar.getInstance().getTimeInMillis(), msg, 3);
+                    if(msg.compareTo(session.getlastpn()) != 0) {
+                        session.setlastpn(msg);
+                        showNotification(Calendar.getInstance().getTimeInMillis(), msg, 3);
+                    }
                 }
                 else if (session.getCurrentOrderId() != null && snapshot.child(session.getCurrentOrderId()).exists()) {
                     String msg = snapshot.child(session.getCurrentOrderId()).getValue().toString();
@@ -76,7 +82,7 @@ public class NotificationListener extends Service {
         //Creating a notification
         final String GROUP_KEY_ORDER_IDS = "group_order_ids";
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
-        builder.setSmallIcon(R.mipmap.ic_push_notification);
+        builder.setSmallIcon(R.drawable.ic_push_notificationgo);
 
         //Vibration
         builder.setVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 });

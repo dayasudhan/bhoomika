@@ -60,6 +60,7 @@ public class SessionManager {
 	public static final String KEY_LAST_AREA_SERCHED = "lastareasearched";
 
 	public static final String KEY_SLIDER_LOGO = "slider";
+	public static final String KEY_LAST_PN = "last_pn";
 
 	// Constructor
 	public  boolean hasAddress=false;
@@ -108,7 +109,16 @@ public class SessionManager {
 		String id = pref.getString(KEY_LAST_AREA_SERCHED, "");
 		return id;
 	}
-
+	public void setlastpn(String msg)
+	{
+		editor.putString(KEY_LAST_PN,msg);
+		editor.commit();
+	}
+	public String getlastpn()
+	{
+		String id = pref.getString(KEY_LAST_PN, "");
+		return id;
+	}
 	public void setKeyPhone(String orderId)
 	{
 		editor.putString(KEY_PHONE,orderId);
