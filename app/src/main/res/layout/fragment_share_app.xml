@@ -8,16 +8,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Invite your friend to Khaanavali(ಖಾನಾವಳಿ)"
-            android:id="@+id/textView2"
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+            <!--android:text="Invite your friend to Khaanavali(ಖಾನಾವಳಿ)"-->
+            <!--android:id="@+id/textView2"-->
 
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="46dp" />
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_marginTop="46dp" />-->
 
         <Button
             android:layout_width="wrap_content"
@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageView"
-            android:src="@drawable/uploadsharefriends"
+            android:src="@drawable/invite1"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
 
