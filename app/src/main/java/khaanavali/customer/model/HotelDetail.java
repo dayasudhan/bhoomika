@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class HotelDetail {
 
 
-    Integer phone;
+    String phone;
     int deliverRange;
     String _id;
     ArrayList<String> deliverAreas;
@@ -67,7 +67,7 @@ public class HotelDetail {
         speciality = new String();
         deliverAreas = new ArrayList<String>();
    //     deliverRange = 3;
-        phone = new Integer(0);
+        phone = new String();
         rating = 5;
       //  deliveryTime = 60;
     }
@@ -94,11 +94,11 @@ public class HotelDetail {
     public void setMenu(ArrayList<MenuItem> menu) {
         this.menu = menu;
     }
-    public Integer getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
     public ArrayList<String> getDeliverAreas() {

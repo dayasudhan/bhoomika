@@ -34,6 +34,7 @@ public class OrderHistory extends AppCompatActivity {
         order = gson.fromJson(intent.getStringExtra("order"), Order.class);
         String trackerStatus = intent.getStringExtra("txtViewTracker");
         TextView txtViewName = (TextView) findViewById(R.id.vendor_name_value);
+        TextView txtViewPhone = (TextView) findViewById(R.id.vendor_phone_value);
         TextView txtorderStatus = (TextView) findViewById(R.id.order_status_value);
         TextView txtViewAddress = (TextView) findViewById(R.id.address_value);
         TextView txtViewMenu = (TextView) findViewById(R.id.items_value);
@@ -43,6 +44,7 @@ public class OrderHistory extends AppCompatActivity {
       // TextView txtVieworderTime = (TextView) findViewById(R.id.order_time_value);
 
         txtViewName.setText(order.getHotel().getName());
+        txtViewPhone.setText(String.valueOf(order.getHotel().getPhone()));
         txtorderStatus.setText(trackerStatus);
         txtViewOrderId.setText(order.getId());
 

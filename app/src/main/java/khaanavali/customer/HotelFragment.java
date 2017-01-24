@@ -354,13 +354,7 @@ public class HotelFragment extends Fragment {
                             }
                         }
                         if (object.has(TAG_PHONE)) {
-                            int phone=0 ;
-                            try {
-                                phone = object.getInt(TAG_PHONE);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            hotelDetail.setPhone(new Integer(phone));
+                            hotelDetail.setPhone(object.getString(TAG_PHONE));
                             hotelDetail.getHotel().setPhone(hotelDetail.getPhone());
                         }
                         if (object.has(TAG_ADDRESS)) {

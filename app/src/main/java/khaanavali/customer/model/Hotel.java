@@ -9,7 +9,7 @@ public class Hotel {
         name = new String();
         email = new String();
         id = new String();
-        phone = new Integer(0);
+        phone = new String();
         logo =  new String();
         //deliveryCharges = 0;
     }
@@ -29,16 +29,16 @@ public class Hotel {
         this.email = email;
     }
 
-    public Integer getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
     String name;
     String email;
-    Integer phone;
+    String phone;
 
     public String getId() {
         return id;
