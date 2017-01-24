@@ -15,15 +15,17 @@ public class SmsReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Bundle data  = intent.getExtras();
+        if(mListener != null) {
+            Bundle data = intent.getExtras();
 
-        Object[] pdus = (Object[]) data.get("pdus");
+            Object[] pdus = (Object[]) data.get("pdus");
 
-        for(int i=0;i<pdus.length;i++){
-            SmsMessage smsMessage = SmsMessage.createFromPdu((byte[]) pdus[i]);
-            String sender = smsMessage.getDisplayOriginatingAddress();
-            String messageBody = smsMessage.getMessageBody();
-            mListener.messageReceived(messageBody);
+            for (int i = 0; i < pdus.length; i++) {
+                SmsMessage smsMessage = SmsMessage.createFromPdu((byte[]) pdus[i]);
+                String sender = smsMessage.getDisplayOriginatingAddress();
+                String messageBody = smsMessage.getMessageBody();
+                mListener.messageReceived(messageBody);
+            }
         }
 
     }

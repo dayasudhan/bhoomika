@@ -284,6 +284,7 @@ public class OtpVeirificationActivity extends AppCompatActivity {
                     i.putExtra("order", order);
                     i.putExtra("HotelDetail",hotelDetail);
                     i.putExtra("Uniqid","From_OtpVeirificationActivity");
+                    SmsReceiver.bindListener(null);
                     startActivity(i);
                     verifyPressed = false;
                 }
